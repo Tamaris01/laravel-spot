@@ -112,7 +112,7 @@
             <div class="row g-4">
                 <div class="col-md-4 col-sm-6">
                     <div class="card shadow-box p-4 hidden-card" data-aos="fade-up">
-                        <img src="{{ asset('images/Pendaftaran.png') }}" class="img-fluid mb-3" alt="Pendaftaran Akun">
+                        <img src="{{ asset('images/pendaftaran.png') }}" class="img-fluid mb-3" alt="Pendaftaran Akun">
                         <h5>Pendaftaran Akun</h5>
                         <p>Daftar akun dengan mudah untuk mengakses layanan kami.</p>
                     </div>
