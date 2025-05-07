@@ -83,7 +83,7 @@
         }
 
         .button-palang-spot {
-            background-color: #ffdc40;
+            background-color: #ffdb4d;
             border: none;
             color: black;
             font-weight: bold;
@@ -243,7 +243,7 @@
     <div id="successModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: #FFDC40;">
+                <div class="modal-header" style="background-color: #ffdb4d;">
                     <h5 class="modal-title" id="successModalLabel">Pendaftaran Berhasil</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -255,7 +255,7 @@
 
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
-                    <button type="button" class="btn" style="background-color: #FFDC40; color: black; width: 100px;" data-bs-dismiss="modal">Oke</button>
+                    <button type="button" class="btn" style="background-color: #ffdb4d; color: black; width: 100px;" data-bs-dismiss="modal">Oke</button>
                 </div>
             </div>
         </div>
