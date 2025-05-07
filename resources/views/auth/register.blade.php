@@ -87,7 +87,7 @@
         }
 
         .button-palang-spot {
-            background-color: #ffdc40;
+            background-color: #ffdb4d;
             border: none;
             color: black;
             font-weight: bold;
