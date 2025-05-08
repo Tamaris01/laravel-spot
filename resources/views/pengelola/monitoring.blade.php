@@ -393,7 +393,7 @@
         if (isChecking) return;
 
         try {
-            const response = await fetch("http://127.0.0.1:5000/result");
+            const response = await fetch("https://flask-spot-production-dd0c.up.railway.app/result");
             if (!response.ok) throw new Error("Gagal fetch plat nomor");
 
             const data = await response.json();
@@ -453,7 +453,7 @@
 
     async function checkPlatNomor(platNomor) {
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/check_plate/${platNomor}`);
+            const response = await fetch(`https://laravel-spot-production.up.railway.app/api/check_plate/${platNomor}`);
             if (!response.ok) throw new Error("Gagal fetch data validasi plat");
             const data = await response.json();
             return data.exists;
@@ -470,7 +470,7 @@
     let timeoutResetInfo = null;
 
     function tampilkanInfoScan() {
-        fetch('http://127.0.0.1:8000/api/scan-latest')
+        fetch('https://laravel-spot-production.up.railway.app/api/scan-latest')
             .then(response => response.json())
             .then(data => {
                 const info = document.getElementById('info-scan');
@@ -562,7 +562,7 @@
         const base64Image = tempCanvas.toDataURL("image/jpeg");
 
         try {
-            await fetch("http://127.0.0.1:5000/upload_frame", {
+            await fetch("https://flask-spot-production-dd0c.up.railway.app/upload_frame", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -572,7 +572,7 @@
                 })
             });
 
-            const frameRes = await fetch("http://127.0.0.1:5000/get_processed_frame");
+            const frameRes = await fetch("https://flask-spot-production-dd0c.up.railway.app/get_processed_frame");
             const frameData = await frameRes.json();
 
             if (frameData.frame) {
@@ -584,7 +584,7 @@
                 img.src = frameData.frame;
             }
 
-            const resultRes = await fetch("http://127.0.0.1:5000/result");
+            const resultRes = await fetch("https://flask-spot-production-dd0c.up.railway.app/result");
             const resultData = await resultRes.json();
 
             if (resultData.plat_nomor && resultData.plat_nomor !== "-") {
