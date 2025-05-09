@@ -393,7 +393,7 @@
         if (isChecking) return;
 
         try {
-            const response = await fetch("https://9ff5-182-2-5-36.ngrok-free.app/result");
+            const response = await fetch("https://2286-182-2-5-48.ngrok-free.app/result");
             if (!response.ok) throw new Error("Gagal fetch plat nomor");
 
             const data = await response.json();
@@ -562,7 +562,7 @@
         const base64Image = tempCanvas.toDataURL("image/jpeg");
 
         try {
-            await fetch("https://9ff5-182-2-5-36.ngrok-free.app/upload_frame", {
+            await fetch("https://2286-182-2-5-48.ngrok-free.app/upload_frame", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -572,7 +572,7 @@
                 })
             });
 
-            const frameRes = await fetch("https://9ff5-182-2-5-36.ngrok-free.app/get_processed_frame");
+            const frameRes = await fetch("https://2286-182-2-5-48.ngrok-free.app/get_processed_frame");
             const frameData = await frameRes.json();
 
             if (frameData.frame) {
@@ -584,7 +584,7 @@
                 img.src = frameData.frame;
             }
 
-            const resultRes = await fetch("https://9ff5-182-2-5-36.ngrok-free.app/result");
+            const resultRes = await fetch("https://2286-182-2-5-48.ngrok-free.app/result");
             const resultData = await resultRes.json();
 
             if (resultData.plat_nomor && resultData.plat_nomor !== "-") {
