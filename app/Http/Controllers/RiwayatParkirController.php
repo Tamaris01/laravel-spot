@@ -35,7 +35,7 @@ class RiwayatParkirController extends Controller
 
         // Step 2: Hubungi server deteksi plat nomor (Flask)
         try {
-            $response = Http::timeout(5)->get('http://127.0.0.1:5000/result');
+            $response = Http::timeout(5)->get('https://3f60-182-2-4-168.ngrok-free.app/result');
 
             if (!$response->ok()) {
                 session(['scan_error' => ['message' => 'Gagal mendapatkan respons dari server deteksi plat.']]);
