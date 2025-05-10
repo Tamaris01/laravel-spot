@@ -393,7 +393,7 @@
         if (isChecking) return;
 
         try {
-            const response = await fetch("http://156.67.221.43:5000/result");
+            const response = await fetch("https://alpu.web.id/result");
             if (!response.ok) throw new Error("Gagal fetch plat nomor");
 
             const data = await response.json();
@@ -563,7 +563,7 @@
 
     try {
         // Kirim frame ke Flask
-        await fetch("http://156.67.221.43:5000/upload_frame", {
+        await fetch("https://alpu.web.id/upload_frame", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -575,7 +575,7 @@
         await new Promise(resolve => setTimeout(resolve, 500));
 
         // Ambil hasil deteksi plat nomor
-        const resultRes = await fetch("http://156.67.221.43:5000/result");
+        const resultRes = await fetch("https://alpu.web.id/result");
         const resultData = await resultRes.json();
         console.log("📥 Data result dari Flask:", resultData);
 
@@ -590,7 +590,7 @@
         }
 
         // Ambil frame hasil deteksi (dengan bounding box dll.)
-        const frameRes = await fetch("http://156.67.221.43:5000/get_processed_frame");
+        const frameRes = await fetch("https://alpu.web.id/get_processed_frame");
         const frameData = await frameRes.json();
 
         if (frameData.frame) {
