@@ -3,9 +3,9 @@
 return [
 
     /*
-    |--------------------------------------------------------------------------
+    |----------------------------------------------------------------------
     | Third Party Services
-    |--------------------------------------------------------------------------
+    |----------------------------------------------------------------------
     |
     | This file is for storing the credentials for third party services such
     | as Mailgun, Postmark, AWS and more. This file provides the de facto
@@ -29,6 +29,13 @@ return [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+    ],
+
+    // Konfigurasi Cloudinary
+    'cloudinary' => [
+        'cloud_name' => env('CLOUDINARY_CLOUD_NAME', 'dusw72eit'),
+        'api_key' => env('CLOUDINARY_API_KEY', '455418814631734'),
+        'api_secret' => env('CLOUDINARY_API_SECRET', 'H5RCkTeOYWTOhBIXdj1FbUTr8Sw'),
     ],
 
 ];
