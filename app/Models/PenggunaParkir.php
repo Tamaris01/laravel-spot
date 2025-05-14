@@ -2,23 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable; // Ganti Model dari Model ke Authenticatable
-use Illuminate\Notifications\Notifiable; // Jika perlu menggunakan notifikasi
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Hash;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary; // Import Cloudinary
 
-class PenggunaParkir extends Authenticatable // Mengimplementasikan Authenticatable untuk autentikasi
+class PenggunaParkir extends Authenticatable
 {
-    use HasFactory, Notifiable; // Menambahkan trait Notifiable jika menggunakan notifikasi
+    use HasFactory, Notifiable;
 
-    protected $table = 'pengguna_parkir'; // Tabel yang digunakan
+    protected $table = 'pengguna_parkir';
 
     public $timestamps = false;
-    protected $primaryKey = 'id_pengguna'; // Menggunakan id_pengguna sebagai primary key
-    public $incrementing = false; // Jika id_pengguna bukan auto-increment
-    protected $keyType = 'string'; // Jika id_pengguna adalah string
+    protected $primaryKey = 'id_pengguna';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
-    // Kolom yang bisa diisi melalui mass assignment
     protected $fillable = [
         'id_pengguna',
         'nama',
@@ -32,24 +32,47 @@ class PenggunaParkir extends Authenticatable // Mengimplementasikan Authenticata
     // Mutator untuk mengenkripsi password sebelum disimpan
     public function setPasswordAttribute($value)
     {
-        $this->attributes['password'] = Hash::make($value); // Hashing password
+        $this->attributes['password'] = Hash::make($value);
     }
 
     // Mengembalikan nama kolom yang digunakan untuk autentikasi
     public function getAuthIdentifierName()
     {
-        return 'id_pengguna'; // Gunakan id_pengguna sebagai identifier untuk autentikasi
+        return 'id_pengguna';
     }
 
     // Mengembalikan password yang di-hash untuk pemeriksaan autentikasi
     public function getAuthPassword()
     {
-        return $this->attributes['password']; // Password yang telah di-hash
+        return $this->attributes['password'];
     }
 
     // Relasi one-to-one dengan tabel kendaraan
     public function kendaraan()
     {
-        return $this->hasOne(Kendaraan::class, 'id_pengguna', 'id_pengguna'); // Relasi ke model Kendaraan
+        return $this->hasOne(Kendaraan::class, 'id_pengguna', 'id_pengguna');
+    }
+
+    /**
+     * Mutator untuk menyimpan public_id foto yang diupload ke Cloudinary.
+     */
+    public function setFotoAttribute($value)
+    {
+        if (is_string($value) && strpos($value, 'http') !== false) {
+            // Jika value sudah berupa URL, simpan sebagai public_id
+            $this->attributes['foto'] = $value;
+        } else {
+            // Upload foto baru ke Cloudinary jika ada file gambar
+            $foto = Cloudinary::upload($value->getRealPath());
+            $this->attributes['foto'] = $foto->getPublicId(); // Simpan public_id dari Cloudinary
+        }
+    }
+
+    /**
+     * Menampilkan URL dari foto yang disimpan di Cloudinary.
+     */
+    public function getFotoUrlAttribute()
+    {
+        return Cloudinary::getUrl($this->foto); // Mendapatkan URL gambar berdasarkan public_id
     }
 }
