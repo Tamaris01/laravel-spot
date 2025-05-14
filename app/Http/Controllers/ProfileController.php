@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest; // Import the profile request
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary; // Pastikan Cloudinary sudah di-import
 
 class ProfileController extends Controller
 {
@@ -44,35 +44,24 @@ class ProfileController extends Controller
         $user->nama = $request->nama;
         $user->email = $request->email;
 
-      // Menangani upload foto profil
-    if ($request->hasFile('foto')) {
-        // Tentukan path direktori untuk menyimpan foto
-        $fotoDirectory = public_path('images/profil');
-
-        // Pastikan direktori ada, jika tidak, buat direktori
-        if (!file_exists($fotoDirectory)) {
-            mkdir($fotoDirectory, 0755, true);
-        }
-
-        // Jika ada foto lama, hapus foto lama (kecuali default)
-        if ($user->foto && $user->foto !== 'images/profil/default.jpg') {
-            $oldFotoPath = public_path($user->foto);
-            if (file_exists($oldFotoPath)) {
-                unlink($oldFotoPath);
+        // Menangani upload foto profil
+        if ($request->hasFile('foto')) {
+            // Jika ada foto lama, hapus foto lama dari Cloudinary
+            if ($user->foto) {
+                Cloudinary::destroy($user->foto); // Hapus foto lama menggunakan public_id
                 Log::info("Foto lama berhasil dihapus: {$user->foto}");
             }
+
+            // Upload foto baru ke Cloudinary
+            $fotoBaru = $request->file('foto');
+            $uploaded = Cloudinary::upload($fotoBaru->getRealPath(), [
+                'folder' => 'profil'
+            ]);
+
+            // Ambil public_id dari Cloudinary dan simpan di database
+            $user->foto = $uploaded->getPublicId(); // Simpan public_id ke database
+            Log::info("Foto baru disimpan dengan public_id: {$user->foto}");
         }
-
-        // Simpan foto baru ke direktori
-        $fotoBaru = $request->file('foto');
-        $namaFotoBaru = time() . '_' . $fotoBaru->getClientOriginalName();
-        $fotoBaruPath = 'images/profil/' . $namaFotoBaru;
-        $fotoBaru->move($fotoDirectory, $namaFotoBaru);
-
-        // Simpan path foto ke database
-        $user->foto = $fotoBaruPath;
-        Log::info("Foto baru disimpan: {$fotoBaruPath}");
-    }
 
         // Memperbarui password jika diberikan
         if ($request->filled('password')) {
