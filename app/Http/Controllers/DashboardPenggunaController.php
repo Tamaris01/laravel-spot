@@ -33,7 +33,10 @@ class DashboardPenggunaController extends Controller
             ->first();
 
         // Buat path QR code jika kendaraan ada
-        $qrCodePath = $kendaraan ? 'images/qrcodes/' . $kendaraan->plat_nomor . '.png' : null;
+        $qrCodePath = $kendaraan
+            ? 'https://res.cloudinary.com/dusw72eit/image/upload/images/qrcodes/' . rawurlencode($kendaraan->plat_nomor) . '.svg'
+            : null;
+
 
         // Jumlah pengguna unik dari tabel riwayat_parkir berdasarkan hari ini
         $jumlahPengguna = DB::table('riwayat_parkir')
