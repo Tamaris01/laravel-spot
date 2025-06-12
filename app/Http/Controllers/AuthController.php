@@ -16,95 +16,96 @@ class AuthController extends Controller
      */
     public function showLoginForm()
     {
-        return view('auth.login'); // Mengarahkan ke halaman login
+        return view('auth.login');
     }
 
     /**
-     * Proses login untuk Pengguna dan Pengelola Parkir.
+     * Proses login untuk Pengelola dan Pengguna Parkir.
      */
     public function login(Request $request)
     {
-        // Validasi input form login
+        // Validasi input
         $credentials = $request->validate([
-            'id' => ['required'], // ID bisa untuk Pengguna atau Pengelola
-            'password' => ['required'], // Kata sandi
+            'id' => ['required'],
+            'password' => ['required'],
         ]);
 
-        // Log informasi saat mencoba login
-        Log::info('Login attempt', ['id' => $credentials['id']]);
+        Log::info('Percobaan login', ['id' => $credentials['id']]);
 
-        // Cek apakah ID pengguna ada di model PenggunaParkir
-        $user = PenggunaParkir::where('id_pengguna', $credentials['id'])->first();
+        // ✅ Cek ke Pengelola lebih dulu
+        $user = PengelolaParkir::where('id_pengelola', $credentials['id'])->first();
+        $guard = 'pengelola';
 
-        // Jika pengguna tidak ditemukan, cek di model PengelolaParkir
-        $guard = 'pengguna'; // Default guard pengguna
+        // Jika tidak ditemukan di Pengelola, cek Pengguna
         if (!$user) {
-            $user = PengelolaParkir::where('id_pengelola', $credentials['id'])->first();
-            $guard = 'pengelola'; // Ubah guard jika yang login adalah pengelola
+            $user = PenggunaParkir::where('id_pengguna', $credentials['id'])->first();
+            $guard = 'pengguna';
         }
 
-        // Jika pengguna atau pengelola ditemukan
         if ($user) {
-            Log::info('User found', ['id' => $credentials['id']]);
+            Log::info('Akun ditemukan', ['id' => $credentials['id'], 'guard' => $guard]);
 
-            // Jika yang ditemukan adalah pengguna, cek status aktif
+            // ✅ Cek status hanya untuk pengguna
             if ($guard === 'pengguna' && $user->status !== 'aktif') {
-                Log::warning('Login attempt for non-active user', ['id_pengguna' => $user->id_pengguna]);
-                return back()->with('status', 'error')->with('message', 'Maaf,akun anda belum aktif!')->onlyInput('id');
+                Log::warning('Akun pengguna belum aktif', ['id_pengguna' => $user->id_pengguna]);
+                return back()
+                    ->with('status', 'error')
+                    ->with('message', 'Maaf, akun anda belum aktif!')
+                    ->onlyInput('id');
             }
 
-            // Cek apakah password cocok dengan yang di-hash di database
+            // Cek password
             if (Hash::check($credentials['password'], $user->password)) {
-                // Login berhasil, autentikasi pengguna dengan guard yang sesuai
                 Auth::guard($guard)->login($user);
-                $request->session()->regenerate(); // Regenerasi session
+                $request->session()->regenerate();
 
-                // Cek tipe user dan arahkan ke dashboard yang sesuai
                 if ($guard === 'pengguna') {
-                    Log::info('Pengguna logged in', ['id_pengguna' => $user->id_pengguna]);
-                    return redirect()->route('pengguna.dashboard')->with('status', 'success')->with('message', 'Selamat datang, Anda berhasil masuk!');
-                } elseif ($guard === 'pengelola') {
-                    Log::info('Pengelola logged in', ['id_pengelola' => $user->id_pengelola]);
-                    return redirect()->route('pengelola.dashboard')->with('status', 'success')->with('message', 'Selamat datang, Anda berhasil masuk!');
+                    Log::info('Pengguna berhasil login', ['id_pengguna' => $user->id_pengguna]);
+                    return redirect()->route('pengguna.dashboard')
+                        ->with('status', 'success')
+                        ->with('message', 'Selamat datang, Anda berhasil masuk!');
+                } else {
+                    Log::info('Pengelola berhasil login', ['id_pengelola' => $user->id_pengelola]);
+                    return redirect()->route('pengelola.dashboard')
+                        ->with('status', 'success')
+                        ->with('message', 'Selamat datang, Anda berhasil masuk!');
                 }
             } else {
-                // Password salah
-                Log::warning('Password salah untuk pengguna/pengelola', ['id' => $credentials['id']]);
-                return back()->with('status', 'error')->with('message', 'Password anda salah.')->onlyInput('id');
+                Log::warning('Password salah', ['id' => $credentials['id']]);
+                return back()
+                    ->with('status', 'error')
+                    ->with('message', 'Password anda salah.')
+                    ->onlyInput('id');
             }
         } else {
-            // Pengguna atau pengelola tidak ditemukan
-            Log::warning('User tidak ditemukan', ['id' => $credentials['id']]);
-            return back()->with('status', 'error')->with('message', 'ID tidak ditemukan.')->onlyInput('id');
+            Log::warning('ID tidak ditemukan', ['id' => $credentials['id']]);
+            return back()
+                ->with('status', 'error')
+                ->with('message', 'ID tidak ditemukan.')
+                ->onlyInput('id');
         }
     }
 
+    /**
+     * Logout untuk pengguna dan pengelola.
+     */
     public function logout(Request $request)
     {
-        $userId = null; // Initialize user ID variable for logging
-
-        // Check which guard is currently authenticated and log out accordingly
         if (Auth::guard('pengguna')->check()) {
-            $user = Auth::guard('pengguna')->user(); // Get authenticated user
-            if ($user) {
-                $userId = $user->id_pengguna; // Get id_pengguna
-                Auth::guard('pengguna')->logout(); // Logout pengguna
-                Log::info('Pengguna logged out', ['id_pengguna' => $userId]);
-            }
+            $user = Auth::guard('pengguna')->user();
+            Log::info('Pengguna logout', ['id_pengguna' => $user->id_pengguna]);
+            Auth::guard('pengguna')->logout();
         } elseif (Auth::guard('pengelola')->check()) {
-            $user = Auth::guard('pengelola')->user(); // Get authenticated user
-            if ($user) {
-                $userId = $user->id_pengelola; // Get id_pengelola
-                Auth::guard('pengelola')->logout(); // Logout pengelola
-                Log::info('Pengelola logged out', ['id_pengelola' => $userId]);
-            }
+            $user = Auth::guard('pengelola')->user();
+            Log::info('Pengelola logout', ['id_pengelola' => $user->id_pengelola]);
+            Auth::guard('pengelola')->logout();
         }
 
-        // Hapus session yang ada
         $request->session()->invalidate();
-        $request->session()->regenerateToken(); // Regenerasi token CSRF untuk keamanan
+        $request->session()->regenerateToken();
 
-        // Redirect ke halaman login setelah logout dengan notifikasi
-        return redirect('/login')->with('status', 'success')->with('message', 'Anda berhasil logout.');
+        return redirect('/login')
+            ->with('status', 'success')
+            ->with('message', 'Anda berhasil logout.');
     }
 }

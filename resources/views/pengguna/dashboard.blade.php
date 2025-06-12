@@ -285,7 +285,8 @@
             <h6 class="text-center mt-3">Data Diri Pengguna</h6>
             <div class="d-flex flex-column flex-lg-row align-items-center">
                 <div class="user-info text-center mb-3">
-                    <img src="{{ asset(Auth::user()->foto) }}" alt="Foto Pengguna" class="rounded img-fluid">
+                    <img src="{{ Auth::user()->foto_url }}" alt="Foto Pengguna" class="rounded img-fluid">
+
                 </div>
                 <div class="details">
                     <table class="table table-borderless">
@@ -323,8 +324,9 @@
             <h6 class="text-center mt-3">QR Code</h6>
             <div class="card-qr">
                 @if ($qrCodePath)
-                <img alt="QR Code" src="{{ asset($qrCodePath) }}" class="img-fluid qr-code mb-3" />
-                <a href="{{ asset($qrCodePath) }}" download="QR_Code_{{ Auth::user()->nama }}" class="btn-download">
+                <img alt="QR Code" src="{{ $qrCodePath }}" class="img-fluid qr-code mb-3" />
+                <a href="{{ $qrCodePath }}" download="QR_Code_{{ Auth::user()->nama }}" class="btn-download">
+
                     Unduh <i class="fas fa-download"></i>
                 </a>
                 @else

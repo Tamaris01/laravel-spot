@@ -11,12 +11,13 @@ class KonfirmasiPendaftaranController extends Controller
     // Menampilkan daftar pendaftar
     public function index(Request $request)
     {
-        // Mengambil data pengguna dengan status 'nonaktif' dan melakukan paginasi
         $pendaftar = PenggunaParkir::where('status', 'nonaktif')->paginate(10);
 
-        // Mengembalikan tampilan dengan data pengguna
-        return view('pengelola.konfirmasi_pendaftaran', compact('pendaftar'));
+        $cloudName = env('CLOUDINARY_CLOUD_NAME');
+
+        return view('pengelola.konfirmasi_pendaftaran', compact('pendaftar', 'cloudName'));
     }
+
 
     // Fungsi pencarian pendaftar berdasarkan nama atau email
     public function search(Request $request)

@@ -78,32 +78,32 @@ class DatabaseSeeder extends Seeder
             $kendaraan->save();
         }
 
-        // $riwayatParkirData = [
-        //     // Rentang pagi, siang, sore, malam
-        //     ['id_pengguna' => '4342211050', 'plat_nomor' => 'BP 3640 JR',  'waktu_masuk' => Carbon::today()->setTime(7, 0, 0), 'waktu_keluar' => null, 'status_parkir' => 'masuk'],
-        //     ['id_pengguna' => '4342211036', 'plat_nomor' => 'BP 5678 EL',  'waktu_masuk' => Carbon::today()->setTime(8, 0, 0), 'waktu_keluar' => null, 'status_parkir' => 'masuk'],
-        //     ['id_pengguna' => '4342211041', 'plat_nomor' => 'BP 9101 EC',  'waktu_masuk' => Carbon::today()->setTime(12, 0, 0), 'waktu_keluar' => null, 'status_parkir' => 'masuk'],
-        //     ['id_pengguna' => '4342211045', 'plat_nomor' => 'BP 1121 AZ',  'waktu_masuk' => Carbon::today()->setTime(13, 0, 0), 'waktu_keluar' => null, 'status_parkir' => 'masuk'],
-        //     ['id_pengguna' => '4342211046', 'plat_nomor' => 'BP 3141 MA', 'waktu_masuk' => Carbon::today()->setTime(18, 0, 0), 'waktu_keluar' => null, 'status_parkir' => 'masuk'],
-        //     ['id_pengguna' => '4342211082', 'plat_nomor' => 'BP 0003 BW', 'waktu_masuk' => Carbon::today()->setTime(18, 0, 0), 'waktu_keluar' => null, 'status_parkir' => 'keluar'],
-        //     ['id_pengguna' => '4342211083', 'plat_nomor' => 'BP 0004 AW', 'waktu_masuk' => Carbon::today()->setTime(18, 0, 0), 'waktu_keluar' => null, 'status_parkir' => 'keluar'],
-        //     ['id_pengguna' => '222331', 'plat_nomor' => 'BP 0001 GA', 'waktu_masuk' => Carbon::today()->setTime(19, 0, 0), 'waktu_keluar' => null, 'status_parkir' => 'keluar'],
-        //     ['id_pengguna' => '222332', 'plat_nomor' => 'BP 0002 IQ', 'waktu_masuk' => Carbon::today()->setTime(20, 0, 0), 'waktu_keluar' => null, 'status_parkir' => 'keluar'],
+        $riwayatParkirData = [
+            // Rentang pagi, siang, sore, malam
+            ['id_pengguna' => '4342211050', 'plat_nomor' => 'BP 3640 JR',  'waktu_masuk' => Carbon::today()->setTime(7, 0, 0), 'waktu_keluar' => null, 'status_parkir' => 'masuk'],
+            ['id_pengguna' => '4342211036', 'plat_nomor' => 'BP 5678 EL',  'waktu_masuk' => Carbon::today()->setTime(8, 0, 0), 'waktu_keluar' => null, 'status_parkir' => 'masuk'],
+            ['id_pengguna' => '4342211041', 'plat_nomor' => 'B 2015 TZA',  'waktu_masuk' => Carbon::today()->setTime(12, 0, 0), 'waktu_keluar' => null, 'status_parkir' => 'masuk'],
+            ['id_pengguna' => '4342211045', 'plat_nomor' => 'BP 1121 AZ',  'waktu_masuk' => Carbon::today()->setTime(13, 0, 0), 'waktu_keluar' => null, 'status_parkir' => 'masuk'],
+            ['id_pengguna' => '4342211046', 'plat_nomor' => 'BP 3141 MA', 'waktu_masuk' => Carbon::today()->setTime(18, 0, 0), 'waktu_keluar' => null, 'status_parkir' => 'masuk'],
+            ['id_pengguna' => '4342211082', 'plat_nomor' => 'BP 0003 BW', 'waktu_masuk' => Carbon::today()->setTime(18, 0, 0), 'waktu_keluar' => null, 'status_parkir' => 'keluar'],
+            ['id_pengguna' => '4342211083', 'plat_nomor' => 'BP 0004 AW', 'waktu_masuk' => Carbon::today()->setTime(18, 0, 0), 'waktu_keluar' => null, 'status_parkir' => 'keluar'],
+            ['id_pengguna' => '222331', 'plat_nomor' => 'BP 0001 GA', 'waktu_masuk' => Carbon::today()->setTime(19, 0, 0), 'waktu_keluar' => null, 'status_parkir' => 'keluar'],
+            ['id_pengguna' => '222332', 'plat_nomor' => 'BP 0002 IQ', 'waktu_masuk' => Carbon::today()->setTime(20, 0, 0), 'waktu_keluar' => null, 'status_parkir' => 'keluar'],
 
 
-        // ];
+        ];
 
-        // // Get the last ID and increment it
-        // $lastRecord = RiwayatParkir::latest('id_riwayat_parkir')->first();
-        // $lastId = $lastRecord ? (int)substr($lastRecord->id_riwayat_parkir, 4) : 0;
+        // Get the last ID and increment it
+        $lastRecord = RiwayatParkir::latest('id_riwayat_parkir')->first();
+        $lastId = $lastRecord ? (int)substr($lastRecord->id_riwayat_parkir, 4) : 0;
 
-        // foreach ($riwayatParkirData as $data) {
-        //     // Increment ID by 1
-        //     $lastId++;
-        //     $id_riwayat_parkir = 'PARK' . str_pad($lastId, 3, '0', STR_PAD_LEFT); // Generate the next ID
+        foreach ($riwayatParkirData as $data) {
+            // Increment ID by 1
+            $lastId++;
+            $id_riwayat_parkir = 'PARK' . str_pad($lastId, 3, '0', STR_PAD_LEFT); // Generate the next ID
 
-        //     // Insert the record with the generated ID
-        //     RiwayatParkir::create(array_merge($data, ['id_riwayat_parkir' => $id_riwayat_parkir]));
-        // }
+            // Insert the record with the generated ID
+            RiwayatParkir::create(array_merge($data, ['id_riwayat_parkir' => $id_riwayat_parkir]));
+        }
     }
 }

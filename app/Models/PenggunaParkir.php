@@ -58,15 +58,23 @@ class PenggunaParkir extends Authenticatable
      */
     public function setFotoAttribute($value)
     {
-        if (is_string($value) && strpos($value, 'http') !== false) {
-            // Jika value sudah berupa URL, simpan sebagai public_id
+        // Jika $value adalah string, anggap sudah public_id dan langsung simpan
+        if (is_string($value)) {
             $this->attributes['foto'] = $value;
-        } else {
-            // Upload foto baru ke Cloudinary jika ada file gambar
-            $foto = Cloudinary::upload($value->getRealPath());
-            $this->attributes['foto'] = $foto->getPublicId(); // Simpan public_id dari Cloudinary
+            return;
         }
+
+        // Kalau bukan string, kemungkinan file upload, lakukan upload Cloudinary
+        if (method_exists($value, 'getRealPath')) {
+            $foto = Cloudinary::upload($value->getRealPath());
+            $this->attributes['foto'] = $foto->getPublicId();
+            return;
+        }
+
+        // Jika nilai lain, bisa set null atau error sesuai kebutuhan
+        $this->attributes['foto'] = null;
     }
+
 
     /**
      * Menampilkan URL dari foto yang disimpan di Cloudinary.

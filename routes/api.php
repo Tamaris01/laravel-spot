@@ -15,3 +15,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/scan-qr', [RiwayatParkirController::class, 'scanQR']);
 Route::get('/scan-latest', [RiwayatParkirController::class, 'getLatest']);
 Route::get('/check_plate/{plat_nomor}', [MonitoringParkirController::class, 'checkPlate']);
+Route::get('/check-scan-qr', [RiwayatParkirController::class, 'CheckscanQR']);

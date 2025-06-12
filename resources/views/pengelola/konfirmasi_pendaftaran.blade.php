@@ -113,7 +113,7 @@
                                     <td>{{ $data->email }}</td>
                                     <td class="text-center">
                                         <!-- Button Lihat -->
-                                        <button class="btn btn-success btn-sm" onclick="lihat('{{ $data->id_pengguna }}', '{{url($data->foto) }}')">
+                                        <button class="btn btn-success btn-sm" onclick="lihat('{{ $data->foto }}')">
                                             <i class="fas fa-eye"></i> Lihat
                                         </button>
                                     </td>
@@ -129,7 +129,7 @@
                                 </tr>
                                 <!-- Modal untuk lihat Pengguna-->
                                 <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" style=" display: flex;  justify-content: center;  align-items: center;  text-align: center;" role="document"> <!-- Center the modal -->
+                                    <div class="modal-dialog" style="display: flex; justify-content: center; align-items: center; text-align: center;" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header" style="background-color: #FFDC40;">
                                                 <h5 class="modal-title" id="imageModalLabel">Foto Pengguna</h5>
@@ -238,11 +238,13 @@
     }
 
     // Melihat gambar pengguna di modal
-    function lihat(id_pengguna, imageUrl) {
-        var imgElement = document.getElementById('userImage'); // pastikan ID-nya benar
-        imgElement.src = imageUrl; // Menetapkan URL gambar
-        $('#imageModal').modal('show'); // Menampilkan modal
+    function lihat(fotoPublicId) {
+        const cloudName = "{{ $cloudName }}";
+        const imageUrl = `https://res.cloudinary.com/${cloudName}/image/upload/${fotoPublicId}`;
+        document.getElementById('userImage').src = imageUrl;
+        $('#imageModal').modal('show');
     }
+
 
 
     // Fungsi untuk memuat data tabel secara dinamis

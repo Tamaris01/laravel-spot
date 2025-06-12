@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Log;
 use App\Models\PenggunaParkir;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+
 
 class PenggunaParkirController extends Controller
 {
@@ -78,7 +79,6 @@ class PenggunaParkirController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi data yang diterima
         $validated = $request->validate([
             'id_pengguna' => 'required_if:kategori,!Tamu|string|max:255|unique:pengguna_parkir,id_pengguna',
             'kategori' => 'required|string|in:' . implode(',', $this->getEnumValues('pengguna_parkir', 'kategori')),
@@ -89,49 +89,33 @@ class PenggunaParkirController extends Controller
         ]);
 
         try {
-            // Validasi dimensi foto
+            $fotoUrl = null;
             if ($request->hasFile('foto')) {
                 $foto = $request->file('foto');
                 $dimensions = getimagesize($foto);
-                $width = $dimensions[0];
-                $height = $dimensions[1];
-
-                // Periksa dimensi gambar (472x472 piksel sebagai contoh 4x4 cm pada 300 DPI)
-                if ($width !== 472 || $height !== 472) {
-                    return redirect()->back()->withErrors(['foto' => 'Dimensi foto harus berukuran 472x472 piksel (4x4 cm pada 300 DPI).'])->withInput();
+                if ($dimensions[0] !== 472 || $dimensions[1] !== 472) {
+                    return redirect()->back()->withErrors(['foto' => 'Dimensi foto harus 472x472 piksel.'])->withInput();
                 }
 
-                if ($request->hasFile('foto')) {
-                    // Mendapatkan file dari request
-                    $foto = $request->file('foto');
-
-                    // Menentukan path penyimpanan langsung di folder public/images/profil
-                    $fotoPath = 'images/profil/' . uniqid() . '_' . $foto->getClientOriginalName();
-
-                    // Memindahkan file ke folder public/images/profil
-                    $foto->move(public_path('images/profil'), $fotoPath);
-                } else {
-                    $fotoPath = null;
-                }
+                $fotoUrl = Cloudinary::upload($foto->getRealPath(), [
+                    'folder' => 'images/profil'
+                ])->getSecurePath();
             }
 
-            // Membuat instance PenggunaParkir baru
             $pengguna = new PenggunaParkir();
             $pengguna->id_pengguna = $request->kategori !== 'Tamu'
                 ? $request->id_pengguna
                 : 'Tamu_' . mt_rand(10000000, 99999999);
-
             $pengguna->nama = $request->nama;
             $pengguna->email = $request->email;
-            $pengguna->password = $request->password; // Enkripsi password
-            $pengguna->foto = $fotoPath;
+            $pengguna->password = $request->password;
+            $pengguna->foto = $fotoUrl;
             $pengguna->kategori = $request->kategori;
             $pengguna->status = 'aktif';
             $pengguna->save();
 
             return redirect()->route('pengelola.kelola_pengguna.index')->with('success', 'Pengguna berhasil ditambahkan.');
         } catch (\Exception $e) {
-            // Jika terjadi error, log error dan tampilkan pesan kegagalan
             Log::error('Error saving pengguna: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan pengguna.');
         }
@@ -149,58 +133,53 @@ class PenggunaParkirController extends Controller
 
     public function update(Request $request, $id_pengguna)
     {
-        // Validasi data yang diterima
         $validated = $request->validate([
             'kategori' => 'required|string|in:' . implode(',', $this->getEnumValues('pengguna_parkir', 'kategori')),
             'nama' => 'required|string|regex:/^[A-Z][a-zA-Z\s,\.]*$/|max:50',
             'email' => 'required|email|unique:pengguna_parkir,email,' . $id_pengguna . ',id_pengguna|max:255',
-            'password' => 'nullable|string|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/', // Password bisa kosong jika tidak diubah
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Foto bisa kosong jika tidak diubah
+            'password' => 'nullable|string|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         try {
-            // Menemukan pengguna berdasarkan id_pengguna
             $pengguna = PenggunaParkir::findOrFail($id_pengguna);
-
-            // Menyimpan path foto lama sebelum diubah (jika ada)
             $oldFoto = $pengguna->foto;
 
-            // Menangani upload foto jika ada file baru
+            // Upload ke Cloudinary jika ada file foto baru
             if ($request->hasFile('foto')) {
-                // Hapus foto lama jika ada dan tidak menggunakan foto default
-                if ($oldFoto && $oldFoto !== 'images/profil/default.jpg' && file_exists(public_path($oldFoto))) {
-                    unlink(public_path($oldFoto)); // Menghapus file lama
-                    Log::info("Foto lama pengguna dengan id {$id_pengguna} dihapus: {$oldFoto}");
+                // Hapus foto lama dari Cloudinary jika bukan default
+                if ($oldFoto && !str_contains($oldFoto, 'default.jpg')) {
+                    $publicId = pathinfo(basename($oldFoto), PATHINFO_FILENAME);
+                    Cloudinary::destroy("images/profil/{$publicId}");
+                    Log::info("Foto lama pengguna dengan ID {$id_pengguna} dihapus dari Cloudinary: {$publicId}");
                 }
 
-                // Simpan foto baru
-                $fotoProfil = $request->file('foto');
-                $fotoProfilPath = 'images/profil/' . time() . '_' . $fotoProfil->getClientOriginalName();
-                $fotoProfil->move(public_path('images/profil'), $fotoProfilPath);
-                $pengguna->foto = $fotoProfilPath;
-                Log::info("Foto baru untuk pengguna dengan id {$id_pengguna} disimpan: {$fotoProfilPath}");
+                // Upload foto baru
+                $uploadedFileUrl = Cloudinary::upload($request->file('foto')->getRealPath(), [
+                    'folder' => 'images/profil',
+                ])->getSecurePath();
+
+                $pengguna->foto = $uploadedFileUrl;
+                Log::info("Foto baru pengguna dengan ID {$id_pengguna} diupload ke Cloudinary: {$uploadedFileUrl}");
             }
 
-            // Menangani perubahan password jika ada
             if ($request->filled('password')) {
-                $pengguna->password = $request->password; // Menyimpan password secara langsung (tanpa enkripsi)
+                $pengguna->password = $request->password;
             }
 
-            // Update data pengguna selain ID Pengguna
             $pengguna->update([
                 'kategori' => $validated['kategori'],
                 'nama' => $validated['nama'],
                 'email' => $validated['email'],
             ]);
 
-            // Redirect setelah sukses
             return redirect()->route('pengelola.kelola_pengguna.index')->with('success', 'Pengguna berhasil diperbarui.');
         } catch (\Exception $e) {
-            // Log error jika terjadi kesalahan
-            Log::error('Error updating pengguna: ' . $e->getMessage());
+            Log::error('Gagal memperbarui pengguna: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Terjadi kesalahan saat memperbarui pengguna.');
         }
     }
+
 
 
 
@@ -208,19 +187,19 @@ class PenggunaParkirController extends Controller
     {
         Log::info("Menghapus pengguna dengan ID: $id_pengguna");
 
-        // Cari pengguna berdasarkan ID
         $pengguna = PenggunaParkir::find($id_pengguna);
 
         if ($pengguna) {
-            // Jika pengguna memiliki foto, hapus foto tersebut
-            if ($pengguna->foto && $pengguna->foto !== 'images/profil/default.jpg' && file_exists(public_path($pengguna->foto))) {
-                unlink(public_path($pengguna->foto)); // Menghapus file foto
-                Log::info("Foto pengguna dengan ID $id_pengguna berhasil dihapus: {$pengguna->foto}");
+            if ($pengguna->foto && !str_contains($pengguna->foto, 'default.jpg')) {
+                $filename = basename($pengguna->foto); // contoh: nama_file.jpg
+                $publicId = pathinfo($filename, PATHINFO_FILENAME);
+
+                Cloudinary::destroy("images/profil/{$publicId}");
+                Log::info("Foto pengguna dengan ID $id_pengguna berhasil dihapus dari Cloudinary: {$pengguna->foto}");
             }
 
-            // Hapus data pengguna dari database
             $pengguna->delete();
-            Log::info("Pengguna berhasil dihapus.");
+            Log::info("Pengguna dengan ID $id_pengguna berhasil dihapus dari database.");
 
             return redirect()->route('pengelola.kelola_pengguna.index')->with('success', 'Pengguna berhasil dihapus.');
         } else {
