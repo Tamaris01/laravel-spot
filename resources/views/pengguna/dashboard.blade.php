@@ -285,7 +285,7 @@
             <h6 class="text-center mt-3">Data Diri Pengguna</h6>
             <div class="d-flex flex-column flex-lg-row align-items-center">
                 <div class="user-info text-center mb-3">
-                    <img src="https://res.cloudinary.com/dusw72eit/image/upload/{{ Auth::user()->foto }}" alt="Foto Pengguna" class="rounded img-fluid">
+                    <img src="{{ Auth::user()->foto }}" alt="Foto Pengguna" class="rounded img-fluid">
 
 
                 </div>
