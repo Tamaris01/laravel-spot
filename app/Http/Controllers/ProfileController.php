@@ -44,46 +44,33 @@ class ProfileController extends Controller
         $user->nama = $request->nama;
         $user->email = $request->email;
 
-        // Proses update foto jika ada file foto baru
         if ($request->hasFile('foto')) {
-            // Hapus foto lama jika ada dan bukan default
-            if ($user->foto && !str_contains($user->foto, 'default.jpg')) {
-                $publicId = null;
+            $oldFoto = $user->foto;
 
-                // Jika foto lama berupa secure URL, ekstrak public_id
-                if (str_starts_with($user->foto, 'http')) {
-                    $parsedUrl = parse_url($user->foto);
-                    $path = $parsedUrl['path'] ?? ''; // contoh: /images/profil/abc123.jpg
-                    $publicIdWithExt = ltrim($path, '/'); // jadi: images/profil/abc123.jpg
-                    $publicId = preg_replace('/\.(jpg|jpeg|png|webp)$/i', '', $publicIdWithExt); // jadi: images/profil/abc123
-                } else {
-                    // Jika disimpan sebagai public_id (misalnya dari sistem lama)
-                    $publicId = $user->foto;
-                }
+            if ($oldFoto && !str_contains($oldFoto, 'default.jpg')) {
+                $parsedUrl = parse_url($oldFoto);
+                $path = $parsedUrl['path'] ?? ''; // Contoh: /images/profil/abc123.jpg
+                $filename = pathinfo($path, PATHINFO_FILENAME); // abc123
+                $publicId = 'images/profil/' . $filename;
 
-                if ($publicId) {
-                    Cloudinary::destroy($publicId);
-                    Log::info("Foto lama dihapus dari Cloudinary: {$publicId}");
-                }
+                Cloudinary::destroy($publicId);
+                Log::info("Foto lama user dihapus dari Cloudinary: {$publicId}");
             }
 
-            // Upload foto baru ke Cloudinary
+            // Upload foto baru
             $uploaded = Cloudinary::upload($request->file('foto')->getRealPath(), [
                 'folder' => 'images/profil',
                 'resource_type' => 'image'
             ]);
 
-            // Simpan secure URL-nya
-            $user->foto = $uploaded->getSecurePath();
-            Log::info("Foto baru diupload dan disimpan: {$user->foto}");
+            $user->foto = $uploaded->getSecurePath(); // Simpan URL seperti sebelumnya
+            Log::info("Foto baru user disimpan dengan URL: {$user->foto}");
         }
 
-        // Update password jika ada input
         if ($request->filled('password')) {
-            $user->password = $request->password; // Hash password agar aman
+            $user->password = $request->password;
         }
 
-        // Simpan perubahan
         if (!$user->save()) {
             throw new \Exception('Gagal memperbarui profil.');
         }
