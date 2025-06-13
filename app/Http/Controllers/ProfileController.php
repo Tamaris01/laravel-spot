@@ -45,26 +45,35 @@ class ProfileController extends Controller
         $user->email = $request->email;
 
         if ($request->hasFile('foto')) {
-            // Hapus foto lama di Cloudinary jika ada
-            if ($user->foto) {
-                Cloudinary::destroy($user->foto);
-                Log::info("Foto lama berhasil dihapus: {$user->foto}");
+            // Hapus foto lama jika bukan default
+            if ($user->foto && !str_contains($user->foto, 'default.jpg')) {
+                if (str_starts_with($user->foto, 'http')) {
+                    // Ekstrak public_id dari URL
+                    $parsedUrl = parse_url($user->foto);
+                    $path = $parsedUrl['path'] ?? '';
+                    $publicIdWithExt = ltrim($path, '/'); // contoh: images/profil/abc123.jpg
+                    $publicId = preg_replace('/\.(jpg|jpeg|png)$/', '', $publicIdWithExt);
+                } else {
+                    $publicId = $user->foto;
+                }
+
+                Cloudinary::destroy($publicId);
+                Log::info("Foto lama dihapus: {$publicId}");
             }
 
-            // Upload foto baru ke Cloudinary, simpan di folder 'images/profil' supaya konsisten dengan register
-            $fotoBaru = $request->file('foto');
-            $uploaded = Cloudinary::upload($fotoBaru->getRealPath(), [
+            // Upload foto baru
+            $uploaded = Cloudinary::upload($request->file('foto')->getRealPath(), [
                 'folder' => 'images/profil',
                 'resource_type' => 'image'
             ]);
 
-            $user->foto = $uploaded->getPublicId(); // Simpan public_id di database
-            Log::info("Foto baru disimpan dengan public_id: {$user->foto}");
+            // Simpan URL lengkap ke database (agar bisa langsung dipakai di <img src="{{ $user->foto }}">)
+            $user->foto = $uploaded->getSecurePath();
+            Log::info("Foto baru disimpan dengan URL: {$user->foto}");
         }
 
-        // Update password hanya jika diisi, dan lakukan hashing
         if ($request->filled('password')) {
-            $user->password = $request->password;
+            $user->password = $request->password; // Jangan lupa enkripsi
         }
 
         if (!$user->save()) {
