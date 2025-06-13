@@ -59,7 +59,9 @@
                 <div class="card-body row">
                     <div class="col-12 col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 h-100">
                         <div class="upload-photo text-center p-2">
-                            <img id="previewProfil" src="{{asset($user->foto) }}" alt="Preview Foto Profil" class="img-thumbnail">
+                            <img id="previewProfil" src="https://res.cloudinary.com/dusw72eit/image/upload/{{ $user->foto }}"
+                                alt="Preview Foto Profil"
+                                class="img-thumbnail">
 
                         </div>
                     </div>
