@@ -539,7 +539,7 @@
 @endsection
 
 @section('scripts')
-<script>
+<!-- <script>
     // Fungsi untuk membuka modal tambah
     function openFormTambah() {
         $('#tambahModal').modal('show');
@@ -620,7 +620,7 @@
         var rows = document.getElementById('rows').value;
         window.location.href = '?rows=' + rows; // Menyertakan parameter rows dalam URL
     }
-</script>
+</script> -->
 <!-- jQuery and Bootstrap 4 JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
