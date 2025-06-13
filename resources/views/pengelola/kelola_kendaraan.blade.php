@@ -548,11 +548,6 @@
         };
         reader.readAsDataURL(event.target.files[0]);
     }
-
-
-
-
-
     // Fungsi untuk menampilkan QR Code modal
     function lihatQR(qrCodeUrl) {
         $('#qrCodeImage').attr('src', qrCodeUrl);
@@ -566,23 +561,6 @@
         $('#deleteModal').modal('show');
     }
 
-    // Preview the user photo on upload
-    function previewImage(event, previewId, labelId) {
-        var file = event.target.files[0];
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            // Tampilkan gambar pratinjau
-            document.getElementById(previewId).src = e.target.result;
-            document.getElementById(previewId).style.display = 'block';
-
-            // Ubah label jika ada gambar
-            document.getElementById(labelId).style.display = 'none';
-        };
-
-        if (file) {
-            reader.readAsDataURL(file);
-        }
-    }
 
     //Rows
     function changeRows() {
