@@ -180,6 +180,8 @@ class KelolaKendaraanController extends Controller
 
     public function update(KendaraanRequest $request, $plat_nomor)
     {
+        $plat_nomor = urldecode($plat_nomor);
+
         // Mencari kendaraan berdasarkan plat_nomor
         $kendaraan = Kendaraan::where('plat_nomor', $plat_nomor)->first();
 
