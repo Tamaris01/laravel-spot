@@ -198,17 +198,10 @@
                                         </button>
                                     </td>
                                     <td>
-                                        <button
-                                            class="btn btn-info btn-sm"
-                                            data-toggle="modal"
-                                            data-target="#editModal"
-                                            data-plat-nomor="{{ $data->plat_nomor }}"
-                                            data-jenis="{{ $data->jenis }}"
-                                            data-warna="{{ $data->warna }}"
-                                            data-foto="{{ $data->foto }}"
-                                            data-id-pengguna="{{ $data->penggunaParkir->id_pengguna ?? '' }}">
+                                        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal{{ $data->plat_nomor }}">
                                             <i class="fas fa-edit"></i> Edit
                                         </button>
+
 
                                         <button class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $data->plat_nomor }}', '{{ $data->penggunaParkir->nama }}')">
                                             <i class="fas fa-trash-alt"></i> Hapus
