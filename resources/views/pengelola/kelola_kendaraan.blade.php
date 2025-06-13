@@ -539,38 +539,7 @@
 @endsection
 
 @section('scripts')
-<!-- <script>
-    // Fungsi untuk membuka modal tambah
-    function openFormTambah() {
-        $('#tambahModal').modal('show');
-    }
-
-
-    $('#editModal').on('show.bs.modal', function(event) {
-        const button = $(event.relatedTarget);
-        const modal = $(this);
-
-        const foto = button.data('foto');
-        const platNomor = button.data('plat-nomor');
-        const jenis = button.data('jenis');
-        const warna = button.data('warna');
-        const idPengguna = button.data('id-pengguna');
-
-        // Isi nilai-nilai form
-        modal.find('#plat_nomor_edit').val(platNomor);
-        modal.find('#jenis_edit').val(jenis);
-        modal.find('#warna_edit').val(warna);
-        modal.find('#id_pengguna_edit').val(idPengguna);
-
-        // Tampilkan foto dari database
-        const preview = modal.find('#previewVehicleEdit');
-        if (foto) {
-            preview.attr('src', foto);
-        } else {
-            preview.attr('src', '{{ asset("images/kendaraan/default.jpg") }}');
-        }
-    });
-
+<script>
     // Preview ketika user memilih file baru
     function previewImage(event) {
         const reader = new FileReader();
@@ -620,7 +589,7 @@
         var rows = document.getElementById('rows').value;
         window.location.href = '?rows=' + rows; // Menyertakan parameter rows dalam URL
     }
-</script> -->
+</script>
 <!-- jQuery and Bootstrap 4 JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
