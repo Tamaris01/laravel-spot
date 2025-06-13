@@ -199,7 +199,7 @@
                                     </td>
                                     <td>
 
-                                        <a href="{{ route('pengelola.kelola_kendaraan.edit', urlencode($data->plat_nomor)) }}" class="btn btn-info btn-sm">
+                                        <a href="{{ route('pengelola.kelola_kendaraan.edit', rawurlencode($data->plat_nomor)) }}" class="btn btn-info btn-sm">
                                             <i class="fas fa-edit"></i> Edit
                                         </a>
 
