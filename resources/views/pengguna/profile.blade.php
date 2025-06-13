@@ -59,7 +59,7 @@
                 <div class="card-body row">
                     <div class="col-12 col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 h-100">
                         <div class="upload-photo text-center p-2">
-                            <img id="previewProfil" src="https://res.cloudinary.com/dusw72eit/image/upload/{{ $user->foto }}"
+                            <img id="previewProfil" src="{{ $user->foto }}"
                                 alt="Preview Foto Profil"
                                 class="img-thumbnail">
 
@@ -121,7 +121,7 @@
                         <div class="row">
                             <div class="col-12 col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 h-100">
                                 <div class="upload-photo text-center p-2" onclick="document.getElementById('uploadPhotoProfilEdit').click()">
-                                    <img id="previewProfilEdit" src="https://res.cloudinary.com/dusw72eit/image/upload/{{ asset($user->foto) }}" alt="Preview Foto Profil" class="img-thumbnail">
+                                    <img id="previewProfilEdit" src="{{ asset($user->foto) }}" alt="Preview Foto Profil" class="img-thumbnail">
                                     <input type="file" id="uploadPhotoProfilEdit" name="foto" style="display:none;" accept="image/*" onchange="previewImage(event, 'previewProfilEdit')">
                                 </div>
                             </div>
