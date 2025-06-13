@@ -44,21 +44,27 @@ class ProfileController extends Controller
         $user->nama = $request->nama;
         $user->email = $request->email;
 
+        // Proses update foto jika ada file foto baru
         if ($request->hasFile('foto')) {
-            // Hapus foto lama dari Cloudinary jika bukan default
+            // Hapus foto lama jika ada dan bukan default
             if ($user->foto && !str_contains($user->foto, 'default.jpg')) {
-                // Ekstrak public_id dari URL lama
+                $publicId = null;
+
+                // Jika foto lama berupa secure URL, ekstrak public_id
                 if (str_starts_with($user->foto, 'http')) {
                     $parsedUrl = parse_url($user->foto);
                     $path = $parsedUrl['path'] ?? ''; // contoh: /images/profil/abc123.jpg
                     $publicIdWithExt = ltrim($path, '/'); // jadi: images/profil/abc123.jpg
-                    $publicId = preg_replace('/\.(jpg|jpeg|png)$/', '', $publicIdWithExt); // jadi: images/profil/abc123
+                    $publicId = preg_replace('/\.(jpg|jpeg|png|webp)$/i', '', $publicIdWithExt); // jadi: images/profil/abc123
                 } else {
+                    // Jika disimpan sebagai public_id (misalnya dari sistem lama)
                     $publicId = $user->foto;
                 }
 
-                Cloudinary::destroy($publicId);
-                Log::info("Foto lama dihapus dari Cloudinary: {$publicId}");
+                if ($publicId) {
+                    Cloudinary::destroy($publicId);
+                    Log::info("Foto lama dihapus dari Cloudinary: {$publicId}");
+                }
             }
 
             // Upload foto baru ke Cloudinary
@@ -69,14 +75,15 @@ class ProfileController extends Controller
 
             // Simpan secure URL-nya
             $user->foto = $uploaded->getSecurePath();
-            Log::info("Foto baru disimpan dengan URL: {$user->foto}");
+            Log::info("Foto baru diupload dan disimpan: {$user->foto}");
         }
 
-        // Update password jika ada
+        // Update password jika ada input
         if ($request->filled('password')) {
-            $user->password = $request->password; // Hash password
+            $user->password = $request->password; // Hash password agar aman
         }
 
+        // Simpan perubahan
         if (!$user->save()) {
             throw new \Exception('Gagal memperbarui profil.');
         }
