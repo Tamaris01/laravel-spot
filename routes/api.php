@@ -16,3 +16,4 @@ Route::post('/scan-qr', [RiwayatParkirController::class, 'scanQR']);
 Route::get('/scan-latest', [RiwayatParkirController::class, 'getLatest']);
 Route::get('/check_plate/{plat_nomor}', [MonitoringParkirController::class, 'checkPlate']);
 Route::get('/check-scan-qr', [RiwayatParkirController::class, 'CheckscanQR']);
+Route::get('/perintah-palang', [RiwayatParkirController::class, 'perintahPalang']);
