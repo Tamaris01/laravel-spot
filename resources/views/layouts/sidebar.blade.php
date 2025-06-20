@@ -6,7 +6,7 @@
         <!-- Profil Pengguna -->
         <div class="user-panel mt-3 pb-2 mb-2 d-flex flex-column align-items-center text-center">
             <div class="image" style="margin-bottom: 5px;">
-                <img src="https://res.cloudinary.com/dusw72eit/image/upload/{{ Auth::user()->foto }}"
+                <img src="Auth::user()->foto }}"
                     class="img-circle elevation-2"
                     style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid white;"
                     alt="User Image">

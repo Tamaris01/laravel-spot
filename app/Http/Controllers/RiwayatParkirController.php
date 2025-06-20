@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Models\RiwayatParkir;
 use App\Models\Kendaraan;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 
 class RiwayatParkirController extends Controller
 {
@@ -15,52 +16,53 @@ class RiwayatParkirController extends Controller
      */
     public function scanQR(Request $request)
     {
-        // Ambil plat nomor dari request (QR code atau input plat nomor)
         $platNomor = $request->input('plat_nomor');
 
-        // Validasi input plat nomor
         if (!$platNomor) {
             return response()->json(['message' => 'Plat nomor tidak ditemukan'], 400);
         }
 
-        // Cari kendaraan berdasarkan plat nomor di tabel Kendaraan
         $kendaraan = Kendaraan::where('plat_nomor', $platNomor)->first();
 
         if (!$kendaraan) {
-            return response()->json(['message' => 'Plat nomor yang anda pindai tidak terdaftar di sistem'], 404);
+            return response()->json(['message' => 'Plat nomor tidak terdaftar'], 404);
         }
 
-        // Ambil id_pengguna dari relasi kendaraan
         $idPengguna = $kendaraan->penggunaParkir->id_pengguna ?? null;
 
         if (!$idPengguna) {
-            return response()->json(['message' => 'Data pengguna tidak ditemukan untuk kendaraan ini'], 404);
+            return response()->json(['message' => 'Data pengguna tidak ditemukan'], 404);
         }
 
-        // Cek apakah kendaraan sudah masuk dan belum keluar
+        $waktuSekarang = Carbon::now();
+
         $riwayatParkir = RiwayatParkir::where('plat_nomor', $platNomor)
             ->where('status_parkir', 'masuk')
             ->first();
 
-        $waktuSekarang = Carbon::now();
-
         if ($riwayatParkir) {
-            // Kendaraan keluar
+            // Keluar
             $riwayatParkir->waktu_keluar = $waktuSekarang;
             $riwayatParkir->status_parkir = 'keluar';
             $riwayatParkir->save();
+
+            // Simpan status sementara untuk ESP32
+            Cache::put('status_' . $platNomor, 'keluar', 30); // expired dalam 30 detik
 
             return response()->json([
                 'message' => 'QR Code berhasil dipindai, kendaraan keluar.',
             ]);
         } else {
-            // Kendaraan masuk
+            // Masuk
             RiwayatParkir::create([
                 'id_pengguna' => $idPengguna,
                 'plat_nomor' => $platNomor,
                 'waktu_masuk' => $waktuSekarang,
                 'status_parkir' => 'masuk',
             ]);
+
+            // Simpan status sementara untuk ESP32
+            Cache::put('status_' . $platNomor, 'masuk', 30); // expired dalam 30 detik
 
             return response()->json([
                 'message' => 'QR Code berhasil dipindai, kendaraan masuk.',
@@ -69,6 +71,26 @@ class RiwayatParkirController extends Controller
     }
 
 
+    public function getStatus(Request $request)
+    {
+        $platNomor = $request->query('plat_nomor');
+
+        if (!$platNomor) {
+            return response()->json(['message' => 'Plat nomor tidak ditemukan'], 400);
+        }
+
+        // Ambil status dari cache dan hapus setelah dibaca
+        $status = Cache::pull('status_' . $platNomor);
+
+        if (!$status) {
+            return response()->json(['message' => 'Status belum tersedia'], 404);
+        }
+
+        return response()->json([
+            'plat_nomor' => $platNomor,
+            'status' => $status,
+        ]);
+    }
     public function CheckscanQR(Request $request)
     {
         // Ambil plat nomor dari request GET
