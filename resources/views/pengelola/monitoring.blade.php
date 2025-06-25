@@ -453,7 +453,7 @@
 
     async function checkPlatNomor(platNomor) {
         try {
-            const response = await fetch(`https://laravel-spot-production.up.railway.app/api/check_plate/${platNomor}`);
+            const response = await fetch(`https://alpu.web.id/server/check_plate/${platNomor}`);
             if (!response.ok) throw new Error("Gagal fetch data validasi plat");
             const data = await response.json();
             return data.exists;
@@ -470,7 +470,7 @@
     let timeoutResetInfo = null;
 
     function tampilkanInfoScan() {
-        fetch('https://laravel-spot-production.up.railway.app/api/scan-latest')
+        fetch('https://alpu.web.id/server/scan-latest')
             .then(response => response.json())
             .then(data => {
                 const info = document.getElementById('info-scan');
