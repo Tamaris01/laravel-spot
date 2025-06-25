@@ -17,89 +17,72 @@ class RiwayatParkirController extends Controller
      */
     public function scanQR(Request $request)
     {
-        $platNomor = $request->input('plat_nomor');
-
-        // Validasi awal
-        if (!$platNomor) {
-            session(['scan_error' => ['message' => 'Plat nomor tidak ditemukan dalam permintaan.']]);
-            return response()->json(['message' => 'Plat nomor tidak ditemukan dalam permintaan.'], 400);
-        }
-
-        // Cari data kendaraan
-        $kendaraan = Kendaraan::where('plat_nomor', $platNomor)->first();
-
-        if (!$kendaraan) {
-            session(['scan_error' => ['message' => 'Plat nomor tidak terdaftar.']]);
-            return response()->json(['message' => 'Plat nomor yang anda pindai tidak terdaftar di sistem.'], 404);
-        }
+        $platQR = strtoupper($request->input('plat_nomor'));
+        $platDeteksi = null;
 
         try {
-            // Coba hubungi server Flask untuk deteksi plat
-            $response = Http::timeout(5)->get('https://alpu.web.id/server/result');
+            // Step 1: Coba deteksi plat otomatis dari server Flask
+            $response = Http::timeout(5)->get('https://3f60-182-2-4-168.ngrok-free.app/result');
 
-            if (!$response->ok()) {
-                session(['scan_error' => ['message' => 'Gagal mendapatkan respons dari server deteksi plat.']]);
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Gagal mendapatkan respons dari server deteksi plat. Silakan coba lagi atau pindai QR.'
-                ], 500);
-            }
-
-            $data = $response->json();
-            $platDeteksi = strtoupper($data['plat_nomor'] ?? '');
-
-            // Jika tidak terdeteksi atau deteksi tidak valid
-            if (empty($platDeteksi) || $platDeteksi === '-') {
-                session(['scan_error' => ['message' => 'Plat nomor tidak terdeteksi oleh sistem.']]);
-                return response()->json([
-                    'status' => 'not_detected',
-                    'message' => 'Plat nomor tidak terdeteksi. Silakan coba lagi atau pindai QR code.'
-                ]);
-            }
-
-            // Jika plat hasil deteksi tidak cocok dengan yang dari QR/input
-            if (strtoupper($kendaraan->plat_nomor) !== $platDeteksi) {
-                session(['scan_error' => ['message' => 'Plat nomor hasil deteksi tidak sesuai dengan QR.']]);
-                return response()->json([
-                    'status' => 'mismatch',
-                    'message' => 'Plat nomor hasil deteksi tidak sesuai dengan QR. Silakan coba lagi atau pindai ulang QR.'
-                ], 400);
-            }
-
-            // Proses lanjut: pencatatan riwayat parkir
-            $idPengguna = $kendaraan->penggunaParkir->id_pengguna;
-            $waktuSekarang = Carbon::now();
-
-            $riwayatParkir = RiwayatParkir::where('plat_nomor', $platNomor)
-                ->where('status_parkir', 'masuk')
-                ->first();
-
-            if ($riwayatParkir) {
-                $riwayatParkir->waktu_keluar = $waktuSekarang;
-                $riwayatParkir->status_parkir = 'keluar';
-                $riwayatParkir->save();
-
-                return response()->json([
-                    'message' => 'Kendaraan ditemukan dan status diperbarui menjadi keluar. Silakan keluar.'
-                ]);
-            } else {
-                RiwayatParkir::create([
-                    'id_pengguna' => $idPengguna,
-                    'plat_nomor' => $platNomor,
-                    'waktu_masuk' => $waktuSekarang,
-                    'status_parkir' => 'masuk',
-                ]);
-
-                return response()->json([
-                    'message' => 'Kendaraan ditemukan dan status diperbarui menjadi masuk. Silakan masuk.'
-                ]);
+            if ($response->ok()) {
+                $data = $response->json();
+                $platDeteksi = strtoupper($data['plat_nomor'] ?? '');
             }
         } catch (\Exception $e) {
-            session(['scan_error' => ['message' => 'Terjadi kesalahan sistem: ' . $e->getMessage()]]);
+            // Log tapi tetap lanjut ke fallback QR
+        }
+
+        // Step 2: Gunakan hasil deteksi jika ada, jika tidak gunakan plat dari QR
+        $platFinal = $platDeteksi && $platDeteksi !== '-' ? $platDeteksi : $platQR;
+
+        if (!$platFinal) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Terjadi kesalahan sistem. Silakan coba lagi atau gunakan QR sebagai alternatif.'
-            ], 500);
+                'message' => 'Plat nomor tidak terdeteksi maupun tidak tersedia dari QR. Silakan coba lagi.'
+            ], 400);
+        }
+
+        // Step 3: Cek kendaraan
+        $kendaraan = Kendaraan::where('plat_nomor', $platFinal)->first();
+
+        if (!$kendaraan) {
+            return response()->json([
+                'status' => 'not_found',
+                'message' => 'Plat nomor tidak ditemukan dalam sistem. Silakan daftar terlebih dahulu.'
+            ], 404);
+        }
+
+        $idPengguna = $kendaraan->penggunaParkir->id_pengguna ?? null;
+        $waktuSekarang = Carbon::now();
+
+        $riwayatParkir = RiwayatParkir::where('plat_nomor', $platFinal)
+            ->where('status_parkir', 'masuk')
+            ->first();
+
+        if ($riwayatParkir) {
+            $riwayatParkir->update([
+                'waktu_keluar' => $waktuSekarang,
+                'status_parkir' => 'keluar',
+            ]);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Kendaraan ditemukan, status keluar berhasil diperbarui.',
+                'metode' => $platDeteksi ? 'deteksi_kamera' : 'qr_code'
+            ]);
+        } else {
+            RiwayatParkir::create([
+                'id_pengguna' => $idPengguna,
+                'plat_nomor' => $platFinal,
+                'waktu_masuk' => $waktuSekarang,
+                'status_parkir' => 'masuk',
+            ]);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Kendaraan berhasil dicatat sebagai masuk.',
+                'metode' => $platDeteksi ? 'deteksi_kamera' : 'qr_code'
+            ]);
         }
     }
 
