@@ -22,7 +22,7 @@ class RiwayatParkirController extends Controller
 
         try {
             // Step 1: Coba deteksi plat otomatis dari server Flask
-            $response = Http::timeout(5)->get('https://3f60-182-2-4-168.ngrok-free.app/result');
+            $response = Http::timeout(5)->get('https://alpu.web.id/server/result');
 
             if ($response->ok()) {
                 $data = $response->json();
