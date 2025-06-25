@@ -470,7 +470,7 @@
     let timeoutResetInfo = null;
 
     function tampilkanInfoScan() {
-        fetch('https://alpu.web.id/server/scan-latest')
+        fetch('https://alpu.web.id/api/scan-latest')
             .then(response => response.json())
             .then(data => {
                 const info = document.getElementById('info-scan');
