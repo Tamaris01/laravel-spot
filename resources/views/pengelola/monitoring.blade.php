@@ -393,7 +393,7 @@
         if (isChecking) return;
 
         try {
-            const response = await fetch("https://alpu.web.id/result");
+            const response = await fetch("https://alpu.web.id/api/result");
             if (!response.ok) throw new Error("Gagal fetch plat nomor");
 
             const data = await response.json();
@@ -550,70 +550,71 @@
         };
     }
 
-  async function sendFrameToServer() {
-    if (!webcamElement.videoWidth || !webcamElement.videoHeight) return;
+    async function sendFrameToServer() {
+        if (!webcamElement.videoWidth || !webcamElement.videoHeight) return;
 
-    const tempCanvas = document.createElement("canvas");
-    tempCanvas.width = webcamElement.videoWidth;
-    tempCanvas.height = webcamElement.videoHeight;
-    const tempCtx = tempCanvas.getContext("2d");
-    tempCtx.drawImage(webcamElement, 0, 0, tempCanvas.width, tempCanvas.height);
+        const tempCanvas = document.createElement("canvas");
+        tempCanvas.width = webcamElement.videoWidth;
+        tempCanvas.height = webcamElement.videoHeight;
+        const tempCtx = tempCanvas.getContext("2d");
+        tempCtx.drawImage(webcamElement, 0, 0, tempCanvas.width, tempCanvas.height);
 
-    const base64Image = tempCanvas.toDataURL("image/jpeg");
+        const base64Image = tempCanvas.toDataURL("image/jpeg");
 
-    try {
-        // Kirim frame ke Flask
-        await fetch("https://alpu.web.id/upload_frame", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ image: base64Image })
-        });
+        try {
+            // Kirim frame ke Flask
+            await fetch("https://alpu.web.id/api/upload_frame", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    image: base64Image
+                })
+            });
 
-        // ✅ Tambah delay agar proses deteksi selesai
-        await new Promise(resolve => setTimeout(resolve, 500));
+            // ✅ Tambah delay agar proses deteksi selesai
+            await new Promise(resolve => setTimeout(resolve, 500));
 
-        // Ambil hasil deteksi plat nomor
-        const resultRes = await fetch("https://alpu.web.id/result");
-        const resultData = await resultRes.json();
-        console.log("📥 Data result dari Flask:", resultData);
+            // Ambil hasil deteksi plat nomor
+            const resultRes = await fetch("https://alpu.web.id/api/result");
+            const resultData = await resultRes.json();
+            console.log("📥 Data result dari Flask:", resultData);
 
-        if (resultData.plat_nomor && resultData.plat_nomor !== "-") {
-            console.log("🚘 Plat Nomor Terdeteksi:", resultData.plat_nomor);
+            if (resultData.plat_nomor && resultData.plat_nomor !== "-") {
+                console.log("🚘 Plat Nomor Terdeteksi:", resultData.plat_nomor);
 
-            // ✅ Update hasil di halaman jika ada elemen id="hasilPlatNomor"
-            const hasilElem = document.getElementById("hasilPlatNomor");
-            if (hasilElem) {
-                hasilElem.innerText = resultData.plat_nomor;
+                // ✅ Update hasil di halaman jika ada elemen id="hasilPlatNomor"
+                const hasilElem = document.getElementById("hasilPlatNomor");
+                if (hasilElem) {
+                    hasilElem.innerText = resultData.plat_nomor;
+                }
             }
+
+            // Ambil frame hasil deteksi (dengan bounding box dll.)
+            const frameRes = await fetch("https://alpu.web.id/api/get_processed_frame");
+            const frameData = await frameRes.json();
+
+            if (frameData.frame) {
+                const img = new Image();
+                img.onload = () => {
+                    ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+                    ctx.drawImage(img, 0, 0, canvasElement.width, canvasElement.height);
+                };
+                img.src = frameData.frame;
+            }
+
+        } catch (err) {
+            console.error("❌ Gagal kirim atau ambil frame:", err);
         }
-
-        // Ambil frame hasil deteksi (dengan bounding box dll.)
-        const frameRes = await fetch("https://alpu.web.id/get_processed_frame");
-        const frameData = await frameRes.json();
-
-        if (frameData.frame) {
-            const img = new Image();
-            img.onload = () => {
-                ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-                ctx.drawImage(img, 0, 0, canvasElement.width, canvasElement.height);
-            };
-            img.src = frameData.frame;
-        }
-
-    } catch (err) {
-        console.error("❌ Gagal kirim atau ambil frame:", err);
     }
-}
 
-async function mainLoop() {
-    await startCamera();
-    setInterval(sendFrameToServer, 1000);
-}
+    async function mainLoop() {
+        await startCamera();
+        setInterval(sendFrameToServer, 1000);
+    }
 
-mainLoop();
-
+    mainLoop();
 </script>
 
 
