@@ -112,49 +112,7 @@ class RiwayatParkirController extends Controller
 
         return view('pengguna.riwayat_parkir', compact('riwayatParkir', 'date'));
     }
-    public function getLatest()
-    {
-        // Cek apakah ada error scan di session
-        if (session()->has('scan_error')) {
-            $errorData = session('scan_error');
-            session()->forget('scan_error'); // Hapus supaya tidak muncul terus-menerus
 
-            return response()->json([
-                'status' => 'error',
-                'message' => $errorData['message'],
-                'timestamp' => now()->timestamp // Tetap berikan timestamp untuk validasi JS
-            ]);
-        }
-
-        // Ambil data scan terakhir dari database
-        $latest = RiwayatParkir::orderByRaw('GREATEST(COALESCE(waktu_masuk, 0), COALESCE(waktu_keluar, 0)) DESC')->first();
-
-        if (!$latest) {
-            return response()->json([
-                'message' => 'Belum ada data scan.',
-                'status' => 'kosong',
-                'timestamp' => now()->timestamp // Tambahkan timestamp juga untuk 'kosong'
-            ]);
-        }
-
-        $timestamp = strtotime(
-            $latest->status_parkir === 'masuk'
-                ? $latest->waktu_masuk
-                : $latest->waktu_keluar
-        );
-
-        return response()->json([
-            'plat_nomor' => $latest->plat_nomor,
-            'status' => $latest->status_parkir,
-            'message' => $latest->status_parkir === 'masuk'
-                ? 'QR Code berhasil dipindai dan kendaraan ditemukan, silakan masuk!'
-                : 'QR Code berhasil dipindai dan kendaraan ditemukan, silakan keluar!',
-            'waktu' => $latest->status_parkir === 'masuk'
-                ? $latest->waktu_masuk
-                : $latest->waktu_keluar,
-            'timestamp' => $timestamp
-        ]);
-    }
     public function perintahPalang()
     {
         // Ambil log QR terbaru
