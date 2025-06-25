@@ -15,16 +15,15 @@ class RiwayatParkirController extends Controller
      */
     public function scanQR(Request $request)
     {
-        // Validasi data input dari request
+        // Validasi input
         $validated = $request->validate([
             'plat_nomor' => 'required|string|max:255|regex:/^[A-Za-z0-9\s]+$/',
         ]);
 
-        // Bersihkan dan ubah plat nomor jadi huruf besar tanpa spasi
         $platNomorInput = strtoupper(preg_replace('/\s+/', '', $validated['plat_nomor']));
         $currentTime = Carbon::now();
 
-        // Cari kendaraan dengan plat nomor yang cocok
+        // Cari kendaraan berdasarkan plat_nomor tanpa spasi dan huruf besar
         $kendaraan = Kendaraan::whereRaw("REPLACE(UPPER(plat_nomor), ' ', '') = ?", [$platNomorInput])->first();
 
         if (!$kendaraan) {
@@ -34,40 +33,61 @@ class RiwayatParkirController extends Controller
         }
 
         $idPengguna = $kendaraan->id_pengguna;
-        $platNomor = $kendaraan->plat_nomor; // gunakan format asli dari database
+        $platNomor = $kendaraan->plat_nomor; // pakai format asli dari database
 
-        // Ambil entri parkir terakhir
+        // Ambil entri terakhir dari plat nomor ini
         $riwayat = RiwayatParkir::where('plat_nomor', $platNomor)
             ->orderBy('created_at', 'desc')
             ->first();
 
-        if ($riwayat && $riwayat->status_parkir === 'masuk' && is_null($riwayat->waktu_keluar)) {
-            // Jika status terakhir adalah masuk dan belum keluar → ubah ke keluar
+        if (!$riwayat) {
+            // Belum ada data → buat status masuk
+            $riwayatBaru = RiwayatParkir::create([
+                'id_pengguna'   => $idPengguna,
+                'plat_nomor'    => $platNomor,
+                'waktu_masuk'   => $currentTime,
+                'status_parkir' => 'masuk',
+            ]);
+
+            return response()->json([
+                'message' => 'Status parkir diubah menjadi masuk',
+                'data'    => $riwayatBaru,
+            ], 201);
+        }
+
+        if ($riwayat->status_parkir === 'masuk' && $riwayat->waktu_keluar === null) {
+            // Jika terakhir adalah masuk dan belum keluar → update jadi keluar
             $riwayat->update([
-                'waktu_keluar' => $currentTime,
+                'waktu_keluar'  => $currentTime,
                 'status_parkir' => 'keluar',
             ]);
 
             return response()->json([
                 'message' => 'Status parkir diubah menjadi keluar',
-                'data' => $riwayat,
+                'data'    => $riwayat,
             ], 200);
         }
 
-        // Jika tidak sedang parkir → catat sebagai masuk
-        $riwayatBaru = RiwayatParkir::create([
-            'id_pengguna'   => $idPengguna,
-            'plat_nomor'    => $platNomor,
-            'waktu_masuk'   => $currentTime,
-            'status_parkir' => 'masuk',
-        ]);
+        if ($riwayat->status_parkir === 'keluar') {
+            // Terakhir keluar → buat status masuk baru
+            $riwayatBaru = RiwayatParkir::create([
+                'id_pengguna'   => $idPengguna,
+                'plat_nomor'    => $platNomor,
+                'waktu_masuk'   => $currentTime,
+                'status_parkir' => 'masuk',
+            ]);
 
+            return response()->json([
+                'message' => 'Status parkir diubah menjadi masuk',
+                'data'    => $riwayatBaru,
+            ], 201);
+        }
+
+        // Kondisi lain yang tidak dikenali
         return response()->json([
-            'message' => 'Status parkir diubah menjadi masuk',
-            'data' => $riwayatBaru,
-        ], 201);
+            'message' => 'Gagal memproses status parkir.',
+        ], 400);
     }
-
 
 
     /**
