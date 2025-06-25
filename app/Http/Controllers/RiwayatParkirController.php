@@ -36,15 +36,16 @@ class RiwayatParkirController extends Controller
         $idPengguna = $kendaraan->id_pengguna;
         $platNomor = $kendaraan->plat_nomor; // gunakan format asli dari database
 
-        // Cek apakah kendaraan sedang parkir (masuk tapi belum keluar)
+        // Cek apakah ada riwayat yang belum keluar
         $riwayat = RiwayatParkir::where('plat_nomor', $platNomor)
-            ->where('status_parkir', 'masuk')
-            ->whereNull('waktu_keluar')
-            ->latest()
+            ->where(function ($query) {
+                $query->whereNull('waktu_keluar')
+                    ->orWhereDate('waktu_keluar', Carbon::today()->format('Y-m-d'));
+            })
             ->first();
 
-        if ($riwayat) {
-            // Jika sudah masuk dan belum keluar, update ke keluar
+        if ($riwayat && $riwayat->status_parkir === 'masuk' && is_null($riwayat->waktu_keluar)) {
+            // Update ke keluar
             $riwayat->update([
                 'waktu_keluar' => $currentTime,
                 'status_parkir' => 'keluar',
@@ -56,7 +57,13 @@ class RiwayatParkirController extends Controller
             ], 200);
         }
 
-        // Jika tidak ditemukan status masuk aktif, catat sebagai masuk
+        // Cek duplikasi status masuk
+        $duplicateEntry = RiwayatParkir::where('plat_nomor', $platNomor)
+            ->where('status_parkir', 'masuk')
+            ->whereNull('waktu_keluar')
+            ->exists();
+
+        // Catat sebagai masuk
         $riwayatBaru = RiwayatParkir::create([
             'id_pengguna'   => $idPengguna,
             'plat_nomor'    => $platNomor,
@@ -69,7 +76,6 @@ class RiwayatParkirController extends Controller
             'data' => $riwayatBaru,
         ], 201);
     }
-
 
 
     /**
