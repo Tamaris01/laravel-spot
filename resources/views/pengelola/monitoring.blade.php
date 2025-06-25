@@ -249,8 +249,6 @@
                         <!-- Hasil Plat Nomor -->
                         <h5 id="result"><strong id="platNomor">-</strong></h5>
                     </div>
-                    <!-- Teks Informasi Hasil Scan QR (Menampilkan status kendaraan) -->
-                    <p id="info-scan" class="info-scan" style="display: none;"></p>
                 </div>
 
             </div>
@@ -453,7 +451,7 @@
 
     async function checkPlatNomor(platNomor) {
         try {
-            const response = await fetch(`https://alpu.web.id/server/check_plate/${platNomor}`);
+            const response = await fetch(`https://alpu.web.id/api/check_plate/${platNomor}`);
             if (!response.ok) throw new Error("Gagal fetch data validasi plat");
             const data = await response.json();
             return data.exists;
