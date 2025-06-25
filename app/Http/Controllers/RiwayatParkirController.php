@@ -65,7 +65,7 @@ class RiwayatParkirController extends Controller
         return response()->json([
             'message' => 'Status parkir diubah menjadi masuk',
             'data' => $riwayatBaru,
-        ], 200);
+        ], 201);
     }
 
 
