@@ -216,13 +216,10 @@
                             <option value="keluar">Monitoring Keluar</option>
                         </select>
                     </div>
-                    <div class="video-wrapper">
-                        <div class="video-wrapper" style="position: relative;">
-                            <video id="webcam" autoplay playsinline style="width:100%; border-radius:8px;"></video>
-                            <!-- Canvas untuk menggambar bounding box di atas video -->
-                            <canvas id="canvas" style="position: absolute; top: 0; left: 0; width: 100%; border-radius:8px;"></canvas>
-                        </div>
-
+                    <div class="video-wrapper" style="position: relative;">
+                        <video id="webcam" autoplay playsinline muted style="width:100%; border-radius:8px;"></video>
+                        <!-- Canvas untuk bounding box -->
+                        <canvas id="canvas" style="position: absolute; top: 0; left: 0; width: 100%; border-radius:8px;"></canvas>
                     </div>
                 </div>
 
@@ -231,22 +228,21 @@
                     <div class="column-header">
                         <h4 class="section-title">Hasil Deteksi</h4>
                     </div>
-                    <audio id="deteksiAudio" src="{{ asset('succes.mp3') }}" type="audio/mpeg" preload="auto"></audio>
 
+                    <!-- Audio untuk deteksi sukses -->
+                    <audio id="suksesMasukAudio" src="{{ asset('sukses-masuk.mp3') }}" preload="auto"></audio>
+                    <audio id="suksesKeluarAudio" src="{{ asset('sukses-keluar.mp3') }}" preload="auto"></audio>
 
-
-                    <!-- Teks Informasi Hasil Scan QR (Menampilkan informasi berdasarkan hasil scan) -->
+                    <!-- Info Teks -->
                     <p id="infoText" class="info-text" style="display: none;"></p>
-                    <audio id="scanMasukAudio" src="{{ asset('scan-masuk.mp3') }}" preload="auto"></audio>
-                    <audio id="scanKeluarAudio" src="{{ asset('scan-keluar.mp3') }}" preload="auto"></audio>
 
+                    <!-- Hasil Plat Nomor -->
                     <div class="canvas-wrapper fake-canvas">
-                        <!-- Hasil Plat Nomor -->
                         <h5 id="result"><strong id="platNomor">-</strong></h5>
                     </div>
                 </div>
-
             </div>
+
 
             <div class="card border-black">
                 <div class="card-body">
