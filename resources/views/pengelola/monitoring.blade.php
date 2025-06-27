@@ -193,6 +193,11 @@
             /* Warna latar belakang kuning kembali */
         }
     }
+
+
+    /* .date-display {
+        animation: pulse 10s infinite;
+    } */
 </style>
 <!-- Overlay Loading -->
 <div id="loading-overlay">
@@ -216,10 +221,13 @@
                             <option value="keluar">Monitoring Keluar</option>
                         </select>
                     </div>
-                    <div class="video-wrapper" style="position: relative;">
-                        <video id="webcam" autoplay playsinline muted style="width:100%; border-radius:8px;"></video>
-                        <!-- Canvas untuk bounding box -->
-                        <canvas id="canvas" style="position: absolute; top: 0; left: 0; width: 100%; border-radius:8px;"></canvas>
+                    <div class="video-wrapper">
+                        <div class="video-wrapper" style="position: relative;">
+                            <video id="webcam" autoplay playsinline style="width:100%; border-radius:8px;"></video>
+                            <!-- Canvas untuk menggambar bounding box di atas video -->
+                            <canvas id="canvas" style="position: absolute; top: 0; left: 0; width: 100%; border-radius:8px;"></canvas>
+                        </div>
+
                     </div>
                 </div>
 
@@ -228,21 +236,24 @@
                     <div class="column-header">
                         <h4 class="section-title">Hasil Deteksi</h4>
                     </div>
+                    <audio id="deteksiAudio" src="{{ asset('succes.mp3') }}" type="audio/mpeg" preload="auto"></audio>
 
-                    <!-- Audio untuk deteksi sukses -->
-                    <audio id="suksesMasukAudio" src="{{ asset('sukses-masuk.mp3') }}" preload="auto"></audio>
-                    <audio id="suksesKeluarAudio" src="{{ asset('sukses-keluar.mp3') }}" preload="auto"></audio>
 
-                    <!-- Info Teks -->
+
+                    <!-- Teks Informasi Hasil Scan QR (Menampilkan informasi berdasarkan hasil scan) -->
                     <p id="infoText" class="info-text" style="display: none;"></p>
+                    <audio id="scanMasukAudio" src="{{ asset('scan-masuk.mp3') }}" preload="auto"></audio>
+                    <audio id="scanKeluarAudio" src="{{ asset('scan-keluar.mp3') }}" preload="auto"></audio>
 
-                    <!-- Hasil Plat Nomor -->
                     <div class="canvas-wrapper fake-canvas">
+                        <!-- Hasil Plat Nomor -->
                         <h5 id="result"><strong id="platNomor">-</strong></h5>
                     </div>
+                    <!-- Teks Informasi Hasil Scan QR (Menampilkan status kendaraan) -->
+                    <p id="info-scan" class="info-scan" style="display: none;"></p>
                 </div>
-            </div>
 
+            </div>
 
             <div class="card border-black">
                 <div class="card-body">
@@ -374,9 +385,7 @@
 
     let lastPlatNomor = "";
     let displayedPlates = new Set();
-    const audioDeteksi = document.getElementById("deteksiAudio");
-    const audioMasuk = document.getElementById("suksesMasukAudio");
-    const audioKeluar = document.getElementById("suksesKeluarAudio");
+    const audio = document.getElementById("deteksiAudio");
     let pendingPlates = [];
     let isChecking = false;
 
@@ -384,7 +393,7 @@
         if (isChecking) return;
 
         try {
-            const response = await fetch("https://alpu.web.id/server/result");
+            const response = await fetch("http://127.0.0.1:5000/result");
             if (!response.ok) throw new Error("Gagal fetch plat nomor");
 
             const data = await response.json();
@@ -410,22 +419,14 @@
                 document.getElementById("infoText").innerText = "Memeriksa data kendaraan...";
                 document.getElementById("infoText").style.display = "block";
 
-                const result = await checkPlatNomor(currentPlat);
+                const isRegistered = await checkPlatNomor(currentPlat);
 
-                if (result.exists) {
-                    if (result.status === 'masuk' && audioMasuk) {
-                        audioMasuk.currentTime = 0;
-                        audioMasuk.play();
-                    } else if (result.status === 'keluar' && audioKeluar) {
-                        audioKeluar.currentTime = 0;
-                        audioKeluar.play();
-                    }
-
-                    document.getElementById("infoText").innerText =
-                        `✅ Plat nomor ${currentPlat} terdaftar dan berhasil ${result.status}.`;
+                if (isRegistered) {
+                    audio.currentTime = 0;
+                    audio.play();
+                    document.getElementById("infoText").innerText = `✅ Plat nomor ${currentPlat} terdaftar. Silakan scan QR Anda di alat!`;
                 } else {
-                    document.getElementById("infoText").innerText =
-                        `❌ Plat nomor ${currentPlat} tidak terdaftar di sistem.`;
+                    document.getElementById("infoText").innerText = `❌ Plat nomor ${currentPlat} kendaraan Anda tidak terdaftar di sistem!`;
                 }
 
                 isChecking = false;
@@ -452,24 +453,86 @@
 
     async function checkPlatNomor(platNomor) {
         try {
-            const response = await fetch(`https://alpu.web.id/api/check_plate/${platNomor}`);
+            const response = await fetch(`http://127.0.0.1:8000/api/check_plate/${platNomor}`);
             if (!response.ok) throw new Error("Gagal fetch data validasi plat");
             const data = await response.json();
-            return {
-                exists: data.exists,
-                status: data.status
-            };
+            return data.exists;
         } catch (error) {
             console.error("Error checking plate number:", error);
             showDefaultMessage();
-            return {
-                exists: false,
-                status: null
-            };
+            return false;
         }
     }
 
     setInterval(fetchPlatNomor, 1000);
+
+    let waktuScanTerakhir = null;
+    let timeoutResetInfo = null;
+
+    function tampilkanInfoScan() {
+        fetch('http://127.0.0.1:8000/api/scan-latest')
+            .then(response => response.json())
+            .then(data => {
+                const info = document.getElementById('info-scan');
+                const scanMasukAudio = document.getElementById('scanMasukAudio');
+                const scanKeluarAudio = document.getElementById('scanKeluarAudio');
+
+                if (!data || !data.timestamp || data.timestamp === waktuScanTerakhir) return;
+
+                waktuScanTerakhir = data.timestamp;
+                if (timeoutResetInfo) clearTimeout(timeoutResetInfo);
+                info.style.display = 'block';
+
+                switch (data.status) {
+                    case 'masuk':
+                        info.innerText = `📱 ${data.message}`;
+                        info.style.color = 'green';
+                        if (scanMasukAudio) {
+                            scanMasukAudio.currentTime = 0;
+                            scanMasukAudio.play();
+                        }
+                        break;
+                    case 'keluar':
+                        info.innerText = `📱 ${data.message}`;
+                        info.style.color = 'green';
+                        if (scanKeluarAudio) {
+                            scanKeluarAudio.currentTime = 0;
+                            scanKeluarAudio.play();
+                        }
+                        break;
+                    case 'error':
+                        info.innerText = `❌ ${data.message}`;
+                        info.style.color = 'red';
+                        break;
+                    case 'kosong':
+                        info.innerText = `ℹ️ ${data.message}`;
+                        info.style.color = 'black';
+                        break;
+                    case 'not_found':
+                        info.innerText = `⚠️ ${data.message}`;
+                        info.style.color = 'orange';
+                        break;
+                    default:
+                        info.innerText = `🔍 ${data.message}`;
+                        info.style.color = 'black';
+                }
+
+                timeoutResetInfo = setTimeout(() => {
+                    info.innerText = 'ℹ️ Silakan scan QR Code Anda pada alat pemindai!';
+                    info.style.color = 'black';
+                }, 10000);
+            })
+            .catch(error => {
+                const info = document.getElementById('info-scan');
+                info.style.display = 'block';
+                info.innerText = '❌ Terjadi kesalahan dalam mengambil data scan!';
+                info.style.color = 'red';
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        setInterval(tampilkanInfoScan, 1000);
+    });
 
     const webcamElement = document.getElementById("webcam");
     const canvasElement = document.getElementById("canvas");
@@ -499,7 +562,7 @@
         const base64Image = tempCanvas.toDataURL("image/jpeg");
 
         try {
-            await fetch("https://alpu.web.id/server/upload_frame", {
+            await fetch("http://127.0.0.1:5000/upload_frame", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -509,19 +572,7 @@
                 })
             });
 
-            await new Promise(resolve => setTimeout(resolve, 500));
-
-            const resultRes = await fetch("https://alpu.web.id/server/result");
-            const resultData = await resultRes.json();
-
-            if (resultData.plat_nomor && resultData.plat_nomor !== "-") {
-                const hasilElem = document.getElementById("hasilPlatNomor");
-                if (hasilElem) {
-                    hasilElem.innerText = resultData.plat_nomor;
-                }
-            }
-
-            const frameRes = await fetch("https://alpu.web.id/server/get_processed_frame");
+            const frameRes = await fetch("http://127.0.0.1:5000/get_processed_frame");
             const frameData = await frameRes.json();
 
             if (frameData.frame) {
@@ -531,6 +582,13 @@
                     ctx.drawImage(img, 0, 0, canvasElement.width, canvasElement.height);
                 };
                 img.src = frameData.frame;
+            }
+
+            const resultRes = await fetch("http://127.0.0.1:5000/result");
+            const resultData = await resultRes.json();
+
+            if (resultData.plat_nomor && resultData.plat_nomor !== "-") {
+                console.log("🚘 Plat Nomor Terdeteksi:", resultData.plat_nomor);
             }
 
         } catch (err) {
