@@ -453,7 +453,7 @@
 
     async function checkPlatNomor(platNomor) {
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/check_plate/${platNomor}`);
+            const response = await fetch(`https://alpu.web.id/api/check_plate/${platNomor}`);
             if (!response.ok) throw new Error("Gagal fetch data validasi plat");
             const data = await response.json();
             return data.exists;
@@ -470,7 +470,7 @@
     let timeoutResetInfo = null;
 
     function tampilkanInfoScan() {
-        fetch('http://127.0.0.1:8000/api/scan-latest')
+        fetch('https://alpu.web.id/api/scan-latest')
             .then(response => response.json())
             .then(data => {
                 const info = document.getElementById('info-scan');
