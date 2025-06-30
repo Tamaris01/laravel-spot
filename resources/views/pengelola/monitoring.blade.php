@@ -173,26 +173,6 @@
         margin-top: 5px;
         border-radius: 50%;
     }
-
-    /* Animasi perubahan jam */
-    @keyframes pulse {
-        0% {
-            transform: scale(1);
-            background-color: #f0f0f0;
-        }
-
-        50% {
-            transform: scale(1.05);
-            background-color: #ff6347;
-            /* Warna merah saat animasi */
-        }
-
-        100% {
-            transform: scale(1);
-            background-color: #FFDC40;
-            /* Warna latar belakang kuning kembali */
-        }
-    }
 </style>
 <!-- Overlay Loading -->
 <div id="loading-overlay">
