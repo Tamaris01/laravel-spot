@@ -119,17 +119,28 @@ class RiwayatParkirController extends Controller
 
     public function perintahPalang()
     {
-        // Ambil log QR terbaru
         $latest = RiwayatParkir::latest()->first();
 
         if ($latest) {
             if ($latest->status_parkir === 'masuk' && $latest->waktu_keluar === null) {
-                return response()->json(['perintah' => 'BUKA PALANG']);
-            } else {
-                return response()->json(['perintah' => 'DIAM']);
+                return response()->json([
+                    'perintah' => 'BUKA PALANG',
+                    'status_parkir' => 'masuk',
+                    'plat_nomor' => $latest->plat_nomor
+                ]);
+            } elseif ($latest->status_parkir === 'keluar') {
+                return response()->json([
+                    'perintah' => 'BUKA PALANG',
+                    'status_parkir' => 'keluar',
+                    'plat_nomor' => $latest->plat_nomor
+                ]);
             }
         }
 
-        return response()->json(['perintah' => 'DIAM']);
+        return response()->json([
+            'perintah' => 'DIAM',
+            'status_parkir' => null,
+            'plat_nomor' => null
+        ]);
     }
 }
