@@ -470,7 +470,6 @@
     async function sendFrameToServer() {
         if (!webcamElement.videoWidth || !webcamElement.videoHeight) return;
 
-        // Ambil frame dari webcam
         const tempCanvas = document.createElement("canvas");
         tempCanvas.width = webcamElement.videoWidth;
         tempCanvas.height = webcamElement.videoHeight;
@@ -480,8 +479,8 @@
         const base64Image = tempCanvas.toDataURL("image/jpeg");
 
         try {
-            // Kirim frame ke Flask server
-            const uploadRes = await fetch("https://alpu.web.id/server/upload_frame", {
+            // Kirim frame ke Flask
+            await fetch("https://alpu.web.id/upload_frame", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -491,30 +490,26 @@
                 })
             });
 
-            if (!uploadRes.ok) {
-                const errData = await uploadRes.json();
-                console.error("❌ Gagal upload frame:", errData);
-                return;
-            }
+            // ✅ Tambah delay agar proses deteksi selesai
+            await new Promise(resolve => setTimeout(resolve, 500));
 
-            // Delay untuk memberikan waktu YOLO OCR memproses
-            await new Promise(resolve => setTimeout(resolve, 1000));
-
-            // Ambil hasil plat nomor
-            const resultRes = await fetch("https://alpu.web.id/server/result");
+            // Ambil hasil deteksi plat nomor
+            const resultRes = await fetch("https://alpu.web.id/result");
             const resultData = await resultRes.json();
+            console.log("📥 Data result dari Flask:", resultData);
 
             if (resultData.plat_nomor && resultData.plat_nomor !== "-") {
+                console.log("🚘 Plat Nomor Terdeteksi:", resultData.plat_nomor);
+
+                // ✅ Update hasil di halaman jika ada elemen id="hasilPlatNomor"
                 const hasilElem = document.getElementById("hasilPlatNomor");
                 if (hasilElem) {
                     hasilElem.innerText = resultData.plat_nomor;
                 }
-            } else {
-                console.log("ℹ️ Plat nomor belum terdeteksi.");
             }
 
-            // Ambil frame yang sudah diproses YOLO OCR
-            const frameRes = await fetch("https://alpu.web.id/server/get_processed_frame");
+            // Ambil frame hasil deteksi (dengan bounding box dll.)
+            const frameRes = await fetch("https://alpu.web.id/get_processed_frame");
             const frameData = await frameRes.json();
 
             if (frameData.frame) {
@@ -524,8 +519,6 @@
                     ctx.drawImage(img, 0, 0, canvasElement.width, canvasElement.height);
                 };
                 img.src = frameData.frame;
-            } else {
-                console.log("ℹ️ Belum ada frame hasil untuk ditampilkan:", frameData.error || "No frame returned.");
             }
 
         } catch (err) {
