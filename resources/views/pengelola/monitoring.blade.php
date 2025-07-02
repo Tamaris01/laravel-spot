@@ -494,7 +494,7 @@
             await new Promise(resolve => setTimeout(resolve, 500));
 
             // Ambil hasil deteksi plat nomor
-            const resultRes = await fetch("https://alpu.web.id/result");
+            const resultRes = await fetch("https://alpu.web.id/server/result");
             const resultData = await resultRes.json();
             console.log("📥 Data result dari Flask:", resultData);
 
@@ -509,7 +509,7 @@
             }
 
             // Ambil frame hasil deteksi (dengan bounding box dll.)
-            const frameRes = await fetch("https://alpu.web.id/get_processed_frame");
+            const frameRes = await fetch("https://alpu.web.id/server/get_processed_frame");
             const frameData = await frameRes.json();
 
             if (frameData.frame) {
