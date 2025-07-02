@@ -380,7 +380,7 @@
         if (isChecking) return;
 
         try {
-            const response = await fetch("https://alpu.web.id/result");
+            const response = await fetch("https://alpu.web.id/server/result");
             if (!response.ok) throw new Error("Gagal fetch plat nomor");
 
             const data = await response.json();
