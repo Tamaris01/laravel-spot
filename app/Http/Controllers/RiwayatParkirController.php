@@ -119,7 +119,8 @@ class RiwayatParkirController extends Controller
 
     public function perintahPalang()
     {
-        $latest = RiwayatParkir::latest()->first();
+        // Perbaikan: gunakan orderBy dengan kolom yang ada
+        $latest = RiwayatParkir::orderBy('id_riwayat_parkir', 'desc')->first();
 
         if ($latest) {
             if ($latest->status_parkir === 'masuk' && $latest->waktu_keluar === null) {
@@ -128,7 +129,9 @@ class RiwayatParkirController extends Controller
                     'status_parkir' => 'masuk',
                     'plat_nomor' => $latest->plat_nomor
                 ]);
-            } elseif ($latest->status_parkir === 'keluar') {
+            }
+
+            if ($latest->status_parkir === 'keluar') {
                 return response()->json([
                     'perintah' => 'BUKA PALANG',
                     'status_parkir' => 'keluar',
