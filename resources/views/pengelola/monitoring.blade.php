@@ -470,6 +470,7 @@
     async function sendFrameToServer() {
         if (!webcamElement.videoWidth || !webcamElement.videoHeight) return;
 
+        // Ambil frame dari webcam
         const tempCanvas = document.createElement("canvas");
         tempCanvas.width = webcamElement.videoWidth;
         tempCanvas.height = webcamElement.videoHeight;
@@ -479,7 +480,8 @@
         const base64Image = tempCanvas.toDataURL("image/jpeg");
 
         try {
-            await fetch("https://alpu.web.id/server/upload_frame", {
+            // Kirim frame ke Flask server
+            const uploadRes = await fetch("https://alpu.web.id/server/upload_frame", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -489,8 +491,16 @@
                 })
             });
 
-            await new Promise(resolve => setTimeout(resolve, 500));
+            if (!uploadRes.ok) {
+                const errData = await uploadRes.json();
+                console.error("❌ Gagal upload frame:", errData);
+                return;
+            }
 
+            // Delay untuk memberikan waktu YOLO OCR memproses
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            // Ambil hasil plat nomor
             const resultRes = await fetch("https://alpu.web.id/server/result");
             const resultData = await resultRes.json();
 
@@ -499,8 +509,11 @@
                 if (hasilElem) {
                     hasilElem.innerText = resultData.plat_nomor;
                 }
+            } else {
+                console.log("ℹ️ Plat nomor belum terdeteksi.");
             }
 
+            // Ambil frame yang sudah diproses YOLO OCR
             const frameRes = await fetch("https://alpu.web.id/server/get_processed_frame");
             const frameData = await frameRes.json();
 
@@ -511,6 +524,8 @@
                     ctx.drawImage(img, 0, 0, canvasElement.width, canvasElement.height);
                 };
                 img.src = frameData.frame;
+            } else {
+                console.log("ℹ️ Belum ada frame hasil untuk ditampilkan:", frameData.error || "No frame returned.");
             }
 
         } catch (err) {
