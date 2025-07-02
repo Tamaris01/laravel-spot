@@ -480,7 +480,7 @@
 
         try {
             // Kirim frame ke Flask
-            await fetch("https://alpu.web.id/upload_frame", {
+            await fetch("https://alpu.web.id/server/upload_frame", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
