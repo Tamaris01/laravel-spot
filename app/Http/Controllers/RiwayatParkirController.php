@@ -66,8 +66,10 @@ class RiwayatParkirController extends Controller
             ]);
 
             return response()->json([
-                'status' => 'success',
+                'status' => true,
                 'message' => 'Kendaraan ditemukan, status keluar berhasil diperbarui.',
+                'status_parkir' => 'keluar',
+                'plat_nomor' => $platFinal,
                 'metode' => $platDeteksi ? 'deteksi_kamera' : 'qr_code'
             ]);
         } else {
@@ -79,8 +81,10 @@ class RiwayatParkirController extends Controller
             ]);
 
             return response()->json([
-                'status' => 'success',
+                'status' => true,
                 'message' => 'Kendaraan berhasil dicatat sebagai masuk.',
+                'status_parkir' => 'masuk',
+                'plat_nomor' => $platFinal,
                 'metode' => $platDeteksi ? 'deteksi_kamera' : 'qr_code'
             ]);
         }
