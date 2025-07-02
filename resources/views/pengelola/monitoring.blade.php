@@ -320,130 +320,103 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    // ✅ Menampilkan jam realtime
+    // JAM REALTIME
     function updateTime() {
         const now = new Date();
-        const hours = now.getHours().toString().padStart(2, '0');
-        const minutes = now.getMinutes().toString().padStart(2, '0');
-        const seconds = now.getSeconds().toString().padStart(2, '0');
-        const formattedTime = `${hours}:${minutes}:${seconds}`;
-        document.getElementById("current-time").textContent = formattedTime;
+        document.getElementById("current-time").textContent = now.toLocaleTimeString();
     }
     setInterval(updateTime, 1000);
     updateTime();
 
-    // ✅ Menampilkan data monitoring parkir realtime
-    function fetchMonitoringData() {
-        fetch('/monitoring')
-            .then(response => response.json())
-            .then(data => {
-                let tbody = '';
-                data.forEach(item => {
-                    tbody += `
-                    <tr>
-                        <td>${item.id_riwayat_parkir}</td>
-                        <td>${item.pengguna.id_pengguna}</td>
-                        <td>${item.kendaraan.plat_nomor}</td>
-                        <td>${item.waktu_masuk}</td>
-                        <td style="color:${item.status_parkir === 'masuk' ? 'green' : 'red'}">${item.status_parkir}</td>
-                    </tr>
-                `;
-                });
-                document.querySelector('tbody.bg-putih').innerHTML = tbody;
-            })
-            .catch(err => console.error("Gagal ambil monitoring data:", err));
+    // MONITORING PARKIR REALTIME
+    async function fetchMonitoringData() {
+        try {
+            const response = await fetch('/monitoring');
+            const data = await response.json();
+            let tbody = '';
+            data.forEach(item => {
+                tbody += `<tr>
+                <td>${item.id_riwayat_parkir}</td>
+                <td>${item.pengguna.id_pengguna}</td>
+                <td>${item.kendaraan.plat_nomor}</td>
+                <td>${item.waktu_masuk}</td>
+                <td style="color:${item.status_parkir === 'masuk' ? 'green' : 'red'}">${item.status_parkir}</td>
+            </tr>`;
+            });
+            document.querySelector('tbody.bg-putih').innerHTML = tbody;
+        } catch (error) {
+            console.error('Gagal mengambil data monitoring:', error);
+        }
     }
     setInterval(fetchMonitoringData, 1000);
     fetchMonitoringData();
 
-    // ✅ Mengambil plat nomor hasil deteksi dari server setiap 1 detik dan mengecek status di database
+    // INISIALISASI AUDIO
     const audioMasuk = document.getElementById("suksesMasukAudio");
     const audioKeluar = document.getElementById("suksesKeluarAudio");
     let displayedPlates = new Set();
 
+    // AMBIL PLAT NOMOR DAN VALIDASI STATUS
     async function fetchPlatNomor() {
         try {
             const response = await fetch("https://alpu.web.id/server/result");
-            if (!response.ok) throw new Error("Gagal fetch plat nomor");
-
             const data = await response.json();
-            const platNomor = data.plat_nomor?.trim() || '-';
+            const platNomor = data.plat_nomor?.trim() || "-";
 
-            if (platNomor !== '-' && !displayedPlates.has(platNomor)) {
+            if (platNomor !== "-" && !displayedPlates.has(platNomor)) {
                 displayedPlates.add(platNomor);
                 document.getElementById("platNomor").innerText = platNomor;
                 document.getElementById("infoText").innerText = "Memeriksa data kendaraan...";
 
-                const result = await checkPlatNomor(platNomor);
+                const checkResponse = await fetch(`https://alpu.web.id/api/check_plate/${platNomor}`);
+                const checkData = await checkResponse.json();
 
-                if (result.exists) {
-                    if (result.status === 'masuk' && audioMasuk) {
-                        audioMasuk.currentTime = 0;
+                if (checkData.exists) {
+                    if (checkData.status === 'masuk' && audioMasuk) {
                         audioMasuk.play();
-                    } else if (result.status === 'keluar' && audioKeluar) {
-                        audioKeluar.currentTime = 0;
+                    } else if (checkData.status === 'keluar' && audioKeluar) {
                         audioKeluar.play();
                     }
-                    document.getElementById("infoText").innerText = `✅ Plat nomor ${platNomor} terdaftar dan berhasil ${result.status}.`;
+                    document.getElementById("infoText").innerText = `✅ Plat ${platNomor} terdaftar (${checkData.status})`;
                 } else {
-                    document.getElementById("infoText").innerText = `❌ Plat nomor ${platNomor} tidak terdaftar di sistem.`;
+                    document.getElementById("infoText").innerText = `❌ Plat ${platNomor} tidak terdaftar.`;
                 }
             }
-        } catch (err) {
-            console.error("Gagal ambil atau cek plat nomor:", err);
-            document.getElementById("infoText").innerText = "Gagal koneksi ke server deteksi.";
-        }
-    }
-
-    async function checkPlatNomor(platNomor) {
-        try {
-            const response = await fetch(`https://alpu.web.id/api/check_plate/${platNomor}`);
-            if (!response.ok) throw new Error("Gagal fetch validasi plat nomor");
-            const data = await response.json();
-            return {
-                exists: data.exists,
-                status: data.status
-            };
         } catch (error) {
-            console.error("Error checking plate number:", error);
-            return {
-                exists: false,
-                status: null
-            };
+            console.error('Gagal fetch plat nomor:', error);
         }
     }
     setInterval(fetchPlatNomor, 1000);
 
-    // ✅ Menampilkan live kamera webcam dan hasil bounding box dari server
-    const webcamElement = document.getElementById("webcam");
-    const canvasElement = document.getElementById("canvas");
-    const ctx = canvasElement.getContext("2d");
+    // WEBCAM DAN FRAME DETEKSI
+    const webcam = document.getElementById("webcam");
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
 
     async function startCamera() {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: true
             });
-            webcamElement.srcObject = stream;
-            webcamElement.onloadedmetadata = () => {
-                canvasElement.width = webcamElement.videoWidth;
-                canvasElement.height = webcamElement.videoHeight;
+            webcam.srcObject = stream;
+            webcam.onloadedmetadata = () => {
+                canvas.width = webcam.videoWidth;
+                canvas.height = webcam.videoHeight;
             };
-        } catch (err) {
-            console.error("Gagal mengakses kamera:", err);
+        } catch (error) {
+            console.error('Gagal mengakses kamera:', error);
         }
     }
 
-    // ✅ Mengirim frame webcam ke server untuk pendeteksian plat nomor secara berkala
     async function sendFrameToServer() {
-        if (!webcamElement.videoWidth || !webcamElement.videoHeight) return;
-        const tempCanvas = document.createElement("canvas");
-        tempCanvas.width = webcamElement.videoWidth;
-        tempCanvas.height = webcamElement.videoHeight;
-        const tempCtx = tempCanvas.getContext("2d");
-        tempCtx.drawImage(webcamElement, 0, 0, tempCanvas.width, tempCanvas.height);
+        if (!webcam.videoWidth) return;
 
-        const base64Image = tempCanvas.toDataURL("image/jpeg");
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = webcam.videoWidth;
+        tempCanvas.height = webcam.videoHeight;
+        const tempCtx = tempCanvas.getContext('2d');
+        tempCtx.drawImage(webcam, 0, 0);
+        const base64 = tempCanvas.toDataURL('image/jpeg');
 
         try {
             await fetch("https://alpu.web.id/server/upload_frame", {
@@ -452,23 +425,25 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    image: base64Image
+                    image: base64
                 })
             });
 
-            const frameRes = await fetch("https://alpu.web.id/server/get_processed_frame");
-            const frameData = await frameRes.json();
+            // Delay 500ms agar server selesai memproses
+            await new Promise(resolve => setTimeout(resolve, 500));
 
+            const frameResponse = await fetch("https://alpu.web.id/server/get_processed_frame");
+            const frameData = await frameResponse.json();
             if (frameData.frame) {
                 const img = new Image();
                 img.onload = () => {
-                    ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-                    ctx.drawImage(img, 0, 0, canvasElement.width, canvasElement.height);
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                 };
                 img.src = frameData.frame;
             }
-        } catch (err) {
-            console.error("Gagal kirim/ambil frame:", err);
+        } catch (error) {
+            console.error('Gagal kirim/ambil frame:', error);
         }
     }
 
@@ -478,7 +453,6 @@
     }
     mainLoop();
 </script>
-
 
 
 
