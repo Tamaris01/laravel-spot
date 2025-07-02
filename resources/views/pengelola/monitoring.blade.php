@@ -320,7 +320,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    // JAM REALTIME
+    // ================== JAM REALTIME ==================
     function updateTime() {
         const now = new Date();
         document.getElementById("current-time").textContent = now.toLocaleTimeString();
@@ -328,20 +328,24 @@
     setInterval(updateTime, 1000);
     updateTime();
 
-    // MONITORING PARKIR REALTIME
+    // ============ MONITORING PARKIR REALTIME ============
     async function fetchMonitoringData() {
         try {
             const response = await fetch('/monitoring');
+            if (!response.ok) throw new Error('Gagal fetch data monitoring');
+
             const data = await response.json();
             let tbody = '';
             data.forEach(item => {
-                tbody += `<tr>
-                <td>${item.id_riwayat_parkir}</td>
-                <td>${item.pengguna.id_pengguna}</td>
-                <td>${item.kendaraan.plat_nomor}</td>
-                <td>${item.waktu_masuk}</td>
-                <td style="color:${item.status_parkir === 'masuk' ? 'green' : 'red'}">${item.status_parkir}</td>
-            </tr>`;
+                tbody += `
+                <tr>
+                    <td>${item.id_riwayat_parkir}</td>
+                    <td>${item.pengguna.id_pengguna}</td>
+                    <td>${item.kendaraan.plat_nomor}</td>
+                    <td>${item.waktu_masuk}</td>
+                    <td style="color:${item.status_parkir === 'masuk' ? 'green' : 'red'}">${item.status_parkir}</td>
+                </tr>
+            `;
             });
             document.querySelector('tbody.bg-putih').innerHTML = tbody;
         } catch (error) {
@@ -351,44 +355,91 @@
     setInterval(fetchMonitoringData, 1000);
     fetchMonitoringData();
 
-    // INISIALISASI AUDIO
-    const audioMasuk = document.getElementById("suksesMasukAudio");
-    const audioKeluar = document.getElementById("suksesKeluarAudio");
+    // =============== INISIALISASI AUDIO & PLAT ===============
+    const audio = document.getElementById("suksesMasukAudio"); // ganti jika audio lain
     let displayedPlates = new Set();
+    let pendingPlates = [];
+    let isChecking = false;
 
-    // AMBIL PLAT NOMOR DAN VALIDASI STATUS
-    async function fetchPlatNomor() {
+    // =============== CEK STATUS PLAT KE DATABASE ===============
+    async function checkPlatNomor(platNomor) {
         try {
-            const response = await fetch("https://alpu.web.id/server/result");
+            const response = await fetch(`https://alpu.web.id/api/check_plate/${platNomor}`);
+            if (!response.ok) throw new Error("Gagal fetch validasi plat");
             const data = await response.json();
-            const platNomor = data.plat_nomor?.trim() || "-";
+            return data.exists;
+        } catch (error) {
+            console.error("Error checking plate number:", error);
+            showConnectionError();
+            return false;
+        }
+    }
 
-            if (platNomor !== "-" && !displayedPlates.has(platNomor)) {
-                displayedPlates.add(platNomor);
-                document.getElementById("platNomor").innerText = platNomor;
+    // =============== FETCH PLAT YOLO DAN CEK STATUS ===============
+    async function fetchPlatNomor() {
+        if (isChecking) return;
+
+        try {
+            const response = await fetch("https://alpu.web.id/result");
+            if (!response.ok) throw new Error("Gagal fetch plat nomor");
+
+            const data = await response.json();
+            const platNomor = data.plat_nomor?.trim() || '-';
+
+            if (platNomor === '-' || platNomor === '') {
+                showDefaultMessage();
+                return;
+            }
+
+            if (!displayedPlates.has(platNomor) && !pendingPlates.includes(platNomor)) {
+                pendingPlates.push(platNomor);
+            }
+
+            if (pendingPlates.length > 0) {
+                isChecking = true;
+                const currentPlat = pendingPlates.shift();
+                displayedPlates.add(currentPlat);
+
+                document.getElementById("platNomor").innerText = currentPlat;
                 document.getElementById("infoText").innerText = "Memeriksa data kendaraan...";
+                document.getElementById("infoText").style.display = "block";
 
-                const checkResponse = await fetch(`https://alpu.web.id/api/check_plate/${platNomor}`);
-                const checkData = await checkResponse.json();
+                const isRegistered = await checkPlatNomor(currentPlat);
 
-                if (checkData.exists) {
-                    if (checkData.status === 'masuk' && audioMasuk) {
-                        audioMasuk.play();
-                    } else if (checkData.status === 'keluar' && audioKeluar) {
-                        audioKeluar.play();
+                if (isRegistered) {
+                    if (audio) {
+                        audio.currentTime = 0;
+                        audio.play();
                     }
-                    document.getElementById("infoText").innerText = `✅ Plat ${platNomor} terdaftar (${checkData.status})`;
+                    document.getElementById("infoText").innerText = `✅ Plat nomor ${currentPlat} terdaftar. Silakan Masuk/Keluar!`;
                 } else {
-                    document.getElementById("infoText").innerText = `❌ Plat ${platNomor} tidak terdaftar.`;
+                    document.getElementById("infoText").innerText = `❌ Plat nomor ${currentPlat} tidak terdaftar di sistem!`;
                 }
+
+                isChecking = false;
             }
         } catch (error) {
-            console.error('Gagal fetch plat nomor:', error);
+            console.error("Gagal ambil/cek plat nomor:", error);
+            showConnectionError();
+            isChecking = false;
         }
     }
     setInterval(fetchPlatNomor, 1000);
 
-    // WEBCAM DAN FRAME DETEKSI
+    // ========== PESAN DEFAULT & ERROR KONEKSI ==========
+    function showDefaultMessage() {
+        document.getElementById("platNomor").innerText = '-';
+        document.getElementById("infoText").innerText = "Posisikan kendaraan menghadap kamera dengan benar.";
+        document.getElementById("infoText").style.display = "block";
+    }
+
+    function showConnectionError() {
+        document.getElementById("platNomor").innerText = '-';
+        document.getElementById("infoText").innerText = "Gagal koneksi ke server deteksi.";
+        document.getElementById("infoText").style.display = "block";
+    }
+
+    // ================= WEBCAM & FRAME YOLO =================
     const webcam = document.getElementById("webcam");
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
@@ -404,7 +455,7 @@
                 canvas.height = webcam.videoHeight;
             };
         } catch (error) {
-            console.error('Gagal mengakses kamera:', error);
+            console.error("Gagal mengakses kamera:", error);
         }
     }
 
@@ -415,7 +466,7 @@
         tempCanvas.width = webcam.videoWidth;
         tempCanvas.height = webcam.videoHeight;
         const tempCtx = tempCanvas.getContext('2d');
-        tempCtx.drawImage(webcam, 0, 0);
+        tempCtx.drawImage(webcam, 0, 0, tempCanvas.width, tempCanvas.height);
         const base64 = tempCanvas.toDataURL('image/jpeg');
 
         try {
@@ -429,11 +480,11 @@
                 })
             });
 
-            // Delay 500ms agar server selesai memproses
-            await new Promise(resolve => setTimeout(resolve, 500));
+            await new Promise(resolve => setTimeout(resolve, 500)); // memberi jeda server
 
             const frameResponse = await fetch("https://alpu.web.id/server/get_processed_frame");
             const frameData = await frameResponse.json();
+
             if (frameData.frame) {
                 const img = new Image();
                 img.onload = () => {
@@ -443,7 +494,7 @@
                 img.src = frameData.frame;
             }
         } catch (error) {
-            console.error('Gagal kirim/ambil frame:', error);
+            console.error("Gagal kirim/ambil frame:", error);
         }
     }
 
