@@ -323,20 +323,21 @@
     // ================== JAM REALTIME ==================
     function updateTime() {
         const now = new Date();
-        document.getElementById("current-time").textContent = now.toLocaleTimeString();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        const formattedTime = `${hours}:${minutes}:${seconds}`;
+        document.getElementById("current-time").textContent = formattedTime;
     }
+
     setInterval(updateTime, 1000);
     updateTime();
 
     // ============ MONITORING PARKIR REALTIME ============
-    async function fetchMonitoringData() {
-        try {
-            const response = await fetch('/monitoring');
-            if (!response.ok) throw new Error('Gagal fetch data monitoring');
-
-            const data = await response.json();
+    function fetchMonitoringData() {
+        $.get('/monitoring', function(data) {
             let tbody = '';
-            data.forEach(item => {
+            data.forEach(function(item) {
                 tbody += `
                 <tr>
                     <td>${item.id_riwayat_parkir}</td>
@@ -344,14 +345,12 @@
                     <td>${item.kendaraan.plat_nomor}</td>
                     <td>${item.waktu_masuk}</td>
                     <td style="color:${item.status_parkir === 'masuk' ? 'green' : 'red'}">${item.status_parkir}</td>
-                </tr>
-            `;
+                </tr>`;
             });
-            document.querySelector('tbody.bg-putih').innerHTML = tbody;
-        } catch (error) {
-            console.error('Gagal mengambil data monitoring:', error);
-        }
+            $('tbody.bg-putih').html(tbody);
+        });
     }
+
     setInterval(fetchMonitoringData, 1000);
     fetchMonitoringData();
 
