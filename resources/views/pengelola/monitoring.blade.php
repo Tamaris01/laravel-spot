@@ -320,24 +320,22 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    // ================== JAM REALTIME ==================
+    // ======================= JAM REALTIME =======================
     function updateTime() {
         const now = new Date();
-        const hours = now.getHours().toString().padStart(2, '0');
-        const minutes = now.getMinutes().toString().padStart(2, '0');
-        const seconds = now.getSeconds().toString().padStart(2, '0');
-        const formattedTime = `${hours}:${minutes}:${seconds}`;
+        const formattedTime = now.toLocaleTimeString('id-ID', {
+            hour12: false
+        });
         document.getElementById("current-time").textContent = formattedTime;
     }
-
     setInterval(updateTime, 1000);
     updateTime();
 
-    // ============ MONITORING PARKIR REALTIME ============
+    // ================= MONITORING PARKIR REALTIME ================
     function fetchMonitoringData() {
         $.get('/monitoring', function(data) {
             let tbody = '';
-            data.forEach(function(item) {
+            data.forEach(item => {
                 tbody += `
                 <tr>
                     <td>${item.id_riwayat_parkir}</td>
@@ -350,17 +348,16 @@
             $('tbody.bg-putih').html(tbody);
         });
     }
-
     setInterval(fetchMonitoringData, 1000);
     fetchMonitoringData();
 
-    // =============== INISIALISASI AUDIO & PLAT ===============
-    const audio = document.getElementById("suksesMasukAudio"); // ganti jika audio lain
+    // =============== AUDIO & STATE PLAT ===============
+    const audio = document.getElementById("suksesMasukAudio");
     let displayedPlates = new Set();
     let pendingPlates = [];
     let isChecking = false;
 
-    // =============== CEK STATUS PLAT KE DATABASE ===============
+    // =============== CEK STATUS PLAT DB ===============
     async function checkPlatNomor(platNomor) {
         try {
             const response = await fetch(`https://alpu.web.id/api/check_plate/${platNomor}`);
@@ -368,20 +365,19 @@
             const data = await response.json();
             return data.exists;
         } catch (error) {
-            console.error("Error checking plate number:", error);
+            console.error("Error checking plate:", error);
             showConnectionError();
             return false;
         }
     }
 
-    // =============== FETCH PLAT YOLO DAN CEK STATUS ===============
+    // =============== FETCH PLAT YOLO DAN CEK ===============
     async function fetchPlatNomor() {
         if (isChecking) return;
 
         try {
             const response = await fetch("https://alpu.web.id/server/result");
             if (!response.ok) throw new Error("Gagal fetch plat nomor");
-
             const data = await response.json();
             const platNomor = data.plat_nomor?.trim() || '-';
 
@@ -406,29 +402,26 @@
                 const isRegistered = await checkPlatNomor(currentPlat);
 
                 if (isRegistered) {
-                    if (audio) {
-                        audio.currentTime = 0;
-                        audio.play();
-                    }
-                    document.getElementById("infoText").innerText = `✅ Plat nomor ${currentPlat} terdaftar. Silakan Masuk/Keluar!`;
+                    audio?.play();
+                    document.getElementById("infoText").innerText = `✅ Plat ${currentPlat} terdaftar. Silakan masuk/keluar.`;
                 } else {
-                    document.getElementById("infoText").innerText = `❌ Plat nomor ${currentPlat} tidak terdaftar di sistem!`;
+                    document.getElementById("infoText").innerText = `❌ Plat ${currentPlat} tidak terdaftar di sistem.`;
                 }
 
                 isChecking = false;
             }
         } catch (error) {
-            console.error("Gagal ambil/cek plat nomor:", error);
+            console.error("Gagal fetch/cek plat:", error);
             showConnectionError();
             isChecking = false;
         }
     }
     setInterval(fetchPlatNomor, 1000);
 
-    // ========== PESAN DEFAULT & ERROR KONEKSI ==========
+    // ============== PESAN DEFAULT & ERROR ==============
     function showDefaultMessage() {
         document.getElementById("platNomor").innerText = '-';
-        document.getElementById("infoText").innerText = "Posisikan kendaraan menghadap kamera dengan benar.";
+        document.getElementById("infoText").innerText = "Posisikan kendaraan menghadap kamera dengan jelas.";
         document.getElementById("infoText").style.display = "block";
     }
 
@@ -454,22 +447,26 @@
                 canvas.height = webcam.videoHeight;
             };
         } catch (error) {
-            console.error("Gagal mengakses kamera:", error);
+            console.error("Gagal akses kamera:", error);
         }
     }
 
+    // =========== KIRIM FRAME WEBCAM KE SERVER =============
     async function sendFrameToServer() {
-        if (!webcam.videoWidth) return;
-
-        const tempCanvas = document.createElement('canvas');
-        tempCanvas.width = webcam.videoWidth;
-        tempCanvas.height = webcam.videoHeight;
-        const tempCtx = tempCanvas.getContext('2d');
-        tempCtx.drawImage(webcam, 0, 0, tempCanvas.width, tempCanvas.height);
-        const base64 = tempCanvas.toDataURL('image/jpeg');
-
         try {
-            await fetch("https://alpu.web.id/server/upload_frame", {
+            if (!webcam || webcam.readyState !== 4) {
+                console.warn("Webcam belum siap.");
+                return;
+            }
+
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = webcam.videoWidth;
+            tempCanvas.height = webcam.videoHeight;
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCtx.drawImage(webcam, 0, 0, tempCanvas.width, tempCanvas.height);
+            const base64 = tempCanvas.toDataURL('image/jpeg');
+
+            const uploadResponse = await fetch("https://alpu.web.id/server/upload_frame", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -479,11 +476,20 @@
                 })
             });
 
-            await new Promise(resolve => setTimeout(resolve, 500)); // memberi jeda server
+            if (!uploadResponse.ok) {
+                console.error("Gagal upload frame:", await uploadResponse.text());
+                return;
+            }
+
+            await new Promise(resolve => setTimeout(resolve, 300));
 
             const frameResponse = await fetch("https://alpu.web.id/server/get_processed_frame");
-            const frameData = await frameResponse.json();
+            if (!frameResponse.ok) {
+                console.error("Gagal ambil frame:", await frameResponse.text());
+                return;
+            }
 
+            const frameData = await frameResponse.json();
             if (frameData.frame) {
                 const img = new Image();
                 img.onload = () => {
@@ -491,18 +497,22 @@
                     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                 };
                 img.src = frameData.frame;
+            } else {
+                console.warn("Frame kosong dari server.");
             }
         } catch (error) {
             console.error("Gagal kirim/ambil frame:", error);
         }
     }
 
-    async function mainLoop() {
+    // =========== INISIALISASI APLIKASI ===========
+    async function initMonitoringParkir() {
         await startCamera();
         setInterval(sendFrameToServer, 1000);
     }
-    mainLoop();
+    initMonitoringParkir();
 </script>
+
 
 
 
