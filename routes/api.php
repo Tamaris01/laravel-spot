@@ -13,7 +13,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Endpoint untuk memproses pemindaian QR Code
 Route::post('/scan-qr', [RiwayatParkirController::class, 'scanQR']);
-Route::get('/scan-latest', [RiwayatParkirController::class, 'getLatest']);
 Route::get('/check_plate/{plat_nomor}', [MonitoringParkirController::class, 'checkPlate']);
-Route::get('/check-scan-qr', [RiwayatParkirController::class, 'CheckscanQR']);
-Route::get('/perintah-palang', [RiwayatParkirController::class, 'perintahPalang']);
+// ESP32-A mengirim plat hasil scan ke server
+Route::post('/send-plat', [RiwayatParkirController::class, 'sendPlat']);
+
+// ESP32-B mengambil plat terbaru yang dikirim ESP32-A
+Route::get('/get-plat', [RiwayatParkirController::class, 'getPlat']);

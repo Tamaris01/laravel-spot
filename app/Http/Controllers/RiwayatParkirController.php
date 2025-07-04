@@ -90,6 +90,49 @@ class RiwayatParkirController extends Controller
         }
     }
 
+    /**
+     * ESP32-A mengirim plat ke server untuk disimpan sementara
+     */
+    public function sendPlat(Request $request)
+    {
+        $platNomor = strtoupper($request->input('plat_nomor'));
+
+        if (!$platNomor) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Plat nomor tidak boleh kosong.'
+            ], 400);
+        }
+
+        // Simpan plat sementara ke cache selama 15 detik agar diambil oleh ESP32-B
+        cache()->put('plat_scan_terbaru', $platNomor, 15);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Plat nomor berhasil dikirim.',
+            'plat_nomor' => $platNomor
+        ]);
+    }
+    /**
+     * ESP32-B mengambil plat terbaru yang dikirim oleh ESP32-A
+     */
+    public function getPlat()
+    {
+        $platNomor = cache()->get('plat_scan_terbaru');
+
+        if (!$platNomor) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Tidak ada plat nomor yang tersedia.'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Plat nomor ditemukan.',
+            'plat_nomor' => $platNomor
+        ]);
+    }
 
     /**
      * Display user parking history for today
@@ -115,35 +158,5 @@ class RiwayatParkirController extends Controller
             ->get();
 
         return view('pengguna.riwayat_parkir', compact('riwayatParkir', 'date'));
-    }
-
-    public function perintahPalang()
-    {
-        // Perbaikan: gunakan orderBy dengan kolom yang ada
-        $latest = RiwayatParkir::orderBy('id_riwayat_parkir', 'desc')->first();
-
-        if ($latest) {
-            if ($latest->status_parkir === 'masuk' && $latest->waktu_keluar === null) {
-                return response()->json([
-                    'perintah' => 'BUKA PALANG',
-                    'status_parkir' => 'masuk',
-                    'plat_nomor' => $latest->plat_nomor
-                ]);
-            }
-
-            if ($latest->status_parkir === 'keluar') {
-                return response()->json([
-                    'perintah' => 'BUKA PALANG',
-                    'status_parkir' => 'keluar',
-                    'plat_nomor' => $latest->plat_nomor
-                ]);
-            }
-        }
-
-        return response()->json([
-            'perintah' => 'DIAM',
-            'status_parkir' => null,
-            'plat_nomor' => null
-        ]);
     }
 }
