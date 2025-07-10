@@ -3,17 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Http;
-
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\RiwayatParkir;
 use App\Models\Kendaraan;
 
-
 class RiwayatParkirController extends Controller
 {
     /**
-     * Handle QR Code scanning for parking
+     * Handle QR Code scanning for parking (dari ESP32-B)
      */
     public function scanQR(Request $request)
     {
@@ -21,17 +19,17 @@ class RiwayatParkirController extends Controller
 
         if (!$platQR) {
             return response()->json([
-                'status' => 'error',
+                'status' => false,
                 'message' => 'Plat nomor tidak tersedia dari QR. Silakan coba lagi.'
             ], 400);
         }
 
-        // Step 1: Cek kendaraan
+        // Cek kendaraan
         $kendaraan = Kendaraan::where('plat_nomor', $platQR)->first();
 
         if (!$kendaraan) {
             return response()->json([
-                'status' => 'not_found',
+                'status' => false,
                 'message' => 'Plat nomor tidak ditemukan dalam sistem. Silakan daftar terlebih dahulu.'
             ], 404);
         }
@@ -39,7 +37,7 @@ class RiwayatParkirController extends Controller
         $idPengguna = $kendaraan->penggunaParkir->id_pengguna ?? null;
         $waktuSekarang = Carbon::now();
 
-        // Step 2: Cek status parkir kendaraan
+        // Cek status parkir kendaraan
         $riwayatParkir = RiwayatParkir::where('plat_nomor', $platQR)
             ->where('status_parkir', 'masuk')
             ->first();
@@ -77,7 +75,6 @@ class RiwayatParkirController extends Controller
         }
     }
 
-
     /**
      * ESP32-A mengirim plat ke server untuk disimpan sementara
      */
@@ -101,8 +98,10 @@ class RiwayatParkirController extends Controller
             'plat_nomor' => $platNomor
         ]);
     }
+
     /**
      * ESP32-B mengambil plat terbaru yang dikirim oleh ESP32-A
+     * akan langsung clear cache agar tidak terbaca ulang
      */
     public function getPlat()
     {
@@ -115,6 +114,9 @@ class RiwayatParkirController extends Controller
             ], 404);
         }
 
+        // Hapus cache setelah berhasil diambil agar tidak terbaca ulang
+        cache()->forget('plat_scan_terbaru');
+
         return response()->json([
             'status' => true,
             'message' => 'Plat nomor ditemukan.',
@@ -123,17 +125,14 @@ class RiwayatParkirController extends Controller
     }
 
     /**
-     * Display user parking history for today
+     * Menampilkan riwayat parkir pengguna hari ini
      */
     public function riwayatParkir()
     {
         $user = auth()->user();
         $date = Carbon::now()->locale('id')->isoFormat('dddd, D MMMM Y');
-
-        // Mendapatkan tanggal hari ini
         $today = Carbon::today();
 
-        // Mengambil riwayat parkir pengguna berdasarkan ID pengguna dan hari ini
         $riwayatParkir = RiwayatParkir::whereHas('kendaraan', function ($query) use ($user) {
             $query->where('id_pengguna', $user->id_pengguna);
         })
