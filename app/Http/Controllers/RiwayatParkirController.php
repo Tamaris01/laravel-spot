@@ -89,8 +89,8 @@ class RiwayatParkirController extends Controller
             ], 400);
         }
 
-        // Simpan plat sementara ke cache selama 60 detik agar diambil oleh ESP32-B
-        cache()->put('plat_scan_terbaru', $platNomor, 60);
+        // Simpan plat sementara ke cache selama detik agar diambil oleh ESP32-B
+        cache()->put('plat_scan_terbaru', $platNomor, 20);
 
         return response()->json([
             'status' => true,
