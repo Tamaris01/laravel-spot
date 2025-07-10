@@ -18,32 +18,16 @@ class RiwayatParkirController extends Controller
     public function scanQR(Request $request)
     {
         $platQR = strtoupper($request->input('plat_nomor'));
-        $platDeteksi = null;
 
-        try {
-            // Step 1: Coba deteksi plat otomatis dari server Flask
-            $response = Http::timeout(5)->get('https://alpu.web.id/server/result');
-
-            if ($response->ok()) {
-                $data = $response->json();
-                $platDeteksi = strtoupper($data['plat_nomor'] ?? '');
-            }
-        } catch (\Exception $e) {
-            // Log tapi tetap lanjut ke fallback QR
-        }
-
-        // Step 2: Gunakan hasil deteksi jika ada, jika tidak gunakan plat dari QR
-        $platFinal = $platDeteksi && $platDeteksi !== '-' ? $platDeteksi : $platQR;
-
-        if (!$platFinal) {
+        if (!$platQR) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Plat nomor tidak terdeteksi maupun tidak tersedia dari QR. Silakan coba lagi.'
+                'message' => 'Plat nomor tidak tersedia dari QR. Silakan coba lagi.'
             ], 400);
         }
 
-        // Step 3: Cek kendaraan
-        $kendaraan = Kendaraan::where('plat_nomor', $platFinal)->first();
+        // Step 1: Cek kendaraan
+        $kendaraan = Kendaraan::where('plat_nomor', $platQR)->first();
 
         if (!$kendaraan) {
             return response()->json([
@@ -55,11 +39,13 @@ class RiwayatParkirController extends Controller
         $idPengguna = $kendaraan->penggunaParkir->id_pengguna ?? null;
         $waktuSekarang = Carbon::now();
 
-        $riwayatParkir = RiwayatParkir::where('plat_nomor', $platFinal)
+        // Step 2: Cek status parkir kendaraan
+        $riwayatParkir = RiwayatParkir::where('plat_nomor', $platQR)
             ->where('status_parkir', 'masuk')
             ->first();
 
         if ($riwayatParkir) {
+            // Update sebagai keluar
             $riwayatParkir->update([
                 'waktu_keluar' => $waktuSekarang,
                 'status_parkir' => 'keluar',
@@ -69,13 +55,14 @@ class RiwayatParkirController extends Controller
                 'status' => true,
                 'message' => 'Kendaraan ditemukan, status keluar berhasil diperbarui.',
                 'status_parkir' => 'keluar',
-                'plat_nomor' => $platFinal,
-                'metode' => $platDeteksi ? 'deteksi_kamera' : 'qr_code'
+                'plat_nomor' => $platQR,
+                'metode' => 'qr_code'
             ]);
         } else {
+            // Catat sebagai masuk
             RiwayatParkir::create([
                 'id_pengguna' => $idPengguna,
-                'plat_nomor' => $platFinal,
+                'plat_nomor' => $platQR,
                 'waktu_masuk' => $waktuSekarang,
                 'status_parkir' => 'masuk',
             ]);
@@ -84,11 +71,12 @@ class RiwayatParkirController extends Controller
                 'status' => true,
                 'message' => 'Kendaraan berhasil dicatat sebagai masuk.',
                 'status_parkir' => 'masuk',
-                'plat_nomor' => $platFinal,
-                'metode' => $platDeteksi ? 'deteksi_kamera' : 'qr_code'
+                'plat_nomor' => $platQR,
+                'metode' => 'qr_code'
             ]);
         }
     }
+
 
     /**
      * ESP32-A mengirim plat ke server untuk disimpan sementara
