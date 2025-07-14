@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AktivitasPenggunaParkir;
+use Carbon\Carbon;
 use App\Models\PenggunaParkir;
 use App\Models\PengelolaParkir;
 use Illuminate\Http\Request;
@@ -32,7 +34,7 @@ class AuthController extends Controller
 
         Log::info('Percobaan login', ['id' => $credentials['id']]);
 
-        // ✅ Cek ke Pengelola lebih dulu
+        // Cek ke Pengelola lebih dulu
         $user = PengelolaParkir::where('id_pengelola', $credentials['id'])->first();
         $guard = 'pengelola';
 
@@ -45,7 +47,7 @@ class AuthController extends Controller
         if ($user) {
             Log::info('Akun ditemukan', ['id' => $credentials['id'], 'guard' => $guard]);
 
-            // ✅ Cek status hanya untuk pengguna
+            // Cek status hanya untuk pengguna
             if ($guard === 'pengguna' && $user->status !== 'aktif') {
                 Log::warning('Akun pengguna belum aktif', ['id_pengguna' => $user->id_pengguna]);
                 return back()
@@ -59,8 +61,17 @@ class AuthController extends Controller
                 Auth::guard($guard)->login($user);
                 $request->session()->regenerate();
 
+                // ✅ Catat aktivitas login hanya untuk pengguna parkir
                 if ($guard === 'pengguna') {
                     Log::info('Pengguna berhasil login', ['id_pengguna' => $user->id_pengguna]);
+
+                    AktivitasPenggunaParkir::create([
+                        'id_pengguna' => $user->id_pengguna,
+                        'aktivitas' => 'login',
+                        'keterangan' => 'User login ke aplikasi',
+                        'waktu_aktivitas' => Carbon::now(),
+                    ]);
+
                     return redirect()->route('pengguna.dashboard')
                         ->with('status', 'success')
                         ->with('message', 'Selamat datang, Anda berhasil masuk!');
@@ -94,6 +105,15 @@ class AuthController extends Controller
         if (Auth::guard('pengguna')->check()) {
             $user = Auth::guard('pengguna')->user();
             Log::info('Pengguna logout', ['id_pengguna' => $user->id_pengguna]);
+
+            // ✅ Catat aktivitas logout
+            AktivitasPenggunaParkir::create([
+                'id_pengguna' => $user->id_pengguna,
+                'aktivitas' => 'logout',
+                'keterangan' => 'User logout dari aplikasi',
+                'waktu_aktivitas' => Carbon::now(),
+            ]);
+
             Auth::guard('pengguna')->logout();
         } elseif (Auth::guard('pengelola')->check()) {
             $user = Auth::guard('pengelola')->user();
