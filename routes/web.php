@@ -14,7 +14,7 @@ use App\Http\Controllers\KonfirmasiPendaftaranController;
 use App\Http\Controllers\MonitoringParkirController;
 use App\Http\Controllers\LaporanParkirController;
 use App\Http\Controllers\RiwayatParkirController;
-use App\Http\Controllers\LaporanMetrikController;
+
 // Redirect root to login
 Route::get('/', function () {
     return redirect()->route('landing-page');
@@ -99,6 +99,4 @@ Route::middleware(['auth:pengelola'])->group(function () {
     Route::get('/pengelola/konfirmasi-pendaftaran/search', [KonfirmasiPendaftaranController::class, 'search'])->name('pengelola.konfirmasi_pendaftaran.search');
     Route::post('/pengelola/konfirmasi/terima/{id_pengguna}', [KonfirmasiPendaftaranController::class, 'terima'])->name('pengelola.konfirmasi_pendaftaran.terima');
     Route::post('/pengelola/konfirmasi/tolak/{id_pengguna}', [KonfirmasiPendaftaranController::class, 'tolak'])->name('pengelola.konfirmasi_pendaftaran.tolak');
-
-    Route::get('/laporan-metrik', [LaporanMetrikController::class, 'index']);
 });

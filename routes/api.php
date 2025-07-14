@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RiwayatParkirController;
 use App\Http\Controllers\MonitoringParkirController;
+use App\Http\Controllers\LaporanMetrikController;
 
 
 // Middleware untuk autentikasi user
@@ -19,3 +20,4 @@ Route::post('/send-plat', [RiwayatParkirController::class, 'sendPlat']);
 
 // ESP32-B mengambil plat terbaru yang dikirim ESP32-A
 Route::get('/get-plat', [RiwayatParkirController::class, 'getPlat']);
+Route::get('/laporan-metrik', [LaporanMetrikController::class, 'index']);
