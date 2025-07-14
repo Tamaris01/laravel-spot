@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\RiwayatParkir;
 use App\Models\Kendaraan;
+use App\Models\AktivitasPenggunaParkir;
 
 class RiwayatParkirController extends Controller
 {
@@ -49,6 +50,14 @@ class RiwayatParkirController extends Controller
                 'status_parkir' => 'keluar',
             ]);
 
+            // Tambah aktivitas parkir_keluar
+            AktivitasPenggunaParkir::create([
+                'id_pengguna' => $idPengguna,
+                'aktivitas' => 'parkir_keluar',
+                'keterangan' => 'Scan QR keluar parkir',
+                'waktu_aktivitas' => $waktuSekarang,
+            ]);
+
             return response()->json([
                 'status' => true,
                 'message' => 'Kendaraan ditemukan, status keluar berhasil diperbarui.',
@@ -63,6 +72,14 @@ class RiwayatParkirController extends Controller
                 'plat_nomor' => $platQR,
                 'waktu_masuk' => $waktuSekarang,
                 'status_parkir' => 'masuk',
+            ]);
+
+            // Tambah aktivitas parkir_masuk
+            AktivitasPenggunaParkir::create([
+                'id_pengguna' => $idPengguna,
+                'aktivitas' => 'parkir_masuk',
+                'keterangan' => 'Scan QR masuk parkir',
+                'waktu_aktivitas' => $waktuSekarang,
             ]);
 
             return response()->json([
