@@ -38,6 +38,16 @@ class RiwayatParkirController extends Controller
         $idPengguna = $kendaraan->penggunaParkir->id_pengguna ?? null;
         $waktuSekarang = Carbon::now();
 
+        // ✅ Catat hanya fitur scan_qr (tidak mencatat parkir_masuk / parkir_keluar)
+        if ($idPengguna) {
+            AktivitasPenggunaParkir::create([
+                'id_pengguna' => $idPengguna,
+                'aktivitas' => 'scan_qr',
+                'keterangan' => 'User scan QR untuk parkir',
+                'waktu_aktivitas' => $waktuSekarang,
+            ]);
+        }
+
         // Cek status parkir kendaraan
         $riwayatParkir = RiwayatParkir::where('plat_nomor', $platQR)
             ->where('status_parkir', 'masuk')
@@ -48,14 +58,6 @@ class RiwayatParkirController extends Controller
             $riwayatParkir->update([
                 'waktu_keluar' => $waktuSekarang,
                 'status_parkir' => 'keluar',
-            ]);
-
-            // Tambah aktivitas parkir_keluar
-            AktivitasPenggunaParkir::create([
-                'id_pengguna' => $idPengguna,
-                'aktivitas' => 'parkir_keluar',
-                'keterangan' => 'Scan QR keluar parkir',
-                'waktu_aktivitas' => $waktuSekarang,
             ]);
 
             return response()->json([
@@ -72,14 +74,6 @@ class RiwayatParkirController extends Controller
                 'plat_nomor' => $platQR,
                 'waktu_masuk' => $waktuSekarang,
                 'status_parkir' => 'masuk',
-            ]);
-
-            // Tambah aktivitas parkir_masuk
-            AktivitasPenggunaParkir::create([
-                'id_pengguna' => $idPengguna,
-                'aktivitas' => 'parkir_masuk',
-                'keterangan' => 'Scan QR masuk parkir',
-                'waktu_aktivitas' => $waktuSekarang,
             ]);
 
             return response()->json([
@@ -106,7 +100,7 @@ class RiwayatParkirController extends Controller
             ], 400);
         }
 
-        // Simpan plat sementara ke cache selama detik agar diambil oleh ESP32-B
+        // Simpan plat sementara ke cache selama 20 detik agar diambil oleh ESP32-B
         cache()->put('plat_scan_terbaru', $platNomor, 20);
 
         return response()->json([
