@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash; // Untuk enkripsi password
+use Illuminate\Support\Facades\Hash;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use App\Models\AktivitasPenggunaParkir; // ✅ Tambahkan ini
+use Carbon\Carbon; // ✅ Tambahkan ini
 
 class ProfileController extends Controller
 {
@@ -31,6 +33,16 @@ class ProfileController extends Controller
             $userId = Auth::guard('pengelola')->check() ? $user->id_pengelola : $user->id_pengguna;
             Log::info('Profil berhasil diperbarui untuk pengguna ID: ' . $userId);
 
+            // ✅ Tambahkan aktivitas hanya untuk pengguna parkir
+            if (Auth::guard('pengguna')->check()) {
+                AktivitasPenggunaParkir::create([
+                    'id_pengguna' => $user->id_pengguna,
+                    'aktivitas' => 'update_profile',
+                    'keterangan' => 'User memperbarui profil',
+                    'waktu_aktivitas' => Carbon::now(),
+                ]);
+            }
+
             return back()->with('success', 'Profil berhasil diperbarui.');
         } catch (\Exception $e) {
             Log::error('Gagal memperbarui profil untuk pengguna ID: ' . ($user->id_pengguna ?? $user->id_pengelola) . ' - Error: ' . $e->getMessage());
@@ -49,26 +61,25 @@ class ProfileController extends Controller
 
             if ($oldFoto && !str_contains($oldFoto, 'default.jpg')) {
                 $parsedUrl = parse_url($oldFoto);
-                $path = $parsedUrl['path'] ?? ''; // Contoh: /images/profil/abc123.jpg
-                $filename = pathinfo($path, PATHINFO_FILENAME); // abc123
+                $path = $parsedUrl['path'] ?? '';
+                $filename = pathinfo($path, PATHINFO_FILENAME);
                 $publicId = 'images/profil/' . $filename;
 
                 Cloudinary::destroy($publicId);
                 Log::info("Foto lama user dihapus dari Cloudinary: {$publicId}");
             }
 
-            // Upload foto baru
             $uploaded = Cloudinary::upload($request->file('foto')->getRealPath(), [
                 'folder' => 'images/profil',
                 'resource_type' => 'image'
             ]);
 
-            $user->foto = $uploaded->getSecurePath(); // Simpan URL seperti sebelumnya
+            $user->foto = $uploaded->getSecurePath();
             Log::info("Foto baru user disimpan dengan URL: {$user->foto}");
         }
 
         if ($request->filled('password')) {
-            $user->password = $request->password;
+            $user->password = $request->password; // Sudah otomatis terenkripsi via mutator
         }
 
         if (!$user->save()) {
