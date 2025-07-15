@@ -145,7 +145,7 @@
     </div>
 
     <!--Ini pengguna aktif-->
-    <div class="card shadow mb-4 border-0 card-spot">
+    <div class="card shadow mb-4 border-0">
         <div class="card-header d-flex align-items-center justify-content-between">
             <h5 class="mb-0 text-dark">
                 <span class="font-weight-bold">{{ $jumlahPenggunaAktif }}</span> Pengguna Sedang Aktif
