@@ -88,6 +88,16 @@ class DashboardPengelolaController extends Controller
             ->groupBy('waktu')
             ->get();
 
+        // Data pengguna sedang aktif login
+        $penggunaAktif = DB::table('session_penggunaparkir')
+            ->join('pengguna_parkir', 'session_penggunaparkir.id_pengguna', '=', 'pengguna_parkir.id_pengguna')
+            ->whereNull('session_penggunaparkir.session_end')
+            ->select('pengguna_parkir.id_pengguna', 'pengguna_parkir.nama')
+            ->get();
+
+        $jumlahPenggunaAktif = $penggunaAktif->count();
+
+
         // Return data as JSON for AJAX
         if ($request->ajax()) {
             return response()->json([
@@ -97,7 +107,10 @@ class DashboardPengelolaController extends Controller
                 'kategoriDataChart' => $kategoriDataChart,
                 'waktuPuncakChartData' => $waktuPuncakChartData,
                 'jenisKendaraanData' => $jenisKendaraanData,
-                'kendaraanMasukWaktuData' => $kendaraanMasukWaktuData
+                'kendaraanMasukWaktuData' => $kendaraanMasukWaktuData,
+                'jumlahPenggunaAktif' => $jumlahPenggunaAktif,
+                'penggunaAktif' => $penggunaAktif
+
             ]);
         }
 
@@ -110,7 +123,9 @@ class DashboardPengelolaController extends Controller
             'kategoriDataChart',
             'waktuPuncakChartData',
             'jenisKendaraanData',
-            'kendaraanMasukWaktuData'
+            'kendaraanMasukWaktuData',
+            'jumlahPenggunaAktif',
+            'penggunaAktif'
         ));
     }
 }

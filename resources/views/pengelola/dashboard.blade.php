@@ -143,6 +143,36 @@
             <div class="highlight"></div>
         </div>
     </div>
+    <div class="card shadow mb-4">
+        <div class="card-header bg-warning text-dark">
+            <h5 class="mb-0">
+                <i class="fas fa-users"></i> Pengguna Sedang Aktif
+            </h5>
+        </div>
+        <div class="card-body">
+            <h2 class="text-center display-4" style="font-weight: bold; color: #FF5733;">
+                {{ $jumlahPenggunaAktif }} Pengguna Aktif
+            </h2>
+
+            @if($penggunaAktif->count() > 0)
+            <ul class="list-group mt-3">
+                @foreach($penggunaAktif as $pengguna)
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <i class="fas fa-user-circle text-success"></i>
+                        <strong>{{ $pengguna->nama }}</strong> ({{ $pengguna->id_pengguna }})
+                    </div>
+                    <span class="badge badge-success">Online</span>
+                </li>
+                @endforeach
+            </ul>
+            @else
+            <p class="text-center text-muted mt-3">
+                Tidak ada pengguna aktif saat ini.
+            </p>
+            @endif
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-6">
