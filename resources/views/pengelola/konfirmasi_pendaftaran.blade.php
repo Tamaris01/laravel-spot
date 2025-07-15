@@ -112,8 +112,8 @@
                                     <td>{{ $data->nama }}</td>
                                     <td>{{ $data->email }}</td>
                                     <td class="text-center">
-                                        <!-- Button Lihat -->
-                                        <button class="btn btn-success btn-sm" onclick="lihat('{{ $data->foto }}')">
+                                        <!-- Tombol pada tabel -->
+                                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#imageModal-{{ $data->id_pengguna }}">
                                             <i class="fas fa-eye"></i> Lihat
                                         </button>
                                     </td>
@@ -127,18 +127,18 @@
 
                                     </td>
                                 </tr>
-                                <!-- Modal untuk lihat Pengguna-->
-                                <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                <!-- Modal untuk lihat Pengguna -->
+                                <div class="modal fade" id="imageModal-{{ $data->id_pengguna }}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel-{{ $data->id_pengguna }}" aria-hidden="true">
                                     <div class="modal-dialog" style="display: flex; justify-content: center; align-items: center; text-align: center;" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header" style="background-color: #FFDC40;">
-                                                <h5 class="modal-title" id="imageModalLabel">Foto Pengguna</h5>
+                                                <h5 class="modal-title" id="imageModalLabel-{{ $data->id_pengguna }}">Foto Pengguna</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body text-center">
-                                                <img id="userImage" src="" alt="User Image" class="img-fluid" style="height: 50%; width: 50%;">
+                                                <img src="{{ $data->foto }}" alt="Foto Pengguna {{ $data->nama }}" class="img-fluid rounded shadow" style="max-height: 400px; max-width: 100%;">
                                             </div>
                                         </div>
                                     </div>
@@ -237,23 +237,7 @@
         };
     }
 
-    // Melihat gambar pengguna di modal
-    const CLOUD_NAME = "{{ env('CLOUDINARY_CLOUD_NAME') }}";
 
-    function lihat(fotoPublicId) {
-        const cloudName = CLOUD_NAME ?? document.body.dataset.cloudName ?? 'your_cloud_name_here';
-        let imageUrl = '';
-
-        if (fotoPublicId && fotoPublicId.trim() !== '') {
-            imageUrl = `https://res.cloudinary.com/${cloudName}/image/upload/${fotoPublicId}.jpg`;
-        } else {
-            imageUrl = "{{ asset('images/default.jpg') }}"; // fallback foto default jika kosong
-        }
-
-        const userImage = document.getElementById('userImage');
-        userImage.src = imageUrl;
-        $('#imageModal').modal('show');
-    }
 
 
 
