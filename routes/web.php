@@ -87,8 +87,7 @@ Route::middleware(['auth:pengelola'])->group(function () {
     Route::get('/find-pengguna', [KelolaKendaraanController::class, 'findPenggunaById'])->name('find.pengguna');
     Route::post('/kelola-kendaraan/store', [KelolaKendaraanController::class, 'store'])->name('pengelola.kelola_kendaraan.store');
     Route::get('/kelola-kendaraan/search', [KelolaKendaraanController::class, 'search'])->name('pengelola.kelola_kendaraan.search');
-    Route::get('/kelola-kendaraan/edit/{plat_nomor}', [KelolaKendaraanController::class, 'edit'])
-        ->where('plat_nomor', '.*') // Izinkan karakter bebas
+    Route::get('/pengelola/kelola-kendaraan/{plat_nomor}/edit', [KelolaKendaraanController::class, 'edit'])
         ->name('pengelola.kelola_kendaraan.edit');
     Route::put('/kelola-kendaraan/update/{plat_nomor}', [KelolaKendaraanController::class, 'update'])->name('pengelola.kelola_kendaraan.update');
     Route::delete('/kelola-kendaraan/delete/{plat_nomor}', [KelolaKendaraanController::class, 'destroy'])->name('pengelola.kelola_kendaraan.delete');
