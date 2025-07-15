@@ -99,7 +99,7 @@ class DashboardPengelolaController extends Controller
             ->whereNull('session_penggunaparkir.session_end')
             ->select('pengguna_parkir.id_pengguna', 'pengguna_parkir.nama')
             ->orderBy('session_penggunaparkir.session_start', 'desc')
-            ->paginate(5); // <= Tambahkan paginate(5)
+            ->paginate(3); // <= Tambahkan paginate(5)
 
 
 
