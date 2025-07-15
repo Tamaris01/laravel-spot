@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+
 
 class KendaraanController extends Controller
 {
@@ -58,31 +60,35 @@ class KendaraanController extends Controller
         try {
             Log::info('Vehicle data before update:', $kendaraan->toArray());
 
-            // Update vehicle data
+            // Update jenis dan warna kendaraan
             $kendaraan->jenis = $request->jenis;
             $kendaraan->warna = ucwords(strtolower($request->warna));
 
-            // Handle vehicle photo upload
+            // Jika ada foto baru
             if ($request->hasFile('foto_kendaraan')) {
-                $path = public_path('images/kendaraan');
 
-                // Ensure directory exists
-                if (!File::exists($path)) {
-                    File::makeDirectory($path, 0755, true);
+                // Hapus foto lama dari Cloudinary jika ada
+                if ($kendaraan->foto) {
+                    $parsedUrl = parse_url($kendaraan->foto);
+                    $path = $parsedUrl['path'] ?? '';
+                    $publicId = pathinfo($path, PATHINFO_FILENAME);
+
+                    if ($publicId) {
+                        Cloudinary::destroy("images/kendaraan/{$publicId}");
+                        Log::info("Old vehicle photo deleted from Cloudinary: {$publicId}");
+                    }
                 }
 
-                // Delete old photo if a new one is uploaded
-                if ($kendaraan->foto && File::exists($path . '/' . $kendaraan->foto)) {
-                    File::delete($path . '/' . $kendaraan->foto);
-                    Log::info('Old photo deleted:', ['photo' => $kendaraan->foto]);
-                }
+                // Upload foto baru ke Cloudinary
+                $uploadedFileUrl = Cloudinary::upload(
+                    $request->file('foto_kendaraan')->getRealPath(),
+                    ['folder' => 'images/kendaraan', 'resource_type' => 'image']
+                )->getSecurePath();
 
-                // Store new photo
-                $filename = time() . '_' . $request->file('foto_kendaraan')->getClientOriginalName();
-                $request->file('foto_kendaraan')->move($path, $filename);
-                $kendaraan->foto = 'images/kendaraan/' . $filename;
+                // Simpan URL foto ke database
+                $kendaraan->foto = $uploadedFileUrl;
 
-                Log::info('New photo saved:', ['photo' => $kendaraan->foto]);
+                Log::info('New vehicle photo uploaded to Cloudinary:', ['url' => $uploadedFileUrl]);
             }
 
             $kendaraan->save();
