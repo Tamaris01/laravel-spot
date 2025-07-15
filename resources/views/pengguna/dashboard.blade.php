@@ -277,6 +277,41 @@
         <div class="highlight"></div>
     </div>
 </div>
+<div class="card shadow-sm mb-4 border-0">
+    <div class="card-body p-3">
+        <h6 class="font-weight-bold mb-3 text-black">
+            {{ $jumlahPenggunaAktif }} Pengguna Aktif
+        </h6>
+
+        @if($penggunaAktif->count() > 0)
+        <ul class="list-group list-group-flush">
+            @foreach($penggunaAktif as $pengguna)
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center mr-2 text-black"
+                        style="background-color: #FFDC40; width: 35px; height: 35px;">
+
+                        {{ strtoupper(substr($pengguna->nama, 0, 1)) }}
+                    </div>
+                    <div>
+                        <div class="font-weight-bold">{{ $pengguna->nama }}</div>
+                        <small class="text-muted">{{ $pengguna->id_pengguna }}</small>
+                    </div>
+                </div>
+                <span class="badge badge-success">Online</span>
+            </li>
+            @endforeach
+        </ul>
+        @if($jumlahPenggunaAktifLainnya > 0)
+        <div class="mt-2 text-center text-muted">
+            Pengguna aktif lainnya: {{ $jumlahPenggunaAktifLainnya }}
+        </div>
+        @endif
+        @else
+        <p class="text-center text-muted">Tidak ada pengguna aktif saat ini.</p>
+        @endif
+    </div>
+</div>
 
 <div class="row mx-0">
     <!-- User Info Card -->
