@@ -146,10 +146,10 @@
     <div class="card shadow mb-4 border-0">
         <div class="card-header d-flex align-items-center justify-content-between" style="background: linear-gradient(90deg, #FFDC40, #FFD700); border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;">
             <h5 class="mb-0 text-dark">
-                <i class="fas fa-users mr-2"></i>
+                <i class="fas fa-circle text-success pulse"></i>
                 <span class="font-weight-bold">{{ $jumlahPenggunaAktif }}</span> Pengguna Sedang Aktif
             </h5>
-            <i class="fas fa-circle text-success pulse"></i>
+
         </div>
 
         <div class="card-body">
