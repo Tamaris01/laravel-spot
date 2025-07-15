@@ -8,6 +8,33 @@ use Illuminate\Http\Request;
 
 class DashboardPengelolaController extends Controller
 {
+
+
+    public function penggunaAktifRealtime()
+    {
+        $jumlahPenggunaAktif = DB::table('session_penggunaparkir')->whereNull('session_end')->count();
+
+        $penggunaAktif = DB::table('session_penggunaparkir')
+            ->join('pengguna_parkir', 'session_penggunaparkir.id_pengguna', '=', 'pengguna_parkir.id_pengguna')
+            ->whereNull('session_penggunaparkir.session_end')
+            ->select('pengguna_parkir.id_pengguna', 'pengguna_parkir.nama')
+            ->orderBy('session_penggunaparkir.session_start', 'desc')
+            ->limit(3)
+            ->get();
+
+        $jumlahPenggunaAktifLainnya = max($jumlahPenggunaAktif - 3, 0);
+
+        $html = view('partials._pengguna_aktif_list', [
+            'penggunaAktif' => $penggunaAktif,
+            'jumlahPenggunaAktifLainnya' => $jumlahPenggunaAktifLainnya
+        ])->render();
+
+        return response()->json([
+            'jumlah' => $jumlahPenggunaAktif,
+            'html' => $html
+        ]);
+    }
+
     public function dashboard(Request $request)
     {
         $user = auth()->user();

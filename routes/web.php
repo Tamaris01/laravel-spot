@@ -56,6 +56,8 @@ Route::middleware(['auth:pengelola'])->group(function () {
     Route::get('dashboard/pengelola/chart2', [DashboardPengelolaController::class, 'chart2Data'])->name('pengelola.dashboard.chart2.data');
     Route::get('dashboard/pengelola/chart3', [DashboardPengelolaController::class, 'chart3Data'])->name('pengelola.dashboard.chart3.data');
     Route::get('dashboard/pengelola/chart4', [DashboardPengelolaController::class, 'chart4Data'])->name('pengelola.dashboard.chart4.data');
+    // web.php
+    Route::get('/pengguna-aktif/realtime', [DashboardPengelolaController::class, 'penggunaAktifRealtime']);
 
     // Profil pengelola
     Route::get('/profile/pengelola', [ProfileController::class, 'showProfile'])->name('pengelola.profile.show');

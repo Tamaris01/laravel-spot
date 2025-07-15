@@ -157,7 +157,6 @@
                     <div class="d-flex align-items-center">
                         <div class="rounded-circle d-flex align-items-center justify-content-center mr-2 text-black"
                             style="background-color: #FFDC40; width: 35px; height: 35px;">
-
                             {{ strtoupper(substr($pengguna->nama, 0, 1)) }}
                         </div>
                         <div>
@@ -177,6 +176,7 @@
             @else
             <p class="text-center text-muted">Tidak ada pengguna aktif saat ini.</p>
             @endif
+
         </div>
     </div>
 
@@ -259,12 +259,24 @@
 
 @section('scripts')
 
+
+
 <!-- jQuery and Bootstrap 4 JS -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+    function reloadPenggunaAktif() {
+        $.get('{{ url("/pengguna-aktif/realtime") }}', function(data) {
+            $('#jumlahPenggunaAktif').text(data.jumlah);
+            $('#pengguna-aktif-wrapper').html(data.html);
+        });
+    }
+
+    // Panggil tiap 5 detik
+    setInterval(reloadPenggunaAktif, 5000);
     // Data kategori pengguna dari controller
     var kategoriData = @json($kategoriDataChart);
     var kategoriLabels = kategoriData.map(function(item) {
