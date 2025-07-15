@@ -163,22 +163,15 @@ class KelolaKendaraanController extends Controller
     }
 
 
-    public function edit($platNomor)
+    public function edit($id_pengguna)
     {
-        try {
-            $platNomor = urldecode($platNomor); // tambahkan ini
-            // Ambil data kendaraan beserta pengguna terkait
-            $kendaraan = Kendaraan::with('penggunaParkir')->where('plat_nomor', $platNomor)->firstOrFail();
+        $kendaraan = Kendaraan::with('penggunaParkir')
+            ->where('id_pengguna', $id_pengguna)
+            ->firstOrFail();
 
-            // Ambil semua data pengguna untuk dropdown
-            $penggunaParkir = PenggunaParkir::select('id_pengguna', 'nama')->get();
+        $penggunaParkir = PenggunaParkir::select('id_pengguna', 'nama')->get();
 
-            // Return ke view dengan data
-            return view('pengelola.kelola_kendaraan.edit', compact('kendaraan', 'penggunaParkir'));
-        } catch (\Exception $e) {
-            // Redirect jika data tidak ditemukan
-            return redirect()->route('pengelola.kelola_kendaraan.index')->with('error', 'Kendaraan tidak ditemukan.');
-        }
+        return view('pengelola.kelola_kendaraan.edit', compact('kendaraan', 'penggunaParkir'));
     }
 
 
