@@ -143,7 +143,9 @@
             <div class="highlight"></div>
         </div>
     </div>
-    <div class="card shadow mb-4 border-0">
+
+    <!--Ini pengguna aktif-->
+    <div class="card shadow mb-4 border-0 card-spot">
         <div class="card-header d-flex align-items-center justify-content-between">
             <h5 class="mb-0 text-dark">
                 <span class="font-weight-bold">{{ $jumlahPenggunaAktif }}</span> Pengguna Sedang Aktif
@@ -151,7 +153,7 @@
 
         </div>
 
-        <div class="card-spot" style="border-bottom: 1px solid black; background-color: white; font-weight: 500px; color: black;">
+        <div class="card-body" style="border-bottom: 1px solid black; background-color: white; font-weight: 500px; color: black;">
             @if($penggunaAktif->count() > 0)
             <ul class="list-group mt-2">
                 @foreach($penggunaAktif as $pengguna)
