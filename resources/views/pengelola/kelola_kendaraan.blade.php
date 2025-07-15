@@ -409,7 +409,7 @@
                                                                 <input
                                                                     type="file"
                                                                     id="uploadPhotoVehicleEdit"
-                                                                    name="foto_kendaraan"
+                                                                    name="foto"
                                                                     style="display: none;"
                                                                     accept="image/*"
                                                                     onchange="previewImage(event, 'previewVehicleEdit')">
