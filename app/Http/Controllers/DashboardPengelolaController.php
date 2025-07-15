@@ -92,14 +92,17 @@ class DashboardPengelolaController extends Controller
         $jumlahPenggunaAktif = DB::table('session_penggunaparkir')
             ->whereNull('session_end')
             ->count();
-
-        // Ambil 5 pengguna aktif per halaman dengan paginasi
+        // Ambil 5 pengguna aktif terbaru saja
         $penggunaAktif = DB::table('session_penggunaparkir')
             ->join('pengguna_parkir', 'session_penggunaparkir.id_pengguna', '=', 'pengguna_parkir.id_pengguna')
             ->whereNull('session_penggunaparkir.session_end')
             ->select('pengguna_parkir.id_pengguna', 'pengguna_parkir.nama')
             ->orderBy('session_penggunaparkir.session_start', 'desc')
-            ->paginate(3); // <= Tambahkan paginate(5)
+            ->limit(5)
+            ->get();
+
+        // Hitung jumlah pengguna aktif lainnya
+        $jumlahPenggunaAktifLainnya = max($jumlahPenggunaAktif - 5, 0);
 
 
 
@@ -130,7 +133,8 @@ class DashboardPengelolaController extends Controller
             'jenisKendaraanData',
             'kendaraanMasukWaktuData',
             'jumlahPenggunaAktif',
-            'penggunaAktif'
+            'penggunaAktif',
+            'jumlahPenggunaAktifLainnya'
         ));
     }
 }

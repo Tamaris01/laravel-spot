@@ -144,39 +144,36 @@
         </div>
     </div>
 
-    <!-- Pengguna Aktif -->
-    <div class="card shadow mb-4 border-0" style="background-color: white; border: 1px solid #e0e0e0;">
-        <!-- Header -->
-        <div class="card-header d-flex align-items-center justify-content-between bg-light">
-            <h5 class="mb-0 text-dark">
+    <div class="card shadow-sm mb-4 border-0">
+        <div class="card-body p-3">
+            <h6 class="font-weight-bold mb-3 text-primary">
+                <i class="fas fa-users"></i> {{ $jumlahPenggunaAktif }} Pengguna Aktif
+            </h6>
 
-                <span class="font-weight-bold">{{ $jumlahPenggunaAktif }}</span> Pengguna Sedang Aktif
-            </h5>
-        </div>
-
-        <!-- Body -->
-        <div class="card-body">
             @if($penggunaAktif->count() > 0)
-            <ul class="list-group list-group-flush mt-2">
+            <ul class="list-group list-group-flush">
                 @foreach($penggunaAktif as $pengguna)
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div>
-                        <i class="fas fa-user-circle text-success"></i>
-                        <strong>{{ $pengguna->nama }}</strong> ({{ $pengguna->id_pengguna }})
+                    <div class="d-flex align-items-center">
+                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mr-2" style="width: 35px; height: 35px;">
+                            {{ strtoupper(substr($pengguna->nama, 0, 1)) }}
+                        </div>
+                        <div>
+                            <div class="font-weight-bold">{{ $pengguna->nama }}</div>
+                            <small class="text-muted">{{ $pengguna->id_pengguna }}</small>
+                        </div>
                     </div>
                     <span class="badge badge-success">Online</span>
                 </li>
                 @endforeach
             </ul>
-
-            <!-- Paginasi -->
-            <div class="mt-3 d-flex justify-content-center">
-                {{ $penggunaAktif->links('pagination::bootstrap-4') }}
+            @if($jumlahPenggunaAktifLainnya > 0)
+            <div class="mt-2 text-center text-muted">
+                Pengguna aktif lainnya: {{ $jumlahPenggunaAktifLainnya }}
             </div>
+            @endif
             @else
-            <p class="text-center text-muted mt-3 mb-0">
-                Tidak ada pengguna aktif saat ini.
-            </p>
+            <p class="text-center text-muted">Tidak ada pengguna aktif saat ini.</p>
             @endif
         </div>
     </div>
