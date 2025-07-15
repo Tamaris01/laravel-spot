@@ -4,14 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\PenggunaParkir;
 use App\Models\Kendaraan;
-use App\Models\AktivitasPenggunaParkir; // ✅ Tambah ini
+use App\Models\AktivitasPenggunaParkir;
 use App\Http\Requests\RegisterRequest;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
-use Illuminate\Support\Facades\Hash;
-use Carbon\Carbon; // ✅ Tambah ini
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -42,9 +40,7 @@ class RegisterController extends Controller
         if (!empty($result)) {
             $type = $result[0]->Type;
             if (preg_match('/^enum\((.*)\)$/', $type, $matches)) {
-                return array_map(function ($value) {
-                    return trim($value, "'");
-                }, explode(',', $matches[1]));
+                return array_map(fn($value) => trim($value, "'"), explode(',', $matches[1]));
             }
         }
         return [];
@@ -52,41 +48,40 @@ class RegisterController extends Controller
 
     public function register(RegisterRequest $request)
     {
+        DB::beginTransaction();
         try {
-            // Validasi dan upload foto profil
+            // ✅ Upload foto profil ke Cloudinary
             if (!$request->hasFile('foto') || !$request->file('foto')->isValid()) {
                 return back()->withErrors(['foto' => 'Foto profil tidak valid atau belum diupload.'])->withInput();
             }
-
-            $uploadedFotoProfil = Cloudinary::upload(
+            $fotoProfilUpload = Cloudinary::upload(
                 $request->file('foto')->getRealPath(),
                 ['folder' => 'images/profil', 'resource_type' => 'image']
             );
-            $fotoProfilPublicId = $uploadedFotoProfil->getPublicId();
+            $fotoProfilPublicId = $fotoProfilUpload->getPublicId();
 
-            // Validasi dan upload foto kendaraan
+            // ✅ Upload foto kendaraan ke Cloudinary
             if (!$request->hasFile('foto_kendaraan') || !$request->file('foto_kendaraan')->isValid()) {
                 return back()->withErrors(['foto_kendaraan' => 'Foto kendaraan tidak valid atau belum diupload.'])->withInput();
             }
-
-            $uploadedFotoKendaraan = Cloudinary::upload(
+            $fotoKendaraanUpload = Cloudinary::upload(
                 $request->file('foto_kendaraan')->getRealPath(),
                 ['folder' => 'images/kendaraan', 'resource_type' => 'image']
             );
-            $fotoKendaraanPublicId = $uploadedFotoKendaraan->getPublicId();
+            $fotoKendaraanPublicId = $fotoKendaraanUpload->getPublicId();
 
-            // Simpan data pengguna
-            $pengguna = new PenggunaParkir();
-            $pengguna->id_pengguna = $request->kategori !== 'Tamu'
-                ? $request->id_pengguna
-                : 'Tamu_' . mt_rand(10000000, 99999999);
-            $pengguna->nama = $request->nama;
-            $pengguna->email = $request->email;
-            $pengguna->password = $request->password;
-            $pengguna->foto = $fotoProfilPublicId;
-            $pengguna->kategori = $request->kategori;
-            $pengguna->status = 'nonaktif';
-            $pengguna->save();
+            // ✅ Simpan data pengguna
+            $pengguna = PenggunaParkir::create([
+                'id_pengguna' => $request->kategori !== 'Tamu'
+                    ? $request->id_pengguna
+                    : 'Tamu_' . mt_rand(10000000, 99999999),
+                'nama' => $request->nama,
+                'email' => $request->email,
+                'password' => $request->password, // auto hash by mutator
+                'foto' => $fotoProfilPublicId,
+                'kategori' => $request->kategori,
+                'status' => 'nonaktif',
+            ]);
 
             // ✅ Catat aktivitas register
             AktivitasPenggunaParkir::create([
@@ -96,34 +91,20 @@ class RegisterController extends Controller
                 'waktu_aktivitas' => Carbon::now(),
             ]);
 
-            // Simpan data kendaraan
+            // ✅ Simpan kendaraan (QR akan otomatis ter-generate di model)
             $kendaraan = new Kendaraan();
             $kendaraan->plat_nomor = $request->plat_nomor;
             $kendaraan->jenis = $request->jenis;
             $kendaraan->warna = ucwords(strtolower($request->warna));
             $kendaraan->foto = $fotoKendaraanPublicId;
             $kendaraan->id_pengguna = $pengguna->id_pengguna;
+            $kendaraan->save(); // QR akan otomatis dibuat saat saving
 
-            // Generate dan upload QR Code
-            $qrCodeContent = $kendaraan->plat_nomor;
-            $tempPath = sys_get_temp_dir() . '/' . $qrCodeContent . '.png';
-            QrCode::format('png')->size(300)->generate($qrCodeContent, $tempPath);
-
-            $uploadedQrCode = Cloudinary::upload(
-                $tempPath,
-                ['folder' => 'images/qrcodes', 'resource_type' => 'image']
-            );
-
-            // Hapus file QR sementara
-            if (file_exists($tempPath)) {
-                unlink($tempPath);
-            }
-
-            $kendaraan->qr_code = $uploadedQrCode->getPublicId();
-            $kendaraan->save();
+            DB::commit();
 
             return redirect()->route('login')->with('pendaftaran', 'Pendaftaran anda berhasil. Tunggu konfirmasi dari pengelola parkir.');
         } catch (\Exception $e) {
+            DB::rollBack();
             Log::error('Error during registration: ' . $e->getMessage());
             return back()->withErrors(['error' => 'Terjadi kesalahan saat mendaftar. Silakan coba lagi.'])->withInput();
         }
