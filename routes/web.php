@@ -92,7 +92,7 @@ Route::middleware(['auth:pengelola'])->group(function () {
         ->name('pengelola.kelola_kendaraan.edit');
     Route::put('/kelola-kendaraan/update/{plat_nomor}', [KelolaKendaraanController::class, 'update'])->name('pengelola.kelola_kendaraan.update');
     Route::delete('/kelola-kendaraan/delete/{plat_nomor}', [KelolaKendaraanController::class, 'destroy'])->name('pengelola.kelola_kendaraan.delete');
-    Route::put('/kelola_kendaraan/{plat_nomor}', [KelolaKendaraanController::class, 'update'])->name('pengelola.kelola_kendaraan.update');
+
 
 
     //Konfirmasi Pendaftaran
