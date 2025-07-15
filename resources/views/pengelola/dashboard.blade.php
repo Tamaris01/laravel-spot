@@ -144,7 +144,7 @@
         </div>
     </div>
     <div class="card shadow mb-4 border-0">
-        <div class="card-header d-flex align-items-center justify-content-between" style="background: linear-gradient(90deg, #FFDC40, #FFD700); border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;">
+        <div class="card-header d-flex align-items-center justify-content-between">
             <h5 class="mb-0 text-dark">
                 <span class="font-weight-bold">{{ $jumlahPenggunaAktif }}</span> Pengguna Sedang Aktif
             </h5>
