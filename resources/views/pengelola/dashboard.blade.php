@@ -151,74 +151,73 @@
             </h5>
             <i class="fas fa-circle text-success pulse"></i>
         </div>
+
+        <div class="card-body">
+            @if($penggunaAktif->count() > 0)
+            <ul class="list-group mt-2">
+                @foreach($penggunaAktif as $pengguna)
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <i class="fas fa-user-circle text-success"></i>
+                        <strong>{{ $pengguna->nama }}</strong> ({{ $pengguna->id_pengguna }})
+                    </div>
+                    <span class="badge badge-success">Online</span>
+                </li>
+                @endforeach
+            </ul>
+            @else
+            <p class="text-center text-muted mt-3">
+                Tidak ada pengguna aktif saat ini.
+            </p>
+            @endif
+        </div>
     </div>
 
-    <div class="card-body">
-        @if($penggunaAktif->count() > 0)
-        <ul class="list-group mt-2">
-            @foreach($penggunaAktif as $pengguna)
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                    <i class="fas fa-user-circle text-success"></i>
-                    <strong>{{ $pengguna->nama }}</strong> ({{ $pengguna->id_pengguna }})
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card-spot">
+                <div class="card-header text-center" style="border-bottom: 1px solid black; background-color: white; font-weight: 500px; color: black;">
+                    Pengguna Parkir Hari ini</div>
+                <div class="card-body">
+                    <canvas class="chart" id="barChart"></canvas>
                 </div>
-                <span class="badge badge-success">Online</span>
-            </li>
-            @endforeach
-        </ul>
-        @else
-        <p class="text-center text-muted mt-3">
-            Tidak ada pengguna aktif saat ini.
-        </p>
-        @endif
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-6">
-        <div class="card-spot">
-            <div class="card-header text-center" style="border-bottom: 1px solid black; background-color: white; font-weight: 500px; color: black;">
-                Pengguna Parkir Hari ini</div>
-            <div class="card-body">
-                <canvas class="chart" id="barChart"></canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-spot">
+                <div class="card-header text-center" style="border-bottom: 1px solid black; background-color: white; font-weight: 500px; color: black;">
+                    Waktu Puncak Penggunaan</div>
+                <div class="card-body">
+                    <canvas class="chart" id="lineChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="card-spot">
-            <div class="card-header text-center" style="border-bottom: 1px solid black; background-color: white; font-weight: 500px; color: black;">
-                Waktu Puncak Penggunaan</div>
-            <div class="card-body">
-                <canvas class="chart" id="lineChart"></canvas>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card-spot">
+                <div class="card-header text-center" style="border-bottom: 1px solid black; background-color: white; font-weight: 500px; color: black;">
+
+                    Presentase Jenis Kendaraan</div>
+                <div class="card-body">
+                    <canvas class="chart" id="pieChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-spot">
+                <div class="card-header text-center" style="border-bottom: 1px solid black; background-color: white; font-weight: 500px; color: black;">
+                    Statistik Kendaraan Masuk
+                </div>
+
+
+                <div class="card-body">
+                    <canvas class="chart" id="doughnutChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="row">
-    <div class="col-md-6">
-        <div class="card-spot">
-            <div class="card-header text-center" style="border-bottom: 1px solid black; background-color: white; font-weight: 500px; color: black;">
-
-                Presentase Jenis Kendaraan</div>
-            <div class="card-body">
-                <canvas class="chart" id="pieChart"></canvas>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card-spot">
-            <div class="card-header text-center" style="border-bottom: 1px solid black; background-color: white; font-weight: 500px; color: black;">
-                Statistik Kendaraan Masuk
-            </div>
-
-
-            <div class="card-body">
-                <canvas class="chart" id="doughnutChart"></canvas>
-            </div>
-        </div>
-    </div>
-</div>
 </div>
 
 
