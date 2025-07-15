@@ -155,7 +155,7 @@
                 @foreach($penggunaAktif as $pengguna)
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
-                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mr-2" style="width: 35px; height: 35px;">
+                        <div class="bg-black text-white rounded-circle d-flex align-items-center justify-content-center mr-2" style="width: 35px; height: 35px;">
                             {{ strtoupper(substr($pengguna->nama, 0, 1)) }}
                         </div>
                         <div>
