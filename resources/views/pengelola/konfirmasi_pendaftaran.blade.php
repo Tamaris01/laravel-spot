@@ -138,7 +138,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body text-center">
-                                                <img src="{{ asset($data->foto) }}" alt="User Image" class="img-fluid" style="height: 50%; width: 50%;">
+                                                <img id="userImage" src="" alt="User Image" class="img-fluid" style="height: 50%; width: 50%;">
                                             </div>
                                         </div>
                                     </div>
@@ -237,13 +237,13 @@
         };
     }
 
-    // // Melihat gambar pengguna di modal
-    // function lihat(fotoPublicId) {
-    //     const cloudName = "{{ $cloudName }}";
-    //     const imageUrl = `https://res.cloudinary.com/${cloudName}/image/upload/${fotoPublicId}`;
-    //     document.getElementById('userImage').src = imageUrl;
-    //     $('#imageModal').modal('show');
-    // }
+    // Melihat gambar pengguna di modal
+    function lihat(fotoPublicId) {
+        const cloudName = "{{ $cloudName }}";
+        const imageUrl = `https://res.cloudinary.com/${cloudName}/image/upload/${fotoPublicId}`;
+        document.getElementById('userImage').src = imageUrl;
+        $('#imageModal').modal('show');
+    }
 
 
 
