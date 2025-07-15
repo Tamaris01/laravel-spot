@@ -50,7 +50,7 @@ class RegisterController extends Controller
     {
         DB::beginTransaction();
         try {
-            // ✅ Upload foto profil ke Cloudinary
+            // ✅ Upload foto profil ke Cloudinary dan simpan URL lengkap
             if (!$request->hasFile('foto') || !$request->file('foto')->isValid()) {
                 return back()->withErrors(['foto' => 'Foto profil tidak valid atau belum diupload.'])->withInput();
             }
@@ -58,9 +58,9 @@ class RegisterController extends Controller
                 $request->file('foto')->getRealPath(),
                 ['folder' => 'images/profil', 'resource_type' => 'image']
             );
-            $fotoProfilPublicId = $fotoProfilUpload->getPublicId();
+            $fotoProfilUrl = $fotoProfilUpload->getSecurePath(); // ✅ URL lengkap disimpan
 
-            // ✅ Upload foto kendaraan ke Cloudinary
+            // ✅ Upload foto kendaraan ke Cloudinary dan simpan URL lengkap
             if (!$request->hasFile('foto_kendaraan') || !$request->file('foto_kendaraan')->isValid()) {
                 return back()->withErrors(['foto_kendaraan' => 'Foto kendaraan tidak valid atau belum diupload.'])->withInput();
             }
@@ -68,17 +68,17 @@ class RegisterController extends Controller
                 $request->file('foto_kendaraan')->getRealPath(),
                 ['folder' => 'images/kendaraan', 'resource_type' => 'image']
             );
-            $fotoKendaraanPublicId = $fotoKendaraanUpload->getPublicId();
+            $fotoKendaraanUrl = $fotoKendaraanUpload->getSecurePath(); // ✅ URL lengkap disimpan
 
-            // ✅ Simpan data pengguna
+            // ✅ Simpan data pengguna dengan URL foto lengkap
             $pengguna = PenggunaParkir::create([
                 'id_pengguna' => $request->kategori !== 'Tamu'
                     ? $request->id_pengguna
                     : 'Tamu_' . mt_rand(10000000, 99999999),
                 'nama' => $request->nama,
                 'email' => $request->email,
-                'password' => $request->password, // auto hash by mutator
-                'foto' => $fotoProfilPublicId,
+                'password' => $request->password, // auto hash by mutator di model
+                'foto' => $fotoProfilUrl,
                 'kategori' => $request->kategori,
                 'status' => 'nonaktif',
             ]);
@@ -91,14 +91,14 @@ class RegisterController extends Controller
                 'waktu_aktivitas' => Carbon::now(),
             ]);
 
-            // ✅ Simpan kendaraan (QR akan otomatis ter-generate di model)
+            // ✅ Simpan kendaraan (QR otomatis ter-generate di model), simpan URL foto lengkap
             $kendaraan = new Kendaraan();
             $kendaraan->plat_nomor = $request->plat_nomor;
             $kendaraan->jenis = $request->jenis;
             $kendaraan->warna = ucwords(strtolower($request->warna));
-            $kendaraan->foto = $fotoKendaraanPublicId;
+            $kendaraan->foto = $fotoKendaraanUrl;
             $kendaraan->id_pengguna = $pengguna->id_pengguna;
-            $kendaraan->save(); // QR akan otomatis dibuat saat saving
+            $kendaraan->save(); // QR otomatis dibuat di model
 
             DB::commit();
 
