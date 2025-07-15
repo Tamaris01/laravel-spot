@@ -108,7 +108,7 @@ class RiwayatParkirController extends Controller
 
             // ✅ Kirim notifikasi ke dashboard via cache
             if ($idPengguna) {
-                cache()->put('notif_parkir_' . $idPengguna, $message, 15);
+                cache()->put('notif_parkir_' . $idPengguna, $message, 60);
             }
 
             return response()->json([
