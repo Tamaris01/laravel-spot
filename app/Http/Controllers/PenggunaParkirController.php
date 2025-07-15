@@ -80,6 +80,8 @@ class PenggunaParkirController extends Controller
 
     public function store(Request $request)
     {
+        Log::info('Memulai proses store pengguna');
+
         $validated = $request->validate([
             'id_pengguna' => 'required_if:kategori,!Tamu|string|max:255|unique:pengguna_parkir,id_pengguna',
             'kategori' => 'required|string|in:' . implode(',', $this->getEnumValues('pengguna_parkir', 'kategori')),
@@ -90,11 +92,15 @@ class PenggunaParkirController extends Controller
         ]);
 
         try {
+            Log::info('Validasi berhasil', $validated);
+
             $fotoUrl = null;
             if ($request->hasFile('foto')) {
                 $foto = $request->file('foto');
                 $dimensions = getimagesize($foto);
+                Log::info("Dimensi foto: {$dimensions[0]}x{$dimensions[1]}");
                 if ($dimensions[0] !== 472 || $dimensions[1] !== 472) {
+                    Log::warning('Dimensi foto tidak sesuai 472x472, upload dibatalkan.');
                     return redirect()->back()
                         ->withErrors(['foto' => 'Dimensi foto harus 472x472 piksel.'])
                         ->withInput();
@@ -104,6 +110,7 @@ class PenggunaParkirController extends Controller
                     'folder' => 'images/profil'
                 ]);
                 $fotoUrl = $uploadedFile->getSecurePath();
+                Log::info("Foto berhasil diupload ke Cloudinary: $fotoUrl");
             }
 
             $pengguna = new PenggunaParkir();
@@ -113,10 +120,13 @@ class PenggunaParkirController extends Controller
             $pengguna->kategori = $validated['kategori'];
             $pengguna->nama = $validated['nama'];
             $pengguna->email = $validated['email'];
-            $pengguna->password = $validated['password']; // tidak perlu hash manual
+            $pengguna->password = $validated['password']; // model sudah hash otomatis
             $pengguna->foto = $fotoUrl;
             $pengguna->status = 'aktif';
+
             $pengguna->save();
+
+            Log::info("Pengguna dengan ID {$pengguna->id_pengguna} berhasil disimpan ke database.");
 
             return redirect()->route('pengelola.kelola_pengguna.index')
                 ->with('success', 'Pengguna berhasil ditambahkan.');
@@ -127,6 +137,7 @@ class PenggunaParkirController extends Controller
                 ->withInput();
         }
     }
+
 
 
     public function edit($id_pengguna)
