@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\PenggunaParkir;
 use App\Models\Kendaraan;
+use App\Models\AktivitasPenggunaParkir; // ✅ Tambah ini
 use App\Http\Requests\RegisterRequest;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon; // ✅ Tambah ini
 
 class RegisterController extends Controller
 {
@@ -19,7 +21,6 @@ class RegisterController extends Controller
 
     public function __construct()
     {
-        // Inisialisasi nilai enum
         $this->kategoriArray = $this->getEnumValues('pengguna_parkir', 'kategori');
         $this->jenisKendaraanArray = $this->getEnumValues('kendaraan', 'jenis');
         $this->warnaKendaraanArray = $this->getEnumValues('kendaraan', 'warna');
@@ -40,17 +41,14 @@ class RegisterController extends Controller
 
         if (!empty($result)) {
             $type = $result[0]->Type;
-
             if (preg_match('/^enum\((.*)\)$/', $type, $matches)) {
                 return array_map(function ($value) {
                     return trim($value, "'");
                 }, explode(',', $matches[1]));
             }
         }
-
         return [];
     }
-
 
     public function register(RegisterRequest $request)
     {
@@ -89,6 +87,14 @@ class RegisterController extends Controller
             $pengguna->kategori = $request->kategori;
             $pengguna->status = 'nonaktif';
             $pengguna->save();
+
+            // ✅ Catat aktivitas register
+            AktivitasPenggunaParkir::create([
+                'id_pengguna' => $pengguna->id_pengguna,
+                'aktivitas' => 'register',
+                'keterangan' => 'User mendaftar akun parkir',
+                'waktu_aktivitas' => Carbon::now(),
+            ]);
 
             // Simpan data kendaraan
             $kendaraan = new Kendaraan();
