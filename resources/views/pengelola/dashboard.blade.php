@@ -159,8 +159,7 @@
                 @foreach($penggunaAktif as $pengguna)
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div>
-                        <i class="fas fa-user-circle text-success"></i>
-                        <strong>{{ $pengguna->nama }}</strong> ({{ $pengguna->id_pengguna }})
+                        <i class="fas fa-user-circle text-success"></i> <span><strong>{{ $pengguna->nama }}</strong> ({{ $pengguna->id_pengguna }}) </span>
                     </div>
                     <span class="badge badge-success">Online</span>
                 </li>
