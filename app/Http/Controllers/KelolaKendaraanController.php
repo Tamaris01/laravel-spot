@@ -108,11 +108,14 @@ class KelolaKendaraanController extends Controller
      */
     public function create()
     {
-        // Get a list of all pengguna_parkir (assuming you have a PenggunaParkir model)
-        $penggunaParkir = PenggunaParkir::all(); // You can add more filtering if necessary
+        // Ambil hanya pengguna aktif yang belum memiliki kendaraan
+        $penggunaParkir = PenggunaParkir::where('status', 'aktif')
+            ->doesntHave('kendaraan')
+            ->get();
 
         return view('pengelola.kelola_kendaraan.create', compact('penggunaParkir'));
     }
+
 
     /**
      * Store a newly created vehicle in the database.
