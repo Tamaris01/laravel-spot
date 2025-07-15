@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\AktivitasPenggunaParkir;
-use Carbon\Carbon;
+use App\Models\SessionPenggunaParkir; // ✅ Tambah
 use App\Models\PenggunaParkir;
 use App\Models\PengelolaParkir;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str; // ✅ Tambah
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -26,7 +28,6 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        // Validasi input
         $credentials = $request->validate([
             'id' => ['required'],
             'password' => ['required'],
@@ -34,11 +35,11 @@ class AuthController extends Controller
 
         Log::info('Percobaan login', ['id' => $credentials['id']]);
 
-        // Cek ke Pengelola lebih dulu
+        // Cek Pengelola
         $user = PengelolaParkir::where('id_pengelola', $credentials['id'])->first();
         $guard = 'pengelola';
 
-        // Jika tidak ditemukan di Pengelola, cek Pengguna
+        // Jika bukan pengelola, cek pengguna
         if (!$user) {
             $user = PenggunaParkir::where('id_pengguna', $credentials['id'])->first();
             $guard = 'pengguna';
@@ -47,9 +48,9 @@ class AuthController extends Controller
         if ($user) {
             Log::info('Akun ditemukan', ['id' => $credentials['id'], 'guard' => $guard]);
 
-            // Cek status hanya untuk pengguna
+            // Cek status untuk pengguna
             if ($guard === 'pengguna' && $user->status !== 'aktif') {
-                Log::warning('Akun pengguna belum aktif', ['id_pengguna' => $user->id_pengguna]);
+                Log::warning('Akun belum aktif', ['id_pengguna' => $user->id_pengguna]);
                 return back()
                     ->with('status', 'error')
                     ->with('message', 'Maaf, akun anda belum aktif!')
@@ -61,16 +62,25 @@ class AuthController extends Controller
                 Auth::guard($guard)->login($user);
                 $request->session()->regenerate();
 
-                // ✅ Catat aktivitas login hanya untuk pengguna parkir
                 if ($guard === 'pengguna') {
                     Log::info('Pengguna berhasil login', ['id_pengguna' => $user->id_pengguna]);
 
+                    // ✅ Catat aktivitas login
                     AktivitasPenggunaParkir::create([
                         'id_pengguna' => $user->id_pengguna,
                         'aktivitas' => 'login',
                         'keterangan' => 'User login ke aplikasi',
                         'waktu_aktivitas' => Carbon::now(),
                     ]);
+
+                    // ✅ Catat session start
+                    $sessionId = Str::uuid();
+                    SessionPenggunaParkir::create([
+                        'id_pengguna' => $user->id_pengguna,
+                        'session_id' => $sessionId,
+                        'session_start' => now(),
+                    ]);
+                    session(['session_id_penggunaparkir' => $sessionId]);
 
                     return redirect()->route('pengguna.dashboard')
                         ->with('status', 'success')
@@ -113,6 +123,20 @@ class AuthController extends Controller
                 'keterangan' => 'User logout dari aplikasi',
                 'waktu_aktivitas' => Carbon::now(),
             ]);
+
+            // ✅ Update session end & duration
+            if (session()->has('session_id_penggunaparkir')) {
+                $sessionId = session('session_id_penggunaparkir');
+                $sessionRecord = SessionPenggunaParkir::where('session_id', $sessionId)->first();
+
+                if ($sessionRecord) {
+                    $sessionRecord->session_end = now();
+                    $sessionRecord->duration_seconds = now()->diffInSeconds($sessionRecord->session_start);
+                    $sessionRecord->save();
+                }
+
+                session()->forget('session_id_penggunaparkir');
+            }
 
             Auth::guard('pengguna')->logout();
         } elseif (Auth::guard('pengelola')->check()) {
