@@ -165,6 +165,10 @@
                 </li>
                 @endforeach
             </ul>
+            <!-- Tambahkan paginasi -->
+            <div class="mt-2 d-flex justify-content-center">
+                {{ $penggunaAktif->links() }}
+            </div>
             @else
             <p class="text-center text-muted mt-3">
                 Tidak ada pengguna aktif saat ini.
