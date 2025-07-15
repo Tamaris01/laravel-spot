@@ -149,7 +149,7 @@
         <!-- Header -->
         <div class="card-header d-flex align-items-center justify-content-between bg-light">
             <h5 class="mb-0 text-dark">
-                <i class="fas fa-users text-warning"></i>
+
                 <span class="font-weight-bold">{{ $jumlahPenggunaAktif }}</span> Pengguna Sedang Aktif
             </h5>
         </div>
