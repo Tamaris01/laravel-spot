@@ -113,7 +113,7 @@
                                     <td>{{ $data->email }}</td>
                                     <td class="text-center">
                                         <!-- Button Lihat -->
-                                        <button class="btn btn-success btn-sm" onclick="lihat('{{ Cloudinary::getUrl($data->foto) }}')">
+                                        <button class="btn btn-success btn-sm" onclick="lihat('{{ $data->foto }}')">
                                             <i class="fas fa-eye"></i> Lihat
                                         </button>
                                     </td>
@@ -238,11 +238,12 @@
     }
 
     // Melihat gambar pengguna di modal
-    function lihat(fotoUrl) {
-        document.getElementById('userImage').src = fotoUrl;
+    function lihat(fotoPublicId) {
+        const cloudName = "{{ $cloudName }}";
+        const imageUrl = `https://res.cloudinary.com/${cloudName}/image/upload/${fotoPublicId}`;
+        document.getElementById('userImage').src = imageUrl;
         $('#imageModal').modal('show');
     }
-
 
 
 
