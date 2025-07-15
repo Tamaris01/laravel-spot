@@ -54,6 +54,23 @@ class DashboardPenggunaController extends Controller
             ->whereDate('waktu_keluar', $today)
             ->where('status_parkir', 'keluar')
             ->count();
+        // Hitung total pengguna aktif untuk judul
+        $jumlahPenggunaAktif = DB::table('session_penggunaparkir')
+            ->whereNull('session_end')
+            ->count();
+        // Ambil 5 pengguna aktif terbaru saja
+        $penggunaAktif = DB::table('session_penggunaparkir')
+            ->join('pengguna_parkir', 'session_penggunaparkir.id_pengguna', '=', 'pengguna_parkir.id_pengguna')
+            ->whereNull('session_penggunaparkir.session_end')
+            ->select('pengguna_parkir.id_pengguna', 'pengguna_parkir.nama')
+            ->orderBy('session_penggunaparkir.session_start', 'desc')
+            ->limit(3)
+            ->get();
+
+        // Hitung jumlah pengguna aktif lainnya
+        $jumlahPenggunaAktifLainnya = max($jumlahPenggunaAktif - 3, 0);
+
+
 
         // Kirim semua data ke tampilan
         return view('pengguna.dashboard', compact(
@@ -64,7 +81,10 @@ class DashboardPenggunaController extends Controller
             'qrCodePath',
             'jumlahPengguna',
             'jumlahParkirMasuk',
-            'jumlahParkirKeluar'
+            'jumlahParkirKeluar',
+            'jumlahPenggunaAktif',
+            'penggunaAktif',
+            'jumlahPenggunaAktifLainnya'
         ));
     }
 }
