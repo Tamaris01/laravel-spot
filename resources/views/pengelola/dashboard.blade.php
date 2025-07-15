@@ -144,38 +144,43 @@
         </div>
     </div>
 
-    <!--Ini pengguna aktif-->
-    <div class="card shadow mb-4 border-0" style="border-bottom: 1px solid black; background-color: white;">
-        <div class="card-header d-flex align-items-center justify-content-between">
+    <!-- Pengguna Aktif -->
+    <div class="card shadow mb-4 border-0" style="background-color: white; border: 1px solid #e0e0e0;">
+        <!-- Header -->
+        <div class="card-header d-flex align-items-center justify-content-between bg-light">
             <h5 class="mb-0 text-dark">
+                <i class="fas fa-users text-warning"></i>
                 <span class="font-weight-bold">{{ $jumlahPenggunaAktif }}</span> Pengguna Sedang Aktif
             </h5>
-
         </div>
 
-        <div class="card-body" style="border-bottom: 1px solid black; background-color: white;">
+        <!-- Body -->
+        <div class="card-body">
             @if($penggunaAktif->count() > 0)
-            <ul class="list-group mt-2">
+            <ul class="list-group list-group-flush mt-2">
                 @foreach($penggunaAktif as $pengguna)
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div>
-                        <i class="fas fa-user-circle text-success"></i> <span><strong>{{ $pengguna->nama }}</strong> ({{ $pengguna->id_pengguna }}) </span>
+                        <i class="fas fa-user-circle text-success"></i>
+                        <strong>{{ $pengguna->nama }}</strong> ({{ $pengguna->id_pengguna }})
                     </div>
                     <span class="badge badge-success">Online</span>
                 </li>
                 @endforeach
             </ul>
-            <!-- Tambahkan paginasi -->
-            <div class="mt-2 d-flex justify-content-center">
-                {{ $penggunaAktif->links() }}
+
+            <!-- Paginasi -->
+            <div class="mt-3 d-flex justify-content-center">
+                {{ $penggunaAktif->links('pagination::bootstrap-4') }}
             </div>
             @else
-            <p class="text-center text-muted mt-3">
+            <p class="text-center text-muted mt-3 mb-0">
                 Tidak ada pengguna aktif saat ini.
             </p>
             @endif
         </div>
     </div>
+
 
     <div class="row">
         <div class="col-md-6">
