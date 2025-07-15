@@ -534,6 +534,10 @@
 
 @section('scripts')
 <script>
+    function openFormTambah() {
+        // logika untuk membuka modal / menampilkan form
+        $('#tambahModal').modal('show'); // contoh jika memakai Bootstrap modal
+    }
     // Preview ketika user memilih file baru
     function previewImage(event) {
         const reader = new FileReader();
