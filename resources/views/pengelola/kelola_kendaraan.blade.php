@@ -539,12 +539,17 @@
         $('#tambahModal').modal('show'); // contoh jika memakai Bootstrap modal
     }
     // Preview ketika user memilih file baru
-    function previewImage(event) {
-        const reader = new FileReader();
-        reader.onload = function() {
-            document.getElementById('previewVehicleEdit').src = reader.result;
-        };
-        reader.readAsDataURL(event.target.files[0]);
+    function previewImage(event, previewId) {
+        const input = event.target;
+        const preview = document.getElementById(previewId);
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
     }
     // Fungsi untuk menampilkan QR Code modal
     function lihatQR(qrCodeUrl) {
