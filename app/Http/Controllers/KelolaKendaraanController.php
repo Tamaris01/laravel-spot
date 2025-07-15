@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\KendaraanRequest;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class KelolaKendaraanController extends Controller
 {
@@ -119,42 +119,46 @@ class KelolaKendaraanController extends Controller
     public function store(KendaraanRequest $request)
     {
         try {
+            // Validasi ID Pengguna dan cek apakah ID Pengguna ada di database
             if (is_null($request->id_pengguna)) {
                 return redirect()->back()->with('error', 'ID Pengguna tidak boleh kosong.');
             }
 
+            // Cek apakah pengguna sudah memiliki kendaraan
             $existingVehicle = Kendaraan::where('id_pengguna', $request->id_pengguna)->first();
             if ($existingVehicle) {
-                return redirect()->back()->with('error', 'Pengguna ini sudah memiliki kendaraan.');
+                return redirect()->back()->with('error', 'Pengguna ini sudah memiliki kendaraan, tidak dapat menambahkan lebih dari satu.');
             }
 
+            // Validasi dan simpan detail kendaraan
             $kendaraan = new Kendaraan();
             $kendaraan->plat_nomor = $request->plat_nomor;
             $kendaraan->jenis = $request->jenis;
             $kendaraan->warna = ucwords(strtolower($request->warna));
             $kendaraan->id_pengguna = $request->id_pengguna;
 
-            if ($request->hasFile('foto')) {
+            // Tangani unggahan foto kendaraan jika ada
+            if ($request->hasFile('foto_kendaraan')) {
+                // Pastikan foto yang diupload valid
                 $request->validate([
-                    'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
+                    'foto_kendaraan' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Contoh validasi gambar
                 ]);
 
-                // Upload ke Cloudinary dengan folder "images/kendaraan"
-                $uploadedFileUrl = Cloudinary::upload(
-                    $request->file('foto')->getRealPath(),
-                    ['folder' => 'images/kendaraan']
-                )->getSecurePath();
-
-                // Simpan URL ke database
-                $kendaraan->foto = $uploadedFileUrl;
+                // Simpan foto kendaraan di folder 'kendaraan' pada storage public
+                $kendaraan->foto = $request->file('foto_kendaraan')->store('kendaraan', 'public');
             }
 
+            // Simpan data kendaraan ke database
             $kendaraan->save();
 
+            // Redirect ke halaman kendaraan dengan pesan sukses
             return redirect()->route('pengelola.kelola_kendaraan.index')->with('success', 'Kendaraan berhasil ditambahkan');
         } catch (\Exception $e) {
+            // Log error jika ada kegagalan
             Log::error('Failed to store vehicle: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Gagal menambahkan kendaraan.');
+
+            // Berikan pesan kesalahan yang lebih informatif
+            return redirect()->back()->with('error', 'Gagal menambahkan kendaraan. Silakan coba lagi atau hubungi admin jika kesalahan berlanjut.');
         }
     }
 
@@ -162,26 +166,22 @@ class KelolaKendaraanController extends Controller
     public function edit($platNomor)
     {
         try {
-            $platNomor = urldecode($platNomor); // ⬅️ Tambahkan ini untuk menghindari error pencarian
-
             // Ambil data kendaraan beserta pengguna terkait
-            $kendaraan = Kendaraan::with('penggunaParkir')
-                ->where('plat_nomor', $platNomor)
-                ->firstOrFail();
+            $kendaraan = Kendaraan::with('penggunaParkir')->where('plat_nomor', $platNomor)->firstOrFail();
 
+            // Ambil semua data pengguna untuk dropdown
             $penggunaParkir = PenggunaParkir::select('id_pengguna', 'nama')->get();
 
+            // Return ke view dengan data
             return view('pengelola.kelola_kendaraan.edit', compact('kendaraan', 'penggunaParkir'));
         } catch (\Exception $e) {
+            // Redirect jika data tidak ditemukan
             return redirect()->route('pengelola.kelola_kendaraan.index')->with('error', 'Kendaraan tidak ditemukan.');
         }
     }
 
-
     public function update(KendaraanRequest $request, $plat_nomor)
     {
-        $plat_nomor = urldecode($plat_nomor);
-
         // Mencari kendaraan berdasarkan plat_nomor
         $kendaraan = Kendaraan::where('plat_nomor', $plat_nomor)->first();
 
@@ -220,25 +220,21 @@ class KelolaKendaraanController extends Controller
         $kendaraan->warna = $request->warna;
 
         // Mengelola upload foto kendaraan jika ada
-        if ($request->hasFile('foto')) {
-            // Hapus foto lama dari Cloudinary jika bukan default
-            if ($oldFoto && !str_contains($oldFoto, 'default.jpg')) {
-                $publicId = pathinfo(basename($oldFoto), PATHINFO_FILENAME);
-                Cloudinary::destroy("images/kendaraan/{$publicId}");
-                Log::info("Foto lama kendaraan dengan plat nomor {$plat_nomor} dihapus dari Cloudinary: {$publicId}");
+        if ($request->hasFile('foto_kendaraan')) {
+            // Hapus foto lama jika ada
+            if ($oldFoto && file_exists(public_path($oldFoto))) {
+                unlink(public_path($oldFoto));
+                Log::info("Foto lama kendaraan dengan plat nomor {$plat_nomor} dihapus: {$oldFoto}");
             }
 
-            // Upload foto baru ke Cloudinary
-            $uploadedFileUrl = Cloudinary::upload(
-                $request->file('foto')->getRealPath(),
-                [
-                    'folder' => 'images/kendaraan',
-                ]
-            )->getSecurePath();
+            // Simpan foto baru di public/images/kendaraan
+            $newFotoName = time() . '_' . $request->file('foto_kendaraan')->getClientOriginalName();
+            $filePath = 'images/kendaraan/' . $newFotoName;
+            $request->file('foto_kendaraan')->move(public_path('images/kendaraan'), $newFotoName);
 
             // Update path foto ke database
-            $kendaraan->foto = $uploadedFileUrl;
-            Log::info("Foto baru kendaraan dengan plat nomor {$plat_nomor} diupload ke Cloudinary: {$uploadedFileUrl}");
+            $kendaraan->foto = $filePath;
+            Log::info("Foto baru kendaraan dengan plat nomor {$plat_nomor} disimpan: {$filePath}");
         }
 
         // Simpan perubahan ke database
@@ -257,28 +253,24 @@ class KelolaKendaraanController extends Controller
 
 
 
+
     /**
      * Delete the specified vehicle.
      */
     public function destroy($platNomor)
     {
+        // Find the vehicle by plat nomor
         $kendaraan = Kendaraan::where('plat_nomor', $platNomor)->firstOrFail();
 
         try {
-            // Delete vehicle photo from Cloudinary if exists
+            // Delete the vehicle's photo if it exists
             if ($kendaraan->foto) {
-                $publicId = pathinfo(basename($kendaraan->foto), PATHINFO_FILENAME);
-                $folderedPublicId = 'images/kendaraan/' . $publicId;
-                Cloudinary::destroy($folderedPublicId);
-                Log::info("Foto kendaraan dengan plat {$platNomor} berhasil dihapus dari Cloudinary: {$folderedPublicId}");
+                Storage::disk('public')->delete($kendaraan->foto);
             }
 
-            // Delete QR code from Cloudinary if exists
-            if ($kendaraan->qr_code) {
-                $qrPublicId = pathinfo(basename($kendaraan->qr_code), PATHINFO_FILENAME);
-                $qrFolderedPublicId = 'images/qrcodes/' . $qrPublicId;
-                Cloudinary::destroy($qrFolderedPublicId);
-                Log::info("QR Code kendaraan dengan plat {$platNomor} berhasil dihapus dari Cloudinary: {$qrFolderedPublicId}");
+            // Delete the QR code if it exists
+            if ($kendaraan->qr_code_url) {
+                Storage::disk('public')->delete($kendaraan->qr_code_url);
             }
 
             // Delete the vehicle record
@@ -290,7 +282,6 @@ class KelolaKendaraanController extends Controller
             return redirect()->back()->with('error', 'Gagal menghapus kendaraan');
         }
     }
-
 
     /**
      * Generate QR code for the vehicle.
