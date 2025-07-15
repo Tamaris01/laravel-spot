@@ -372,7 +372,28 @@
         console.log('Page loaded');
         $('#successModal').modal('show'); // Temporarily show the modal to see if it triggers without conditions
     });
+    setInterval(function() {
+        $.ajax({
+            url: '{{ route("dashboard.cek.notif.parkir") }}',
+            type: 'GET',
+            success: function(response) {
+                if (response.status) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Informasi Parkir',
+                        text: response.message,
+                        timer: 3000,
+                        showConfirmButton: false
+                    });
+                }
+            },
+            error: function(xhr) {
+                console.error(xhr.responseText);
+            }
+        });
+    }, 1000); // cek setiap 5 detik
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
     @keyframes bounce {
 

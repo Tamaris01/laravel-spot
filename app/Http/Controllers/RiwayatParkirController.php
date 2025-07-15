@@ -13,7 +13,28 @@ class RiwayatParkirController extends Controller
 {
     /**
      * Handle QR Code scanning for parking (dari ESP32-B)
+     * 
      */
+    public function cekNotifParkir(Request $request)
+    {
+        $user = auth()->user();
+        $cacheKey = 'notif_parkir_' . $user->id_pengguna;
+
+        if (cache()->has($cacheKey)) {
+            $message = cache()->get($cacheKey);
+            cache()->forget($cacheKey); // hapus setelah diambil agar tidak muncul dua kali
+
+            return response()->json([
+                'status' => true,
+                'message' => $message
+            ]);
+        } else {
+            return response()->json([
+                'status' => false
+            ]);
+        }
+    }
+
     public function scanQR(Request $request)
     {
         $platQR = strtoupper($request->input('plat_nomor'));
