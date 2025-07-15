@@ -138,7 +138,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body text-center">
-                                                <img src="{{ $data->foto }}" alt="Foto Pengguna {{ $data->nama }}" class="img-fluid rounded shadow" style="max-height: 400px; max-width: 100%;">
+                                                <img src="{{ $data->foto }}" alt="Foto Pengguna {{ $data->nama }}" class="img-fluid" style="height: 50%; width: 50%;">
                                             </div>
                                         </div>
                                     </div>
