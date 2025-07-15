@@ -151,7 +151,7 @@
 
         </div>
 
-        <div class="card-body">
+        <div class="card-body" style="border-bottom: 1px solid black; background-color: white; font-weight: 500px; color: black;">
             @if($penggunaAktif->count() > 0)
             <ul class="list-group mt-2">
                 @foreach($penggunaAktif as $pengguna)
