@@ -237,8 +237,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body text-center">
-                                                <img src="{{ $user->foto }}" alt="User Image" class="img-fluid" style="height: 50%; width: 50%;">
-
+                                                <img src="{{ asset($user->foto) }}" alt="User Image" class="img-fluid" style="height: 50%; width: 50%;">
 
                                             </div>
                                         </div>
