@@ -163,16 +163,16 @@ class KelolaKendaraanController extends Controller
     }
 
 
-    public function edit($id_pengguna)
-    {
-        $kendaraan = Kendaraan::with('penggunaParkir')
-            ->where('id_pengguna', $id_pengguna)
-            ->firstOrFail();
+    // public function edit($id_pengguna)
+    // {
+    //     $kendaraan = Kendaraan::with('penggunaParkir')
+    //         ->where('id_pengguna', $id_pengguna)
+    //         ->firstOrFail();
 
-        $penggunaParkir = PenggunaParkir::select('id_pengguna', 'nama')->get();
+    //     $penggunaParkir = PenggunaParkir::select('id_pengguna', 'nama')->get();
 
-        return view('pengelola.kelola_kendaraan.edit', compact('kendaraan', 'penggunaParkir'));
-    }
+    //     return view('pengelola.kelola_kendaraan.edit', compact('kendaraan', 'penggunaParkir'));
+    // }
 
 
     public function update(KendaraanRequest $request, $plat_nomor)
