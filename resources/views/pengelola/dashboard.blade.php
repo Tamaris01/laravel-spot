@@ -276,7 +276,7 @@
     }
 
     // Panggil tiap 5 detik
-    setInterval(reloadPenggunaAktif, 5000);
+    setInterval(reloadPenggunaAktif, 2000);
     // Data kategori pengguna dari controller
     var kategoriData = @json($kategoriDataChart);
     var kategoriLabels = kategoriData.map(function(item) {
