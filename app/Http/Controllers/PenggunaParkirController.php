@@ -95,32 +95,39 @@ class PenggunaParkirController extends Controller
                 $foto = $request->file('foto');
                 $dimensions = getimagesize($foto);
                 if ($dimensions[0] !== 472 || $dimensions[1] !== 472) {
-                    return redirect()->back()->withErrors(['foto' => 'Dimensi foto harus 472x472 piksel.'])->withInput();
+                    return redirect()->back()
+                        ->withErrors(['foto' => 'Dimensi foto harus 472x472 piksel.'])
+                        ->withInput();
                 }
 
-                $fotoUrl = Cloudinary::upload($foto->getRealPath(), [
+                $uploadedFile = Cloudinary::upload($foto->getRealPath(), [
                     'folder' => 'images/profil'
-                ])->getSecurePath();
+                ]);
+                $fotoUrl = $uploadedFile->getSecurePath();
             }
 
             $pengguna = new PenggunaParkir();
-            $pengguna->id_pengguna = $request->kategori !== 'Tamu'
-                ? $request->id_pengguna
+            $pengguna->id_pengguna = $validated['kategori'] !== 'Tamu'
+                ? $validated['id_pengguna']
                 : 'Tamu_' . mt_rand(10000000, 99999999);
-            $pengguna->nama = $request->nama;
-            $pengguna->email = $request->email;
-            $pengguna->password = $request->password;
+            $pengguna->kategori = $validated['kategori'];
+            $pengguna->nama = $validated['nama'];
+            $pengguna->email = $validated['email'];
+            $pengguna->password = $validated['password']; // tidak perlu hash manual
             $pengguna->foto = $fotoUrl;
-            $pengguna->kategori = $request->kategori;
             $pengguna->status = 'aktif';
             $pengguna->save();
 
-            return redirect()->route('pengelola.kelola_pengguna.index')->with('success', 'Pengguna berhasil ditambahkan.');
+            return redirect()->route('pengelola.kelola_pengguna.index')
+                ->with('success', 'Pengguna berhasil ditambahkan.');
         } catch (\Exception $e) {
             Log::error('Error saving pengguna: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan pengguna.');
+            return redirect()->back()
+                ->with('error', 'Terjadi kesalahan saat menyimpan pengguna.')
+                ->withInput();
         }
     }
+
 
     public function edit($id_pengguna)
     {
