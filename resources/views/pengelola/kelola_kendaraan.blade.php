@@ -198,10 +198,10 @@
                                         </button>
                                     </td>
                                     <td>
-                                        <a href="{{ route('pengelola.kelola_kendaraan.edit', ['id_pengguna' => $data->id_pengguna]) }}" class="btn btn-info btn-sm">
+
+                                        <a href="{{ route('pengelola.kelola_kendaraan.edit', rawurlencode($data->plat_nomor)) }}" class="btn btn-info btn-sm">
                                             <i class="fas fa-edit"></i> Edit
                                         </a>
-
 
 
                                         <button class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $data->plat_nomor }}', '{{ $data->penggunaParkir->nama }}')">
@@ -392,7 +392,7 @@
                                             <div class="modal-body">
                                                 <!-- Form Edit -->
                                                 <form method="POST"
-                                                    action="{{ route('pengelola.kelola_kendaraan.update', ['id_pengguna' => $data->id_pengguna]) }}"
+                                                    action="{{ route('pengelola.kelola_kendaraan.update', ['plat_nomor' => $data->plat_nomor]) }}"
                                                     enctype="multipart/form-data">
                                                     @csrf
                                                     @method('PUT')
