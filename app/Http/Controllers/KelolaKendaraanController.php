@@ -262,18 +262,23 @@ class KelolaKendaraanController extends Controller
      */
     public function destroy($platNomor)
     {
-        // Find the vehicle by plat nomor
         $kendaraan = Kendaraan::where('plat_nomor', $platNomor)->firstOrFail();
 
         try {
-            // Delete the vehicle's photo if it exists
+            // Delete vehicle photo from Cloudinary if exists
             if ($kendaraan->foto) {
-                Storage::disk('public')->delete($kendaraan->foto);
+                $publicId = pathinfo(basename($kendaraan->foto), PATHINFO_FILENAME);
+                $folderedPublicId = 'images/kendaraan/' . $publicId;
+                Cloudinary::destroy($folderedPublicId);
+                Log::info("Foto kendaraan dengan plat {$platNomor} berhasil dihapus dari Cloudinary: {$folderedPublicId}");
             }
 
-            // Delete the QR code if it exists
-            if ($kendaraan->qr_code_url) {
-                Storage::disk('public')->delete($kendaraan->qr_code_url);
+            // Delete QR code from Cloudinary if exists
+            if ($kendaraan->qr_code) {
+                $qrPublicId = pathinfo(basename($kendaraan->qr_code), PATHINFO_FILENAME);
+                $qrFolderedPublicId = 'images/qrcodes/' . $qrPublicId;
+                Cloudinary::destroy($qrFolderedPublicId);
+                Log::info("QR Code kendaraan dengan plat {$platNomor} berhasil dihapus dari Cloudinary: {$qrFolderedPublicId}");
             }
 
             // Delete the vehicle record
@@ -285,6 +290,7 @@ class KelolaKendaraanController extends Controller
             return redirect()->back()->with('error', 'Gagal menghapus kendaraan');
         }
     }
+
 
     /**
      * Generate QR code for the vehicle.
