@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\PenggunaParkir;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Kendaraan;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 
@@ -189,22 +190,59 @@ class PenggunaParkirController extends Controller
 
         $pengguna = PenggunaParkir::find($id_pengguna);
 
-        if ($pengguna) {
-            if ($pengguna->foto && !str_contains($pengguna->foto, 'default.jpg')) {
-                $filename = basename($pengguna->foto); // contoh: nama_file.jpg
-                $publicId = pathinfo($filename, PATHINFO_FILENAME);
+        if (!$pengguna) {
+            Log::error("Pengguna dengan ID $id_pengguna tidak ditemukan.");
+            return redirect()->route('pengelola.kelola_pengguna.index')->with('error', 'Pengguna tidak ditemukan.');
+        }
 
-                Cloudinary::destroy("images/profil/{$publicId}");
-                Log::info("Foto pengguna dengan ID $id_pengguna berhasil dihapus dari Cloudinary: {$pengguna->foto}");
+        try {
+            // Hapus foto profil pengguna dari Cloudinary jika ada dan bukan default
+            if ($pengguna->foto && !str_contains($pengguna->foto, 'default.jpg')) {
+                $filename = basename($pengguna->foto);
+                $publicId = pathinfo($filename, PATHINFO_FILENAME);
+                $folderedPublicId = "images/profil/{$publicId}";
+
+                Cloudinary::destroy($folderedPublicId);
+                Log::info("Foto pengguna dengan ID $id_pengguna berhasil dihapus dari Cloudinary: {$folderedPublicId}");
             }
 
+            // Cari kendaraan yang dimiliki pengguna ini
+            $kendaraans = Kendaraan::where('id_pengguna', $id_pengguna)->get();
+
+            foreach ($kendaraans as $kendaraan) {
+                // Hapus foto kendaraan dari Cloudinary jika ada
+                if ($kendaraan->foto && !str_contains($kendaraan->foto, 'default.jpg')) {
+                    $filename = basename($kendaraan->foto);
+                    $publicId = pathinfo($filename, PATHINFO_FILENAME);
+                    $folderedPublicId = "images/kendaraan/{$publicId}";
+
+                    Cloudinary::destroy($folderedPublicId);
+                    Log::info("Foto kendaraan dengan plat {$kendaraan->plat_nomor} berhasil dihapus dari Cloudinary: {$folderedPublicId}");
+                }
+
+                // Hapus QR Code kendaraan dari Cloudinary jika ada
+                if ($kendaraan->qr_code) {
+                    $qrFilename = basename($kendaraan->qr_code);
+                    $qrPublicId = pathinfo($qrFilename, PATHINFO_FILENAME);
+                    $qrFolderedPublicId = "images/qrcodes/{$qrPublicId}";
+
+                    Cloudinary::destroy($qrFolderedPublicId);
+                    Log::info("QR Code kendaraan dengan plat {$kendaraan->plat_nomor} berhasil dihapus dari Cloudinary: {$qrFolderedPublicId}");
+                }
+
+                // Hapus kendaraan dari database
+                $kendaraan->delete();
+                Log::info("Kendaraan dengan plat {$kendaraan->plat_nomor} milik pengguna ID $id_pengguna berhasil dihapus dari database.");
+            }
+
+            // Hapus pengguna dari database
             $pengguna->delete();
             Log::info("Pengguna dengan ID $id_pengguna berhasil dihapus dari database.");
 
-            return redirect()->route('pengelola.kelola_pengguna.index')->with('success', 'Pengguna berhasil dihapus.');
-        } else {
-            Log::error("Pengguna dengan ID $id_pengguna tidak ditemukan.");
-            return redirect()->route('pengelola.kelola_pengguna.index')->with('error', 'Pengguna tidak ditemukan.');
+            return redirect()->route('pengelola.kelola_pengguna.index')->with('success', 'Pengguna dan kendaraan terkait berhasil dihapus.');
+        } catch (\Exception $e) {
+            Log::error("Gagal menghapus pengguna dengan ID $id_pengguna: " . $e->getMessage());
+            return redirect()->route('pengelola.kelola_pengguna.index')->with('error', 'Terjadi kesalahan saat menghapus pengguna.');
         }
     }
 }
