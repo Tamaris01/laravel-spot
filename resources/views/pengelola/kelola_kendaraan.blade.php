@@ -199,12 +199,9 @@
                                     </td>
                                     <td>
 
-                                        <button type="button"
-                                            class="btn btn-warning btn-sm"
-                                            data-toggle="modal"
-                                            data-target="#editModal-{{ $data->plat_nomor }}">
+                                        <a href="{{ route('pengelola.kelola_kendaraan.edit', rawurlencode($data->plat_nomor)) }}" class="btn btn-info btn-sm">
                                             <i class="fas fa-edit"></i> Edit
-                                        </button>
+                                        </a>
 
 
                                         <button class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $data->plat_nomor }}', '{{ $data->penggunaParkir->nama }}')">
