@@ -538,19 +538,24 @@
         // logika untuk membuka modal / menampilkan form
         $('#tambahModal').modal('show'); // contoh jika memakai Bootstrap modal
     }
-    // Preview ketika user memilih file baru
-    function previewImage(event, previewId) {
-        const input = event.target;
-        const preview = document.getElementById(previewId);
+    // Preview the user photo on upload
+    function previewImage(event, previewId, labelId) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            // Tampilkan gambar pratinjau
+            document.getElementById(previewId).src = e.target.result;
+            document.getElementById(previewId).style.display = 'block';
 
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                preview.src = e.target.result;
-            }
-            reader.readAsDataURL(input.files[0]);
+            // Ubah label jika ada gambar
+            document.getElementById(labelId).style.display = 'none';
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
         }
     }
+
     // Fungsi untuk menampilkan QR Code modal
     function lihatQR(qrCodeUrl) {
         $('#qrCodeImage').attr('src', qrCodeUrl);
