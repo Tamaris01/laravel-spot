@@ -238,10 +238,20 @@
     }
 
     // Melihat gambar pengguna di modal
+    const CLOUD_NAME = "{{ env('CLOUDINARY_CLOUD_NAME') }}";
+
     function lihat(fotoPublicId) {
-        const cloudName = "{{ $cloudName }}";
-        const imageUrl = `https://res.cloudinary.com/${cloudName}/image/upload/${fotoPublicId}`;
-        document.getElementById('userImage').src = imageUrl;
+        const cloudName = CLOUD_NAME ?? document.body.dataset.cloudName ?? 'your_cloud_name_here';
+        let imageUrl = '';
+
+        if (fotoPublicId && fotoPublicId.trim() !== '') {
+            imageUrl = `https://res.cloudinary.com/${cloudName}/image/upload/${fotoPublicId}.jpg`;
+        } else {
+            imageUrl = "{{ asset('images/default.jpg') }}"; // fallback foto default jika kosong
+        }
+
+        const userImage = document.getElementById('userImage');
+        userImage.src = imageUrl;
         $('#imageModal').modal('show');
     }
 
