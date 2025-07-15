@@ -103,6 +103,21 @@
         border-color: black;
     }
 </style>
+<script>
+    function previewImage(event, previewId) {
+        const input = event.target;
+        const preview = document.getElementById(previewId);
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
 <!-- Overlay Loading -->
 <div id="loading-overlay">
     <img id="loading-logo" src="{{ asset('images/spot-logo.png') }}" alt="SPOT Logo">
@@ -526,19 +541,6 @@
         kategoriSelect.addEventListener("change", toggleIdPengguna);
     });
 
-    //
-    function previewImage(event, previewId) {
-        const input = event.target;
-        const preview = document.getElementById(previewId);
-
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                preview.src = e.target.result;
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
 
     // Fungsi untuk mengganti visibilitas password pada edit 
     function togglePasswordVisibility(userId) {
