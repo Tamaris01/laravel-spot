@@ -199,9 +199,12 @@
                                     </td>
                                     <td>
 
-                                        <a href="{{ route('pengelola.kelola_kendaraan.edit', rawurlencode($data->plat_nomor)) }}" class="btn btn-info btn-sm">
+                                        <button type="button"
+                                            class="btn btn-warning btn-sm"
+                                            data-toggle="modal"
+                                            data-target="#editModal-{{ $data->plat_nomor }}">
                                             <i class="fas fa-edit"></i> Edit
-                                        </a>
+                                        </button>
 
 
                                         <button class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $data->plat_nomor }}', '{{ $data->penggunaParkir->nama }}')">
@@ -369,7 +372,7 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <!--Edit-->
                                 <div class="modal fade"
                                     id="editModal-{{ $data->plat_nomor }}"
                                     tabindex="-1"
