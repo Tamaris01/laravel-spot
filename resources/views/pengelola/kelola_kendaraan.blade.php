@@ -198,9 +198,18 @@
                                         </button>
                                     </td>
                                     <td>
-                                        <a href="{{ route('pengelola.kelola_kendaraan.edit', rawurlencode($data->plat_nomor)) }}" class="btn btn-info btn-sm">
+                                        <button
+                                            type="button"
+                                            class="btn btn-warning btn-sm"
+                                            data-toggle="modal"
+                                            data-target="#editModal"
+                                            data-plat="{{ $data->plat_nomor }}"
+                                            data-id_pengguna="{{ $data->id_pengguna }}"
+                                            data-jenis="{{ $data->jenis }}"
+                                            data-warna="{{ $data->warna }}"
+                                            data-foto="{{ $data->foto }}">
                                             <i class="fas fa-edit"></i> Edit
-                                        </a>
+                                        </button>
 
 
                                         <button class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $data->plat_nomor }}', '{{ $data->penggunaParkir->nama }}')">
@@ -368,119 +377,71 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--Edit-->
-                                <div class="modal fade"
-                                    id="editModal-{{ $data->plat_nomor }}"
-                                    tabindex="-1"
-                                    role="dialog"
-                                    aria-labelledby="editModalLabel-{{ $data->plat_nomor }}"
-                                    aria-hidden="true">
+                                <!-- Modal Edit Dinamis -->
+                                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-lg">
                                         <div class="modal-content">
-                                            <!-- Modal Header -->
+
+                                            <!-- Header -->
                                             <div class="modal-header" style="background-color: #FFDC40;">
-                                                <h5 class="modal-title" id="editModalLabel-{{ $data->plat_nomor }}">
-                                                    Edit Kendaraan: {{ $data->plat_nomor }}
-                                                </h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <h5 class="modal-title" id="editModalLabel">Edit Kendaraan</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
 
-                                            <!-- Modal Body -->
+                                            <!-- Body -->
                                             <div class="modal-body">
-                                                <!-- Form Edit -->
-                                                <form method="POST"
-                                                    action="{{ route('pengelola.kelola_kendaraan.update', ['plat_nomor' => $data->plat_nomor]) }}"
-                                                    enctype="multipart/form-data">
+                                                <form method="POST" id="editForm" enctype="multipart/form-data">
                                                     @csrf
                                                     @method('PUT')
 
                                                     <div class="row">
-                                                        <!-- Kolom Foto -->
-                                                        <div class="col-md-6 text-center" style="border-right: 1px solid black;">
-                                                            <div class="upload-area" onclick="document.getElementById('uploadPhotoVehicleEdit-{{ $data->plat_nomor }}').click()">
-                                                                <img id="previewVehicleEdit-{{ $data->plat_nomor }}"
-                                                                    src="{{ $data->foto ?? asset('images/default_vehicle.jpg') }}"
-                                                                    alt="Foto Kendaraan"
-                                                                    style="display:block; max-width:80%; border-radius: 5px;"
-                                                                    class="img-fluid mb-3" />
-
-                                                                <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: #FFDC40; color: black; padding: 10px; border-top: 1px solid black; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; cursor: pointer;">
-                                                                    <i class="fas fa-plus-circle fa-2x"></i>
-                                                                </div>
-
-                                                                <input type="file"
-                                                                    id="uploadPhotoVehicleEdit-{{ $data->plat_nomor }}"
-                                                                    name="foto_kendaraan"
-                                                                    style="display: none;"
-                                                                    accept="image/*"
-                                                                    onchange="previewImage(event, 'previewVehicleEdit-{{ $data->plat_nomor }}')">
-                                                            </div>
-                                                            @error('foto_kendaraan')
-                                                            <div class="text-danger">{{ $message }}</div>
-                                                            @enderror
+                                                        <!-- Kolom Kiri: Preview Foto -->
+                                                        <div class="col-md-6 text-center">
+                                                            <img id="previewFotoEdit" src="" class="img-fluid mb-2" style="max-height: 250px;">
+                                                            <input type="file" name="foto_kendaraan" class="form-control mt-2">
                                                         </div>
 
-                                                        <!-- Kolom Data -->
+                                                        <!-- Kolom Kanan: Form -->
                                                         <div class="col-md-6">
-                                                            <!-- Dropdown ID Pengguna -->
                                                             <div class="form-group">
                                                                 <label>ID Pengguna</label>
-                                                                <select name="id_pengguna" class="form-control" required>
-                                                                    <option value="" disabled selected>Pilih ID Pengguna</option>
-                                                                    @foreach($penggunaDropdown as $pengguna)
-                                                                    <option value="{{ $pengguna->id_pengguna }}"
-                                                                        {{ $pengguna->id_pengguna == old('id_pengguna', $data->id_pengguna) ? 'selected' : '' }}>
-                                                                        {{ $pengguna->id_pengguna }} - {{ $pengguna->nama }}
-                                                                    </option>
-                                                                    @endforeach
-                                                                </select>
+                                                                <input type="text" id="idPenggunaEdit" name="id_pengguna" class="form-control" readonly>
                                                             </div>
-
-                                                            <!-- Plat Nomor (readonly) -->
                                                             <div class="form-group">
                                                                 <label>Plat Nomor</label>
-                                                                <input type="text" class="form-control" value="{{ $data->plat_nomor }}" readonly>
+                                                                <input type="text" id="platNomorEdit" name="plat_nomor_lama" class="form-control" readonly>
                                                             </div>
-
-                                                            <!-- Jenis -->
                                                             <div class="form-group">
-                                                                <label>Jenis Kendaraan</label>
-                                                                <select name="jenis" class="form-control" required>
+                                                                <label>Jenis</label>
+                                                                <select name="jenis" id="jenisEdit" class="form-control">
                                                                     @foreach($jenisArray as $jenis)
-                                                                    <option value="{{ $jenis }}" {{ $jenis == $data->jenis ? 'selected' : '' }}>
-                                                                        {{ ucfirst($jenis) }}
-                                                                    </option>
+                                                                    <option value="{{ $jenis }}">{{ ucfirst($jenis) }}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
-
-                                                            <!-- Warna -->
                                                             <div class="form-group">
-                                                                <label>Warna Kendaraan</label>
-                                                                <select name="warna" class="form-control" required>
+                                                                <label>Warna</label>
+                                                                <select name="warna" id="warnaEdit" class="form-control">
                                                                     @foreach($warnaArray as $warna)
-                                                                    <option value="{{ $warna }}" {{ $warna == $data->warna ? 'selected' : '' }}>
-                                                                        {{ ucfirst($warna) }}
-                                                                    </option>
+                                                                    <option value="{{ $warna }}">{{ ucfirst($warna) }}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                                    <!-- Modal Footer -->
-                                                    <div class="modal-footer" style="border-top: 1px solid black;">
+                                                    <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                        <button type="submit" class="btn" style="background-color: #FFDC40; color: black;">Simpan</button>
+                                                        <button type="submit" class="btn" style="background-color:#FFDC40;">Simpan</button>
                                                     </div>
                                                 </form>
-                                                <!-- End Form -->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
 
                                 @endforeach
                             </tbody>
@@ -559,6 +520,28 @@
         var rows = document.getElementById('rows').value;
         window.location.href = '?rows=' + rows; // Menyertakan parameter rows dalam URL
     }
+
+    $('#editModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+
+        var plat = button.data('plat');
+        var id_pengguna = button.data('id_pengguna');
+        var jenis = button.data('jenis');
+        var warna = button.data('warna');
+        var foto = button.data('foto');
+
+        var modal = $(this);
+        modal.find('#editModalLabel').text('Edit Kendaraan: ' + plat);
+        modal.find('#idPenggunaEdit').val(id_pengguna);
+        modal.find('#platNomorEdit').val(plat);
+        modal.find('#jenisEdit').val(jenis);
+        modal.find('#warnaEdit').val(warna);
+        modal.find('#previewFotoEdit').attr('src', foto);
+
+        // Update action form route secara dinamis
+        var route = "{{ url('/kelola-kendaraan/update') }}/" + encodeURIComponent(plat);
+        modal.find('#editForm').attr('action', route);
+    });
 </script>
 <!-- jQuery and Bootstrap 4 JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
