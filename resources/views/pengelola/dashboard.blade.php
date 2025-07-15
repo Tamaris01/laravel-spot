@@ -144,7 +144,7 @@
         </div>
     </div>
     <div class="card shadow mb-4">
-        <div class="card-header highlight text-dark">
+        <div class="card-header text-dark">
             <h5 class="mb-0">
                 <i class="fas fa-users"></i>{{ $jumlahPenggunaAktif }} Pengguna Sedang Aktif
             </h5>
