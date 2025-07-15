@@ -144,14 +144,14 @@
         </div>
     </div>
     <div class="card shadow mb-4">
-        <div class="card-header bg-warning text-dark">
+        <div class="card-header highlight text-dark">
             <h5 class="mb-0">
                 <i class="fas fa-users"></i>{{ $jumlahPenggunaAktif }} Pengguna Sedang Aktif
             </h5>
         </div>
         <div class="card-body">
             @if($penggunaAktif->count() > 0)
-            <ul class="list-group mt-3">
+            <ul class="list-group mt-2">
                 @foreach($penggunaAktif as $pengguna)
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div>
