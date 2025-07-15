@@ -20,31 +20,28 @@ class DashboardPenggunaController extends Controller
         $date = Carbon::now()->locale('id')->isoFormat('dddd, D MMMM Y');
         $today = Carbon::now()->toDateString();
 
-        // Mengambil detail pengguna dari tabel pengguna_parkir
+        // Detail pengguna login
         $penggunaDetail = DB::table('pengguna_parkir')
-            ->where('id_pengguna', $user->id_pengguna) // Ambil data pengguna berdasarkan id_pengguna
-            ->select(['id_pengguna', 'nama', 'kategori', 'email', 'foto']) // Tentukan kolom yang diambil
+            ->where('id_pengguna', $user->id_pengguna)
+            ->select(['id_pengguna', 'nama', 'kategori', 'email', 'foto'])
             ->first();
 
-        // Mengambil kendaraan yang terkait dengan pengguna
+        // Kendaraan pengguna
         $kendaraan = DB::table('kendaraan')
-            ->where('id_pengguna', $user->id_pengguna) // Ambil kendaraan berdasarkan pengguna
-            ->select(['plat_nomor']) // Ambil kolom plat_nomor
+            ->where('id_pengguna', $user->id_pengguna)
+            ->select(['plat_nomor'])
             ->first();
 
-        // Buat path QR code jika kendaraan ada
         $qrCodePath = $kendaraan
             ? 'https://res.cloudinary.com/dusw72eit/image/upload/images/qrcodes/' . rawurlencode($kendaraan->plat_nomor) . '.svg'
             : null;
 
-
-        // Jumlah pengguna unik dari tabel riwayat_parkir berdasarkan hari ini
+        // Statistik
         $jumlahPengguna = DB::table('riwayat_parkir')
             ->whereDate('waktu_masuk', $today)
-            ->distinct('id_pengguna') // Hitung pengguna unik
+            ->distinct('id_pengguna')
             ->count('id_pengguna');
 
-        // Jumlah parkir yang statusnya 'masuk' dan 'keluar' berdasarkan hari ini
         $jumlahParkirMasuk = DB::table('riwayat_parkir')
             ->whereDate('waktu_masuk', $today)
             ->where('status_parkir', 'masuk')
@@ -54,11 +51,13 @@ class DashboardPenggunaController extends Controller
             ->whereDate('waktu_keluar', $today)
             ->where('status_parkir', 'keluar')
             ->count();
-        // Hitung total pengguna aktif untuk judul
+
+        // Pengguna aktif: Total
         $jumlahPenggunaAktif = DB::table('session_penggunaparkir')
             ->whereNull('session_end')
             ->count();
-        // Ambil 5 pengguna aktif terbaru saja
+
+        // Ambil 3 pengguna aktif terbaru
         $penggunaAktif = DB::table('session_penggunaparkir')
             ->join('pengguna_parkir', 'session_penggunaparkir.id_pengguna', '=', 'pengguna_parkir.id_pengguna')
             ->whereNull('session_penggunaparkir.session_end')
@@ -67,12 +66,9 @@ class DashboardPenggunaController extends Controller
             ->limit(3)
             ->get();
 
-        // Hitung jumlah pengguna aktif lainnya
+        // Sisa pengguna aktif lainnya
         $jumlahPenggunaAktifLainnya = max($jumlahPenggunaAktif - 3, 0);
 
-
-
-        // Kirim semua data ke tampilan
         return view('pengguna.dashboard', compact(
             'user',
             'date',
@@ -82,8 +78,8 @@ class DashboardPenggunaController extends Controller
             'jumlahPengguna',
             'jumlahParkirMasuk',
             'jumlahParkirKeluar',
-            'jumlahPenggunaAktif',
             'penggunaAktif',
+            'jumlahPenggunaAktif',
             'jumlahPenggunaAktifLainnya'
         ));
     }
