@@ -196,52 +196,61 @@ class PenggunaParkirController extends Controller
         }
 
         try {
+            DB::beginTransaction();
+
             // Hapus foto profil pengguna dari Cloudinary jika ada dan bukan default
             if ($pengguna->foto && !str_contains($pengguna->foto, 'default.jpg')) {
                 $filename = basename($pengguna->foto);
                 $publicId = pathinfo($filename, PATHINFO_FILENAME);
                 $folderedPublicId = "images/profil/{$publicId}";
 
-                Cloudinary::destroy($folderedPublicId);
-                Log::info("Foto pengguna dengan ID $id_pengguna berhasil dihapus dari Cloudinary: {$folderedPublicId}");
+                $result = Cloudinary::destroy($folderedPublicId);
+                Log::info("Hapus foto profil Cloudinary: {$folderedPublicId} Result: " . json_encode($result));
             }
 
-            // Cari kendaraan yang dimiliki pengguna ini
+            // Cari kendaraan terkait pengguna
             $kendaraans = Kendaraan::where('id_pengguna', $id_pengguna)->get();
 
             foreach ($kendaraans as $kendaraan) {
-                // Hapus foto kendaraan dari Cloudinary jika ada
+                // Hapus foto kendaraan
                 if ($kendaraan->foto && !str_contains($kendaraan->foto, 'default.jpg')) {
                     $filename = basename($kendaraan->foto);
                     $publicId = pathinfo($filename, PATHINFO_FILENAME);
                     $folderedPublicId = "images/kendaraan/{$publicId}";
 
-                    Cloudinary::destroy($folderedPublicId);
-                    Log::info("Foto kendaraan dengan plat {$kendaraan->plat_nomor} berhasil dihapus dari Cloudinary: {$folderedPublicId}");
+                    $result = Cloudinary::destroy($folderedPublicId);
+                    Log::info("Hapus foto kendaraan Cloudinary: {$folderedPublicId} Result: " . json_encode($result));
                 }
 
-                // Hapus QR Code kendaraan dari Cloudinary jika ada
+                // Hapus QR Code kendaraan
                 if ($kendaraan->qr_code) {
-                    $qrFilename = basename($kendaraan->qr_code);
-                    $qrPublicId = pathinfo($qrFilename, PATHINFO_FILENAME);
-                    $qrFolderedPublicId = "images/qrcodes/{$qrPublicId}";
+                    $qrUrl = $kendaraan->qr_code;
+                    $parsedUrl = parse_url($qrUrl, PHP_URL_PATH);
+                    $segments = explode('/', $parsedUrl);
+                    $uploadIndex = array_search('upload', $segments);
+                    $publicIdWithExtension = implode('/', array_slice($segments, $uploadIndex + 1));
+                    $publicId = preg_replace('/\.(jpg|jpeg|png|gif|svg)$/i', '', $publicIdWithExtension);
 
-                    Cloudinary::destroy($qrFolderedPublicId);
-                    Log::info("QR Code kendaraan dengan plat {$kendaraan->plat_nomor} berhasil dihapus dari Cloudinary: {$qrFolderedPublicId}");
+                    $result = Cloudinary::destroy($publicId, [
+                        'resource_type' => 'image',
+                    ]);
+                    Log::info("Hapus QR Code Cloudinary: {$publicId} Result: " . json_encode($result));
                 }
 
-                // Hapus kendaraan dari database
+                // Hapus kendaraan
                 $kendaraan->delete();
-                Log::info("Kendaraan dengan plat {$kendaraan->plat_nomor} milik pengguna ID $id_pengguna berhasil dihapus dari database.");
+                Log::info("Kendaraan dengan plat {$kendaraan->plat_nomor} milik pengguna ID $id_pengguna dihapus.");
             }
 
-            // Hapus pengguna dari database
+            // Hapus pengguna
             $pengguna->delete();
-            Log::info("Pengguna dengan ID $id_pengguna berhasil dihapus dari database.");
+            Log::info("Pengguna dengan ID $id_pengguna dihapus dari database.");
 
+            DB::commit();
             return redirect()->route('pengelola.kelola_pengguna.index')->with('success', 'Pengguna dan kendaraan terkait berhasil dihapus.');
         } catch (\Exception $e) {
-            Log::error("Gagal menghapus pengguna dengan ID $id_pengguna: " . $e->getMessage());
+            DB::rollBack();
+            Log::error("Gagal menghapus pengguna ID $id_pengguna: " . $e->getMessage());
             return redirect()->route('pengelola.kelola_pengguna.index')->with('error', 'Terjadi kesalahan saat menghapus pengguna.');
         }
     }
