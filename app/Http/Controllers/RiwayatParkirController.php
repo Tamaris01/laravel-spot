@@ -59,7 +59,7 @@ class RiwayatParkirController extends Controller
         $idPengguna = $kendaraan->penggunaParkir->id_pengguna ?? null;
         $waktuSekarang = Carbon::now();
 
-        // ✅ Catat hanya fitur scan_qr (tidak mencatat parkir_masuk / parkir_keluar)
+        // ✅ Catat aktivitas scan QR
         if ($idPengguna) {
             AktivitasPenggunaParkir::create([
                 'id_pengguna' => $idPengguna,
@@ -81,9 +81,16 @@ class RiwayatParkirController extends Controller
                 'status_parkir' => 'keluar',
             ]);
 
+            $message = 'Kendaraan ditemukan, status keluar berhasil diperbarui.';
+
+            // ✅ Kirim notifikasi ke dashboard via cache
+            if ($idPengguna) {
+                cache()->put('notif_parkir_' . $idPengguna, $message, 15);
+            }
+
             return response()->json([
                 'status' => true,
-                'message' => 'Kendaraan ditemukan, status keluar berhasil diperbarui.',
+                'message' => $message,
                 'status_parkir' => 'keluar',
                 'plat_nomor' => $platQR,
                 'metode' => 'qr_code'
@@ -97,15 +104,23 @@ class RiwayatParkirController extends Controller
                 'status_parkir' => 'masuk',
             ]);
 
+            $message = 'Kendaraan berhasil dicatat sebagai masuk.';
+
+            // ✅ Kirim notifikasi ke dashboard via cache
+            if ($idPengguna) {
+                cache()->put('notif_parkir_' . $idPengguna, $message, 15);
+            }
+
             return response()->json([
                 'status' => true,
-                'message' => 'Kendaraan berhasil dicatat sebagai masuk.',
+                'message' => $message,
                 'status_parkir' => 'masuk',
                 'plat_nomor' => $platQR,
                 'metode' => 'qr_code'
             ]);
         }
     }
+
 
     /**
      * ESP32-A mengirim plat ke server untuk disimpan sementara
