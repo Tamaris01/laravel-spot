@@ -6,6 +6,7 @@ use App\Http\Requests\KendaraanRequest;
 use Illuminate\Http\Request;
 use App\Models\PenggunaParkir;
 use App\Models\Kendaraan;
+use App\Models\AktivitasPenggunaParkir;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -48,25 +49,20 @@ class KendaraanController extends Controller
         $user = Auth::guard('pengguna')->user();
         $kendaraan = $user->kendaraan;
 
-        Log::info('User attempting to update vehicle:', ['user_id' => $user->id, 'vehicle' => $kendaraan]);
+        Log::info('User attempting to update vehicle:', ['user_id' => $user->id_pengguna]);
 
         if (!$kendaraan) {
-            Log::warning('Vehicle not found for user:', ['user_id' => $user->id]);
+            Log::warning('Vehicle not found for user:', ['user_id' => $user->id_pengguna]);
             return redirect()->back()->with('error', 'Kendaraan tidak ditemukan.');
         }
 
-        Log::info('Received data for update:', $request->all());
-
         try {
-            Log::info('Vehicle data before update:', $kendaraan->toArray());
-
             // Update jenis dan warna kendaraan
             $kendaraan->jenis = $request->jenis;
             $kendaraan->warna = ucwords(strtolower($request->warna));
 
             // Jika ada foto baru
             if ($request->hasFile('foto_kendaraan')) {
-
                 // Hapus foto lama dari Cloudinary jika ada
                 if ($kendaraan->foto) {
                     $parsedUrl = parse_url($kendaraan->foto);
@@ -85,22 +81,29 @@ class KendaraanController extends Controller
                     ['folder' => 'images/kendaraan', 'resource_type' => 'image']
                 )->getSecurePath();
 
-                // Simpan URL foto ke database
                 $kendaraan->foto = $uploadedFileUrl;
-
                 Log::info('New vehicle photo uploaded to Cloudinary:', ['url' => $uploadedFileUrl]);
             }
 
             $kendaraan->save();
 
-            Log::info('Vehicle data after update:', $kendaraan->toArray());
+            // ✅ Catat aktivitas pengguna parkir
+            AktivitasPenggunaParkir::create([
+                'id_pengguna' => $user->id_pengguna,
+                'aktivitas' => 'update_kendaraan',
+                'keterangan' => 'Pengguna memperbarui data kendaraan',
+                'waktu_aktivitas' => now(),
+            ]);
+
+            Log::info('Vehicle updated and activity logged successfully:', $kendaraan->toArray());
 
             return redirect()->back()->with('success', 'Data kendaraan berhasil diperbarui.');
         } catch (\Exception $e) {
-            Log::error('Failed to update vehicle data: ' . $e->getMessage(), ['user_id' => $user->id]);
+            Log::error('Failed to update vehicle data: ' . $e->getMessage(), ['user_id' => $user->id_pengguna]);
             return redirect()->back()->with('error', 'Gagal memperbarui data kendaraan.');
         }
     }
+
 
     /**
      * Get enum values from a specific table column.
