@@ -166,6 +166,7 @@ class KelolaKendaraanController extends Controller
     public function edit($platNomor)
     {
         try {
+            $platNomor = urldecode($platNomor); // tambahkan ini
             // Ambil data kendaraan beserta pengguna terkait
             $kendaraan = Kendaraan::with('penggunaParkir')->where('plat_nomor', $platNomor)->firstOrFail();
 
