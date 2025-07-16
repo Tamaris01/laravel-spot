@@ -13,12 +13,16 @@ class KonfirmasiPendaftaranController extends Controller
         $perPage = $request->input('rows', 5);
 
         $pendaftar = PenggunaParkir::where('status', 'nonaktif')
-            ->paginate($perPage);
-
+            ->paginate($perPage)
+            ->withQueryString(); // agar perPage tetap saat pindah halaman
 
         $cloudName = env('CLOUDINARY_CLOUD_NAME');
 
-        return view('pengelola.konfirmasi_pendaftaran', compact('pendaftar', 'cloudName', 'perPage'));
+        return view('pengelola.konfirmasi_pendaftaran', [
+            'pendaftar' => $pendaftar,
+            'cloudName' => $cloudName,
+            'perPage' => $perPage
+        ]);
     }
 
 
