@@ -31,7 +31,11 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         try {
-            $this->updateUserData($user, $request);
+            $result = $this->updateUserData($user, $request);
+
+            if ($result !== true) {
+                return back()->withErrors(['foto' => $result])->withInput();
+            }
 
             $userId = Auth::guard('pengelola')->check() ? $user->id_pengelola : $user->id_pengguna;
             Log::info('Profil berhasil diperbarui untuk pengguna ID: ' . $userId);
@@ -48,12 +52,13 @@ class ProfileController extends Controller
             return back()->with('success', 'Profil berhasil diperbarui.');
         } catch (\Exception $e) {
             Log::error('Gagal memperbarui profil untuk pengguna ID: ' . ($user->id_pengguna ?? $user->id_pengelola) . ' - Error: ' . $e->getMessage());
-            return back()->withErrors('Gagal memperbarui profil. Silakan coba lagi.');
+            return back()->withErrors(['error' => 'Gagal memperbarui profil. Silakan coba lagi.'])->withInput();
         }
     }
 
     /**
      * Memperbarui data pengguna berdasarkan request
+     * Mengembalikan true jika sukses, atau string pesan error jika gagal validasi foto
      */
     private function updateUserData($user, $request)
     {
@@ -65,7 +70,7 @@ class ProfileController extends Controller
             [$width, $height] = getimagesize($imagePath);
 
             if ($width != 472 || $height != 472) {
-                throw new \Exception('Foto harus berukuran tepat 472 x 472 pixel.');
+                return 'Foto profil harus berukuran tepat 472 x 472 pixel.';
             }
 
             $oldFoto = $user->foto;
@@ -89,11 +94,13 @@ class ProfileController extends Controller
         }
 
         if ($request->filled('password')) {
-            $user->password = $request->password;
+            $user->password = $request->password; // menggunakan mutator hash otomatis
         }
 
         if (!$user->save()) {
             throw new \Exception('Gagal memperbarui profil.');
         }
+
+        return true;
     }
 }
