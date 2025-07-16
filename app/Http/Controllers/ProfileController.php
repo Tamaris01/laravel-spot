@@ -2,98 +2,128 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\ProfileRequest;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Auth;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use App\Models\PenggunaParkir;
+use App\Models\Kendaraan;
 use App\Models\AktivitasPenggunaParkir;
+use App\Http\Requests\RegisterRequest;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Carbon\Carbon;
 
-class ProfileController extends Controller
+class RegisterController extends Controller
 {
-    /**
-     * Menampilkan data profil pengguna yang sedang login
-     */
-    public function showProfile()
-    {
-        $user = Auth::user();
-        $view = Auth::guard('pengelola')->check() ? 'pengelola.profile' : 'pengguna.profile';
+    protected $kategoriArray = [];
+    protected $jenisKendaraanArray = [];
+    protected $warnaKendaraanArray = [];
 
-        return view($view, compact('user'));
+    public function __construct()
+    {
+        $this->kategoriArray = $this->getEnumValues('pengguna_parkir', 'kategori');
+        $this->jenisKendaraanArray = $this->getEnumValues('kendaraan', 'jenis');
+        $this->warnaKendaraanArray = $this->getEnumValues('kendaraan', 'warna');
     }
 
-    /**
-     * Memperbarui data profil pengguna yang sedang login
-     */
-    public function update(ProfileRequest $request)
+    public function showRegistrationForm()
     {
-        $user = Auth::user();
+        return view('auth.register', [
+            'kategoriArray' => $this->kategoriArray,
+            'jenisKendaraanArray' => $this->jenisKendaraanArray,
+            'warnaKendaraanArray' => $this->warnaKendaraanArray,
+        ]);
+    }
 
-        try {
-            $this->updateUserData($user, $request);
-
-            $userId = Auth::guard('pengelola')->check() ? $user->id_pengelola : $user->id_pengguna;
-            Log::info('Profil berhasil diperbarui untuk pengguna ID: ' . $userId);
-
-            if (Auth::guard('pengguna')->check()) {
-                AktivitasPenggunaParkir::create([
-                    'id_pengguna' => $user->id_pengguna,
-                    'aktivitas' => 'update_profile',
-                    'keterangan' => 'User memperbarui profil',
-                    'waktu_aktivitas' => Carbon::now(),
-                ]);
+    protected function getEnumValues($table, $column)
+    {
+        $result = DB::select("SHOW COLUMNS FROM `$table` WHERE Field = ?", [$column]);
+        if (!empty($result)) {
+            $type = $result[0]->Type;
+            if (preg_match('/^enum\((.*)\)$/', $type, $matches)) {
+                return array_map(fn($value) => trim($value, "'"), explode(',', $matches[1]));
             }
-
-            return back()->with('success', 'Profil berhasil diperbarui.');
-        } catch (\Exception $e) {
-            Log::error('Gagal memperbarui profil untuk pengguna ID: ' . ($user->id_pengguna ?? $user->id_pengelola) . ' - Error: ' . $e->getMessage());
-            return back()->withErrors('Gagal memperbarui profil. Silakan coba lagi.');
         }
+        return [];
     }
 
-    /**
-     * Memperbarui data pengguna berdasarkan request
-     */
-    private function updateUserData($user, $request)
+    public function register(RegisterRequest $request)
     {
-        $user->nama = $request->nama;
-        $user->email = $request->email;
+        DB::beginTransaction();
+        try {
+            // ✅ Validasi dan upload foto profil
+            if (!$request->hasFile('foto') || !$request->file('foto')->isValid()) {
+                return back()->withErrors(['foto' => 'Foto profil tidak valid atau belum diupload.'])->withInput();
+            }
 
-        if ($request->hasFile('foto')) {
-            $imagePath = $request->file('foto')->getRealPath();
-            [$width, $height] = getimagesize($imagePath);
-
+            [$width, $height] = getimagesize($request->file('foto')->getRealPath());
             if ($width != 472 || $height != 472) {
-                throw new \Exception('Foto harus berukuran tepat 472 x 472 pixel.');
+                return back()->withErrors(['foto' => 'Foto profil harus berukuran tepat 472 x 472 pixel.'])->withInput();
             }
 
-            $oldFoto = $user->foto;
-            if ($oldFoto && !str_contains($oldFoto, 'default.jpg')) {
-                $parsedUrl = parse_url($oldFoto);
-                $path = $parsedUrl['path'] ?? '';
-                $filename = pathinfo($path, PATHINFO_FILENAME);
-                $publicId = 'images/profil/' . $filename;
+            $fotoProfilUpload = Cloudinary::upload(
+                $request->file('foto')->getRealPath(),
+                [
+                    'folder' => 'images/profil',
+                    'resource_type' => 'image'
+                ]
+            );
+            $fotoProfilUrl = $fotoProfilUpload->getSecurePath();
 
-                Cloudinary::destroy($publicId);
-                Log::info("Foto lama user dihapus dari Cloudinary: {$publicId}");
+            // ✅ Validasi dan upload foto kendaraan
+            if (!$request->hasFile('foto_kendaraan') || !$request->file('foto_kendaraan')->isValid()) {
+                return back()->withErrors(['foto_kendaraan' => 'Foto kendaraan tidak valid atau belum diupload.'])->withInput();
             }
 
-            $uploaded = Cloudinary::upload($imagePath, [
-                'folder' => 'images/profil',
-                'resource_type' => 'image'
+            [$widthKendaraan, $heightKendaraan] = getimagesize($request->file('foto_kendaraan')->getRealPath());
+            if ($widthKendaraan != 472 || $heightKendaraan != 472) {
+                return back()->withErrors(['foto_kendaraan' => 'Foto kendaraan harus berukuran tepat 472 x 472 pixel.'])->withInput();
+            }
+
+            $fotoKendaraanUpload = Cloudinary::upload(
+                $request->file('foto_kendaraan')->getRealPath(),
+                [
+                    'folder' => 'images/kendaraan',
+                    'resource_type' => 'image'
+                ]
+            );
+            $fotoKendaraanUrl = $fotoKendaraanUpload->getSecurePath();
+
+            // ✅ Simpan data pengguna
+            $pengguna = PenggunaParkir::create([
+                'id_pengguna' => $request->kategori !== 'Tamu'
+                    ? $request->id_pengguna
+                    : 'Tamu_' . mt_rand(10000000, 99999999),
+                'nama' => $request->nama,
+                'email' => $request->email,
+                'password' => $request->password,
+                'foto' => $fotoProfilUrl,
+                'kategori' => $request->kategori,
+                'status' => 'nonaktif',
             ]);
 
-            $user->foto = $uploaded->getSecurePath();
-            Log::info("Foto baru user disimpan dengan URL: {$user->foto}");
-        }
+            // ✅ Catat aktivitas register
+            AktivitasPenggunaParkir::create([
+                'id_pengguna' => $pengguna->id_pengguna,
+                'aktivitas' => 'register',
+                'keterangan' => 'User mendaftar akun parkir',
+                'waktu_aktivitas' => Carbon::now(),
+            ]);
 
-        if ($request->filled('password')) {
-            $user->password = $request->password;
-        }
+            // ✅ Simpan kendaraan
+            $kendaraan = new Kendaraan();
+            $kendaraan->plat_nomor = $request->plat_nomor;
+            $kendaraan->jenis = $request->jenis;
+            $kendaraan->warna = ucwords(strtolower($request->warna));
+            $kendaraan->foto = $fotoKendaraanUrl;
+            $kendaraan->id_pengguna = $pengguna->id_pengguna;
+            $kendaraan->save();
 
-        if (!$user->save()) {
-            throw new \Exception('Gagal memperbarui profil.');
+            DB::commit();
+
+            return redirect()->route('login')->with('pendaftaran', 'Pendaftaran anda berhasil. Tunggu konfirmasi dari pengelola parkir.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Error during registration: ' . $e->getMessage());
+            return back()->withErrors(['error' => 'Terjadi kesalahan saat mendaftar. Silakan coba lagi.'])->withInput();
         }
     }
 }
