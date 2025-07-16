@@ -49,43 +49,43 @@ class RegisterController extends Controller
     {
         DB::beginTransaction();
         try {
-            // ✅ Upload foto profil ke Cloudinary
+            // ✅ Validasi dan upload foto profil
             if (!$request->hasFile('foto') || !$request->file('foto')->isValid()) {
                 return back()->withErrors(['foto' => 'Foto profil tidak valid atau belum diupload.'])->withInput();
             }
+
+            [$width, $height] = getimagesize($request->file('foto')->getRealPath());
+            if ($width != 472 || $height != 472) {
+                return back()->withErrors(['foto' => 'Foto profil harus berukuran tepat 472 x 472 pixel.'])->withInput();
+            }
+
             $fotoProfilUpload = Cloudinary::upload(
                 $request->file('foto')->getRealPath(),
                 [
                     'folder' => 'images/profil',
-                    'resource_type' => 'image',
-                    'transformation' => [
-                        'width' => 472,
-                        'height' => 472,
-                        'crop' => 'fill' // akan crop tengah & resize pas
-                    ]
+                    'resource_type' => 'image'
                 ]
             );
+            $fotoProfilUrl = $fotoProfilUpload->getSecurePath();
 
-            $fotoProfilUrl = $fotoProfilUpload->getSecurePath(); // URL lengkap
-
-            // ✅ Upload foto kendaraan ke Cloudinary
+            // ✅ Validasi dan upload foto kendaraan
             if (!$request->hasFile('foto_kendaraan') || !$request->file('foto_kendaraan')->isValid()) {
                 return back()->withErrors(['foto_kendaraan' => 'Foto kendaraan tidak valid atau belum diupload.'])->withInput();
             }
+
+            [$widthKendaraan, $heightKendaraan] = getimagesize($request->file('foto_kendaraan')->getRealPath());
+            if ($widthKendaraan != 472 || $heightKendaraan != 472) {
+                return back()->withErrors(['foto_kendaraan' => 'Foto kendaraan harus berukuran tepat 472 x 472 pixel.'])->withInput();
+            }
+
             $fotoKendaraanUpload = Cloudinary::upload(
                 $request->file('foto_kendaraan')->getRealPath(),
                 [
                     'folder' => 'images/kendaraan',
-                    'resource_type' => 'image',
-                    'transformation' => [
-                        'width' => 472,
-                        'height' => 472,
-                        'crop' => 'fill'
-                    ]
+                    'resource_type' => 'image'
                 ]
             );
-
-            $fotoKendaraanUrl = $fotoKendaraanUpload->getSecurePath(); // URL lengkap
+            $fotoKendaraanUrl = $fotoKendaraanUpload->getSecurePath();
 
             // ✅ Simpan data pengguna
             $pengguna = PenggunaParkir::create([
@@ -94,7 +94,7 @@ class RegisterController extends Controller
                     : 'Tamu_' . mt_rand(10000000, 99999999),
                 'nama' => $request->nama,
                 'email' => $request->email,
-                'password' => $request->password, // Auto hash by mutator di model
+                'password' => $request->password, // auto hash by mutator
                 'foto' => $fotoProfilUrl,
                 'kategori' => $request->kategori,
                 'status' => 'nonaktif',
@@ -108,7 +108,7 @@ class RegisterController extends Controller
                 'waktu_aktivitas' => Carbon::now(),
             ]);
 
-            // ✅ Simpan kendaraan (QR otomatis ter-generate di model)
+            // ✅ Simpan kendaraan
             $kendaraan = new Kendaraan();
             $kendaraan->plat_nomor = $request->plat_nomor;
             $kendaraan->jenis = $request->jenis;
