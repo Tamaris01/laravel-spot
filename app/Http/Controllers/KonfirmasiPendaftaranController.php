@@ -10,14 +10,17 @@ class KonfirmasiPendaftaranController extends Controller
 {
     public function index(Request $request)
     {
-        $perPage = $request->input('perPage', 5); // default 10 jika tidak ada input
+        $perPage = $request->input('perPage', 10);
 
-        $pendaftar = PenggunaParkir::where('status', 'nonaktif')->paginate($perPage);
+        $pendaftar = PenggunaParkir::where('status', 'nonaktif')
+            ->paginate($perPage)
+            ->withQueryString(); // <== penting agar query string terbawa
 
         $cloudName = env('CLOUDINARY_CLOUD_NAME');
 
         return view('pengelola.konfirmasi_pendaftaran', compact('pendaftar', 'cloudName', 'perPage'));
     }
+
 
     // Fungsi pencarian pendaftar berdasarkan nama atau email
     public function search(Request $request)
