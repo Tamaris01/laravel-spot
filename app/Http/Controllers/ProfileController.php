@@ -71,8 +71,14 @@ class ProfileController extends Controller
 
             $uploaded = Cloudinary::upload($request->file('foto')->getRealPath(), [
                 'folder' => 'images/profil',
-                'resource_type' => 'image'
+                'resource_type' => 'image',
+                'transformation' => [
+                    'width' => 472,
+                    'height' => 472,
+                    'crop' => 'fill'
+                ]
             ]);
+
 
             $user->foto = $uploaded->getSecurePath();
             Log::info("Foto baru user disimpan dengan URL: {$user->foto}");
