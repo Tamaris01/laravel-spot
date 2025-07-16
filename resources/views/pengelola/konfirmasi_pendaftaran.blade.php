@@ -71,8 +71,12 @@
                         <div>
                             <span class="ml-2">Tampilkan</span>
                             <select id="rows" class="custom-select d-inline border-black" style="width: auto;">
+
+                                @php
+                                $perPage = request('perPage', 5);
+                                @endphp
                                 <option value="5" {{ $perPage == 5 ? 'selected' : '' }}>5</option>
-                                <option value="10" {{ $perPage == 10? 'selected' : '' }}>10</option>
+                                <option value="10" {{ $perPage == 10 ? 'selected' : '' }}>10</option>
                                 <option value="15" {{ $perPage == 15 ? 'selected' : '' }}>15</option>
                                 <option value="20" {{ $perPage == 20 ? 'selected' : '' }}>20</option>
                             </select>
