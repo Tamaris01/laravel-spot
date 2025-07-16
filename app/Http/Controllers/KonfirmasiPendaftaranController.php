@@ -8,16 +8,16 @@ use Illuminate\Http\Request;
 
 class KonfirmasiPendaftaranController extends Controller
 {
-    // Menampilkan daftar pendaftar
     public function index(Request $request)
     {
-        $pendaftar = PenggunaParkir::where('status', 'nonaktif')->paginate(10);
+        $perPage = $request->input('perPage', 5); // default 10 jika tidak ada input
+
+        $pendaftar = PenggunaParkir::where('status', 'nonaktif')->paginate($perPage);
 
         $cloudName = env('CLOUDINARY_CLOUD_NAME');
 
-        return view('pengelola.konfirmasi_pendaftaran', compact('pendaftar', 'cloudName'));
+        return view('pengelola.konfirmasi_pendaftaran', compact('pendaftar', 'cloudName', 'perPage'));
     }
-
 
     // Fungsi pencarian pendaftar berdasarkan nama atau email
     public function search(Request $request)
