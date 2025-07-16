@@ -155,23 +155,45 @@
                     <!-- Pagination -->
                     <div>
                         <ul class="pagination d-flex justify-content-end">
-                            <li class="page-item {{ $pendaftar->onFirstPage() ? 'disabled' : '' }}">
+                            {{-- Tombol Previous --}}
+                            @if ($pendaftar->onFirstPage())
+                            <li class="page-item disabled">
+                                <span class="page-link" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </span>
+                            </li>
+                            @else
+                            <li class="page-item">
                                 <a class="page-link" href="{{ $pendaftar->previousPageUrl() }}" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
+                            @endif
+
+                            {{-- Tombol Halaman --}}
                             @foreach ($pendaftar->getUrlRange(1, $pendaftar->lastPage()) as $page => $url)
                             <li class="page-item {{ $pendaftar->currentPage() == $page ? 'active' : '' }}">
                                 <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                             </li>
                             @endforeach
-                            <li class="page-item {{ $pendaftar->hasMorePages() ? '' : 'disabled' }}">
+
+                            {{-- Tombol Next --}}
+                            @if ($pendaftar->hasMorePages())
+                            <li class="page-item">
                                 <a class="page-link" href="{{ $pendaftar->nextPageUrl() }}" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
+                            @else
+                            <li class="page-item disabled">
+                                <span class="page-link" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </span>
+                            </li>
+                            @endif
                         </ul>
                     </div>
+
                 </div>
             </div>
         </div>
