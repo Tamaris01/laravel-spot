@@ -68,20 +68,19 @@
             <div class="card border-black">
                 <div class="card-body">
                     <div class="header-container d-flex justify-content-between mb-3">
-                        <div>
-                            <span class="ml-2">Tampilkan</span>
-                            <select id="rows" class="custom-select d-inline border-black" style="width: auto;">
+                        <form method="GET" action="{{ route('pengelola.konfirmasi_pendaftaran') }}" class="d-inline">
+                            <div>
+                                <span class="ml-2">Tampilkan</span>
+                                <select name="rows" id="rows" class="custom-select d-inline border-black" style="width: auto;" onchange="this.form.submit()">
+                                    <option value="5" {{ $perPage == 5 ? 'selected' : '' }}>5</option>
+                                    <option value="10" {{ $perPage == 10 ? 'selected' : '' }}>10</option>
+                                    <option value="15" {{ $perPage == 15 ? 'selected' : '' }}>15</option>
+                                    <option value="20" {{ $perPage == 20 ? 'selected' : '' }}>20</option>
+                                </select>
+                                <span class="ml-2">Baris</span>
+                            </div>
+                        </form>
 
-                                @php
-                                $perPage = request('perPage', 5);
-                                @endphp
-                                <option value="5" {{ $perPage == 5 ? 'selected' : '' }}>5</option>
-                                <option value="10" {{ $perPage == 10 ? 'selected' : '' }}>10</option>
-                                <option value="15" {{ $perPage == 15 ? 'selected' : '' }}>15</option>
-                                <option value="20" {{ $perPage == 20 ? 'selected' : '' }}>20</option>
-                            </select>
-                            <span class="ml-2">Baris</span>
-                        </div>
                         <div class="search-container d-flex">
                             <form method="GET" action="{{ route('pengelola.konfirmasi_pendaftaran.search') }}" class="d-flex">
                                 <input type="text" name="query" class="form-control border-black" placeholder="Pencarian" style="width: 250px;" value="{{ request()->get('query') }}">
