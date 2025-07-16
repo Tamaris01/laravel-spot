@@ -10,11 +10,11 @@ class KonfirmasiPendaftaranController extends Controller
 {
     public function index(Request $request)
     {
-        $perPage = $request->input('perPage', 5);
+        $perPage = $request->input('rows', 5);
 
         $pendaftar = PenggunaParkir::where('status', 'nonaktif')
-            ->paginate($perPage)
-            ->withQueryString(); // <== penting agar query string terbawa
+            ->paginate($perPage);
+
 
         $cloudName = env('CLOUDINARY_CLOUD_NAME');
 
