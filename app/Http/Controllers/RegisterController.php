@@ -73,10 +73,7 @@ class RegisterController extends Controller
                 return back()->withErrors(['foto_kendaraan' => 'Foto kendaraan tidak valid atau belum diupload.'])->withInput();
             }
 
-            [$widthKendaraan, $heightKendaraan] = getimagesize($request->file('foto_kendaraan')->getRealPath());
-            if ($widthKendaraan != 472 || $heightKendaraan != 472) {
-                return back()->withErrors(['foto_kendaraan' => 'Foto kendaraan harus berukuran tepat 472 x 472 pixel.'])->withInput();
-            }
+
 
             $fotoKendaraanUpload = Cloudinary::upload(
                 $request->file('foto_kendaraan')->getRealPath(),
