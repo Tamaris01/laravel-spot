@@ -36,7 +36,6 @@ class ProfileController extends Controller
             $userId = Auth::guard('pengelola')->check() ? $user->id_pengelola : $user->id_pengguna;
             Log::info('Profil berhasil diperbarui untuk pengguna ID: ' . $userId);
 
-            // Catat aktivitas hanya untuk pengguna parkir
             if (Auth::guard('pengguna')->check()) {
                 AktivitasPenggunaParkir::create([
                     'id_pengguna' => $user->id_pengguna,
@@ -62,13 +61,13 @@ class ProfileController extends Controller
         $user->email = $request->email;
 
         if ($request->hasFile('foto')) {
-            // Validasi dimensi 472 x 472 secara manual jika ingin validasi di controller
-            [$width, $height] = getimagesize($request->file('foto'));
+            $imagePath = $request->file('foto')->getRealPath();
+            [$width, $height] = getimagesize($imagePath);
+
             if ($width != 472 || $height != 472) {
                 throw new \Exception('Foto harus berukuran tepat 472 x 472 pixel.');
             }
 
-            // Hapus foto lama dari Cloudinary jika bukan default
             $oldFoto = $user->foto;
             if ($oldFoto && !str_contains($oldFoto, 'default.jpg')) {
                 $parsedUrl = parse_url($oldFoto);
@@ -80,8 +79,7 @@ class ProfileController extends Controller
                 Log::info("Foto lama user dihapus dari Cloudinary: {$publicId}");
             }
 
-            // Upload foto baru ke Cloudinary
-            $uploaded = Cloudinary::upload($request->file('foto')->getRealPath(), [
+            $uploaded = Cloudinary::upload($imagePath, [
                 'folder' => 'images/profil',
                 'resource_type' => 'image'
             ]);
@@ -91,7 +89,7 @@ class ProfileController extends Controller
         }
 
         if ($request->filled('password')) {
-            $user->password = $request->password; // Terenkripsi otomatis via mutator
+            $user->password = $request->password;
         }
 
         if (!$user->save()) {
