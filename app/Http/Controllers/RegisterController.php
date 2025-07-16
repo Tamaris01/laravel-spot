@@ -55,8 +55,17 @@ class RegisterController extends Controller
             }
             $fotoProfilUpload = Cloudinary::upload(
                 $request->file('foto')->getRealPath(),
-                ['folder' => 'images/profil', 'resource_type' => 'image']
+                [
+                    'folder' => 'images/profil',
+                    'resource_type' => 'image',
+                    'transformation' => [
+                        'width' => 472,
+                        'height' => 472,
+                        'crop' => 'fill' // akan crop tengah & resize pas
+                    ]
+                ]
             );
+
             $fotoProfilUrl = $fotoProfilUpload->getSecurePath(); // URL lengkap
 
             // ✅ Upload foto kendaraan ke Cloudinary
@@ -65,8 +74,17 @@ class RegisterController extends Controller
             }
             $fotoKendaraanUpload = Cloudinary::upload(
                 $request->file('foto_kendaraan')->getRealPath(),
-                ['folder' => 'images/kendaraan', 'resource_type' => 'image']
+                [
+                    'folder' => 'images/kendaraan',
+                    'resource_type' => 'image',
+                    'transformation' => [
+                        'width' => 472,
+                        'height' => 472,
+                        'crop' => 'fill'
+                    ]
+                ]
             );
+
             $fotoKendaraanUrl = $fotoKendaraanUpload->getSecurePath(); // URL lengkap
 
             // ✅ Simpan data pengguna
