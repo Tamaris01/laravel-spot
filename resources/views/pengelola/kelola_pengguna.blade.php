@@ -137,9 +137,9 @@
                             <form method="GET" action="{{ route('pengelola.kelola_pengguna.index') }}" style="display: inline;">
                                 <select id="rows" name="rows" class="custom-select d-inline border-black" style="width: auto;" onchange="this.form.submit()">
                                     <option value="5" {{ $perPage == 5 ? 'selected' : '' }}>5</option>
+                                    <option value="10" {{ $perPage == 10? 'selected' : '' }}>10</option>
+                                    <option value="15" {{ $perPage == 15 ? 'selected' : '' }}>15</option>
                                     <option value="20" {{ $perPage == 20 ? 'selected' : '' }}>20</option>
-                                    <option value="30" {{ $perPage == 30 ? 'selected' : '' }}>30</option>
-                                    <option value="50" {{ $perPage == 50 ? 'selected' : '' }}>50</option>
                                 </select>
                             </form>
                             <span class="ml-2">Baris</span>

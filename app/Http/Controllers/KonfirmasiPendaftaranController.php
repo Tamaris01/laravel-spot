@@ -10,7 +10,7 @@ class KonfirmasiPendaftaranController extends Controller
 {
     public function index(Request $request)
     {
-        $perPage = $request->input('perPage', 10);
+        $perPage = $request->input('perPage', 5);
 
         $pendaftar = PenggunaParkir::where('status', 'nonaktif')
             ->paginate($perPage)
