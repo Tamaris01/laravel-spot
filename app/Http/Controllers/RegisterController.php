@@ -94,7 +94,7 @@ class RegisterController extends Controller
                     : 'Tamu_' . mt_rand(10000000, 99999999),
                 'nama' => $request->nama,
                 'email' => $request->email,
-                'password' => $request->password, // auto hash by mutator
+                'password' => $request->password,
                 'foto' => $fotoProfilUrl,
                 'kategori' => $request->kategori,
                 'status' => 'nonaktif',
