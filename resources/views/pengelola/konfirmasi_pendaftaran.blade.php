@@ -71,10 +71,10 @@
                         <div>
                             <span class="ml-2">Tampilkan</span>
                             <select id="rows" class="custom-select d-inline border-black" style="width: auto;">
-                                <option value="5" selected>5</option>
-                                <option value="20">20</option>
-                                <option value="30">30</option>
-                                <option value="50">50</option>
+                                <option value="5" {{ $perPage == 5 ? 'selected' : '' }}>5</option>
+                                <option value="20" {{ $perPage == 20 ? 'selected' : '' }}>20</option>
+                                <option value="30" {{ $perPage == 30 ? 'selected' : '' }}>30</option>
+                                <option value="50" {{ $perPage == 50 ? 'selected' : '' }}>50</option>
                             </select>
                             <span class="ml-2">Baris</span>
                         </div>
