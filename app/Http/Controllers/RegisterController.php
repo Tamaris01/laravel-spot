@@ -54,12 +54,6 @@ class RegisterController extends Controller
                 return back()->withErrors(['foto' => 'Foto profil tidak valid atau belum diupload.'])->withInput();
             }
 
-            [$width, $height] = getimagesize($request->file('foto')->getRealPath());
-            if ($width < 300 || $height < 300 || $width > 500 || $height > 500) {
-                return back()->withErrors(['foto' => 'Foto profil harus berukuran minimal 300x300 dan maksimal 500x500 pixel.'])->withInput();
-            }
-
-
             $fotoProfilUpload = Cloudinary::upload(
                 $request->file('foto')->getRealPath(),
                 [
@@ -68,19 +62,16 @@ class RegisterController extends Controller
                     'transformation' => [
                         'width' => 472,
                         'height' => 472,
-                        'crop' => 'fill' // crop tengah agar square
+                        'crop' => 'fill' // tetap square otomatis
                     ]
                 ]
             );
             $fotoProfilUrl = $fotoProfilUpload->getSecurePath();
 
-
             // ✅ Validasi dan upload foto kendaraan
             if (!$request->hasFile('foto_kendaraan') || !$request->file('foto_kendaraan')->isValid()) {
                 return back()->withErrors(['foto_kendaraan' => 'Foto kendaraan tidak valid atau belum diupload.'])->withInput();
             }
-
-
 
             $fotoKendaraanUpload = Cloudinary::upload(
                 $request->file('foto_kendaraan')->getRealPath(),
