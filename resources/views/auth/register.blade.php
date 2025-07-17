@@ -427,9 +427,8 @@
         const kategoriSelect = document.getElementById('kategori');
         const idPenggunaField = document.getElementById('idPenggunaField');
         const idPenggunaInput = document.getElementById('id_pengguna');
-        const form = document.getElementById('formPendaftaran');
 
-        let currentStep = 0;
+        let currentStep = 0; // Langkah awal
 
         function showStep(step) {
             const steps = [step1, step2, step3];
@@ -438,13 +437,13 @@
             });
         }
 
-        function validateStep(stepElement) {
-            const inputs = stepElement.querySelectorAll("input, select, textarea");
+        function validateStep(step) {
+            const inputs = step.querySelectorAll("input, select");
             let isValid = true;
 
             inputs.forEach(input => {
-                if (input.offsetParent !== null && input.type !== 'hidden') {
-                    if (!input.checkValidity() || !input.value.trim()) {
+                if (input.offsetParent !== null) { // hanya validate yang terlihat
+                    if (!input.checkValidity()) {
                         input.classList.add("is-invalid");
                         isValid = false;
                     } else {
@@ -456,7 +455,7 @@
             return isValid;
         }
 
-        // Step navigasi
+        // Validasi dan navigasi ke Step 2
         nextButtonStep1.addEventListener('click', () => {
             if (validateStep(step1)) {
                 currentStep = 1;
@@ -467,6 +466,7 @@
             }
         });
 
+        // Validasi dan navigasi ke Step 3
         nextButtonStep2.addEventListener('click', () => {
             if (validateStep(step2)) {
                 currentStep = 2;
@@ -477,44 +477,70 @@
             }
         });
 
+        // Kembali ke Step 1
         prevButtonStep2.addEventListener('click', () => {
             currentStep = 0;
             showStep(currentStep);
             formHeader.innerText = "Daftar Akun";
         });
 
+        // Kembali ke Step 2
         prevButtonStep3.addEventListener('click', () => {
             currentStep = 1;
             showStep(currentStep);
             formHeader.innerText = "Data Pengguna";
         });
 
-        // Validasi final saat submit
-        form.addEventListener('submit', function(e) {
+        // Validasi final untuk Step 3 dan submit
+        submitButton.addEventListener('click', (e) => {
             if (!validateStep(step3)) {
                 e.preventDefault();
                 alert("Pastikan semua field pada langkah ini sudah diisi dengan benar.");
             }
         });
 
-        // Toggle ID Pengguna berdasarkan kategori
+        // Fungsi untuk toggle id_pengguna saat kategori diubah atau saat load
         function toggleIdPenggunaField() {
+            const idPenggunaInput = idPenggunaField.querySelector('input');
+
             if (kategoriSelect.value === "Tamu") {
                 idPenggunaField.style.display = 'none';
-                idPenggunaInput.value = '';
+                if (idPenggunaInput) {
+                    idPenggunaInput.value = ''; // 🩹 Reset agar tidak ikut terkirim
+                }
             } else {
                 idPenggunaField.style.display = 'block';
             }
         }
 
-        // Saat halaman load
+
+
+        // Jalankan toggle saat halaman benar-benar selesai load agar stabil di HP
         window.addEventListener("load", function() {
             toggleIdPenggunaField();
+
+            // Event listener perubahan kategori
             kategoriSelect.addEventListener('change', toggleIdPenggunaField);
+
+            // Tampilkan langkah pertama
             showStep(currentStep);
+
+            // Loading overlay
+            let loadingOverlay = document.getElementById("loading-overlay");
+            setTimeout(() => {
+                loadingOverlay.style.display = "flex";
+            }, 100);
+
+            setTimeout(() => {
+                loadingOverlay.style.opacity = "0";
+                setTimeout(() => {
+                    loadingOverlay.style.display = "none";
+                    document.getElementById("content").style.display = "block";
+                }, 500);
+            }, 300);
         });
 
-        // Preview Foto
+        // Fungsi pratinjau gambar saat di-upload
         function previewImage(event, previewId, labelId) {
             const input = event.target;
             const preview = document.getElementById(previewId);
@@ -532,9 +558,12 @@
             }
         }
 
+        // Event listener untuk pratinjau gambar foto pengguna
         document.getElementById('uploadPhotoUser').addEventListener('change', function(event) {
             previewImage(event, 'previewUser', 'labelPhotoUser');
         });
+
+        // Event listener untuk pratinjau gambar foto kendaraan
         document.getElementById('uploadPhotoKendaraan').addEventListener('change', function(event) {
             previewImage(event, 'previewKendaraan', 'labelPhotoKendaraan');
         });
