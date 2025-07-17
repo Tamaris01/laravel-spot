@@ -110,7 +110,8 @@
                             <tbody class="bg-putih">
                                 @foreach ($pendaftar as $index => $data)
                                 <tr>
-                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $loop->iteration + ($pendaftar->firstItem() - 1) }}</td>
+
                                     <td>{{ $data->id_pengguna }}</td>
                                     <td>{{ $data->nama }}</td>
                                     <td>{{ $data->email }}</td>
