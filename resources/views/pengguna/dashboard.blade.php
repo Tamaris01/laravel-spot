@@ -11,43 +11,69 @@
     }
 
     .card {
+        margin-bottom: 10px;
         border: 1px solid black;
         background-color: white;
+        text-align: justify;
         overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
     }
 
-    .user-card {
-        height: 100%;
+    .card-body {
         display: flex;
         flex-direction: column;
-        justify-content: start;
-    }
-
-    h6.text-center {
-        color: black;
-        border-bottom: 1px solid black;
-        padding: 10px 0;
-        margin: 0;
-        font-weight: bold;
-    }
-
-    .foto-container {
-        width: 150px;
-        aspect-ratio: 1/1;
-        overflow: hidden;
-        display: flex;
         align-items: center;
         justify-content: center;
-        margin: 15px auto;
+        border: 1px solid black;
+        border-radius: 5px 5px 0 0;
+        text-align: center;
+        background-color: white;
     }
 
-    .foto-container img {
+    .card-qr {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+        text-align: center;
+        background-color: white;
+    }
+
+    .icon {
+        font-size: 2rem;
+        color: black;
+        margin-bottom: 10px;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: black;
+        margin-bottom: 5px;
+    }
+
+    .card-text {
+        font-size: 1rem;
+        color: black;
+    }
+
+    .highlight {
+        background-color: #FFDC40;
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 0 0 5px 5px;
+    }
+
+    /* User Info styling */
+    .user-card {
+        max-width: 100%;
+        margin: auto;
+    }
+
+    .user-info img {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 8px;
+        height: auto;
+        max-width: 200px;
     }
 
     .details table {
@@ -57,57 +83,151 @@
     .details th,
     .details td {
         padding: 6px;
-        font-size: 0.95rem;
+        word-break: break-word;
     }
 
-    .card-qr {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex: 1;
-        padding: 15px;
+    /* Responsive layout for desktop */
+    @media (min-width: 992px) {
+
+        .user-info,
+        .details {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .user-info {
+            width: 40%;
+            padding-right: 20px;
+        }
+
+        .details {
+            width: 60%;
+            padding-left: 10px;
+            text-align: left;
+        }
+    }
+
+    /* QR Code and Foto Responsiveness */
+    .user-info img,
+    .qr-code {
+        width: 50%;
+        height: auto;
     }
 
     .qr-code {
-        width: 180px;
-        height: 180px;
-        object-fit: contain;
-        margin-bottom: 10px;
+        max-width: 25%;
     }
 
     .btn-download {
-        background-color: #FFDC40;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        padding: 5px 20px;
+        font-size: 1rem;
         color: black;
-        padding: 8px 20px;
+        background-color: #FFDC40;
+        border: none;
         border-radius: 5px;
         text-decoration: none;
-        font-weight: 500;
-        border: none;
+        display: inline-block;
     }
 
-    .btn-download:hover {
-        background-color: #e5c930;
+    h6.text-center {
         color: black;
+        border-bottom: 1px solid black;
+        padding-bottom: 10px;
+        width: 100%;
+        text-align: center;
     }
 
+    .greeting-message {
+        color: #FFDC40;
+        background-color: black;
+        padding: 8px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+    }
+
+    .greeting-message i {
+        margin-left: 5px;
+    }
+
+    .date-display {
+        margin-left: auto;
+        text-align: right;
+        color: #6c757d;
+    }
+
+    /* Mobile adjustments */
     @media (max-width: 768px) {
-        .foto-container {
-            width: 120px;
+
+        .qr-code,
+        .user-info img {
+            max-width: 40%;
         }
 
-        .qr-code {
-            width: 140px;
-            height: 140px;
+        .card-title {
+            font-size: 1rem;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
         }
 
         .details th,
         .details td {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
+        }
+
+        .qr-code {
+            max-width: 23%;
+        }
+
+        .user-info img {
+            max-width: 50%;
+        }
+
+        .dashboard-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .date-display {
+            font-size: 1rem;
+            margin-left: 15px;
+        }
+
+        .greeting-message {
+            font-size: 1.2rem;
+            margin-top: 15px;
+        }
+    }
+
+    /* Media query for smaller mobile screens */
+    @media (max-width: 576px) {
+        .dashboard-title {
+            font-size: 1.25rem;
+        }
+
+        .date-display {
+            font-size: 0.9rem;
+        }
+
+        .greeting-message {
+            font-size: 1rem;
+        }
+
+        .d-flex {
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .qr-code {
+            max-width: 20%;
         }
     }
 </style>
-
 
 <!-- Overlay Loading -->
 <div id="loading-overlay">
@@ -159,67 +279,63 @@
 </div>
 
 <div class="row mx-0">
-    <div class="container mt-4">
-        <div class="row align-items-stretch">
-            <!-- User Info Card -->
-            <div class="col-lg-8 col-md-12 mb-3">
-                <div class="card user-card">
-                    <h6 class="text-center">Data Diri Pengguna</h6>
-                    <div class="d-flex flex-column flex-lg-row align-items-center p-3">
-                        <div class="user-info text-center">
-                            <div class="foto-container">
-                                <img src="{{ Auth::user()->foto }}" alt="Foto Pengguna">
-                            </div>
-                        </div>
-                        <div class="details ps-lg-3">
-                            <table class="table table-borderless mb-0">
-                                <tbody>
-                                    <tr>
-                                        <th>NID</th>
-                                        <td>:</td>
-                                        <td>{{ $penggunaDetail->id_pengguna }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Nama</th>
-                                        <td>:</td>
-                                        <td>{{ $penggunaDetail->nama }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Kategori</th>
-                                        <td>:</td>
-                                        <td>{{ $penggunaDetail->kategori }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Email</th>
-                                        <td>:</td>
-                                        <td>{{ $penggunaDetail->email }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- User Info Card -->
+    <div class="col-lg-8 col-md-12 mb-3">
+        <div class="card user-card">
+            <h6 class="text-center mt-3">Data Diri Pengguna</h6>
+            <div class="d-flex flex-column flex-lg-row align-items-center">
+                <div class="user-info text-center mb-3">
+                    <img src="{{ Auth::user()->foto }}" alt="Foto Pengguna" class="rounded img-fluid">
 
-            <!-- QR Code Card -->
-            <div class="col-lg-4 col-md-12 mb-3">
-                <div class="card user-card text-center">
-                    <h6 class="text-center">QR Code</h6>
-                    <div class="card-qr">
-                        @if ($qrCodePath)
-                        <img src="{{ $qrCodePath }}" alt="QR Code" class="qr-code">
-                        <a href="{{ $qrCodePath }}" download="QR_Code_{{ Auth::user()->nama }}" class="btn-download mt-2">
-                            Unduh <i class="fas fa-download"></i>
-                        </a>
-                        @else
-                        <span>Tidak ada QR Code tersedia.</span>
-                        @endif
-                    </div>
+
+                </div>
+                <div class="details">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th>NID</th>
+                                <td>:</td>
+                                <td>{{ $penggunaDetail->id_pengguna }}</td>
+                            </tr>
+                            <tr>
+                                <th>Nama</th>
+                                <td>:</td>
+                                <td>{{ $penggunaDetail->nama }}</td>
+                            </tr>
+                            <tr>
+                                <th>Kategori</th>
+                                <td>:</td>
+                                <td>{{ $penggunaDetail->kategori }}</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>:</td>
+                                <td>{{ $penggunaDetail->email }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- QR Code Card -->
+    <div class="col-lg-4 col-md-12 mb-3">
+        <div class="card user-card text-center">
+            <h6 class="text-center mt-3">QR Code</h6>
+            <div class="card-qr">
+                @if ($qrCodePath)
+                <img alt="QR Code" src="{{ $qrCodePath }}" class="img-fluid qr-code mb-3" />
+                <a href="{{ $qrCodePath }}" download="QR_Code_{{ Auth::user()->nama }}" class="btn-download">
+
+                    Unduh <i class="fas fa-download"></i>
+                </a>
+                @else
+                <span>Tidak ada QR Code tersedia.</span>
+                @endif
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal for Success Message -->
