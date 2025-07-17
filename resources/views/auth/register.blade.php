@@ -9,9 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/pageall.css') }}">
-    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
 
     <!--  AOS JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
@@ -300,7 +297,7 @@
                     <div class="form-group" id="idPenggunaField">
                         <div class="input-group">
                             <span class="input-group-text border border-black text-black"><i class="fas fa-id-card"></i></span>
-                            <input type="text" id="id_pengguna" name="id_pengguna"
+                            <input type="text" id="id_pengguna" name="id_pengguna" autocomplete="off"
                                 class="form-control border border-black text-black @error('id_pengguna') is-invalid @enderror"
                                 placeholder="Masukkan ID Pengguna" required
                                 value="{{ old('id_pengguna') }}">
@@ -504,11 +501,16 @@
         function toggleIdPenggunaField() {
             if (kategoriSelect.value === "Tamu") {
                 idPenggunaField.style.display = 'none';
-                idPenggunaInput.value = ""; // kosongkan agar tidak terkirim
+                // Tambahan ini agar field tidak terkirim:
+                const idPenggunaInput = idPenggunaField.querySelector('input');
+                if (idPenggunaInput) {
+                    idPenggunaInput.value = ''; // Reset nilainya
+                }
             } else {
                 idPenggunaField.style.display = 'block';
             }
         }
+
 
         // Jalankan toggle saat halaman benar-benar selesai load agar stabil di HP
         window.addEventListener("load", function() {
