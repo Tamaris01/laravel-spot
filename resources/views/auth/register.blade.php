@@ -247,7 +247,7 @@
             </div>
             @endif
 
-            <!-- Formulir Pendaftaran -->
+
             <!-- Formulir Pendaftaran -->
             <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data" id="registrationForm">
                 @csrf
@@ -495,14 +495,20 @@
             }
         });
 
-        // Tampilkan field ID Pengguna jika kategori bukan Tamu
-        kategoriSelect.addEventListener('change', function() {
-            if (this.value === "Tamu") {
+        // Fungsi untuk toggle id_pengguna saat kategori diubah atau saat load
+        function toggleIdPenggunaField() {
+            if (kategoriSelect.value === "Tamu") {
                 idPenggunaField.style.display = 'none';
             } else {
                 idPenggunaField.style.display = 'block';
             }
-        });
+        }
+
+        // Jalankan toggle saat halaman dimuat
+        document.addEventListener("DOMContentLoaded", toggleIdPenggunaField);
+
+        // Jalankan toggle saat user mengubah kategori
+        kategoriSelect.addEventListener('change', toggleIdPenggunaField);
 
         // Fungsi pratinjau gambar saat di-upload
         function previewImage(event, previewId, labelId) {
@@ -535,6 +541,7 @@
         // Tampilkan langkah pertama saat halaman dimuat
         showStep(currentStep);
 
+        // Toggle password visibility
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('passwordInput');
             const toggleIcon = document.getElementById('toggleIcon');
@@ -548,7 +555,8 @@
                 toggleIcon.classList.add('bi-eye-fill');
             }
         }
-        //loading
+
+        // Loading overlay
         document.addEventListener("DOMContentLoaded", function() {
             let loadingOverlay = document.getElementById("loading-overlay");
 
