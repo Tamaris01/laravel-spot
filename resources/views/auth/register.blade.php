@@ -494,8 +494,13 @@
             if (!validateStep(step3)) {
                 e.preventDefault();
                 alert("Pastikan semua field pada langkah ini sudah diisi dengan benar.");
+            } else {
+                if (kategoriSelect.value === "Tamu") {
+                    idPenggunaInput.value = ""; // reset sebelum submit
+                }
             }
         });
+
 
         // Fungsi untuk toggle id_pengguna saat kategori diubah atau saat load
         function toggleIdPenggunaField() {
