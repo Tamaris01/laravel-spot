@@ -426,14 +426,19 @@
         const formHeader = document.getElementById('formHeader');
         const kategoriSelect = document.getElementById('kategori');
         const idPenggunaField = document.getElementById('idPenggunaField');
-        const idPenggunaInput = document.getElementById('id_pengguna');
 
-        let currentStep = 0; // Langkah awal
+        let currentStep = 0; // Mulai dari langkah pertama
 
         function showStep(step) {
             const steps = [step1, step2, step3];
             steps.forEach((s, index) => {
-                s.classList.toggle('active', index === step);
+                if (index === step) {
+                    s.classList.add('active');
+                    s.style.display = 'block';
+                } else {
+                    s.classList.remove('active');
+                    s.style.display = 'none';
+                }
             });
         }
 
@@ -442,7 +447,7 @@
             let isValid = true;
 
             inputs.forEach(input => {
-                if (input.offsetParent !== null) { // hanya validate yang terlihat
+                if (input.offsetParent !== null) { // hanya yang terlihat
                     if (!input.checkValidity()) {
                         input.classList.add("is-invalid");
                         isValid = false;
@@ -455,92 +460,77 @@
             return isValid;
         }
 
-        // Validasi dan navigasi ke Step 2
-        nextButtonStep1.addEventListener('click', () => {
-            if (validateStep(step1)) {
+        // Next Step 1
+        if (nextButtonStep1) {
+            nextButtonStep1.addEventListener('click', () => {
+                if (validateStep(step1)) {
+                    currentStep = 1;
+                    showStep(currentStep);
+                    formHeader.innerText = "Data Pengguna";
+                } else {
+                    alert("Pastikan semua field pada langkah ini sudah diisi dengan benar.");
+                }
+            });
+        }
+
+        // Next Step 2
+        if (nextButtonStep2) {
+            nextButtonStep2.addEventListener('click', () => {
+                if (validateStep(step2)) {
+                    currentStep = 2;
+                    showStep(currentStep);
+                    formHeader.innerText = "Data Kendaraan";
+                } else {
+                    alert("Pastikan semua field pada langkah ini sudah diisi dengan benar.");
+                }
+            });
+        }
+
+        // Prev Step 2 -> Step 1
+        if (prevButtonStep2) {
+            prevButtonStep2.addEventListener('click', () => {
+                currentStep = 0;
+                showStep(currentStep);
+                formHeader.innerText = "Daftar Akun";
+            });
+        }
+
+        // Prev Step 3 -> Step 2
+        if (prevButtonStep3) {
+            prevButtonStep3.addEventListener('click', () => {
                 currentStep = 1;
                 showStep(currentStep);
                 formHeader.innerText = "Data Pengguna";
-            } else {
-                alert("Pastikan semua field pada langkah ini sudah diisi dengan benar.");
-            }
-        });
+            });
+        }
 
-        // Validasi dan navigasi ke Step 3
-        nextButtonStep2.addEventListener('click', () => {
-            if (validateStep(step2)) {
-                currentStep = 2;
-                showStep(currentStep);
-                formHeader.innerText = "Data Kendaraan";
-            } else {
-                alert("Pastikan semua field pada langkah ini sudah diisi dengan benar.");
-            }
-        });
+        // Submit Button Step 3
+        if (submitButton) {
+            submitButton.addEventListener('click', (e) => {
+                console.log("Submit button clicked");
+                if (!validateStep(step3)) {
+                    e.preventDefault(); // cegah submit jika tidak valid
+                    alert("Pastikan semua field pada langkah ini sudah diisi dengan benar.");
+                }
+            });
+        } else {
+            console.error("submitButton tidak ditemukan, pastikan id='submitButton' di tombol.");
+        }
 
-        // Kembali ke Step 1
-        prevButtonStep2.addEventListener('click', () => {
-            currentStep = 0;
-            showStep(currentStep);
-            formHeader.innerText = "Daftar Akun";
-        });
-
-        // Kembali ke Step 2
-        prevButtonStep3.addEventListener('click', () => {
-            currentStep = 1;
-            showStep(currentStep);
-            formHeader.innerText = "Data Pengguna";
-        });
-
-        // Validasi final untuk Step 3 dan submit
-        submitButton.addEventListener('click', (e) => {
-            if (!validateStep(step3)) {
-                e.preventDefault();
-                alert("Pastikan semua field pada langkah ini sudah diisi dengan benar.");
-            }
-        });
-
-        // Fungsi untuk toggle id_pengguna saat kategori diubah atau saat load
+        // Toggle id_pengguna tampil atau tidak
         function toggleIdPenggunaField() {
             const idPenggunaInput = idPenggunaField.querySelector('input');
-
             if (kategoriSelect.value === "Tamu") {
                 idPenggunaField.style.display = 'none';
                 if (idPenggunaInput) {
-                    idPenggunaInput.value = ''; // 🩹 Reset agar tidak ikut terkirim
+                    idPenggunaInput.value = '';
                 }
             } else {
                 idPenggunaField.style.display = 'block';
             }
         }
 
-
-
-        // Jalankan toggle saat halaman benar-benar selesai load agar stabil di HP
-        window.addEventListener("load", function() {
-            toggleIdPenggunaField();
-
-            // Event listener perubahan kategori
-            kategoriSelect.addEventListener('change', toggleIdPenggunaField);
-
-            // Tampilkan langkah pertama
-            showStep(currentStep);
-
-            // Loading overlay
-            let loadingOverlay = document.getElementById("loading-overlay");
-            setTimeout(() => {
-                loadingOverlay.style.display = "flex";
-            }, 100);
-
-            setTimeout(() => {
-                loadingOverlay.style.opacity = "0";
-                setTimeout(() => {
-                    loadingOverlay.style.display = "none";
-                    document.getElementById("content").style.display = "block";
-                }, 500);
-            }, 300);
-        });
-
-        // Fungsi pratinjau gambar saat di-upload
+        // Preview Foto
         function previewImage(event, previewId, labelId) {
             const input = event.target;
             const preview = document.getElementById(previewId);
@@ -550,7 +540,9 @@
             reader.onload = function() {
                 preview.src = reader.result;
                 preview.style.display = "block";
-                label.style.display = "none";
+                if (label) {
+                    label.style.display = "none";
+                }
             };
 
             if (input.files && input.files[0]) {
@@ -558,17 +550,7 @@
             }
         }
 
-        // Event listener untuk pratinjau gambar foto pengguna
-        document.getElementById('uploadPhotoUser').addEventListener('change', function(event) {
-            previewImage(event, 'previewUser', 'labelPhotoUser');
-        });
-
-        // Event listener untuk pratinjau gambar foto kendaraan
-        document.getElementById('uploadPhotoKendaraan').addEventListener('change', function(event) {
-            previewImage(event, 'previewKendaraan', 'labelPhotoKendaraan');
-        });
-
-        // Toggle password visibility
+        // Toggle Password Visibility
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('passwordInput');
             const toggleIcon = document.getElementById('toggleIcon');
@@ -582,7 +564,46 @@
                 toggleIcon.classList.add('bi-eye-fill');
             }
         }
+
+        // On Load Initialization
+        window.addEventListener("load", function() {
+            toggleIdPenggunaField();
+            kategoriSelect.addEventListener('change', toggleIdPenggunaField);
+            showStep(currentStep);
+
+            // Loading overlay stabilization
+            const loadingOverlay = document.getElementById("loading-overlay");
+            if (loadingOverlay) {
+                setTimeout(() => {
+                    loadingOverlay.style.opacity = "0";
+                    loadingOverlay.addEventListener('transitionend', () => {
+                        loadingOverlay.style.display = "none";
+                        const content = document.getElementById("content");
+                        if (content) content.style.display = "block";
+                    }, {
+                        once: true
+                    });
+                }, 300);
+            }
+
+            // Preview foto user
+            const uploadPhotoUser = document.getElementById('uploadPhotoUser');
+            if (uploadPhotoUser) {
+                uploadPhotoUser.addEventListener('change', function(event) {
+                    previewImage(event, 'previewUser', 'labelPhotoUser');
+                });
+            }
+
+            // Preview foto kendaraan
+            const uploadPhotoKendaraan = document.getElementById('uploadPhotoKendaraan');
+            if (uploadPhotoKendaraan) {
+                uploadPhotoKendaraan.addEventListener('change', function(event) {
+                    previewImage(event, 'previewKendaraan', 'labelPhotoKendaraan');
+                });
+            }
+        });
     </script>
+
 
     <!-- Pastikan Anda menyertakan Bootstrap 5 CSS dan JS di halaman Anda -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
