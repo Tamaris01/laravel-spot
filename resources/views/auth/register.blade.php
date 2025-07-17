@@ -249,7 +249,8 @@
 
 
             <!-- Formulir Pendaftaran -->
-            <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data" id="registrationForm">
+            <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data" id="formPendaftaran">
+
                 @csrf
 
                 <!-- Step 1: Pilih Kategori Akun -->
@@ -257,8 +258,8 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-text border border-black text-black"><i class="fas fa-user-alt"></i></span>
-                            <select id="kategori" name="kategori" class="form-select border border-black text-black" @error('kategori') is-invalid @enderror" required>
-                                <option value="">Pilih Kategori</option>
+                            <select id="kategori" name="kategori" class="form-select border border-black text-black @error('kategori') is-invalid @enderror" required>
+
                                 @foreach($kategoriArray as $value)
                                 <option value="{{ $value }}" {{ old('kategori') == $value ? 'selected' : '' }}>{{ $value }}</option>
                                 @endforeach
@@ -402,6 +403,7 @@
 
                     <button type="button" class="button-white-spot  btn-block" id="prevButtonStep3">Sebelumnya</button>
                     <button type="submit" class="button-palang-spot btn-block" id="submitButton">Daftar</button>
+
                     <div class="register-link">
                         <p>Sudah punya akun? <a href="{{ route('login') }}">Masuk!</a></p>
                     </div>
@@ -425,8 +427,9 @@
         const kategoriSelect = document.getElementById('kategori');
         const idPenggunaField = document.getElementById('idPenggunaField');
         const idPenggunaInput = document.getElementById('id_pengguna');
+        const form = document.getElementById('formPendaftaran');
 
-        let currentStep = 0; // Langkah awal
+        let currentStep = 0;
 
         function showStep(step) {
             const steps = [step1, step2, step3];
@@ -435,13 +438,13 @@
             });
         }
 
-        function validateStep(step) {
-            const inputs = step.querySelectorAll("input, select");
+        function validateStep(stepElement) {
+            const inputs = stepElement.querySelectorAll("input, select, textarea");
             let isValid = true;
 
             inputs.forEach(input => {
-                if (input.offsetParent !== null) { // hanya validate yang terlihat
-                    if (!input.checkValidity()) {
+                if (input.offsetParent !== null && input.type !== 'hidden') {
+                    if (!input.checkValidity() || !input.value.trim()) {
                         input.classList.add("is-invalid");
                         isValid = false;
                     } else {
@@ -453,7 +456,7 @@
             return isValid;
         }
 
-        // Validasi dan navigasi ke Step 2
+        // Step navigasi
         nextButtonStep1.addEventListener('click', () => {
             if (validateStep(step1)) {
                 currentStep = 1;
@@ -464,7 +467,6 @@
             }
         });
 
-        // Validasi dan navigasi ke Step 3
         nextButtonStep2.addEventListener('click', () => {
             if (validateStep(step2)) {
                 currentStep = 2;
@@ -475,70 +477,44 @@
             }
         });
 
-        // Kembali ke Step 1
         prevButtonStep2.addEventListener('click', () => {
             currentStep = 0;
             showStep(currentStep);
             formHeader.innerText = "Daftar Akun";
         });
 
-        // Kembali ke Step 2
         prevButtonStep3.addEventListener('click', () => {
             currentStep = 1;
             showStep(currentStep);
             formHeader.innerText = "Data Pengguna";
         });
 
-        // Validasi final untuk Step 3 dan submit
-        submitButton.addEventListener('click', (e) => {
+        // Validasi final saat submit
+        form.addEventListener('submit', function(e) {
             if (!validateStep(step3)) {
                 e.preventDefault();
                 alert("Pastikan semua field pada langkah ini sudah diisi dengan benar.");
             }
         });
 
-        // Fungsi untuk toggle id_pengguna saat kategori diubah atau saat load
+        // Toggle ID Pengguna berdasarkan kategori
         function toggleIdPenggunaField() {
-            const idPenggunaInput = idPenggunaField.querySelector('input');
-
             if (kategoriSelect.value === "Tamu") {
                 idPenggunaField.style.display = 'none';
-                if (idPenggunaInput) {
-                    idPenggunaInput.value = ''; // 🩹 Reset agar tidak ikut terkirim
-                }
+                idPenggunaInput.value = '';
             } else {
                 idPenggunaField.style.display = 'block';
             }
         }
 
-
-
-        // Jalankan toggle saat halaman benar-benar selesai load agar stabil di HP
+        // Saat halaman load
         window.addEventListener("load", function() {
             toggleIdPenggunaField();
-
-            // Event listener perubahan kategori
             kategoriSelect.addEventListener('change', toggleIdPenggunaField);
-
-            // Tampilkan langkah pertama
             showStep(currentStep);
-
-            // Loading overlay
-            let loadingOverlay = document.getElementById("loading-overlay");
-            setTimeout(() => {
-                loadingOverlay.style.display = "flex";
-            }, 100);
-
-            setTimeout(() => {
-                loadingOverlay.style.opacity = "0";
-                setTimeout(() => {
-                    loadingOverlay.style.display = "none";
-                    document.getElementById("content").style.display = "block";
-                }, 500);
-            }, 300);
         });
 
-        // Fungsi pratinjau gambar saat di-upload
+        // Preview Foto
         function previewImage(event, previewId, labelId) {
             const input = event.target;
             const preview = document.getElementById(previewId);
@@ -556,12 +532,9 @@
             }
         }
 
-        // Event listener untuk pratinjau gambar foto pengguna
         document.getElementById('uploadPhotoUser').addEventListener('change', function(event) {
             previewImage(event, 'previewUser', 'labelPhotoUser');
         });
-
-        // Event listener untuk pratinjau gambar foto kendaraan
         document.getElementById('uploadPhotoKendaraan').addEventListener('change', function(event) {
             previewImage(event, 'previewKendaraan', 'labelPhotoKendaraan');
         });
