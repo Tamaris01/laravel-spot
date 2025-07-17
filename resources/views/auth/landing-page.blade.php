@@ -280,7 +280,7 @@
                         <i class="fas fa-map-marker-alt contact-icon"></i>
                     </div>
                     <div class="contact-text-box">
-                        <p>Batu Aji Baru Blok B 15 No 32</p>
+                        <p>Politeknik Negeri Batam</p>
                     </div>
                 </div>
             </div>
