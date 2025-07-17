@@ -55,18 +55,25 @@ class RegisterController extends Controller
             }
 
             [$width, $height] = getimagesize($request->file('foto')->getRealPath());
-            if ($width != 472 || $height != 472) {
-                return back()->withErrors(['foto' => 'Foto profil harus berukuran tepat 472 x 472 pixel.'])->withInput();
+            if ($width < 300 || $height < 300 || $width > 500 || $height > 500) {
+                return back()->withErrors(['foto' => 'Foto profil harus berukuran minimal 300x300 dan maksimal 500x500 pixel.'])->withInput();
             }
+
 
             $fotoProfilUpload = Cloudinary::upload(
                 $request->file('foto')->getRealPath(),
                 [
                     'folder' => 'images/profil',
-                    'resource_type' => 'image'
+                    'resource_type' => 'image',
+                    'transformation' => [
+                        'width' => 472,
+                        'height' => 472,
+                        'crop' => 'fill' // crop tengah agar square
+                    ]
                 ]
             );
             $fotoProfilUrl = $fotoProfilUpload->getSecurePath();
+
 
             // ✅ Validasi dan upload foto kendaraan
             if (!$request->hasFile('foto_kendaraan') || !$request->file('foto_kendaraan')->isValid()) {
