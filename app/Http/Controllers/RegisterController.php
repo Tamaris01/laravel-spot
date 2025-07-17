@@ -83,13 +83,10 @@ class RegisterController extends Controller
             $fotoKendaraanUrl = $fotoKendaraanUpload->getSecurePath();
 
             // ✅ Simpan data pengguna
-            $id_pengguna = $request->kategori !== 'Tamu'
-                ? $request->id_pengguna
-                : $this->generateUniqueIdPenggunaTamu();
-
             $pengguna = PenggunaParkir::create([
-                'id_pengguna' => $id_pengguna,
-
+                'id_pengguna' => $request->kategori !== 'Tamu'
+                    ? $request->id_pengguna
+                    : 'Tamu_' . mt_rand(10000000, 99999999),
                 'nama' => $request->nama,
                 'email' => $request->email,
                 'password' => $request->password,

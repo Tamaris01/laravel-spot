@@ -299,7 +299,7 @@
                             <span class="input-group-text border border-black text-black"><i class="fas fa-id-card"></i></span>
                             <input type="text" id="id_pengguna" name="id_pengguna" autocomplete="off"
                                 class="form-control border border-black text-black @error('id_pengguna') is-invalid @enderror"
-                                placeholder="Masukkan ID Pengguna"
+                                placeholder="Masukkan ID Pengguna" required
                                 value="{{ old('id_pengguna') }}">
                         </div>
                         @error('id_pengguna')
@@ -494,13 +494,8 @@
             if (!validateStep(step3)) {
                 e.preventDefault();
                 alert("Pastikan semua field pada langkah ini sudah diisi dengan benar.");
-            } else {
-                if (kategoriSelect.value === "Tamu") {
-                    idPenggunaInput.value = ""; // reset sebelum submit
-                }
             }
         });
-
 
         // Fungsi untuk toggle id_pengguna saat kategori diubah atau saat load
         function toggleIdPenggunaField() {
