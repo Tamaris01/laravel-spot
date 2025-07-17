@@ -411,7 +411,6 @@
         </div>
     </div>
 
-
     <script>
         const nextButtonStep1 = document.getElementById('nextButtonStep1');
         const nextButtonStep2 = document.getElementById('nextButtonStep2');
@@ -425,6 +424,7 @@
         const formHeader = document.getElementById('formHeader');
         const kategoriSelect = document.getElementById('kategori');
         const idPenggunaField = document.getElementById('idPenggunaField');
+        const idPenggunaInput = document.getElementById('id_pengguna');
 
         let currentStep = 0; // Langkah awal
 
@@ -440,11 +440,13 @@
             let isValid = true;
 
             inputs.forEach(input => {
-                if (!input.checkValidity()) {
-                    input.classList.add("is-invalid");
-                    isValid = false;
-                } else {
-                    input.classList.remove("is-invalid");
+                if (input.offsetParent !== null) { // hanya validate yang terlihat
+                    if (!input.checkValidity()) {
+                        input.classList.add("is-invalid");
+                        isValid = false;
+                    } else {
+                        input.classList.remove("is-invalid");
+                    }
                 }
             });
 
@@ -499,16 +501,36 @@
         function toggleIdPenggunaField() {
             if (kategoriSelect.value === "Tamu") {
                 idPenggunaField.style.display = 'none';
+                idPenggunaInput.value = ""; // kosongkan agar tidak terkirim
             } else {
                 idPenggunaField.style.display = 'block';
             }
         }
 
-        // Jalankan toggle saat halaman dimuat
-        document.addEventListener("DOMContentLoaded", toggleIdPenggunaField);
+        // Jalankan toggle saat halaman benar-benar selesai load agar stabil di HP
+        window.addEventListener("load", function() {
+            toggleIdPenggunaField();
 
-        // Jalankan toggle saat user mengubah kategori
-        kategoriSelect.addEventListener('change', toggleIdPenggunaField);
+            // Event listener perubahan kategori
+            kategoriSelect.addEventListener('change', toggleIdPenggunaField);
+
+            // Tampilkan langkah pertama
+            showStep(currentStep);
+
+            // Loading overlay
+            let loadingOverlay = document.getElementById("loading-overlay");
+            setTimeout(() => {
+                loadingOverlay.style.display = "flex";
+            }, 100);
+
+            setTimeout(() => {
+                loadingOverlay.style.opacity = "0";
+                setTimeout(() => {
+                    loadingOverlay.style.display = "none";
+                    document.getElementById("content").style.display = "block";
+                }, 500);
+            }, 300);
+        });
 
         // Fungsi pratinjau gambar saat di-upload
         function previewImage(event, previewId, labelId) {
@@ -520,7 +542,7 @@
             reader.onload = function() {
                 preview.src = reader.result;
                 preview.style.display = "block";
-                label.style.display = "none"; // Sembunyikan label setelah gambar ditampilkan
+                label.style.display = "none";
             };
 
             if (input.files && input.files[0]) {
@@ -538,9 +560,6 @@
             previewImage(event, 'previewKendaraan', 'labelPhotoKendaraan');
         });
 
-        // Tampilkan langkah pertama saat halaman dimuat
-        showStep(currentStep);
-
         // Toggle password visibility
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('passwordInput');
@@ -555,26 +574,8 @@
                 toggleIcon.classList.add('bi-eye-fill');
             }
         }
-
-        // Loading overlay
-        document.addEventListener("DOMContentLoaded", function() {
-            let loadingOverlay = document.getElementById("loading-overlay");
-
-            setTimeout(() => {
-                loadingOverlay.style.display = "flex";
-            }, 100);
-
-            window.onload = function() {
-                setTimeout(() => {
-                    loadingOverlay.style.opacity = "0";
-                    setTimeout(() => {
-                        loadingOverlay.style.display = "none";
-                        document.getElementById("content").style.display = "block";
-                    }, 500);
-                }, 300);
-            };
-        });
     </script>
+
     <!-- Pastikan Anda menyertakan Bootstrap 5 CSS dan JS di halaman Anda -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
