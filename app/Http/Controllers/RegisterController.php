@@ -62,7 +62,7 @@ class RegisterController extends Controller
                     'transformation' => [
                         'width' => 472,
                         'height' => 472,
-                        'crop' => 'fill' // tetap square otomatis
+                        'crop' => 'limit' // tetap square otomatis
                     ]
                 ]
             );
