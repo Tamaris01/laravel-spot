@@ -162,16 +162,12 @@
             text-align: center;
             cursor: pointer;
             position: relative;
-            height: 472px;
-            /* agar sesuai bidang crop */
-            width: 472px;
-            /* optional jika ingin kotak */
+            height: 150px;
             display: flex;
             align-items: center;
             justify-content: center;
             background-color: #f8f9fa;
         }
-
 
         .upload-area img {
             max-width: 100%;
@@ -179,9 +175,7 @@
             object-fit: cover;
             border-radius: 5px;
             display: none;
-            /* akan diubah display block setelah load */
         }
-
 
         .upload-label {
             display: flex;
@@ -360,25 +354,25 @@
                         <p id="labelPhotoKendaraan" class="upload-label">
                             <i class="fas fa-camera"></i> Unggah Foto Kendaraan
                         </p>
-                        <input type="file" id="uploadPhotoKendaraan" name="foto_kendaraan" style="display: none;" accept="image/*" onchange="previewImage(event)">
+                        <input type="file" id="uploadPhotoKendaraan" name="foto_kendaraan" style="display: none;" accept="image/*" onchange="previewImage(event, 'previewKendaraan', 'labelPhotoKendaraan')">
+
                     </div>
                     <div>
                         @error('foto_kendaraan')
-                        <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <div class="form-group mt-3">
+
+                    <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-text border border-black text-black"><i class="fas fa-id-card"></i></span>
                             <input type="text" name="plat_nomor" class="form-control border border-black @error('plat_nomor') is-invalid @enderror" required placeholder="Masukkan Nomor Plat" value="{{ old('plat_nomor') }}">
                         </div>
                         @error('plat_nomor')
-                        <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <div class="form-group mt-3">
+                    <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-text border border-black text-black"><i class="fas fa-list"></i></span>
                             <select name="jenis" class="form-select border border-black @error('jenis') is-invalid @enderror" required>
@@ -389,11 +383,10 @@
                             </select>
                         </div>
                         @error('jenis')
-                        <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <div class="form-group mt-3">
+                    <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-text border border-black text-black"><i class="fas fa-paint-brush"></i></span>
                             <select name="warna" class="form-select border border-black @error('warna') is-invalid @enderror" required>
@@ -404,24 +397,19 @@
                             </select>
                         </div>
                         @error('warna')
-                        <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <button type="button" class="button-white-spot btn-block mt-3" id="prevButtonStep3">Sebelumnya</button>
-                    <button type="submit" class="button-palang-spot btn-block mt-2" id="submitButton">Daftar</button>
-
-                    <div class="register-link mt-3">
+                    <button type="button" class="button-white-spot  btn-block" id="prevButtonStep3">Sebelumnya</button>
+                    <button type="submit" class="button-palang-spot btn-block" id="submitButton">Daftar</button>
+                    <div class="register-link">
                         <p>Sudah punya akun? <a href="{{ route('login') }}">Masuk!</a></p>
                     </div>
                 </div>
-
             </form>
 
         </div>
     </div>
-
-    <script src="https://unpkg.com/cropperjs@1.5.13/dist/cropper.min.js"></script>
 
 
     <script>
@@ -577,54 +565,6 @@
                     }, 500);
                 }, 300);
             };
-        });
-
-        let cropper;
-        const image = document.getElementById('previewKendaraan');
-        const label = document.getElementById('labelPhotoKendaraan');
-        const fileInput = document.getElementById('uploadPhotoKendaraan');
-        const form = document.getElementById('formPendaftaran'); // Pastikan tambahkan id ke form kamu
-
-        function previewImage(event) {
-            const file = event.target.files[0];
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                image.src = e.target.result;
-                image.style.display = 'block';
-                label.style.display = 'none';
-
-                if (cropper) {
-                    cropper.destroy();
-                }
-
-                cropper = new Cropper(image, {
-                    aspectRatio: 1,
-                    viewMode: 1,
-                    autoCropArea: 1,
-                    responsive: true,
-                });
-            }
-            reader.readAsDataURL(file);
-        }
-
-        // Saat submit form, otomatis crop lalu kirim
-        form.addEventListener('submit', function(e) {
-            if (cropper) {
-                e.preventDefault(); // hentikan submit sementara
-                cropper.getCroppedCanvas({
-                    width: 472,
-                    height: 472
-                }).toBlob(function(blob) {
-                    const croppedFile = new File([blob], "foto_kendaraan.jpg", {
-                        type: "image/jpeg"
-                    });
-                    const dataTransfer = new DataTransfer();
-                    dataTransfer.items.add(croppedFile);
-                    fileInput.files = dataTransfer.files;
-                    cropper.destroy(); // bebaskan memori
-                    form.submit(); // submit ulang
-                }, 'image/jpeg', 0.9);
-            }
         });
     </script>
     <!-- Pastikan Anda menyertakan Bootstrap 5 CSS dan JS di halaman Anda -->
