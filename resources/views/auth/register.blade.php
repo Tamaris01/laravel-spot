@@ -428,7 +428,7 @@
             const kategoriSelect = document.getElementById('kategori');
             const idPenggunaField = document.getElementById('idPenggunaField');
 
-            let currentStep = 0; // mulai dari langkah pertama
+            let currentStep = 0; // Mulai dari step 1
 
             function showStep(step) {
                 const steps = [step1, step2, step3];
@@ -461,7 +461,7 @@
                 return isValid;
             }
 
-            // Button Next Step 1
+            // Next Step 1
             if (nextButtonStep1) {
                 nextButtonStep1.addEventListener('click', () => {
                     if (validateStep(step1)) {
@@ -474,7 +474,7 @@
                 });
             }
 
-            // Button Next Step 2
+            // Next Step 2
             if (nextButtonStep2) {
                 nextButtonStep2.addEventListener('click', () => {
                     if (validateStep(step2)) {
@@ -487,7 +487,7 @@
                 });
             }
 
-            // Button Prev Step 2
+            // Prev Step 2 -> Step 1
             if (prevButtonStep2) {
                 prevButtonStep2.addEventListener('click', () => {
                     currentStep = 0;
@@ -496,7 +496,7 @@
                 });
             }
 
-            // Button Prev Step 3
+            // Prev Step 3 -> Step 2
             if (prevButtonStep3) {
                 prevButtonStep3.addEventListener('click', () => {
                     currentStep = 1;
@@ -505,7 +505,7 @@
                 });
             }
 
-            // Button Submit Step 3
+            // Submit Step 3
             if (submitButton) {
                 submitButton.addEventListener('click', (e) => {
                     console.log("Submit button clicked");
@@ -516,14 +516,22 @@
                 });
             }
 
-            // Toggle id_pengguna visibility
+            // Toggle id_pengguna visibility dan required
             function toggleIdPenggunaField() {
                 const idPenggunaInput = idPenggunaField ? idPenggunaField.querySelector('input') : null;
                 if (kategoriSelect && kategoriSelect.value === "Tamu") {
                     if (idPenggunaField) idPenggunaField.style.display = 'none';
-                    if (idPenggunaInput) idPenggunaInput.value = '';
+                    if (idPenggunaInput) {
+                        idPenggunaInput.value = '';
+                        idPenggunaInput.removeAttribute('required');
+                        idPenggunaInput.disabled = true;
+                    }
                 } else {
                     if (idPenggunaField) idPenggunaField.style.display = 'block';
+                    if (idPenggunaInput) {
+                        idPenggunaInput.setAttribute('required', 'required');
+                        idPenggunaInput.disabled = false;
+                    }
                 }
             }
 
@@ -531,8 +539,8 @@
                 kategoriSelect.addEventListener('change', toggleIdPenggunaField);
             }
 
-            // Preview image
-            function previewImage(event, previewId, labelId) {
+            // Membuat previewImage global agar bisa diakses dari onchange
+            window.previewImage = function(event, previewId, labelId) {
                 const input = event.target;
                 const preview = document.getElementById(previewId);
                 const label = document.getElementById(labelId);
@@ -551,21 +559,7 @@
                 if (input.files && input.files[0]) {
                     reader.readAsDataURL(input.files[0]);
                 }
-            }
-
-            const uploadPhotoUser = document.getElementById('uploadPhotoUser');
-            if (uploadPhotoUser) {
-                uploadPhotoUser.addEventListener('change', function(event) {
-                    previewImage(event, 'previewUser', 'labelPhotoUser');
-                });
-            }
-
-            const uploadPhotoKendaraan = document.getElementById('uploadPhotoKendaraan');
-            if (uploadPhotoKendaraan) {
-                uploadPhotoKendaraan.addEventListener('change', function(event) {
-                    previewImage(event, 'previewKendaraan', 'labelPhotoKendaraan');
-                });
-            }
+            };
 
             // Toggle password visibility
             window.togglePasswordVisibility = function() {
@@ -597,6 +591,7 @@
                     }, {
                         once: true
                     });
+
                     // fallback jika transitionend tidak terpanggil
                     setTimeout(() => {
                         if (loadingOverlay.style.display !== "none") {
@@ -616,6 +611,7 @@
             hideOverlay();
         });
     </script>
+
 
 
     <!-- Pastikan Anda menyertakan Bootstrap 5 CSS dan JS di halaman Anda -->
