@@ -494,14 +494,8 @@
             if (!validateStep(step3)) {
                 e.preventDefault();
                 alert("Pastikan semua field pada langkah ini sudah diisi dengan benar.");
-            } else {
-                // 🩹 Reset id_pengguna sebelum submit jika kategori = Tamu
-                if (kategoriSelect.value === "Tamu") {
-                    idPenggunaInput.value = "";
-                }
             }
         });
-
 
         // Fungsi untuk toggle id_pengguna saat kategori diubah atau saat load
         function toggleIdPenggunaField() {
