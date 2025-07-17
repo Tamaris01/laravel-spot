@@ -225,8 +225,12 @@
 </div>
 
 @endsection
-
 @section('scripts')
+<!-- jQuery dan Bootstrap 4 JS harus diletakkan di atas agar $ dikenali -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
 <script>
     function showConfirmationModal(action, id_pengguna) {
         const actionText = action === 'terima' ? 'menerima' : 'menolak';
@@ -241,58 +245,22 @@
                 `{{ route('pengelola.konfirmasi_pendaftaran.tolak', ':id') }}`;
 
             const url = routeUrl.replace(':id', id_pengguna);
+
+            // Membuat dan submit form POST secara dinamis
             const form = document.createElement('form');
             form.method = 'POST';
             form.action = url;
 
+            // CSRF token
             const csrfToken = document.createElement('input');
             csrfToken.type = 'hidden';
             csrfToken.name = '_token';
             csrfToken.value = '{{ csrf_token() }}';
             form.appendChild(csrfToken);
 
-            const methodInput = document.createElement('input');
-            methodInput.type = 'hidden';
-            methodInput.name = '_method';
-            methodInput.value = 'POST';
-            form.appendChild(methodInput);
-
             document.body.appendChild(form);
-            form.submit(); // Kirim form
+            form.submit();
         };
     }
-
-
-
-
-
-    // Fungsi untuk memuat data tabel secara dinamis
-    function loadTableData() {
-        $.ajax({
-            url: "{{ route('pengelola.konfirmasi_pendaftaran') }}", // Ganti URL dengan endpoint yang sesuai
-            type: "GET",
-            dataType: "html",
-            success: function(response) {
-                // Cari elemen tbody dan perbarui dengan data baru
-                const newTableBody = $(response).find('tbody').html();
-                $('tbody').html(newTableBody);
-            },
-            error: function(xhr, status, error) {
-                console.error("Gagal memuat data tabel:", error);
-            }
-        });
-    }
-
-    // Panggil fungsi setiap 2 detik
-    setInterval(loadTableData, 2000);
-
-    // Panggil fungsi sekali saat halaman dimuat
-    loadTableData();
 </script>
-
-<!-- jQuery dan Bootstrap 4 JS -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
 @endsection
