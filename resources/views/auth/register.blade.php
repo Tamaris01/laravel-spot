@@ -414,179 +414,145 @@
     </div>
 
     <script>
-        const nextButtonStep1 = document.getElementById('nextButtonStep1');
-        const nextButtonStep2 = document.getElementById('nextButtonStep2');
-        const prevButtonStep2 = document.getElementById('prevButtonStep2');
-        const prevButtonStep3 = document.getElementById('prevButtonStep3');
-        const submitButton = document.getElementById('submitButton');
+        document.addEventListener("DOMContentLoaded", function() {
+            const nextButtonStep1 = document.getElementById('nextButtonStep1');
+            const nextButtonStep2 = document.getElementById('nextButtonStep2');
+            const prevButtonStep2 = document.getElementById('prevButtonStep2');
+            const prevButtonStep3 = document.getElementById('prevButtonStep3');
+            const submitButton = document.getElementById('submitButton');
 
-        const step1 = document.getElementById('step-1');
-        const step2 = document.getElementById('step-2');
-        const step3 = document.getElementById('step-3');
-        const formHeader = document.getElementById('formHeader');
-        const kategoriSelect = document.getElementById('kategori');
-        const idPenggunaField = document.getElementById('idPenggunaField');
+            const step1 = document.getElementById('step-1');
+            const step2 = document.getElementById('step-2');
+            const step3 = document.getElementById('step-3');
+            const formHeader = document.getElementById('formHeader');
+            const kategoriSelect = document.getElementById('kategori');
+            const idPenggunaField = document.getElementById('idPenggunaField');
 
-        let currentStep = 0; // Mulai dari langkah pertama
+            let currentStep = 0; // mulai dari langkah pertama
 
-        function showStep(step) {
-            const steps = [step1, step2, step3];
-            steps.forEach((s, index) => {
-                if (index === step) {
-                    s.classList.add('active');
-                    s.style.display = 'block';
-                } else {
-                    s.classList.remove('active');
-                    s.style.display = 'none';
-                }
-            });
-        }
-
-        function validateStep(step) {
-            const inputs = step.querySelectorAll("input, select");
-            let isValid = true;
-
-            inputs.forEach(input => {
-                if (input.offsetParent !== null) { // hanya yang terlihat
-                    if (!input.checkValidity()) {
-                        input.classList.add("is-invalid");
-                        isValid = false;
+            function showStep(step) {
+                const steps = [step1, step2, step3];
+                steps.forEach((s, index) => {
+                    if (index === step) {
+                        s.classList.add('active');
+                        s.style.display = 'block';
                     } else {
-                        input.classList.remove("is-invalid");
+                        s.classList.remove('active');
+                        s.style.display = 'none';
                     }
-                }
-            });
+                });
+            }
 
-            return isValid;
-        }
+            function validateStep(step) {
+                const inputs = step.querySelectorAll("input, select");
+                let isValid = true;
 
-        // Next Step 1
-        if (nextButtonStep1) {
-            nextButtonStep1.addEventListener('click', () => {
-                if (validateStep(step1)) {
+                inputs.forEach(input => {
+                    if (input.offsetParent !== null) { // hanya yang terlihat
+                        if (!input.checkValidity()) {
+                            input.classList.add("is-invalid");
+                            isValid = false;
+                        } else {
+                            input.classList.remove("is-invalid");
+                        }
+                    }
+                });
+
+                return isValid;
+            }
+
+            // Button Next Step 1
+            if (nextButtonStep1) {
+                nextButtonStep1.addEventListener('click', () => {
+                    if (validateStep(step1)) {
+                        currentStep = 1;
+                        showStep(currentStep);
+                        formHeader.innerText = "Data Pengguna";
+                    } else {
+                        alert("Pastikan semua field pada langkah ini sudah diisi dengan benar.");
+                    }
+                });
+            }
+
+            // Button Next Step 2
+            if (nextButtonStep2) {
+                nextButtonStep2.addEventListener('click', () => {
+                    if (validateStep(step2)) {
+                        currentStep = 2;
+                        showStep(currentStep);
+                        formHeader.innerText = "Data Kendaraan";
+                    } else {
+                        alert("Pastikan semua field pada langkah ini sudah diisi dengan benar.");
+                    }
+                });
+            }
+
+            // Button Prev Step 2
+            if (prevButtonStep2) {
+                prevButtonStep2.addEventListener('click', () => {
+                    currentStep = 0;
+                    showStep(currentStep);
+                    formHeader.innerText = "Daftar Akun";
+                });
+            }
+
+            // Button Prev Step 3
+            if (prevButtonStep3) {
+                prevButtonStep3.addEventListener('click', () => {
                     currentStep = 1;
                     showStep(currentStep);
                     formHeader.innerText = "Data Pengguna";
+                });
+            }
+
+            // Button Submit Step 3
+            if (submitButton) {
+                submitButton.addEventListener('click', (e) => {
+                    console.log("Submit button clicked");
+                    if (!validateStep(step3)) {
+                        e.preventDefault();
+                        alert("Pastikan semua field pada langkah ini sudah diisi dengan benar.");
+                    }
+                });
+            }
+
+            // Toggle id_pengguna visibility
+            function toggleIdPenggunaField() {
+                const idPenggunaInput = idPenggunaField ? idPenggunaField.querySelector('input') : null;
+                if (kategoriSelect && kategoriSelect.value === "Tamu") {
+                    if (idPenggunaField) idPenggunaField.style.display = 'none';
+                    if (idPenggunaInput) idPenggunaInput.value = '';
                 } else {
-                    alert("Pastikan semua field pada langkah ini sudah diisi dengan benar.");
+                    if (idPenggunaField) idPenggunaField.style.display = 'block';
                 }
-            });
-        }
-
-        // Next Step 2
-        if (nextButtonStep2) {
-            nextButtonStep2.addEventListener('click', () => {
-                if (validateStep(step2)) {
-                    currentStep = 2;
-                    showStep(currentStep);
-                    formHeader.innerText = "Data Kendaraan";
-                } else {
-                    alert("Pastikan semua field pada langkah ini sudah diisi dengan benar.");
-                }
-            });
-        }
-
-        // Prev Step 2 -> Step 1
-        if (prevButtonStep2) {
-            prevButtonStep2.addEventListener('click', () => {
-                currentStep = 0;
-                showStep(currentStep);
-                formHeader.innerText = "Daftar Akun";
-            });
-        }
-
-        // Prev Step 3 -> Step 2
-        if (prevButtonStep3) {
-            prevButtonStep3.addEventListener('click', () => {
-                currentStep = 1;
-                showStep(currentStep);
-                formHeader.innerText = "Data Pengguna";
-            });
-        }
-
-        // Submit Button Step 3
-        if (submitButton) {
-            submitButton.addEventListener('click', (e) => {
-                console.log("Submit button clicked");
-                if (!validateStep(step3)) {
-                    e.preventDefault(); // cegah submit jika tidak valid
-                    alert("Pastikan semua field pada langkah ini sudah diisi dengan benar.");
-                }
-            });
-        } else {
-            console.error("submitButton tidak ditemukan, pastikan id='submitButton' di tombol.");
-        }
-
-        // Toggle id_pengguna tampil atau tidak
-        function toggleIdPenggunaField() {
-            const idPenggunaInput = idPenggunaField.querySelector('input');
-            if (kategoriSelect.value === "Tamu") {
-                idPenggunaField.style.display = 'none';
-                if (idPenggunaInput) {
-                    idPenggunaInput.value = '';
-                }
-            } else {
-                idPenggunaField.style.display = 'block';
-            }
-        }
-
-        // Preview Foto
-        function previewImage(event, previewId, labelId) {
-            const input = event.target;
-            const preview = document.getElementById(previewId);
-            const label = document.getElementById(labelId);
-            const reader = new FileReader();
-
-            reader.onload = function() {
-                preview.src = reader.result;
-                preview.style.display = "block";
-                if (label) {
-                    label.style.display = "none";
-                }
-            };
-
-            if (input.files && input.files[0]) {
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        // Toggle Password Visibility
-        function togglePasswordVisibility() {
-            const passwordInput = document.getElementById('passwordInput');
-            const toggleIcon = document.getElementById('toggleIcon');
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                toggleIcon.classList.remove('bi-eye-fill');
-                toggleIcon.classList.add('bi-eye-slash-fill');
-            } else {
-                passwordInput.type = 'password';
-                toggleIcon.classList.remove('bi-eye-slash-fill');
-                toggleIcon.classList.add('bi-eye-fill');
-            }
-        }
-
-        // On Load Initialization
-        window.addEventListener("load", function() {
-            toggleIdPenggunaField();
-            kategoriSelect.addEventListener('change', toggleIdPenggunaField);
-            showStep(currentStep);
-
-            // Loading overlay stabilization
-            const loadingOverlay = document.getElementById("loading-overlay");
-            if (loadingOverlay) {
-                setTimeout(() => {
-                    loadingOverlay.style.opacity = "0";
-                    loadingOverlay.addEventListener('transitionend', () => {
-                        loadingOverlay.style.display = "none";
-                        const content = document.getElementById("content");
-                        if (content) content.style.display = "block";
-                    }, {
-                        once: true
-                    });
-                }, 300);
             }
 
-            // Preview foto user
+            if (kategoriSelect) {
+                kategoriSelect.addEventListener('change', toggleIdPenggunaField);
+            }
+
+            // Preview image
+            function previewImage(event, previewId, labelId) {
+                const input = event.target;
+                const preview = document.getElementById(previewId);
+                const label = document.getElementById(labelId);
+                const reader = new FileReader();
+
+                reader.onload = function() {
+                    if (preview) {
+                        preview.src = reader.result;
+                        preview.style.display = "block";
+                    }
+                    if (label) {
+                        label.style.display = "none";
+                    }
+                };
+
+                if (input.files && input.files[0]) {
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
             const uploadPhotoUser = document.getElementById('uploadPhotoUser');
             if (uploadPhotoUser) {
                 uploadPhotoUser.addEventListener('change', function(event) {
@@ -594,13 +560,60 @@
                 });
             }
 
-            // Preview foto kendaraan
             const uploadPhotoKendaraan = document.getElementById('uploadPhotoKendaraan');
             if (uploadPhotoKendaraan) {
                 uploadPhotoKendaraan.addEventListener('change', function(event) {
                     previewImage(event, 'previewKendaraan', 'labelPhotoKendaraan');
                 });
             }
+
+            // Toggle password visibility
+            window.togglePasswordVisibility = function() {
+                const passwordInput = document.getElementById('passwordInput');
+                const toggleIcon = document.getElementById('toggleIcon');
+                if (passwordInput && toggleIcon) {
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        toggleIcon.classList.remove('bi-eye-fill');
+                        toggleIcon.classList.add('bi-eye-slash-fill');
+                    } else {
+                        passwordInput.type = 'password';
+                        toggleIcon.classList.remove('bi-eye-slash-fill');
+                        toggleIcon.classList.add('bi-eye-fill');
+                    }
+                }
+            };
+
+            // Loading overlay handling
+            const loadingOverlay = document.getElementById("loading-overlay");
+            const content = document.getElementById("content");
+
+            function hideOverlay() {
+                if (loadingOverlay) {
+                    loadingOverlay.style.opacity = "0";
+                    loadingOverlay.addEventListener('transitionend', () => {
+                        loadingOverlay.style.display = "none";
+                        if (content) content.style.display = "block";
+                    }, {
+                        once: true
+                    });
+                    // fallback jika transitionend tidak terpanggil
+                    setTimeout(() => {
+                        if (loadingOverlay.style.display !== "none") {
+                            loadingOverlay.style.display = "none";
+                            if (content) content.style.display = "block";
+                        }
+                    }, 1000);
+                } else {
+                    if (content) content.style.display = "block";
+                }
+            }
+
+            // INIT
+            currentStep = 0;
+            showStep(currentStep);
+            toggleIdPenggunaField();
+            hideOverlay();
         });
     </script>
 
