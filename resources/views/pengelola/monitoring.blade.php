@@ -464,7 +464,11 @@
             tempCanvas.height = webcam.videoHeight;
             const tempCtx = tempCanvas.getContext('2d');
             tempCtx.drawImage(webcam, 0, 0, tempCanvas.width, tempCanvas.height);
-            const base64 = tempCanvas.toDataURL('image/jpeg');
+
+            // PERBAIKAN: hanya ambil bagian base64 tanpa header
+            const base64 = tempCanvas.toDataURL('image/jpeg').split(',')[1];
+            // atau
+            // const base64 = tempCanvas.toDataURL('image/jpeg').replace(/^data:image\/\w+;base64,/, '');
 
             const uploadResponse = await fetch("https://alpu.web.id/server/upload_frame", {
                 method: "POST",
