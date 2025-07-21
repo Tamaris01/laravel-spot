@@ -362,7 +362,7 @@
         if (isChecking) return;
 
         try {
-            const response = await fetch("http://127.0.0.1:5000/result");
+            const response = await fetch("https://alpu.web.id/server/result");
             if (!response.ok) throw new Error("Gagal fetch plat nomor");
 
             const data = await response.json();
@@ -531,7 +531,7 @@
         const base64Image = tempCanvas.toDataURL("image/jpeg");
 
         try {
-            await fetch("http://127.0.0.1:5000/upload_frame", {
+            await fetch("https://alpu.web.id/server/upload_frame", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -541,7 +541,7 @@
                 })
             });
 
-            const frameRes = await fetch("http://127.0.0.1:5000/get_processed_frame");
+            const frameRes = await fetch("https://alpu.web.id/server/get_processed_frame");
             const frameData = await frameRes.json();
 
             if (frameData.frame) {
@@ -553,7 +553,7 @@
                 img.src = frameData.frame;
             }
 
-            const resultRes = await fetch("http://127.0.0.1:5000/result");
+            const resultRes = await fetch("https://alpu.web.id/server/result");
             const resultData = await resultRes.json();
 
             if (resultData.plat_nomor && resultData.plat_nomor !== "-") {
