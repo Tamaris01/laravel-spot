@@ -453,62 +453,50 @@
 
     // =========== KIRIM FRAME WEBCAM KE SERVER =============
     async function sendFrameToServer() {
+        if (!webcamElement.videoWidth || !webcamElement.videoHeight) return;
+
+        const tempCanvas = document.createElement("canvas");
+        tempCanvas.width = webcamElement.videoWidth;
+        tempCanvas.height = webcamElement.videoHeight;
+        const tempCtx = tempCanvas.getContext("2d");
+        tempCtx.drawImage(webcamElement, 0, 0, tempCanvas.width, tempCanvas.height);
+
+        const base64Image = tempCanvas.toDataURL("image/jpeg");
+
         try {
-            if (!webcam || webcam.readyState !== 4) {
-                console.warn("Webcam belum siap.");
-                return;
-            }
-
-            const tempCanvas = document.createElement('canvas');
-            tempCanvas.width = webcam.videoWidth;
-            tempCanvas.height = webcam.videoHeight;
-            const tempCtx = tempCanvas.getContext('2d');
-            tempCtx.drawImage(webcam, 0, 0, tempCanvas.width, tempCanvas.height);
-
-            // PERBAIKAN: hanya ambil bagian base64 tanpa header
-            const base64 = tempCanvas.toDataURL('image/jpeg').split(',')[1];
-            // atau
-            // const base64 = tempCanvas.toDataURL('image/jpeg').replace(/^data:image\/\w+;base64,/, '');
-
-            const uploadResponse = await fetch("https://alpu.web.id/server/upload_frame", {
+            await fetch("https://alpu.web.id/server/upload_frame", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    image: base64
+                    image: base64Image
                 })
             });
 
-            if (!uploadResponse.ok) {
-                console.error("Gagal upload frame:", await uploadResponse.text());
-                return;
-            }
+            const frameRes = await fetch("https://alpu.web.id/server/get_processed_frame");
+            const frameData = await frameRes.json();
 
-            await new Promise(resolve => setTimeout(resolve, 300));
-
-            const frameResponse = await fetch("https://alpu.web.id/server/get_processed_frame");
-            if (!frameResponse.ok) {
-                console.error("Gagal ambil frame:", await frameResponse.text());
-                return;
-            }
-
-            const frameData = await frameResponse.json();
             if (frameData.frame) {
                 const img = new Image();
                 img.onload = () => {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+                    ctx.drawImage(img, 0, 0, canvasElement.width, canvasElement.height);
                 };
                 img.src = frameData.frame;
-            } else {
-                console.warn("Frame kosong dari server.");
             }
-        } catch (error) {
-            console.error("Gagal kirim/ambil frame:", error);
+
+            const resultRes = await fetch("https://alpu.web.id/server/result");
+            const resultData = await resultRes.json();
+
+            if (resultData.plat_nomor && resultData.plat_nomor !== "-") {
+                console.log("🚘 Plat Nomor Terdeteksi:", resultData.plat_nomor);
+            }
+
+        } catch (err) {
+            console.error("❌ Gagal kirim atau ambil frame:", err);
         }
     }
-
     // =========== INISIALISASI APLIKASI ===========
     async function initMonitoringParkir() {
         await startCamera();
