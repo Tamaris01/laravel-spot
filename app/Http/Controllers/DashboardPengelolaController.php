@@ -41,11 +41,11 @@ class DashboardPengelolaController extends Controller
         $date = Carbon::now()->locale('id')->isoFormat('dddd, D MMMM Y');
         $today = Carbon::now()->toDateString();
 
-        // Jumlah pengguna unik dari tabel riwayat_parkir berdasarkan hari ini
-        $jumlahPengguna = DB::table('riwayat_parkir')
-            ->whereDate('waktu_masuk', $today)
-            ->distinct('id_pengguna')
-            ->count('id_pengguna');
+        $jumlahPengguna = DB::table('pengguna_parkir')
+            ->where('status', 'aktif')
+            ->count();
+
+
 
         // Jumlah parkir yang statusnya 'masuk' dan 'keluar' berdasarkan hari ini
         $jumlahParkirMasuk = DB::table('riwayat_parkir')
