@@ -449,10 +449,8 @@
             console.error("Gagal akses kamera:", error);
         }
     }
-
-    // =========== KIRIM FRAME WEBCAM KE SERVER TANPA BLOCKING ===========
+    const SEND_INTERVAL = 500; // kirim setiap 500ms
     let lastSent = 0;
-    const SEND_INTERVAL = 700; // kirim setiap 700ms
 
     async function sendFrameToServer() {
         const now = Date.now();
@@ -469,7 +467,8 @@
             const tempCtx = tempCanvas.getContext("2d");
             tempCtx.drawImage(webcam, 0, 0, tempCanvas.width, tempCanvas.height);
 
-            const base64Image = tempCanvas.toDataURL("image/jpeg").split(',')[1]; // hanya data base64 tanpa prefix
+            // ✅ Kirim Base64 lengkap dengan prefix (Flask akan otomatis split)
+            const base64Image = tempCanvas.toDataURL("image/jpeg");
 
             await fetch("https://alpu.web.id/server/upload_frame", {
                 method: "POST",
@@ -483,10 +482,11 @@
         } catch (err) {
             console.error("❌ Gagal upload frame:", err);
         }
+
         requestAnimationFrame(sendFrameToServer);
     }
 
-    // =========== AMBIL FRAME YOLO UNTUK DITAMPILKAN ==============
+    // ✅ Ambil frame hasil deteksi YOLO
     async function fetchProcessedFrame() {
         try {
             const response = await fetch("https://alpu.web.id/server/get_processed_frame");
@@ -502,13 +502,15 @@
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
                     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                 };
-                img.src = frameData.frame;
+                img.src = frameData.frame; // sudah langsung data:image/jpeg;base64
             }
         } catch (error) {
             console.error("❌ Gagal ambil frame YOLO:", error);
         }
     }
+
     setInterval(fetchProcessedFrame, 700); // ambil hasil setiap 700ms
+
 
     // =========== INISIALISASI APLIKASI ============
     async function initMonitoringParkir() {
