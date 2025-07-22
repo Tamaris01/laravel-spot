@@ -218,8 +218,6 @@
                 <div class="card-header text-center" style="border-bottom: 1px solid black; background-color: white; font-weight: 500px; color: black;">
                     Statistik Kendaraan Masuk
                 </div>
-
-
                 <div class="card-body">
                     <canvas class="chart" id="doughnutChart"></canvas>
                 </div>

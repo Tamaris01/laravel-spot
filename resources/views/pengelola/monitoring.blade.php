@@ -449,26 +449,21 @@
             console.error("Gagal akses kamera:", error);
         }
     }
+
     const SEND_INTERVAL = 500; // kirim setiap 500ms
-    let lastSent = 0;
 
     async function sendFrameToServer() {
-        const now = Date.now();
-        if (!webcam.videoWidth || !webcam.videoHeight || now - lastSent < SEND_INTERVAL) {
-            requestAnimationFrame(sendFrameToServer);
-            return;
-        }
-        lastSent = now;
+        if (!webcam.srcObject || webcam.videoWidth === 0) return;
 
         try {
+            // Pastikan ukuran canvas sesuai dengan video
             const tempCanvas = document.createElement("canvas");
             tempCanvas.width = webcam.videoWidth;
             tempCanvas.height = webcam.videoHeight;
             const tempCtx = tempCanvas.getContext("2d");
             tempCtx.drawImage(webcam, 0, 0, tempCanvas.width, tempCanvas.height);
 
-            // ✅ Kirim Base64 lengkap dengan prefix (Flask akan otomatis split)
-            const base64Image = tempCanvas.toDataURL("image/jpeg");
+            const base64Image = tempCanvas.toDataURL("image/jpeg"); // dengan prefix data:image/jpeg;base64
 
             await fetch("https://alpu.web.id/server/upload_frame", {
                 method: "POST",
@@ -482,8 +477,6 @@
         } catch (err) {
             console.error("❌ Gagal upload frame:", err);
         }
-
-        requestAnimationFrame(sendFrameToServer);
     }
 
     // ✅ Ambil frame hasil deteksi YOLO
@@ -491,32 +484,30 @@
         try {
             const response = await fetch("https://alpu.web.id/server/get_processed_frame");
             if (!response.ok) {
-                console.error("Gagal fetch processed frame:", await response.text());
+                console.warn("Gagal fetch processed frame:", await response.text());
                 return;
             }
             const frameData = await response.json();
-
             if (frameData.frame) {
                 const img = new Image();
                 img.onload = () => {
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
                     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                 };
-                img.src = frameData.frame; // sudah langsung data:image/jpeg;base64
+                img.src = frameData.frame;
             }
         } catch (error) {
             console.error("❌ Gagal ambil frame YOLO:", error);
         }
     }
 
-    setInterval(fetchProcessedFrame, 700); // ambil hasil setiap 700ms
-
-
     // =========== INISIALISASI APLIKASI ============
     async function initMonitoringParkir() {
         await startCamera();
-        requestAnimationFrame(sendFrameToServer);
+        setInterval(sendFrameToServer, SEND_INTERVAL);
+        setInterval(fetchProcessedFrame, 700);
     }
+
     initMonitoringParkir();
 </script>
 
