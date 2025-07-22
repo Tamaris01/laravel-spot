@@ -198,13 +198,8 @@
                     </div>
                     <div class="video-wrapper" style="position: relative;">
                         <video id="webcam" autoplay playsinline muted style="width:100%; border-radius:8px;"></video>
-                        <div style="position: relative;">
-                            <img src="/get_processed_frame"
-                                id="processedImage"
-                                style="position: absolute; top: 0; left: 0; width: 100%; border-radius: 8px;">
-                        </div>
-
-
+                        <!-- Canvas untuk bounding box -->
+                        <canvas id="canvas" style="position: absolute; top: 0; left: 0; width: 100%; border-radius:8px;"></canvas>
                     </div>
                 </div>
 
