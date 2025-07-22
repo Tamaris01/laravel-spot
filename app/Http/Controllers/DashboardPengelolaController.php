@@ -44,9 +44,6 @@ class DashboardPengelolaController extends Controller
         $jumlahPengguna = DB::table('pengguna_parkir')
             ->where('status', 'aktif')
             ->count();
-
-
-
         // Jumlah parkir yang statusnya 'masuk' dan 'keluar' berdasarkan hari ini
         $jumlahParkirMasuk = DB::table('riwayat_parkir')
             ->whereDate('waktu_masuk', $today)
