@@ -147,7 +147,7 @@
     <div class="card shadow-sm mb-4 border-0">
         <div class="card-body p-3">
             <h6 class="font-weight-bold mb-3 text-black">
-                {{ $jumlahPenggunaAktif }} Pengguna Aktif
+                {{ $jumlahPenggunaAktif }} Pengguna Aktif Hari Ini
             </h6>
 
             @if($penggunaAktif->count() > 0)
