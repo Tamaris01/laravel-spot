@@ -74,6 +74,17 @@
             </div>
         </div>
     </nav>
+    <!-- PROBLEM STATEMENT SECTION -->
+    <div class="row mt-5 text-center">
+        <div class="col-md-12">
+            <h2 class="fw-bold mb-3">Masih punya area parkir yang belum aman dan terkelola dengan baik?</h2>
+            <p class="lead text-muted">
+                Banyak pengelola parkir masih bergantung pada cara manual yang rawan kehilangan, tidak efisien, dan sulit diawasi.
+                <br>
+                Kini saatnya beralih ke sistem yang <strong>otomatis, modern, dan terpercaya</strong>.
+            </p>
+        </div>
+    </div>
 
 
     <!-- Hero Section -->
