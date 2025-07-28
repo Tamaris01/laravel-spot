@@ -132,7 +132,7 @@
     <section id="about" class="about-section" style="background-color: #f8f8f8">
         <div class="about-container">
             <div class="about-image" data-aos="fade-up">
-                <img src="{{ asset('images/about.png') }}" alt="SPOT Illustration">
+                <img src="{{ asset('images/Tentang.png') }}" alt="SPOT Illustration">
             </div>
             <div class="about-content">
                 <h2 data-aos="fade-right">Sistem Parkir Otomatis Terjamin</h2>
