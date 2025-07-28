@@ -63,9 +63,9 @@
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">Tentang</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#features">Fitur</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Fitur Utama</a></li>
                     <li class="nav-item"><a class="nav-link" href="#team">Tim</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Kontak</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Hubungi Kami</a></li>
                 </ul>
                 <div class="d-flex gap-2">
                     <a href="{{ route('register') }}" class="btn btn-outline-black">Daftar</a>
