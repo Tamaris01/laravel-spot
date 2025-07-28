@@ -101,27 +101,20 @@
     </section>
     <!-- Problem Statement Section -->
     <section id="problem-statement" class="about-section">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Text Content -->
-                <div class="col-md-6 mb-4 mb-md-0" data-aos="fade-right">
-                    <h2 class="fw-bold mb-3"> Anda Masih Mengelola Parkir Secara Manual?</h2>
-                    <p class="lead text-muted">
-                        Sistem parkir manual rentan terhadap kehilangan,ketidakefisienan, dan pengawasan yang terbatas
-                    </p>
-                    <p class="lead mb-3">
-                        SPOT hadir sebagai solusi otomatis, modern, dan terpercaya untuk pengelolaan parkir yang lebih aman dan efisien.
-                    </p>
+        <h2 class="fw-bold mb-3 text-warning"> Masih Mengelola Parkir Secara Manual? Saatnya Berubah!</h2>
+        <p class="lead text-muted">
+            Sistem parkir manual rentan terhadap kehilangan, ketidakefisienan, dan pengawasan yang terbatas.
+        </p>
+        <ul class="list-unstyled mt-3">
+            <li><i class="bi bi-x-circle text-danger me-2"></i> Risiko kehilangan kendaraan tinggi</li>
+            <li><i class="bi bi-clock-history text-danger me-2"></i> Pencatatan lambat & tidak akurat</li>
+            <li><i class="bi bi-eye-slash text-danger me-2"></i> Pengawasan minim & tidak realtime</li>
+        </ul>
+        <p class="lead mt-3">
+            <strong>SPOT</strong> hadir sebagai solusi otomatis, modern, dan terpercaya.
+        </p>
+        <a href="#solution" class="btn btn-warning mt-3">Lihat Solusi Kami</a>
 
-                </div>
-
-                <!-- Animation or Illustration -->
-                <div class="col-md-6 text-center" data-aos="fade-left">
-                    <img src="{{ asset('images/kehilangan.png') }}" alt="Kehilangan Kendaraan" class="img-fluid rounded shadow">
-                    <!-- Ganti dengan ilustrasi animasi kehilangan kendaraan -->
-                </div>
-            </div>
-        </div>
     </section>
 
 
