@@ -131,9 +131,6 @@
     <!-- About Section -->
     <section id="about" class="about-section" style="background-color: #f8f8f8">
         <div class="about-container">
-            <div class="about-image" data-aos="fade-up">
-                <img src="{{ asset('images/Tentang.png') }}" alt="SPOT Illustration">
-            </div>
             <div class="about-content">
                 <h2 data-aos="fade-right">Sistem Parkir Otomatis Terjamin</h2>
                 <p data-aos="fade-right">
@@ -147,6 +144,10 @@
                     <a href="{{ route('register') }}" class="btn btn-outline-black">Daftar</a>
                     <a href="{{ route('login') }}" class="btn btn-black">Masuk</a>
                 </div>
+            </div>
+
+            <div class="about-image" data-aos="fade-up">
+                <img src="{{ asset('images/Tentang.png') }}" alt="SPOT Illustration">
             </div>
         </div>
     </section>
