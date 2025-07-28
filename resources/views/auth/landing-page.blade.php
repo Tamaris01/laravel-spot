@@ -75,7 +75,6 @@
         </div>
     </nav>
 
-
     <!-- Hero Section -->
     <section id="home" class="hero">
         <h1 data-aos="fade-up" data-aos-delay="300">
@@ -91,7 +90,6 @@
                 <span class="yellow">T</span><span class="black">erjamin</span>
             </span>
         </h2>
-
         <p data-aos="fade-up" data-aos-delay="700">
             Nikmati kemudahan parkir cerdas yang dirancang untuk <br>
             keamanan dan kenyamanan Anda
@@ -102,21 +100,37 @@
         </a>
     </section>
 
-    <section class="py-5 bg-light" id="problem-statement">
-        <div class="container text-center">
-            <h2 class="fw-bold mb-4">🔍 Masih Mengelola Parkir Secara Manual?</h2>
-            <p class="lead text-muted mb-3">
-                Sistem parkir manual rentan terhadap <span class="text-danger fw-semibold">kehilangan</span>,
-                <span class="text-warning fw-semibold">ketidakefisienan</span>, dan <span class="text-secondary fw-semibold">pengawasan yang terbatas</span>.
-            </p>
-            <p class="lead mb-4">
-                SPOT hadir sebagai solusi <span class="text-primary fw-semibold">otomatis, modern, dan terpercaya</span> untuk pengelolaan parkir yang lebih aman dan efisien.
-            </p>
 
-
-
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="about-container">
+            <div class="about-image" data-aos="fade-up">
+                <h2 class="fw-bold mb-4">🔍 Masih Mengelola Parkir Secara Manual?</h2>
+                <p class="lead text-muted mb-3">
+                    Sistem parkir manual rentan terhadap <span class="text-danger fw-semibold">kehilangan</span>,
+                    <span class="text-warning fw-semibold">ketidakefisienan</span>, dan <span class="text-secondary fw-semibold">pengawasan yang terbatas</span>.
+                </p>
+                <p class="lead mb-4">
+                    SPOT hadir sebagai solusi <span class="text-primary fw-semibold">otomatis, modern, dan terpercaya</span> untuk pengelolaan parkir yang lebih aman dan efisien.
+                </p>
+                <img src="{{ asset('images/about.png') }}" alt="SPOT Illustration">
+            </div>
+            <div class="about-content">
+                <h2 data-aos="fade-right">Sistem Parkir Otomatis Terjamin</h2>
+                <p data-aos="fade-right">
+                    SPOT adalah sistem parkir modern yang dirancang untuk meningkatkan keamanan dan efisiensi pengelolaan parkir.
+                    Menggunakan teknologi canggih seperti Internet of Things (IoT), QR code, dan deteksi plat nomor, SPOT memudahkan
+                    proses masuk dan keluar kendaraan secara otomatis. Sistem ini memastikan kendaraan yang masuk terverifikasi dengan akurat
+                    dan membantu pengelola menganalisis pola parkir agar kapasitas lebih optimal. Dengan SPOT, parkir jadi lebih cepat, aman,
+                    dan nyaman — tanpa ribet! 🚗✨
+                </p>
+                <div class="about-buttons" data-aos="zoom-in">
+                    <a href="{{ route('register') }}" class="btn btn-outline-black">Daftar</a>
+                    <a href="{{ route('login') }}" class="btn btn-black">Masuk</a>
+                </div>
+            </div>
+        </div>
     </section>
-
 
 
     <!-- Features Section -->
