@@ -101,7 +101,7 @@
     </section>
     <section id="about" class="about-section">
         <div class="container text-center">
-            <h2 class="fw-bold mb-4">🔍 Masih Mengelola Parkir Secara Manual?</h2>
+            <h2 class="fw-bold mb-4">Masih Mengelola Parkir Secara Manual?</h2>
             <p class="lead text-muted mb-3">
                 Sistem parkir manual rentan terhadap <span class="text-danger fw-semibold">kehilangan</span>,
                 <span class="text-warning fw-semibold">ketidakefisienan</span>, dan <span class="text-secondary fw-semibold">pengawasan yang terbatas</span>.
