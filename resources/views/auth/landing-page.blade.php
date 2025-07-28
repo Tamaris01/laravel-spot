@@ -312,7 +312,8 @@
                 <p class="text-muted">
                     💡 <em>
                         Hubungi kami untuk pilihan penawaran yang Anda inginkan sekarang!
-                        <a href="#contact" style="color: #ffdb4d; text-decoration: underline;">Hubungi kami</a>
+                        <a href="#contact" style="color: #ffdb4d; font-weight: bold; text-decoration: underline;">Hubungi kami</a>
+
                     </em>
                 </p>
 
