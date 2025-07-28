@@ -115,9 +115,9 @@
                         Sistem parkir manual menyimpan berbagai risiko yang sering terjadi di lapangan:
                     </p>
                     <ul class="list-unstyled lead mt-3">
-                        <li class="mb-2"><i class="bi bi-x-circle-fill text-danger me-2"></i> Risiko kehilangan kendaraan tinggi</li>
-                        <li class="mb-2"><i class="bi bi-clock-fill text-warning me-2"></i> Pencatatan lambat & tidak akurat</li>
-                        <li class="mb-2"><i class="bi bi-eye-slash-fill text-secondary me-2"></i> Pengawasan minim & tidak realtime</li>
+                        <li class="mb-2"><i class="bi bi-x-circle-fill text-white me-2"></i> Risiko kehilangan kendaraan tinggi</li>
+                        <li class="mb-2"><i class="bi bi-clock-fill text-white me-2"></i> Pencatatan lambat & tidak akurat</li>
+                        <li class="mb-2"><i class="bi bi-eye-slash-fill text-white me-2"></i> Pengawasan minim & tidak realtime</li>
                     </ul>
                     <p class="lead text-muted mt-4">
                         Kini saatnya mempertimbangkan sistem yang lebih aman, efisien, dan sesuai dengan era digital.
