@@ -206,7 +206,7 @@
     <!-- Section Harga Layanan SPOT -->
     <section class="py-5 bg-light" id="pricing">
         <div class="container text-center">
-            <h2 class="fw-bold mb-4">💰 Harga Layanan SPOT</h2>
+            <h2 class="fw-bold mb-4">Penawaran terbatas, serbu sekarang!</h2>
             <p class="mb-5 text-muted">Solusi parkir otomatis dengan harga transparan dan fitur lengkap, sesuai kebutuhan Anda.</p>
 
             <div class="row g-4">
