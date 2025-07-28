@@ -101,7 +101,7 @@
         </a>
     </section>
     <!-- Problem Statement Section -->
-    <section id="about" class="about-section py-5" style="background-color: #ffdb4d">
+    <section class="about-section" style="background-color: #ffdb4d">
         <div class="container">
             <div class="row align-items-center">
                 <!-- Text Content -->
@@ -123,7 +123,8 @@
                     <p class="lead text-muted mt-4">
                         Kini saatnya mempertimbangkan sistem yang lebih aman, efisien, dan sesuai dengan era digital.
                     </p>
-                    <a href="#solution" class="btn btn-outline-black">Cari Tahu Solusinya</a>
+                    <a href="#about" class="btn btn-outline-black">Cari Tahu Solusinya</a>
+
                 </div>
             </div>
         </div>
