@@ -105,7 +105,7 @@
             <div class="row align-items-center">
                 <!-- Text Content -->
                 <div class="col-md-6 mb-4 mb-md-0" data-aos="fade-right">
-                    <h2 class="fw-bold mb-3"> Anda Masih Mengelola Parkir Secara Manual?</h2>
+                    <h2 class="bold mb-3"> Anda Masih Mengelola Parkir Secara Manual?</h2>
                     <p class="lead text-muted">
                         Sistem parkir manual rentan terhadap :
                     <ul class="list-unstyled mt-3">
