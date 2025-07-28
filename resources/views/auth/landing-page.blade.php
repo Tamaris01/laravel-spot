@@ -99,17 +99,38 @@
             Selengkapnya <i class="fas fa-arrow-down"></i>
         </a>
     </section>
-    <section id="about" class="about-section">
-        <div class="container text-center">
-            <h2 class="fw-bold mb-4">Masih Mengelola Parkir Secara Manual?</h2>
-            <p class="lead text-muted mb-3">
-                Sistem parkir manual rentan terhadap <span class="text-danger fw-semibold">kehilangan</span>,
-                <span class="text-warning fw-semibold">ketidakefisienan</span>, dan <span class="text-secondary fw-semibold">pengawasan yang terbatas</span>.
-            </p>
-            <p class="lead mb-4">
-                SPOT hadir sebagai solusi <span class="text-primary fw-semibold">otomatis, modern, dan terpercaya</span> untuk pengelolaan parkir yang lebih aman dan efisien.
-            </p>
+    <!-- Problem Statement Section -->
+    <section id="problem-statement" class="py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Text Content -->
+                <div class="col-md-6 mb-4 mb-md-0" data-aos="fade-right">
+                    <h2 class="fw-bold mb-3">🔍 Masih Mengelola Parkir Secara Manual?</h2>
+                    <p class="lead text-muted">
+                        Sistem parkir manual rentan terhadap
+                        <span class="text-danger fw-semibold">kehilangan</span>,
+                        <span class="text-warning fw-semibold">ketidakefisienan</span>, dan
+                        <span class="text-secondary fw-semibold">pengawasan yang terbatas</span>.
+                    </p>
+                    <p class="lead mb-3">
+                        SPOT hadir sebagai solusi <span class="text-primary fw-semibold">otomatis, modern, dan terpercaya</span>
+                        untuk pengelolaan parkir yang lebih aman dan efisien.
+                    </p>
+                    <div class="d-flex flex-column gap-2">
+                        <span class="badge bg-primary p-2">🎯 Gratis uji coba & demo</span>
+                        <span class="badge bg-success p-2">📊 Efisiensi hingga 70% dibanding sistem manual</span>
+                    </div>
+                </div>
+
+                <!-- Animation or Illustration -->
+                <div class="col-md-6 text-center" data-aos="fade-left">
+                    <img src="{{ asset('images/lost-vehicle-animation.gif') }}" alt="Kehilangan Kendaraan" class="img-fluid rounded shadow">
+                    <!-- Ganti dengan ilustrasi animasi kehilangan kendaraan -->
+                </div>
+            </div>
+        </div>
     </section>
+
 
     <!-- About Section -->
     <section id="about" class="about-section">
