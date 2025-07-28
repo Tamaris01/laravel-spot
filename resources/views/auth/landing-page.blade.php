@@ -100,7 +100,7 @@
         </a>
     </section>
     <!-- Problem Statement Section -->
-    <section id="problem-statement" class="about-section py-5" style="background-color: #ffdb4d">
+    <section id="about" class="about-section py-5" style="background-color: #ffdb4d">
         <div class="container">
             <div class="row align-items-center">
                 <!-- Text Content -->
