@@ -64,6 +64,7 @@
                     <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">Tentang</a></li>
                     <li class="nav-item"><a class="nav-link" href="#features">Fitur Utama</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#penawaran">Penawaran</a></li>
                     <li class="nav-item"><a class="nav-link" href="#team">Tim</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Hubungi Kami</a></li>
                 </ul>
@@ -204,7 +205,7 @@
         </div>
     </section>
     <!-- Section Harga Layanan SPOT -->
-    <section class="py-5 bg-light" id="pricing">
+    <section class="py-5 bg-light" id="penawaran">
         <div class="container text-center">
             <h2 class="fw-bold mb-4">Penawaran terbatas, serbu sekarang!</h2>
             <p class="mb-5 text-muted">Solusi parkir otomatis dengan harga transparan dan fitur lengkap, sesuai kebutuhan Anda.</p>
