@@ -230,7 +230,7 @@
                 <div class="col-md-4">
                     <div class="card h-100 shadow-sm border-primary">
                         <div class="card-body">
-                            <h4 class="card-title fw-semibold text-primary">🔧 Paket Profesional</h4>
+                            <h4 class="card-title fw-semibold text-yellow">🔧 Paket Profesional</h4>
                             <h3 class="text-primary">Rp 6.500.000</h3>
                             <p class="text-muted">+ Rp 300.000/bulan untuk maintenance & support</p>
                             <ul class="list-unstyled text-start">
