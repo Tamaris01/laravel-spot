@@ -114,7 +114,7 @@
                         <li><i class="bi bi-eye-slash text-danger me-2"></i> Pengawasan minim & tidak realtime</li>
                     </ul>
                     </p>
-                    <p class="lead mb-3">
+                    <p class="lead mb-2">
                         SPOT hadir sebagai solusi otomatis, modern, dan terpercaya untuk pengelolaan parkir yang lebih aman dan efisien.
                     </p>
 
