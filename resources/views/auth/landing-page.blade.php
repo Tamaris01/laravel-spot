@@ -122,7 +122,7 @@
 
                 <!-- Animation or Illustration -->
                 <div class="col-md-6 text-center" data-aos="fade-left">
-                    <img src="{{ asset('images/kehilangan.png') }}" alt="Kehilangan Kendaraan" class="img-fluid rounded shadow">
+                    <img src="{{ asset('images/kehilangan.png') }}" alt="Kehilangan Kendaraan" class="img-fluid">
                     <!-- Ganti dengan ilustrasi animasi kehilangan kendaraan -->
                 </div>
             </div>
