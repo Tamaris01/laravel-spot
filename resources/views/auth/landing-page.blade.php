@@ -100,35 +100,34 @@
         </a>
     </section>
     <!-- Problem Statement Section -->
-    <section id="problem-statement" class="about-section">
+    <section id="problem-statement" class="about-section py-5" style="background-color: #f9f9f9;">
         <div class="container">
             <div class="row align-items-center">
                 <!-- Text Content -->
                 <div class="col-md-6 mb-4 mb-md-0" data-aos="fade-right">
-                    <h2 class="fw-bold mb-3"> Anda Masih Mengelola Parkir Secara Manual?</h2>
-                    <p class="lead">
-                        Sistem parkir manual rentan terhadap :
-                    <ul class="list-unstyled mt-3">
-                        <li><i class="bi bi-x-circle text-danger me-2"></i> Risiko kehilangan kendaraan tinggi</li>
-                        <li><i class="bi bi-clock-history text-danger me-2"></i> Pencatatan lambat & tidak akurat</li>
-                        <li><i class="bi bi-eye-slash text-danger me-2"></i> Pengawasan minim & tidak realtime</li>
+                    <h2 class="fw-bold mb-4 text-dark">Masih Mengelola Parkir Secara Manual?</h2>
+                    <p class="lead text-muted">
+                        Sistem parkir manual menyimpan berbagai risiko yang sering terjadi di lapangan:
+                    </p>
+                    <ul class="list-unstyled lead mt-3">
+                        <li class="mb-2"><i class="bi bi-x-circle-fill text-danger me-2"></i> Risiko kehilangan kendaraan tinggi</li>
+                        <li class="mb-2"><i class="bi bi-clock-fill text-warning me-2"></i> Pencatatan lambat & tidak akurat</li>
+                        <li class="mb-2"><i class="bi bi-eye-slash-fill text-secondary me-2"></i> Pengawasan minim & tidak realtime</li>
                     </ul>
+                    <p class="lead text-muted mt-4">
+                        Kini saatnya mempertimbangkan sistem yang lebih aman, efisien, dan sesuai dengan era digital.
                     </p>
-                    <p class="lead mb-2">
-                        SPOT hadir sebagai solusi otomatis, modern, dan terpercaya untuk pengelolaan parkir yang lebih aman dan efisien.
-                    </p>
-
+                    <a href="#solution" class="btn btn-warning px-4 py-2 mt-3">Cari Tahu Solusinya</a>
                 </div>
 
-                <!-- Animation or Illustration -->
+                <!-- Illustration / Animation -->
                 <div class="col-md-6 text-center" data-aos="fade-left">
-                    <img src="{{ asset('images/kehilangan.png') }}" alt="Kehilangan Kendaraan" class="img-fluid">
-                    <!-- Ganti dengan ilustrasi animasi kehilangan kendaraan -->
+                    <img src="{{ asset('images/kehilangan.png') }}" alt="Ilustrasi Kehilangan Kendaraan" class="img-fluid rounded shadow">
+                    <!-- Ganti dengan animasi kendaraan hilang jika tersedia -->
                 </div>
             </div>
         </div>
     </section>
-
 
     <!-- About Section -->
     <section id="about" class="about-section">
