@@ -129,8 +129,8 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about-section" style="background-color: #ffff">
-        <div class=" about-container">
+    <section id="about" class="about-section" style="background-color: #f8f8f8">
+        <div class="about-container">
             <div class="about-image" data-aos="fade-up">
                 <img src="{{ asset('images/about.png') }}" alt="SPOT Illustration">
             </div>
