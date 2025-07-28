@@ -113,31 +113,8 @@
                 SPOT hadir sebagai solusi <span class="text-primary fw-semibold">otomatis, modern, dan terpercaya</span> untuk pengelolaan parkir yang lebih aman dan efisien.
             </p>
 
-            <div class="row justify-content-center mt-4">
-                <div class="col-md-4 mb-3">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">📈 Efisiensi Terbukti</h5>
-                            <p class="card-text">
-                                Pengelola parkir melaporkan peningkatan efisiensi <strong>hingga 75%</strong> setelah menggunakan SPOT.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">🎯 Kurangi Kehilangan</h5>
-                            <p class="card-text">
-                                Sistem deteksi otomatis dan pencatatan QR mengurangi risiko kehilangan kendaraan <strong>hingga 90%</strong>.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <a href="#demo" class="btn btn-primary btn-lg mt-4">🎁 Coba Gratis Sekarang</a>
-        </div>
+
     </section>
 
 
