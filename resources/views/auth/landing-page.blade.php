@@ -203,6 +203,73 @@
             </div>
         </div>
     </section>
+    <!-- Section Harga Layanan SPOT -->
+    <section class="py-5 bg-light" id="pricing">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-4">💰 Harga Layanan SPOT</h2>
+            <p class="mb-5 text-muted">Solusi parkir otomatis dengan harga transparan dan fitur lengkap, sesuai kebutuhan Anda.</p>
+
+            <div class="row g-4">
+                <!-- Paket Dasar -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h4 class="card-title fw-semibold">🧩 Paket Dasar</h4>
+                            <h3 class="text-primary">Rp 4.500.000</h3>
+                            <p class="text-muted">Pembayaran sekali, tanpa biaya bulanan</p>
+                            <ul class="list-unstyled text-start">
+                                <li>✅ 1 set perangkat SPOT (Sensor, NodeMCU, LCD)</li>
+                                <li>✅ Sistem monitoring berbasis web</li>
+                                <li>✅ Panduan instalasi & dokumentasi</li>
+                                <li>✅ Gratis maintenance 1 bulan</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paket Profesional -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-primary">
+                        <div class="card-body">
+                            <h4 class="card-title fw-semibold text-primary">🔧 Paket Profesional</h4>
+                            <h3 class="text-primary">Rp 6.500.000</h3>
+                            <p class="text-muted">+ Rp 300.000/bulan untuk maintenance & support</p>
+                            <ul class="list-unstyled text-start">
+                                <li>✅ Semua fitur Paket Dasar</li>
+                                <li>✅ Instalasi langsung oleh tim SPOT</li>
+                                <li>✅ Support teknis via WA/Telegram</li>
+                                <li>✅ Update sistem & fitur berkala</li>
+                                <li>✅ Maintenance perangkat rutin</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paket Enterprise -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h4 class="card-title fw-semibold">🏢 Paket Enterprise</h4>
+                            <h3 class="text-primary">Custom</h3>
+                            <p class="text-muted">Solusi fleksibel untuk skala besar</p>
+                            <ul class="list-unstyled text-start">
+                                <li>✅ Integrasi dengan sistem kampus/RS/tempat ibadah</li>
+                                <li>✅ Penyesuaian branding & fitur</li>
+                                <li>✅ Layanan pelatihan pengguna</li>
+                                <li>✅ SLA support prioritas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <p class="text-muted">🔁 <strong>Perpanjangan Maintenance Bulanan</strong>: Mulai dari <strong>Rp 300.000/bulan</strong></p>
+                <p class="text-muted">💡 <em>Tanyakan penawaran khusus untuk pilot project kampus, kantor, atau perumahan!</em></p>
+            </div>
+        </div>
+    </section>
+    <!-- End Section Harga -->
 
     <!-- Team Section -->
     <section id="team" class="section bg-team py-5">
