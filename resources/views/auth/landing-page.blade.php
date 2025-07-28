@@ -74,17 +74,6 @@
             </div>
         </div>
     </nav>
-    <!-- PROBLEM STATEMENT SECTION -->
-    <div class="row mt-5 text-center">
-        <div class="col-md-12">
-            <h2 class="fw-bold mb-3">Masih punya area parkir yang belum aman dan terkelola dengan baik?</h2>
-            <p class="lead text-muted">
-                Banyak pengelola parkir masih bergantung pada cara manual yang rawan kehilangan, tidak efisien, dan sulit diawasi.
-                <br>
-                Kini saatnya beralih ke sistem yang <strong>otomatis, modern, dan terpercaya</strong>.
-            </p>
-        </div>
-    </div>
 
 
     <!-- Hero Section -->
@@ -102,17 +91,29 @@
                 <span class="yellow">T</span><span class="black">erjamin</span>
             </span>
         </h2>
-        <p data-aos="fade-up" data-aos-delay="700">
-            Nikmati kemudahan parkir cerdas yang dirancang untuk <br>
-            keamanan dan kenyamanan Anda
-        </p>
+        <section id="home" class="hero">
+            <p data-aos="fade-up" data-aos-delay="700">
+                Nikmati kemudahan parkir cerdas yang dirancang untuk <br>
+                keamanan dan kenyamanan Anda
+            </p>
 
-        <a href="#about" class="btn btn-yellow" data-aos="fade-up" data-aos-delay="900">
-            Selengkapnya <i class="fas fa-arrow-down"></i>
-        </a>
+            <a href="#about" class="btn btn-yellow" data-aos="fade-up" data-aos-delay="900">
+                Selengkapnya <i class="fas fa-arrow-down"></i>
+            </a>
+        </section>
+
+        <!-- PROBLEM STATEMENT SECTION -->
+        <div class="row mt-5 text-center">
+            <div class="col-md-12">
+                <h2 class="fw-bold mb-3">Masih punya area parkir yang belum aman dan terkelola dengan baik?</h2>
+                <p class="lead text-muted">
+                    Banyak pengelola parkir masih bergantung pada cara manual yang rawan kehilangan, tidak efisien, dan sulit diawasi.
+                    <br>
+                    Kini saatnya beralih ke sistem yang <strong>otomatis, modern, dan terpercaya</strong>.
+                </p>
+            </div>
+        </div>
     </section>
-
-
     <!-- About Section -->
     <section id="about" class="about-section">
         <div class="about-container">
