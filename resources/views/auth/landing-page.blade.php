@@ -218,8 +218,7 @@
                             <h3 class="text-primary">Rp 4.500.000</h3>
                             <p class="text-muted">Pembayaran sekali, tanpa biaya bulanan</p>
                             <ul class="list-unstyled text-start">
-                                <li>✅ 1 set perangkat SPOT (Sensor, NodeMCU, LCD)</li>
-                                <li>✅ Sistem monitoring berbasis web</li>
+                                <li>✅ 1 set perangkat IoT SPOT</li>
                                 <li>✅ Panduan instalasi & dokumentasi</li>
                                 <li>✅ Gratis maintenance 1 bulan</li>
                             </ul>
@@ -235,10 +234,10 @@
                             <h3 class="text-primary">Rp 6.500.000</h3>
                             <p class="text-muted">+ Rp 300.000/bulan untuk maintenance & support</p>
                             <ul class="list-unstyled text-start">
-                                <li>✅ Semua fitur Paket Dasar</li>
+                                <li>✅ 1 set perangkat IoT SPOT</li>
+                                <li>✅ Sistem monitoring berbasis web</li>
                                 <li>✅ Instalasi langsung oleh tim SPOT</li>
                                 <li>✅ Support teknis via WA/Telegram</li>
-                                <li>✅ Update sistem & fitur berkala</li>
                                 <li>✅ Maintenance perangkat rutin</li>
                             </ul>
                         </div>
@@ -253,10 +252,13 @@
                             <h3 class="text-primary">Custom</h3>
                             <p class="text-muted">Solusi fleksibel untuk skala besar</p>
                             <ul class="list-unstyled text-start">
-                                <li>✅ Integrasi dengan sistem kampus/RS/tempat ibadah</li>
+                                <li>✅ 1 set perangkat IoT SPOT</li>
+                                <li>✅ Sistem monitoring berbasis web</li>
+                                <li>✅ Integrasi dengan sistem instansi anda</li>
                                 <li>✅ Penyesuaian branding & fitur</li>
+                                <li>✅ Update sistem & fitur berkala</li>
                                 <li>✅ Layanan pelatihan pengguna</li>
-                                <li>✅ SLA support prioritas</li>
+
                             </ul>
                         </div>
                     </div>
