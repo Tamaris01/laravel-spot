@@ -106,6 +106,11 @@
                 <!-- Text Content -->
                 <div class="col-md-6 mb-4 mb-md-0" data-aos="fade-right">
                     <h2 class="fw-bold mb-4 text-dark">Masih Mengelola Parkir Secara Manual?</h2>
+                    <img src="{{ asset('images/kehilangan.png') }}" alt="Ilustrasi Kehilangan Kendaraan" class="img-fluid rounded shadow">
+                </div>
+
+                <!-- Illustration / Animation -->
+                <div class="col-md-6 text-center" data-aos="fade-left">
                     <p class="lead text-muted">
                         Sistem parkir manual menyimpan berbagai risiko yang sering terjadi di lapangan:
                     </p>
@@ -118,12 +123,6 @@
                         Kini saatnya mempertimbangkan sistem yang lebih aman, efisien, dan sesuai dengan era digital.
                     </p>
                     <a href="#solution" class="btn btn-warning px-4 py-2 mt-3">Cari Tahu Solusinya</a>
-                </div>
-
-                <!-- Illustration / Animation -->
-                <div class="col-md-6 text-center" data-aos="fade-left">
-                    <img src="{{ asset('images/kehilangan.png') }}" alt="Ilustrasi Kehilangan Kendaraan" class="img-fluid rounded shadow">
-                    <!-- Ganti dengan animasi kendaraan hilang jika tersedia -->
                 </div>
             </div>
         </div>
