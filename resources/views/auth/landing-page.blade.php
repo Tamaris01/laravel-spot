@@ -102,22 +102,41 @@
         </a>
     </section>
 
-    <!-- PROBLEM STATEMENT SECTION -->
-    <section id="home" class="hero py-5" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
-        <div class="container">
-            <div class="row justify-content-center text-center align-items-center">
-                <div class="col-lg-10" data-aos="fade-up">
-                    <div class="p-4 rounded shadow-sm" style="background-color: white;">
-                        <h2 class="fw-bold mb-3 text-dark">
-                            ❓ Masih punya area parkir yang belum aman dan terkelola dengan baik?
-                        </h2>
-                        <p class="lead text-muted">
-                            Banyak pengelola parkir masih bergantung pada cara <strong>manual</strong> yang <span class="text-danger">rawan kehilangan</span>, <span class="text-warning">tidak efisien</span>, dan <span class="text-secondary">sulit diawasi</span>.<br>
-                            Kini saatnya beralih ke sistem yang <span class="text-primary fw-bold">otomatis, modern, dan terpercaya</span>.
-                        </p>
+    <section class="py-5 bg-light" id="problem-statement">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-4">🔍 Masih Mengelola Parkir Secara Manual?</h2>
+            <p class="lead text-muted mb-3">
+                Sistem parkir manual rentan terhadap <span class="text-danger fw-semibold">kehilangan</span>,
+                <span class="text-warning fw-semibold">ketidakefisienan</span>, dan <span class="text-secondary fw-semibold">pengawasan yang terbatas</span>.
+            </p>
+            <p class="lead mb-4">
+                SPOT hadir sebagai solusi <span class="text-primary fw-semibold">otomatis, modern, dan terpercaya</span> untuk pengelolaan parkir yang lebih aman dan efisien.
+            </p>
+
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-4 mb-3">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">📈 Efisiensi Terbukti</h5>
+                            <p class="card-text">
+                                Pengelola parkir melaporkan peningkatan efisiensi <strong>hingga 75%</strong> setelah menggunakan SPOT.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">🎯 Kurangi Kehilangan</h5>
+                            <p class="card-text">
+                                Sistem deteksi otomatis dan pencatatan QR mengurangi risiko kehilangan kendaraan <strong>hingga 90%</strong>.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <a href="#demo" class="btn btn-primary btn-lg mt-4">🎁 Coba Gratis Sekarang</a>
         </div>
     </section>
 
