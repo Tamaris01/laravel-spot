@@ -215,7 +215,7 @@
                     <div class="card h-100 shadow-sm">
                         <div class="card-body">
                             <h4 class="card-title fw-semibold">🧩 Paket Dasar</h4>
-                            <h3 class="text-primary">Rp 4.500.000</h3>
+                            <h3 style="color: #ffdb4d;">Rp 4.500.000</h3>
                             <p class="text-muted">Pembayaran sekali, tanpa biaya bulanan</p>
                             <ul class="list-unstyled text-start">
                                 <li>✅ 1 set perangkat IoT SPOT</li>
@@ -228,10 +228,10 @@
 
                 <!-- Paket Profesional -->
                 <div class="col-md-4">
-                    <div class="card h-100 shadow-sm border-primary">
+                    <div class="card h-100 shadow-sm" style="border: 1px solid #ffdb4d;">
                         <div class="card-body">
-                            <h4 class="card-title fw-semibold text-yellow">🔧 Paket Profesional</h4>
-                            <h3 class="text-primary">Rp 6.500.000</h3>
+                            <h4 class="card-title fw-semibold" style="color: #ffdb4d;">🔧 Paket Profesional</h4>
+                            <h3 style="color: #ffdb4d;">Rp 6.500.000</h3>
                             <p class="text-muted">+ Rp 300.000/bulan untuk maintenance & support</p>
                             <ul class="list-unstyled text-start">
                                 <li>✅ 1 set perangkat IoT SPOT</li>
@@ -249,7 +249,7 @@
                     <div class="card h-100 shadow-sm">
                         <div class="card-body">
                             <h4 class="card-title fw-semibold">🏢 Paket Enterprise</h4>
-                            <h3 class="text-primary">Custom</h3>
+                            <h3 style="color: #ffdb4d;">Custom</h3>
                             <p class="text-muted">Solusi fleksibel untuk skala besar</p>
                             <ul class="list-unstyled text-start">
                                 <li>✅ 1 set perangkat IoT SPOT</li>
@@ -258,7 +258,6 @@
                                 <li>✅ Penyesuaian branding & fitur</li>
                                 <li>✅ Update sistem & fitur berkala</li>
                                 <li>✅ Layanan pelatihan pengguna</li>
-
                             </ul>
                         </div>
                     </div>
