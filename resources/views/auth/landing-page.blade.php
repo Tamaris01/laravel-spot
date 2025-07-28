@@ -130,7 +130,7 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about-section" style="background-color: #f8f8f8">
+    <section id="about" class="about-section">
         <div class="about-container">
             <div class="about-content">
                 <h2 data-aos="fade-right">Sistem Parkir Otomatis Terjamin</h2>
