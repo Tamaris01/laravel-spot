@@ -110,7 +110,7 @@
                 </div>
 
                 <!-- Illustration / Animation -->
-                <div class="col-md-6 text-center" data-aos="fade-left">
+                <div class="col-md-6" data-aos="fade-left">
                     <p class="lead text-muted">
                         Sistem parkir manual menyimpan berbagai risiko yang sering terjadi di lapangan:
                     </p>
