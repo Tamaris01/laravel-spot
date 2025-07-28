@@ -99,20 +99,22 @@
             Selengkapnya <i class="fas fa-arrow-down"></i>
         </a>
     </section>
-
+    <section id="about" class="about-section">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-4">🔍 Masih Mengelola Parkir Secara Manual?</h2>
+            <p class="lead text-muted mb-3">
+                Sistem parkir manual rentan terhadap <span class="text-danger fw-semibold">kehilangan</span>,
+                <span class="text-warning fw-semibold">ketidakefisienan</span>, dan <span class="text-secondary fw-semibold">pengawasan yang terbatas</span>.
+            </p>
+            <p class="lead mb-4">
+                SPOT hadir sebagai solusi <span class="text-primary fw-semibold">otomatis, modern, dan terpercaya</span> untuk pengelolaan parkir yang lebih aman dan efisien.
+            </p>
+    </section>
 
     <!-- About Section -->
     <section id="about" class="about-section">
         <div class="about-container">
             <div class="about-image" data-aos="fade-up">
-                <h2 class="fw-bold mb-4">🔍 Masih Mengelola Parkir Secara Manual?</h2>
-                <p class="lead text-muted mb-3">
-                    Sistem parkir manual rentan terhadap <span class="text-danger fw-semibold">kehilangan</span>,
-                    <span class="text-warning fw-semibold">ketidakefisienan</span>, dan <span class="text-secondary fw-semibold">pengawasan yang terbatas</span>.
-                </p>
-                <p class="lead mb-4">
-                    SPOT hadir sebagai solusi <span class="text-primary fw-semibold">otomatis, modern, dan terpercaya</span> untuk pengelolaan parkir yang lebih aman dan efisien.
-                </p>
                 <img src="{{ asset('images/about.png') }}" alt="SPOT Illustration">
             </div>
             <div class="about-content">
