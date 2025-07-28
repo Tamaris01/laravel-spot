@@ -309,7 +309,13 @@
 
             <div class="mt-5">
                 <p class="text-muted">🔁 <strong>Perpanjangan Maintenance Bulanan</strong>: Mulai dari <strong>Rp 300.000/bulan</strong></p>
-                <p class="text-muted">💡 <em>Tanyakan penawaran khusus untuk pilot project kampus, kantor, atau perumahan!</em></p>
+                <p class="text-muted">
+                    💡 <em>
+                        Hubungi kami untuk pilihan penawaran yang Anda inginkan sekarang!
+                        <a href="#contact" style="color: #ffdb4d; text-decoration: underline;">Hubungi kami</a>
+                    </em>
+                </p>
+
             </div>
         </div>
     </section>
