@@ -122,7 +122,7 @@
                     <p class="lead text-muted mt-4">
                         Kini saatnya mempertimbangkan sistem yang lebih aman, efisien, dan sesuai dengan era digital.
                     </p>
-                    <a href="#solution" class="btn btn-warning px-4 py-2 mt-3">Cari Tahu Solusinya</a>
+                    <a href="#solution" class="btn btn-outline-black">Cari Tahu Solusinya</a>
                 </div>
             </div>
         </div>
