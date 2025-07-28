@@ -107,14 +107,10 @@
                 <div class="col-md-6 mb-4 mb-md-0" data-aos="fade-right">
                     <h2 class="fw-bold mb-3"> Anda Masih Mengelola Parkir Secara Manual?</h2>
                     <p class="lead text-muted">
-                        Sistem parkir manual rentan terhadap
-                        <span class="text-danger fw-semibold">kehilangan</span>,
-                        <span class="text-warning fw-semibold">ketidakefisienan</span>, dan
-                        <span class="text-secondary fw-semibold">pengawasan yang terbatas</span>.
+                        Sistem parkir manual rentan terhadap kehilangan,ketidakefisienan, dan pengawasan yang terbatas
                     </p>
                     <p class="lead mb-3">
-                        SPOT hadir sebagai solusi <span class="text-primary fw-semibold">otomatis, modern, dan terpercaya</span>
-                        untuk pengelolaan parkir yang lebih aman dan efisien.
+                        SPOT hadir sebagai solusi otomatis, modern, dan terpercaya untuk pengelolaan parkir yang lebih aman dan efisien.
                     </p>
                     <div class="d-flex flex-column gap-2">
                         <span class="badge bg-primary p-2">🎯 Gratis uji coba & demo</span>
