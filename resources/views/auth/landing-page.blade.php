@@ -112,10 +112,7 @@
                     <p class="lead mb-3">
                         SPOT hadir sebagai solusi otomatis, modern, dan terpercaya untuk pengelolaan parkir yang lebih aman dan efisien.
                     </p>
-                    <div class="d-flex flex-column gap-2">
-                        <span class="badge bg-primary p-2">🎯 Gratis uji coba & demo</span>
-                        <span class="badge bg-success p-2">📊 Efisiensi hingga 70% dibanding sistem manual</span>
-                    </div>
+
                 </div>
 
                 <!-- Animation or Illustration -->
