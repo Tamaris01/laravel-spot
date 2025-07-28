@@ -103,40 +103,24 @@
     </section>
 
     <!-- PROBLEM STATEMENT SECTION -->
-    <section id="home" class="hero">
-        <div class="row mt-5 text-center">
-            <div class="col-md-12">
-                <h2 class="fw-bold mb-3">Masih punya area parkir yang belum aman dan terkelola dengan baik?</h2>
-                <p class="lead text-muted">
-                    Banyak pengelola parkir masih bergantung pada cara manual yang rawan kehilangan, tidak efisien, dan sulit diawasi.
-                    <br>
-                    Kini saatnya beralih ke sistem yang <strong>otomatis, modern, dan terpercaya</strong>.
-                </p>
-            </div>
-        </div>
-    </section>
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <div class="about-container">
-            <div class="about-image" data-aos="fade-up">
-                <img src="{{ asset('images/about.png') }}" alt="SPOT Illustration">
-            </div>
-            <div class="about-content">
-                <h2 data-aos="fade-right">Sistem Parkir Otomatis Terjamin</h2>
-                <p data-aos="fade-right">
-                    SPOT adalah sistem parkir modern yang dirancang untuk meningkatkan keamanan dan efisiensi pengelolaan parkir.
-                    Menggunakan teknologi canggih seperti Internet of Things (IoT), QR code, dan deteksi plat nomor, SPOT memudahkan
-                    proses masuk dan keluar kendaraan secara otomatis. Sistem ini memastikan kendaraan yang masuk terverifikasi dengan akurat
-                    dan membantu pengelola menganalisis pola parkir agar kapasitas lebih optimal. Dengan SPOT, parkir jadi lebih cepat, aman,
-                    dan nyaman — tanpa ribet! 🚗✨
-                </p>
-                <div class="about-buttons" data-aos="zoom-in">
-                    <a href="{{ route('register') }}" class="btn btn-outline-black">Daftar</a>
-                    <a href="{{ route('login') }}" class="btn btn-black">Masuk</a>
+    <section id="home" class="hero py-5" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
+        <div class="container">
+            <div class="row justify-content-center text-center align-items-center">
+                <div class="col-lg-10" data-aos="fade-up">
+                    <div class="p-4 rounded shadow-sm" style="background-color: white;">
+                        <h2 class="fw-bold mb-3 text-dark">
+                            ❓ Masih punya area parkir yang belum aman dan terkelola dengan baik?
+                        </h2>
+                        <p class="lead text-muted">
+                            Banyak pengelola parkir masih bergantung pada cara <strong>manual</strong> yang <span class="text-danger">rawan kehilangan</span>, <span class="text-warning">tidak efisien</span>, dan <span class="text-secondary">sulit diawasi</span>.<br>
+                            Kini saatnya beralih ke sistem yang <span class="text-primary fw-bold">otomatis, modern, dan terpercaya</span>.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
 
 
     <!-- Features Section -->
