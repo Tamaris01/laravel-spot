@@ -100,7 +100,7 @@
         </a>
     </section>
     <!-- Problem Statement Section -->
-    <section id="about" class="about-section">
+    <section id="problem-statement" class="about-section">
         <div class="container">
             <div class="row align-items-center">
                 <!-- Text Content -->
