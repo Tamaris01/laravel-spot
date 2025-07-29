@@ -30,7 +30,7 @@
     <!-- CSS Icon-->
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3G8CML90EN"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3XHY9WDYCP"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -39,8 +39,9 @@
         }
         gtag('js', new Date());
 
-        gtag('config', 'G-3G8CML90EN');
+        gtag('config', 'G-3XHY9WDYCP');
     </script>
+
 </head>
 
 <body>
