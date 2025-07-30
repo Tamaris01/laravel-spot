@@ -375,6 +375,7 @@
                             <h3 style="color: #ffdb4d;">Rp 4.500.000</h3>
                             <p class="text-muted">Pembayaran sekali, tanpa biaya bulanan</p>
                             <ul class="list-unstyled text-start">
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Perangkat IoT</li>
                                 <li><i class="bi bi-check-circle-fill text-success me-2"></i> Sistem scan QR</li>
                                 <li><i class="bi bi-check-circle-fill text-success me-2"></i> Dashboard Admin</li>
                                 <li><i class="bi bi-check-circle-fill text-success me-2"></i> Riwayat Transaksi</li>
@@ -427,8 +428,7 @@
                 <p class="text-muted"><i class="bi bi-arrow-repeat me-2"></i><strong>Perpanjangan Maintenance Bulanan</strong>: Mulai dari <strong>Rp 300.000/bulan</strong></p>
                 <p class="text-muted">
                     <em>
-                        Hubungi kami untuk pilihan penawaran yang Anda inginkan sekarang!
-                        <a href="#contact" style="color: #ffdb4d; font-weight: bold; text-decoration: underline;">Hubungi kami</a>
+                        <a href="#contact" style="color: #ffdb4d; font-weight: bold; text-decoration: underline;">Hubungi kami</a>untuk pilihan penawaran yang Anda inginkan sekarang!
 
                     </em>
                 </p>
