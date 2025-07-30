@@ -126,7 +126,7 @@
                     <img src="{{ asset('images/Tentang.png') }}" alt="SPOT Illustration" class="img-fluid rounded">
                 </div>
                 <div class="col-md-6 order-md-1" data-aos="fade-right">
-                    <h3 class="fw-bold mb-3">Sistem Parkir Otomatis Terjamin</h3>
+                    <h3 class="fw-bold mb-3">SPOT (Sistem Parkir Otomatis Terjamin)</h3>
                     <p class="lead text-muted" style="text-align: justify;">
                         SPOT adalah sistem parkir modern yang dirancang untuk meningkatkan keamanan dan efisiensi pengelolaan parkir.
                         Menggunakan teknologi canggih seperti Internet of Things (IoT), QR code, dan deteksi plat nomor, SPOT memudahkan
