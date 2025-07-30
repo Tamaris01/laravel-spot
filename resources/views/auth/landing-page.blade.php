@@ -269,20 +269,20 @@
                 <h3 class="fw-bold mb-4">💬 Apa Kata Pengguna Kami?</h3>
                 <div class="row g-3">
                     <div class="col-md-4">
-                        <blockquote class="blockquote bg-white p-3 rounded shadow-sm border-start border-info border-4">
-                            <p class="mb-2">“Saya merasa lebih aman parkir di kampus sekarang.”</p>
+                        <blockquote class="blockquote bg-white p-4 rounded shadow-sm border-start border-info border-4 h-100">
+                            <p class="mb-3" style="min-height: 60px;">“Parkir jadi lebih aman dan nyaman di kampus.”</p>
                             <footer class="blockquote-footer">Penguji Mahasiswa</footer>
                         </blockquote>
                     </div>
                     <div class="col-md-4">
-                        <blockquote class="blockquote bg-white p-3 rounded shadow-sm border-start border-info border-4">
-                            <p class="mb-2">“Pemindaian QR cepat dan praktis.”</p>
+                        <blockquote class="blockquote bg-white p-4 rounded shadow-sm border-start border-info border-4 h-100">
+                            <p class="mb-3" style="min-height: 60px;">“QR code cepat dan mudah dipindai.”</p>
                             <footer class="blockquote-footer">Pengguna Beta</footer>
                         </blockquote>
                     </div>
                     <div class="col-md-4">
-                        <blockquote class="blockquote bg-white p-3 rounded shadow-sm border-start border-info border-4">
-                            <p class="mb-2">“Monitoring membantu saya memeriksa kendaraan masuk dengan mudah.”</p>
+                        <blockquote class="blockquote bg-white p-4 rounded shadow-sm border-start border-info border-4 h-100">
+                            <p class="mb-3" style="min-height: 60px;">“Monitoring bantu cek kendaraan masuk.”</p>
                             <footer class="blockquote-footer">Penguji Admin</footer>
                         </blockquote>
                     </div>
