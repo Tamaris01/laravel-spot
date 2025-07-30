@@ -245,27 +245,27 @@
             </div>
 
 
-            <!-- Session Duration -->
-            <div class="d-flex align-items-center bg-white border-start border-4 border-warning rounded-4 shadow-sm p-4 mb-4">
-                <div class="d-flex align-items-center justify-content-center rounded-4 bg-warning bg-opacity-25 me-4" style="width: 60px; height: 60px;">
-                    <i class="bi bi-clock-history text-warning fs-3"></i>
-                </div>
-                <div>
-                    <h5 class="fw-bold text-dark mb-1">Durasi & Frekuensi Sesi</h5>
-                    <p class="text-muted mb-0">
-                        Rata-rata sesi: <span class="fw-semibold text-dark">4 menit 20 detik</span><br>
-                        Kunjungan: <span class="fw-semibold text-dark">2–3 kali per hari</span>
-                    </p>
-                </div>
-            </div>
-
-
-
-
-            <!-- Retention + Feature Usage -->
             <div class="row mb-5">
+                <!-- Session Duration Card -->
+                <div class="col-md-4 mb-4">
+                    <div class="d-flex flex-column justify-content-between h-100 bg-white border-start border-warning border-4 rounded-4 shadow-sm p-4 transition">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-warning bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-clock-history fs-4 text-warning"></i>
+                            </div>
+                            <h5 class="mb-0 fw-semibold text-dark ms-3">Durasi & Frekuensi</h5>
+                        </div>
+                        <div>
+                            <p class="text-muted mb-1">Rata-rata sesi:</p>
+                            <h6 class="fw-bold text-dark">4 menit 20 detik</h6>
+                            <p class="text-muted mb-1">Kunjungan harian:</p>
+                            <h6 class="fw-bold text-dark">2–3 kali</h6>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Retention Card -->
-                <div class="col-md-6 mb-4">
+                <div class="col-md-4 mb-4">
                     <div class="d-flex flex-column justify-content-between h-100 bg-white border-start border-warning border-4 rounded-4 shadow-sm p-4 transition position-relative">
                         <span class="badge bg-warning position-absolute top-0 end-0 m-3">%</span>
                         <div>
@@ -282,7 +282,7 @@
                 </div>
 
                 <!-- Feature Usage Card -->
-                <div class="col-md-6 mb-4">
+                <div class="col-md-4 mb-4">
                     <div class="d-flex flex-column justify-content-between h-100 bg-white border-start border-warning border-4 rounded-4 shadow-sm p-4 transition position-relative">
                         <span class="badge bg-warning position-absolute top-0 end-0 m-3">Top 3</span>
                         <div>
