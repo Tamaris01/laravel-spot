@@ -159,7 +159,7 @@
 
 
     <!-- Features Section -->
-    <section id="features" class="py-5 bg-light">
+    <div class="p-4 rounded-4 mb-5" style="background-color: #ffdb4d;">
         <div class="container text-center">
             <h2 class="text-center mb-5 section-title" data-aos="zoom-in">Fitur <span class="yellow">SPOT</span></h2>
             <div class="row g-4">
@@ -207,341 +207,341 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section id="pengguna" class="py-5 bg-light" data-aos="fade-up">
-        <div class="container">
-            <div class="col text-center">
-                <h2 class="text-center fw-bold mb-5" data-aos="zoom-in">Pengguna <span class="yellow">SPOT</span></h2>
-            </div>
+        </section>
+        <section id="pengguna" class="py-5 bg-light" data-aos="fade-up">
+            <div class="container">
+                <div class="col text-center">
+                    <h2 class="text-center fw-bold mb-5" data-aos="zoom-in">Pengguna <span class="yellow">SPOT</span></h2>
+                </div>
 
-            <!-- Active Users -->
-            <div class="row text-center mb-5">
-                <div class="col-md-4 mb-4" data-aos="fade-right">
-                    <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #ffdb4d;">
-                        <i class="bi bi-calendar3 fs-1 mb-3" style="color:#ffdb4d;"></i>
-                        <h5 class="fw-semibold text-dark">MAU</h5>
-                        <h2 class="fw-bold" style="color:#ffdb4d;">100+</h2>
-                        <p class="text-muted">Pengguna Aktif Bulanan</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" data-aos="fade-up">
-                    <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #ffdb4d;">
-                        <i class="bi bi-calendar-week fs-1 mb-3" style="color:#ffdb4d;"></i>
-                        <h5 class="fw-semibold text-dark">WAU</h5>
-                        <h2 class="fw-bold" style="color:#ffdb4d;">80</h2>
-                        <p class="text-muted">Pengguna Aktif Mingguan</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" data-aos="fade-left">
-                    <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #ffdb4d;">
-                        <i class="bi bi-calendar-day fs-1 mb-3" style="color:#ffdb4d;"></i>
-                        <h5 class="fw-semibold text-dark">DAU</h5>
-                        <h2 class="fw-bold" style="color:#ffdb4d;">50</h2>
-                        <p class="text-muted">Pengguna Aktif Harian</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Additional Metrics -->
-            <div class="row mb-5">
-                <div class="col-md-4 mb-4" data-aos="flip-left">
-                    <!-- Session Duration -->
-                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5 position-relative" style="transition: 0.3s ease; border-color: #ffdb4d;">
-                        <span class="badge text-dark position-absolute top-0 end-0 m-3" style="background-color: #ffdb4d;">Harian</span>
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="rounded-circle d-flex justify-content-center align-items-center"
-                                style="width: 50px; height: 50px; background-color: rgba(255,219,77,0.25);">
-                                <i class="bi bi-clock-history fs-4" style="color:#ffdb4d;"></i>
-                            </div>
-                            <h5 class="ms-3 mb-0 fw-semibold text-dark">Durasi & Frekuensi</h5>
+                <!-- Active Users -->
+                <div class="row text-center mb-5">
+                    <div class="col-md-4 mb-4" data-aos="fade-right">
+                        <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #ffdb4d;">
+                            <i class="bi bi-calendar3 fs-1 mb-3" style="color:#ffdb4d;"></i>
+                            <h5 class="fw-semibold text-dark">MAU</h5>
+                            <h2 class="fw-bold" style="color:#ffdb4d;">100+</h2>
+                            <p class="text-muted">Pengguna Aktif Bulanan</p>
                         </div>
-                        <p class="text-muted mb-1">Rata-rata sesi:</p>
-                        <h6 class="fw-bold text-dark">4 menit 20 detik</h6>
-                        <p class="text-muted mb-1">Kunjungan harian:</p>
-                        <h6 class="fw-bold text-dark">2–3 kali</h6>
+                    </div>
+                    <div class="col-md-4 mb-4" data-aos="fade-up">
+                        <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #ffdb4d;">
+                            <i class="bi bi-calendar-week fs-1 mb-3" style="color:#ffdb4d;"></i>
+                            <h5 class="fw-semibold text-dark">WAU</h5>
+                            <h2 class="fw-bold" style="color:#ffdb4d;">80</h2>
+                            <p class="text-muted">Pengguna Aktif Mingguan</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4" data-aos="fade-left">
+                        <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #ffdb4d;">
+                            <i class="bi bi-calendar-day fs-1 mb-3" style="color:#ffdb4d;"></i>
+                            <h5 class="fw-semibold text-dark">DAU</h5>
+                            <h2 class="fw-bold" style="color:#ffdb4d;">50</h2>
+                            <p class="text-muted">Pengguna Aktif Harian</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-md-4 mb-4" data-aos="flip-up">
-                    <!-- Retention Rate -->
-                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5 position-relative" style="transition: 0.3s ease; border-color: #ffdb4d;">
-                        <span class="badge text-dark position-absolute top-0 end-0 m-3" style="background-color: #ffdb4d;">7 Hari</span>
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px; background-color: rgba(255,219,77,0.25);">
-                                <i class="bi bi-arrow-repeat fs-4" style="color:#ffdb4d;"></i>
+                <!-- Additional Metrics -->
+                <div class="row mb-5">
+                    <div class="col-md-4 mb-4" data-aos="flip-left">
+                        <!-- Session Duration -->
+                        <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5 position-relative" style="transition: 0.3s ease; border-color: #ffdb4d;">
+                            <span class="badge text-dark position-absolute top-0 end-0 m-3" style="background-color: #ffdb4d;">Harian</span>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="rounded-circle d-flex justify-content-center align-items-center"
+                                    style="width: 50px; height: 50px; background-color: rgba(255,219,77,0.25);">
+                                    <i class="bi bi-clock-history fs-4" style="color:#ffdb4d;"></i>
+                                </div>
+                                <h5 class="ms-3 mb-0 fw-semibold text-dark">Durasi & Frekuensi</h5>
                             </div>
-                            <h5 class="ms-3 mb-0 fw-semibold text-dark">Retensi Pengguna</h5>
+                            <p class="text-muted mb-1">Rata-rata sesi:</p>
+                            <h6 class="fw-bold text-dark">4 menit 20 detik</h6>
+                            <p class="text-muted mb-1">Kunjungan harian:</p>
+                            <h6 class="fw-bold text-dark">2–3 kali</h6>
                         </div>
-                        <h2 class="fw-bold" style="color:#ffdb4d;">72%</h2>
-                        <p class="text-muted">Kembali dalam 7 hari terakhir</p>
+                    </div>
+
+                    <div class="col-md-4 mb-4" data-aos="flip-up">
+                        <!-- Retention Rate -->
+                        <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5 position-relative" style="transition: 0.3s ease; border-color: #ffdb4d;">
+                            <span class="badge text-dark position-absolute top-0 end-0 m-3" style="background-color: #ffdb4d;">7 Hari</span>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px; background-color: rgba(255,219,77,0.25);">
+                                    <i class="bi bi-arrow-repeat fs-4" style="color:#ffdb4d;"></i>
+                                </div>
+                                <h5 class="ms-3 mb-0 fw-semibold text-dark">Retensi Pengguna</h5>
+                            </div>
+                            <h2 class="fw-bold" style="color:#ffdb4d;">72%</h2>
+                            <p class="text-muted">Kembali dalam 7 hari terakhir</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-4" data-aos="flip-right">
+                        <!-- Feature Usage -->
+                        <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5 position-relative" style="transition: 0.3s ease; border-color: #ffdb4d;">
+                            <span class="badge text-dark position-absolute top-0 end-0 m-3" style="background-color: #ffdb4d;">Top 3</span>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px; background-color: rgba(255,219,77,0.25);">
+                                    <i class="bi bi-stars fs-4" style="color:#ffdb4d;"></i>
+                                </div>
+                                <h5 class="ms-3 mb-0 fw-semibold text-dark">Fitur Populer</h5>
+                            </div>
+                            <ul class="list-unstyled text-muted mb-0">
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>70% QR Scan</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>35% Deteksi Plat</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i>15% Laporan Parkir</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-md-4 mb-4" data-aos="flip-right">
-                    <!-- Feature Usage -->
-                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5 position-relative" style="transition: 0.3s ease; border-color: #ffdb4d;">
-                        <span class="badge text-dark position-absolute top-0 end-0 m-3" style="background-color: #ffdb4d;">Top 3</span>
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px; background-color: rgba(255,219,77,0.25);">
-                                <i class="bi bi-stars fs-4" style="color:#ffdb4d;"></i>
+                <!-- Testimonials -->
+                <div class="mb-5">
+                    <h3 class="fw-bold mb-4 text-center" data-aos="zoom-in-up">Apa Kata Pengguna Kami?</h3>
+                    <div class="row g-4">
+                        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="card h-100 border-0 shadow-lg rounded-4 p-3 bg-gradient" style="background: linear-gradient(135deg, #fff8e1, #ffffff); transition: transform 0.3s;">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start mb-3">
+                                        <div class="me-3">
+                                            <i class="bi bi-shield-check fs-2" style="color:#ffdb4d;"></i>
+                                        </div>
+                                        <div>
+                                            <p class="mb-2 fs-5">“Parkir jadi lebih aman dan nyaman di kampus.”</p>
+                                            <small class="text-muted">— Penguji Mahasiswa</small>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <h5 class="ms-3 mb-0 fw-semibold text-dark">Fitur Populer</h5>
                         </div>
-                        <ul class="list-unstyled text-muted mb-0">
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>70% QR Scan</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>35% Deteksi Plat</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>15% Laporan Parkir</li>
-                        </ul>
+                        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="card h-100 border-0 shadow-lg rounded-4 p-3 bg-gradient" style="background: linear-gradient(135deg, #e3f2fd, #ffffff); transition: transform 0.3s;">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start mb-3">
+                                        <div class="me-3">
+                                            <i class="bi bi-qr-code-scan fs-2" style="color:#ffdb4d;"></i>
+                                        </div>
+                                        <div>
+                                            <p class="mb-2 fs-5">“QR code cepat dan mudah dipindai.”</p>
+                                            <small class="text-muted">— Pengguna Beta</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                            <div class="card h-100 border-0 shadow-lg rounded-4 p-3 bg-gradient" style="background: linear-gradient(135deg, #f3e5f5, #ffffff); transition: transform 0.3s;">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start mb-3">
+                                        <div class="me-3">
+                                            <i class="bi bi-camera-video fs-2" style="color:#ffdb4d;"></i>
+                                        </div>
+                                        <div>
+                                            <p class="mb-2 fs-5">“Monitoring bantu cek kendaraan masuk.”</p>
+                                            <small class="text-muted">— Penguji Admin</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
+        </section>
 
-            <!-- Testimonials -->
-            <div class="mb-5">
-                <h3 class="fw-bold mb-4 text-center" data-aos="zoom-in-up">Apa Kata Pengguna Kami?</h3>
+        <!-- Section Harga Layanan SPOT -->
+        <section class="py-5 bg-light" id="penawaran">
+            <div class="container text-center">
+                <h2 class="fw-bold mb-4">Penawaran terbatas, serbu sekarang!</h2>
+                <p class="mb-5 text-muted">Solusi parkir otomatis dengan harga transparan dan fitur lengkap, sesuai kebutuhan Anda.</p>
+
                 <div class="row g-4">
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                        <div class="card h-100 border-0 shadow-lg rounded-4 p-3 bg-gradient" style="background: linear-gradient(135deg, #fff8e1, #ffffff); transition: transform 0.3s;">
+                    <!-- Paket Dasar -->
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm">
                             <div class="card-body">
-                                <div class="d-flex align-items-start mb-3">
-                                    <div class="me-3">
-                                        <i class="bi bi-shield-check fs-2" style="color:#ffdb4d;"></i>
-                                    </div>
-                                    <div>
-                                        <p class="mb-2 fs-5">“Parkir jadi lebih aman dan nyaman di kampus.”</p>
-                                        <small class="text-muted">— Penguji Mahasiswa</small>
-                                    </div>
-                                </div>
+                                <h4 class="card-title fw-semibold">🧩 Paket Dasar</h4>
+                                <h3 style="color: #ffdb4d;">Rp 4.500.000</h3>
+                                <p class="text-muted">Pembayaran sekali, tanpa biaya bulanan</p>
+                                <ul class="list-unstyled text-start" style="padding-left: 0;">
+                                    <li style="display: flex; align-items: center; margin-bottom: 6px;">
+                                        <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
+                                        <span>1 set perangkat IoT SPOT</span>
+                                    </li>
+                                    <li style="display: flex; align-items: center; margin-bottom: 6px;">
+                                        <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
+                                        <span>Panduan instalasi & dokumentasi</span>
+                                    </li>
+                                    <li style="display: flex; align-items: center;">
+                                        <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
+                                        <span>Gratis maintenance 1 bulan</span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                        <div class="card h-100 border-0 shadow-lg rounded-4 p-3 bg-gradient" style="background: linear-gradient(135deg, #e3f2fd, #ffffff); transition: transform 0.3s;">
+
+                    <!-- Paket Profesional -->
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm" style="border: 1px solid #ffdb4d;">
                             <div class="card-body">
-                                <div class="d-flex align-items-start mb-3">
-                                    <div class="me-3">
-                                        <i class="bi bi-qr-code-scan fs-2" style="color:#ffdb4d;"></i>
-                                    </div>
-                                    <div>
-                                        <p class="mb-2 fs-5">“QR code cepat dan mudah dipindai.”</p>
-                                        <small class="text-muted">— Pengguna Beta</small>
-                                    </div>
-                                </div>
+                                <h4 class="card-title fw-semibold" style="color: #ffdb4d;">🔧 Paket Profesional</h4>
+                                <h3 style="color: #ffdb4d;">Rp 6.500.000</h3>
+                                <p class="text-muted">+ Rp 300.000/bulan untuk maintenance & support</p>
+                                <ul class="list-unstyled text-start" style="padding-left: 0;">
+                                    <li style="display: flex; align-items: center; margin-bottom: 6px;">
+                                        <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
+                                        <span>1 set perangkat IoT SPOT</span>
+                                    </li>
+                                    <li style="display: flex; align-items: center; margin-bottom: 6px;">
+                                        <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
+                                        <span>Sistem monitoring berbasis web</span>
+                                    </li>
+                                    <li style="display: flex; align-items: center; margin-bottom: 6px;">
+                                        <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
+                                        <span>Instalasi langsung oleh tim SPOT</span>
+                                    </li>
+                                    <li style="display: flex; align-items: center; margin-bottom: 6px;">
+                                        <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
+                                        <span>Support teknis via WA/Telegram</span>
+                                    </li>
+                                    <li style="display: flex; align-items: center;">
+                                        <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
+                                        <span>Maintenance perangkat rutin</span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                        <div class="card h-100 border-0 shadow-lg rounded-4 p-3 bg-gradient" style="background: linear-gradient(135deg, #f3e5f5, #ffffff); transition: transform 0.3s;">
+
+                    <!-- Paket Enterprise -->
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm">
                             <div class="card-body">
-                                <div class="d-flex align-items-start mb-3">
-                                    <div class="me-3">
-                                        <i class="bi bi-camera-video fs-2" style="color:#ffdb4d;"></i>
-                                    </div>
-                                    <div>
-                                        <p class="mb-2 fs-5">“Monitoring bantu cek kendaraan masuk.”</p>
-                                        <small class="text-muted">— Penguji Admin</small>
-                                    </div>
-                                </div>
+                                <h4 class="card-title fw-semibold">🏢 Paket Enterprise</h4>
+                                <h3 style="color: #ffdb4d;">Custom</h3>
+                                <p class="text-muted">Solusi fleksibel untuk skala besar</p>
+                                <ul class="list-unstyled text-start" style="padding-left: 0;">
+                                    <li style="display: flex; align-items: center; margin-bottom: 6px;">
+                                        <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
+                                        <span>1 set perangkat IoT SPOT</span>
+                                    </li>
+                                    <li style="display: flex; align-items: center; margin-bottom: 6px;">
+                                        <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
+                                        <span>Sistem monitoring berbasis web</span>
+                                    </li>
+                                    <li style="display: flex; align-items: center; margin-bottom: 6px;">
+                                        <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
+                                        <span>Integrasi dengan sistem instansi anda</span>
+                                    </li>
+                                    <li style="display: flex; align-items: center; margin-bottom: 6px;">
+                                        <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
+                                        <span>Penyesuaian branding & fitur</span>
+                                    </li>
+                                    <li style="display: flex; align-items: center; margin-bottom: 6px;">
+                                        <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
+                                        <span>Update sistem & fitur berkala</span>
+                                    </li>
+                                    <li style="display: flex; align-items: center;">
+                                        <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
+                                        <span>Layanan pelatihan pengguna</span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="mt-5">
+                    <p class="text-muted">🔁 <strong>Perpanjangan Maintenance Bulanan</strong>: Mulai dari <strong>Rp 300.000/bulan</strong></p>
+                    <p class="text-muted">
+                        💡 <em>
+                            Hubungi kami untuk pilihan penawaran yang Anda inginkan sekarang!
+                            <a href="#contact" style="color: #ffdb4d; font-weight: bold; text-decoration: underline;">Hubungi kami</a>
+
+                        </em>
+                    </p>
+
                 </div>
             </div>
+        </section>
+        <!-- End Section Harga -->
 
-        </div>
-    </section>
 
-    <!-- Section Harga Layanan SPOT -->
-    <section class="py-5 bg-light" id="penawaran">
-        <div class="container text-center">
-            <h2 class="fw-bold mb-4">Penawaran terbatas, serbu sekarang!</h2>
-            <p class="mb-5 text-muted">Solusi parkir otomatis dengan harga transparan dan fitur lengkap, sesuai kebutuhan Anda.</p>
-
-            <div class="row g-4">
-                <!-- Paket Dasar -->
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h4 class="card-title fw-semibold">🧩 Paket Dasar</h4>
-                            <h3 style="color: #ffdb4d;">Rp 4.500.000</h3>
-                            <p class="text-muted">Pembayaran sekali, tanpa biaya bulanan</p>
-                            <ul class="list-unstyled text-start" style="padding-left: 0;">
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>1 set perangkat IoT SPOT</span>
-                                </li>
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Panduan instalasi & dokumentasi</span>
-                                </li>
-                                <li style="display: flex; align-items: center;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Gratis maintenance 1 bulan</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Paket Profesional -->
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm" style="border: 1px solid #ffdb4d;">
-                        <div class="card-body">
-                            <h4 class="card-title fw-semibold" style="color: #ffdb4d;">🔧 Paket Profesional</h4>
-                            <h3 style="color: #ffdb4d;">Rp 6.500.000</h3>
-                            <p class="text-muted">+ Rp 300.000/bulan untuk maintenance & support</p>
-                            <ul class="list-unstyled text-start" style="padding-left: 0;">
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>1 set perangkat IoT SPOT</span>
-                                </li>
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Sistem monitoring berbasis web</span>
-                                </li>
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Instalasi langsung oleh tim SPOT</span>
-                                </li>
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Support teknis via WA/Telegram</span>
-                                </li>
-                                <li style="display: flex; align-items: center;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Maintenance perangkat rutin</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Paket Enterprise -->
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h4 class="card-title fw-semibold">🏢 Paket Enterprise</h4>
-                            <h3 style="color: #ffdb4d;">Custom</h3>
-                            <p class="text-muted">Solusi fleksibel untuk skala besar</p>
-                            <ul class="list-unstyled text-start" style="padding-left: 0;">
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>1 set perangkat IoT SPOT</span>
-                                </li>
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Sistem monitoring berbasis web</span>
-                                </li>
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Integrasi dengan sistem instansi anda</span>
-                                </li>
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Penyesuaian branding & fitur</span>
-                                </li>
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Update sistem & fitur berkala</span>
-                                </li>
-                                <li style="display: flex; align-items: center;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Layanan pelatihan pengguna</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-5">
-                <p class="text-muted">🔁 <strong>Perpanjangan Maintenance Bulanan</strong>: Mulai dari <strong>Rp 300.000/bulan</strong></p>
-                <p class="text-muted">
-                    💡 <em>
-                        Hubungi kami untuk pilihan penawaran yang Anda inginkan sekarang!
-                        <a href="#contact" style="color: #ffdb4d; font-weight: bold; text-decoration: underline;">Hubungi kami</a>
-
-                    </em>
+        <!-- Team Section -->
+        <section id="team" class="section bg-team py-5">
+            <div class="container">
+                <h2 class="text-center mb-5 section-title" data-aos="fade-right">Tim Kami</h2>
+                <p class="text-center mb-5 section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                    Bersama, kami membangun solusi inovatif yang mendorong masa depan teknologi.
+                    Dengan semangat kolaborasi, kreativitas, dan keahlian, kami menghadirkan inovasi yang berarti
+                    untuk menjawab tantangan dunia digital yang terus berkembang.
                 </p>
-
-            </div>
-        </div>
-    </section>
-    <!-- End Section Harga -->
-
-
-    <!-- Team Section -->
-    <section id="team" class="section bg-team py-5">
-        <div class="container">
-            <h2 class="text-center mb-5 section-title" data-aos="fade-right">Tim Kami</h2>
-            <p class="text-center mb-5 section-subtitle" data-aos="fade-up" data-aos-delay="100">
-                Bersama, kami membangun solusi inovatif yang mendorong masa depan teknologi.
-                Dengan semangat kolaborasi, kreativitas, dan keahlian, kami menghadirkan inovasi yang berarti
-                untuk menjawab tantangan dunia digital yang terus berkembang.
-            </p>
-            <div class="row">
-                <div class="col-12 col-sm-6 col-lg-3 mb-4">
-                    <div class="team-card text-center" data-aos="zoom-in" data-aos-delay="100">
-                        <img src="{{ asset('images/Tamaris.png') }}" alt="Team Member" class="team-img">
-                        <h4>Tamaris Roulina</h4>
-                        <p>Lead Developer</p>
-                        <div class="social-icons">
-                            <a href="mailto:#" class="social-icon"><i class="ri-mail-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-instagram-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-whatsapp-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-linkedin-box-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-youtube-fill"></i></a>
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                        <div class="team-card text-center" data-aos="zoom-in" data-aos-delay="100">
+                            <img src="{{ asset('images/Tamaris.png') }}" alt="Team Member" class="team-img">
+                            <h4>Tamaris Roulina</h4>
+                            <p>Lead Developer</p>
+                            <div class="social-icons">
+                                <a href="mailto:#" class="social-icon"><i class="ri-mail-fill"></i></a>
+                                <a href="#" class="social-icon"><i class="ri-instagram-fill"></i></a>
+                                <a href="#" class="social-icon"><i class="ri-whatsapp-fill"></i></a>
+                                <a href="#" class="social-icon"><i class="ri-linkedin-box-fill"></i></a>
+                                <a href="#" class="social-icon"><i class="ri-youtube-fill"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-sm-6 col-lg-3 mb-4">
-                    <div class="team-card text-center" data-aos="zoom-in" data-aos-delay="200">
-                        <img src="{{ asset('images/Alifzidan.png') }}" alt="Team Member" class="team-img">
-                        <h4>Alifzidan Rizky</h4>
-                        <p>UI/UX Designer</p>
-                        <div class="social-icons">
-                            <a href="mailto:#" class="social-icon"><i class="ri-mail-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-instagram-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-whatsapp-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-linkedin-box-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-youtube-fill"></i></a>
-                        </div>
+                    <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                        <div class="team-card text-center" data-aos="zoom-in" data-aos-delay="200">
+                            <img src="{{ asset('images/Alifzidan.png') }}" alt="Team Member" class="team-img">
+                            <h4>Alifzidan Rizky</h4>
+                            <p>UI/UX Designer</p>
+                            <div class="social-icons">
+                                <a href="mailto:#" class="social-icon"><i class="ri-mail-fill"></i></a>
+                                <a href="#" class="social-icon"><i class="ri-instagram-fill"></i></a>
+                                <a href="#" class="social-icon"><i class="ri-whatsapp-fill"></i></a>
+                                <a href="#" class="social-icon"><i class="ri-linkedin-box-fill"></i></a>
+                                <a href="#" class="social-icon"><i class="ri-youtube-fill"></i></a>
+                            </div>
 
+                        </div>
                     </div>
-                </div>
-                <div class="col-12 col-sm-6 col-lg-3 mb-4">
-                    <div class="team-card text-center" data-aos="zoom-in" data-aos-delay="300">
-                        <img src="{{ asset('images/Elicia.png') }}" alt="Team Member" class="team-img">
-                        <h4>Elicia Sandova</h4>
-                        <p>Testing</p>
-                        <div class="social-icons">
-                            <a href="mailto:#" class="social-icon"><i class="ri-mail-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-instagram-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-whatsapp-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-linkedin-box-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-youtube-fill"></i></a>
-                        </div>
+                    <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                        <div class="team-card text-center" data-aos="zoom-in" data-aos-delay="300">
+                            <img src="{{ asset('images/Elicia.png') }}" alt="Team Member" class="team-img">
+                            <h4>Elicia Sandova</h4>
+                            <p>Testing</p>
+                            <div class="social-icons">
+                                <a href="mailto:#" class="social-icon"><i class="ri-mail-fill"></i></a>
+                                <a href="#" class="social-icon"><i class="ri-instagram-fill"></i></a>
+                                <a href="#" class="social-icon"><i class="ri-whatsapp-fill"></i></a>
+                                <a href="#" class="social-icon"><i class="ri-linkedin-box-fill"></i></a>
+                                <a href="#" class="social-icon"><i class="ri-youtube-fill"></i></a>
+                            </div>
 
+                        </div>
                     </div>
-                </div>
-                <div class="col-12 col-sm-6 col-lg-3 mb-4">
-                    <div class="team-card text-center" data-aos="zoom-in" data-aos-delay="400">
-                        <img src="{{ asset('images/Maulana.png') }}" alt="Team Member" class="team-img">
-                        <h4>Maulana Arianto</h4>
-                        <p>Backend Developer</p>
-                        <div class="social-icons">
-                            <a href="mailto:#" class="social-icon"><i class="ri-mail-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-instagram-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-whatsapp-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-linkedin-box-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-youtube-fill"></i></a>
-                        </div>
+                    <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                        <div class="team-card text-center" data-aos="zoom-in" data-aos-delay="400">
+                            <img src="{{ asset('images/Maulana.png') }}" alt="Team Member" class="team-img">
+                            <h4>Maulana Arianto</h4>
+                            <p>Backend Developer</p>
+                            <div class="social-icons">
+                                <a href="mailto:#" class="social-icon"><i class="ri-mail-fill"></i></a>
+                                <a href="#" class="social-icon"><i class="ri-instagram-fill"></i></a>
+                                <a href="#" class="social-icon"><i class="ri-whatsapp-fill"></i></a>
+                                <a href="#" class="social-icon"><i class="ri-linkedin-box-fill"></i></a>
+                                <a href="#" class="social-icon"><i class="ri-youtube-fill"></i></a>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
 
 
@@ -549,136 +549,136 @@
 
 
 
-    <!-- Contact Section -->
-    <section id="contact" class="section py-5 bg-light">
-        <h2 class="text-center mb-5 section-title" data-aos="zoom-in">Hubungi Kami</h2>
-        <div class="container d-flex justify-content-center flex-wrap gap-3">
+        <!-- Contact Section -->
+        <section id="contact" class="section py-5 bg-light">
+            <h2 class="text-center mb-5 section-title" data-aos="zoom-in">Hubungi Kami</h2>
+            <div class="container d-flex justify-content-center flex-wrap gap-3">
 
-            <form class="contact-form d-flex flex-column" style="flex: 1; max-width: 400px;" data-aos="fade-right">
-                <input type="text" class="form-control mb-2" placeholder="Nama Lengkap Anda">
-                <input type="email" class="form-control mb-2" placeholder="Alamat Email Anda">
-                <textarea class="form-control mb-2" rows="3" placeholder="Isi Pesan Anda"></textarea>
-                <button type="submit" class="btn btn-dark">
-                    <i class="fa fa-paper-plane"></i> Kirim
-                </button>
-            </form>
+                <form class="contact-form d-flex flex-column" style="flex: 1; max-width: 400px;" data-aos="fade-right">
+                    <input type="text" class="form-control mb-2" placeholder="Nama Lengkap Anda">
+                    <input type="email" class="form-control mb-2" placeholder="Alamat Email Anda">
+                    <textarea class="form-control mb-2" rows="3" placeholder="Isi Pesan Anda"></textarea>
+                    <button type="submit" class="btn btn-dark">
+                        <i class="fa fa-paper-plane"></i> Kirim
+                    </button>
+                </form>
 
-            <!-- Contact Info -->
-            <div class="contact-info d-flex flex-column" style="flex: 1; max-width: 400px;" data-aos="fade-right">
-                <div class="contact-item d-flex" data-aos="zoom-in">
-                    <div class="contact-icon-box">
-                        <i class="fa fa-phone contact-icon"></i>
+                <!-- Contact Info -->
+                <div class="contact-info d-flex flex-column" style="flex: 1; max-width: 400px;" data-aos="fade-right">
+                    <div class="contact-item d-flex" data-aos="zoom-in">
+                        <div class="contact-icon-box">
+                            <i class="fa fa-phone contact-icon"></i>
+                        </div>
+                        <div class="contact-text-box">
+                            <p>+62 821 7147 5991</p>
+                        </div>
                     </div>
-                    <div class="contact-text-box">
-                        <p>+62 821 7147 5991</p>
+                    <div class="contact-item d-flex" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="contact-icon-box">
+                            <i class="fa fa-envelope contact-icon"></i>
+                        </div>
+                        <div class="contact-text-box">
+                            <p>spotid618@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item d-flex" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="contact-icon-box">
+                            <i class="fab fa-instagram contact-icon"></i>
+                        </div>
+                        <div class="contact-text-box">
+                            <p>@spotid618</p>
+                        </div>
+                    </div>
+                    <div class="contact-item d-flex" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="contact-icon-box">
+                            <i class="fas fa-map-marker-alt contact-icon"></i>
+                        </div>
+                        <div class="contact-text-box">
+                            <p>Politeknik Negeri Batam</p>
+                        </div>
                     </div>
                 </div>
-                <div class="contact-item d-flex" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="contact-icon-box">
-                        <i class="fa fa-envelope contact-icon"></i>
-                    </div>
-                    <div class="contact-text-box">
-                        <p>spotid618@gmail.com</p>
-                    </div>
-                </div>
-                <div class="contact-item d-flex" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="contact-icon-box">
-                        <i class="fab fa-instagram contact-icon"></i>
-                    </div>
-                    <div class="contact-text-box">
-                        <p>@spotid618</p>
-                    </div>
-                </div>
-                <div class="contact-item d-flex" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="contact-icon-box">
-                        <i class="fas fa-map-marker-alt contact-icon"></i>
-                    </div>
-                    <div class="contact-text-box">
-                        <p>Politeknik Negeri Batam</p>
-                    </div>
-                </div>
+
             </div>
-
-        </div>
-    </section>
+        </section>
 
 
 
 
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 - Sistem Parkir Otomatis Terjamin</p>
-    </footer>
-    <!-- Scroll to Top Button -->
-    <button id="scrollTopBtn" onclick="scrollToTop()"><i class="fas fa-chevron-up"></i></button>
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 - Sistem Parkir Otomatis Terjamin</p>
+        </footer>
+        <!-- Scroll to Top Button -->
+        <button id="scrollTopBtn" onclick="scrollToTop()"><i class="fas fa-chevron-up"></i></button>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Tampilkan tombol scroll jika user menggulir ke bawah 100px
-        window.onscroll = function() {
-            var scrollTopBtn = document.getElementById("scrollTopBtn");
-            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                scrollTopBtn.style.display = "block";
-            } else {
-                scrollTopBtn.style.display = "none";
-            }
-        };
-
-        // Fungsi untuk scroll ke atas
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const navbar = document.querySelector(".navbar");
-            const toggle = document.querySelector(".navbar-toggle");
-            const nav = document.querySelector(".navbar-nav");
-
-            // Navbar berubah saat scroll
-            window.addEventListener("scroll", function() {
-                if (window.scrollY > 50) {
-                    navbar.classList.add("scrolled");
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // Tampilkan tombol scroll jika user menggulir ke bawah 100px
+            window.onscroll = function() {
+                var scrollTopBtn = document.getElementById("scrollTopBtn");
+                if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                    scrollTopBtn.style.display = "block";
                 } else {
-                    navbar.classList.remove("scrolled");
+                    scrollTopBtn.style.display = "none";
                 }
-            });
-
-            // Toggle menu di mobile
-            toggle.addEventListener("click", function() {
-                nav.classList.toggle("active");
-            });
-        });
-        //card
-        AOS.init({
-            duration: 1000, // Durasi animasi (ms)
-            once: false, // Animasi akan terjadi lebih dari sekali
-            easing: 'ease-in-out',
-        });
-
-        //loading
-        document.addEventListener("DOMContentLoaded", function() {
-            let loadingOverlay = document.getElementById("loading-overlay");
-
-            setTimeout(() => {
-                loadingOverlay.style.display = "flex";
-            }, 100);
-
-            window.onload = function() {
-                setTimeout(() => {
-                    loadingOverlay.style.opacity = "0";
-                    setTimeout(() => {
-                        loadingOverlay.style.display = "none";
-                        document.getElementById("content").style.display = "block";
-                    }, 500);
-                }, 300);
             };
-        });
-    </script>
+
+            // Fungsi untuk scroll ke atas
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+
+            document.addEventListener("DOMContentLoaded", function() {
+                const navbar = document.querySelector(".navbar");
+                const toggle = document.querySelector(".navbar-toggle");
+                const nav = document.querySelector(".navbar-nav");
+
+                // Navbar berubah saat scroll
+                window.addEventListener("scroll", function() {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add("scrolled");
+                    } else {
+                        navbar.classList.remove("scrolled");
+                    }
+                });
+
+                // Toggle menu di mobile
+                toggle.addEventListener("click", function() {
+                    nav.classList.toggle("active");
+                });
+            });
+            //card
+            AOS.init({
+                duration: 1000, // Durasi animasi (ms)
+                once: false, // Animasi akan terjadi lebih dari sekali
+                easing: 'ease-in-out',
+            });
+
+            //loading
+            document.addEventListener("DOMContentLoaded", function() {
+                let loadingOverlay = document.getElementById("loading-overlay");
+
+                setTimeout(() => {
+                    loadingOverlay.style.display = "flex";
+                }, 100);
+
+                window.onload = function() {
+                    setTimeout(() => {
+                        loadingOverlay.style.opacity = "0";
+                        setTimeout(() => {
+                            loadingOverlay.style.display = "none";
+                            document.getElementById("content").style.display = "block";
+                        }, 500);
+                    }, 300);
+                };
+            });
+        </script>
 
 </body>
 
