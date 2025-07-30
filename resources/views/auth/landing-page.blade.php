@@ -90,7 +90,7 @@
     </section>
     <!-- About Section-->
     <section id="about" class="about-section">
-        <div class="container">
+        <div class="about-container">
             <!-- Judul -->
             <div class="text-center mb-5" data-aos="fade-down">
                 <h2 class="fw-bold">Anda Masih Mengelola Parkir Secara Manual?</h2>
@@ -98,7 +98,7 @@
 
             <!-- Bagian Problem -->
             <div class="row align-items-center mb-5">
-                <div class="col-md-6 mb-4 mb-md-0" data-aos="fade-right">
+                <div class="col-md-6 mb-4 mb-md-0 about-image" data-aos="fade-right">
                     <img src="{{ asset('images/kehilangan.png') }}" alt="Ilustrasi Kehilangan Kendaraan" class="img-fluid rounded">
                 </div>
                 <div class="col-md-6" data-aos="fade-left">
