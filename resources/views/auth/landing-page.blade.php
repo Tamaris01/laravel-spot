@@ -133,7 +133,7 @@
             <!-- Transisi ke Solusi -->
             <div class="text-center my-5" data-aos="zoom-in">
                 <i class="bi bi-arrow-down-circle-fill fs-1 text-dark mb-3"></i>
-                <h3 class="fw-bold text-dark">Inilah Solusinya!</h3>
+                <h3 class="fw-bold text-dark">Ini Solusinya!</h3>
             </div>
             <!-- Bagian Tentang SPOT -->
             <div class="row align-items-center">
