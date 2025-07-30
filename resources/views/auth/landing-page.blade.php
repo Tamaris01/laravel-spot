@@ -359,120 +359,83 @@
     <!-- Section Harga Layanan SPOT -->
     <section class="py-5 bg-light" id="penawaran">
         <div class="container text-center">
-            <h2 class="fw-bold mb-4">Penawaran terbatas, serbu sekarang!</h2>
-            <p class="mb-5 text-muted">Solusi parkir otomatis dengan harga transparan dan fitur lengkap, sesuai kebutuhan Anda.</p>
+            <h2 class="fw-bold mb-4" data-aos="zoom-in-up" data-aos-duration="800">Penawaran terbatas, serbu sekarang!</h2>
+            <p class="mb-5 text-muted" data-aos="fade-up" data-aos-delay="100">Solusi parkir otomatis dengan harga transparan dan fitur lengkap, sesuai kebutuhan Anda.</p>
 
             <div class="row g-4">
                 <!-- Paket Dasar -->
-                <div class="col-md-4">
+                <div class="col-md-4" data-aos="fade-right" data-aos-delay="150">
                     <div class="card h-100 shadow-sm">
                         <div class="card-body">
-                            <h4 class="card-title fw-semibold">🧩 Paket Dasar</h4>
+                            <div class="mb-3">
+                                <i class="bi bi-box fs-1 text-warning"></i>
+                            </div>
+                            <h4 class="card-title fw-semibold">Paket Dasar</h4>
                             <h3 style="color: #ffdb4d;">Rp 4.500.000</h3>
                             <p class="text-muted">Pembayaran sekali, tanpa biaya bulanan</p>
-                            <ul class="list-unstyled text-start" style="padding-left: 0;">
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>1 set perangkat IoT SPOT</span>
-                                </li>
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Panduan instalasi & dokumentasi</span>
-                                </li>
-                                <li style="display: flex; align-items: center;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Gratis maintenance 1 bulan</span>
-                                </li>
+                            <ul class="list-unstyled text-start">
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Sistem scan QR</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Dashboard Admin</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Riwayat Transaksi</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <!-- Paket Profesional -->
-                <div class="col-md-4">
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="250">
                     <div class="card h-100 shadow-sm" style="border: 1px solid #ffdb4d;">
                         <div class="card-body">
-                            <h4 class="card-title fw-semibold" style="color: #ffdb4d;">🔧 Paket Profesional</h4>
+                            <div class="mb-3">
+                                <i class="bi bi-tools fs-1 text-warning"></i>
+                            </div>
+                            <h4 class="card-title fw-semibold text-warning">Paket Profesional</h4>
                             <h3 style="color: #ffdb4d;">Rp 6.500.000</h3>
                             <p class="text-muted">+ Rp 300.000/bulan untuk maintenance & support</p>
-                            <ul class="list-unstyled text-start" style="padding-left: 0;">
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>1 set perangkat IoT SPOT</span>
-                                </li>
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Sistem monitoring berbasis web</span>
-                                </li>
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Instalasi langsung oleh tim SPOT</span>
-                                </li>
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Support teknis via WA/Telegram</span>
-                                </li>
-                                <li style="display: flex; align-items: center;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Maintenance perangkat rutin</span>
-                                </li>
+                            <ul class="list-unstyled text-start">
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Fitur Dasar + Kamera Deteksi</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Statistik & Laporan Otomatis</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Fitur Komplain Pengguna</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <!-- Paket Enterprise -->
-                <div class="col-md-4">
+                <div class="col-md-4" data-aos="fade-left" data-aos-delay="150">
                     <div class="card h-100 shadow-sm">
                         <div class="card-body">
-                            <h4 class="card-title fw-semibold">🏢 Paket Enterprise</h4>
+                            <div class="mb-3">
+                                <i class="bi bi-building fs-1 text-warning"></i>
+                            </div>
+                            <h4 class="card-title fw-semibold">Paket Enterprise</h4>
                             <h3 style="color: #ffdb4d;">Custom</h3>
                             <p class="text-muted">Solusi fleksibel untuk skala besar</p>
-                            <ul class="list-unstyled text-start" style="padding-left: 0;">
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>1 set perangkat IoT SPOT</span>
-                                </li>
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Sistem monitoring berbasis web</span>
-                                </li>
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Integrasi dengan sistem instansi anda</span>
-                                </li>
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Penyesuaian branding & fitur</span>
-                                </li>
-                                <li style="display: flex; align-items: center; margin-bottom: 6px;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Update sistem & fitur berkala</span>
-                                </li>
-                                <li style="display: flex; align-items: center;">
-                                    <span style="background-color: #28a745; color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-size: 12px; margin-right: 8px;">✔</span>
-                                    <span>Layanan pelatihan pengguna</span>
-                                </li>
+                            <ul class="list-unstyled text-start">
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Seluruh fitur Profesional</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Integrasi Sistem Pihak Ketiga</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Dukungan SLA Khusus</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="mt-5">
-                <p class="text-muted">🔁 <strong>Perpanjangan Maintenance Bulanan</strong>: Mulai dari <strong>Rp 300.000/bulan</strong></p>
+            <!-- Footer Harga -->
+            <div class="mt-5" data-aos="fade-up" data-aos-delay="300">
+                <p class="text-muted"><i class="bi bi-arrow-repeat me-2"></i><strong>Perpanjangan Maintenance Bulanan</strong>: Mulai dari <strong>Rp 300.000/bulan</strong></p>
                 <p class="text-muted">
-                    💡 <em>
+                    <i class="bi bi-info-circle me-2"></i>
+                    <em>
                         Hubungi kami untuk pilihan penawaran yang Anda inginkan sekarang!
                         <a href="#contact" style="color: #ffdb4d; font-weight: bold; text-decoration: underline;">Hubungi kami</a>
-
                     </em>
                 </p>
-
             </div>
         </div>
     </section>
     <!-- End Section Harga -->
+
 
 
     <!-- Team Section -->
