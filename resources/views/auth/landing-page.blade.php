@@ -171,42 +171,42 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="card shadow-box p-4 hidden-card" data-aos="fade-up">
                         <img src="{{ asset('images/pendaftaran.png') }}" class="img-fluid mb-3" alt="Pendaftaran Akun">
-                        <h5>Pendaftaran Akun</h5>
+                        <h5 style="font-weight: bold;">Pendaftaran Akun</h5>
                         <p>Daftar akun dengan mudah untuk mengakses layanan kami.</p>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <div class="card shadow-box p-4 hidden-card" data-aos="fade-up" data-aos-delay="200">
                         <img src="{{ asset('images/kelola pengguna.png') }}" class="img-fluid mb-3" alt="Kelola Pengguna">
-                        <h5>Kelola Pengguna</h5>
+                        <h5 style="font-weight: bold;">Kelola Pengguna</h5>
                         <p>Kelola data pengguna dengan <br> aman dan efisien.</p>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <div class="card shadow-box p-4 hidden-card" data-aos="fade-up" data-aos-delay="400">
                         <img src="{{ asset('images/kelola kendaraan.png') }}" class="img-fluid mb-3" alt="Kelola Kendaraan">
-                        <h5>Kelola Kendaraan</h5>
+                        <h5 style="font-weight: bold;">Kelola Kendaraan</h5>
                         <p>Kelola data kendaraan secara <br> praktis dan terorganisir.</p>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <div class="card shadow-box p-4 hidden-card" data-aos="fade-up" data-aos-delay="600">
                         <img src="{{ asset('images/AksesQR.png') }}" class="img-fluid mb-3" alt="Akses QR Code & Deteksi Plat">
-                        <h5>Akses QR Code & Deteksi Plat</h5>
+                        <h5 style="font-weight: bold;">Akses QR Code & Deteksi Plat</h5>
                         <p>Pindai QR Code dan deteksi otomatis nomor plat untuk akses parkir yang aman.</p>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <div class="card shadow-box p-4 hidden-card" data-aos="fade-up" data-aos-delay="800">
                         <img src="{{ asset('images/Monitor.png') }}" class="img-fluid mb-3" alt="Monitoring Parkir">
-                        <h5>Monitoring Parkir</h5>
+                        <h5 style="font-weight: bold;">Monitoring Parkir</h5>
                         <p>Pantau aktivitas keluar masuk kendaraan dan status parkir secara real-time.</p>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <div class="card shadow-box p-4 hidden-card" data-aos="fade-up" data-aos-delay="1000">
                         <img src="{{ asset('images/laporan.png') }}" class="img-fluid mb-3" alt="Laporan Parkir">
-                        <h5>Laporan Parkir</h5>
+                        <h5 style="font-weight: bold;">Laporan Parkir</h5>
                         <p>Generate laporan parkir otomatis untuk analisis yang lebih akurat dan optimal.</p>
                     </div>
                 </div>
