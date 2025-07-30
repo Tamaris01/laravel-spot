@@ -525,13 +525,14 @@
 
             <!-- Contact Form -->
             <form id="contact-form" class="contact-form d-flex flex-column" style="flex: 1; max-width: 400px;" data-aos="fade-right">
-                <input type="text" name="from_name" class="form-control mb-2" placeholder="Nama Lengkap Anda" required>
-                <input type="email" name="from_email" class="form-control mb-2" placeholder="Alamat Email Anda" required>
-                <textarea name="message" class="form-control mb-2" rows="3" placeholder="Isi Pesan Anda" required></textarea>
+                <input type="text" name="nama" class="form-control mb-2" placeholder="Nama Lengkap Anda" required>
+                <input type="email" name="e-mail" class="form-control mb-2" placeholder="Alamat Email Anda" required>
+                <textarea name="pesan" class="form-control mb-2" rows="3" placeholder="Isi Pesan Anda" required></textarea>
                 <button type="submit" class="btn btn-dark">
                     <i class="fa fa-paper-plane"></i> Kirim
                 </button>
             </form>
+
 
 
             <!-- Contact Info -->
@@ -583,20 +584,20 @@
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
         (function() {
-            emailjs.init("Ok1z5E09gzxP4fbib"); // Ganti dengan user ID EmailJS kamu (bisa kosongkan jika pakai SDK v3)
+            emailjs.init("Ok1z5E09gzxP4fbib"); // Ganti dengan USER ID kamu
         })();
     </script>
-
     <script>
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault(); // Mencegah reload halaman
+        document.getElementById("contact-form").addEventListener("submit", function(e) {
+            e.preventDefault();
 
-            emailjs.sendForm('layanan_u054rsm', 'template_9u6boc4', this)
+            emailjs.sendForm("layanan_u054rsm", "template_z8nc5hl", this)
                 .then(function(response) {
-                    alert('Pesan berhasil dikirim!');
+                    alert("Pesan berhasil dikirim!");
+                    document.getElementById("contact-form").reset();
                 }, function(error) {
-                    alert('Gagal mengirim pesan. Coba lagi.');
-                    console.log('FAILED...', error);
+                    alert("Gagal mengirim pesan. Silakan coba lagi.");
+                    console.error("EmailJS Error:", error);
                 });
         });
     </script>
