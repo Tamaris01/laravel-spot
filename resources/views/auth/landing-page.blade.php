@@ -242,7 +242,7 @@
             <div class="row mb-5">
                 <!-- Session Duration -->
                 <div class="col-md-4 mb-4">
-                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-top border-5 border-warning" style="transition: 0.3s ease;">
+                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5 border-warning" style="transition: 0.3s ease;">
                         <div class="d-flex align-items-center mb-3">
                             <div class="bg-warning bg-opacity-25 rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px;">
                                 <i class="bi bi-clock-history text-warning fs-4"></i>
@@ -258,7 +258,7 @@
 
                 <!-- Retention Rate -->
                 <div class="col-md-4 mb-4">
-                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-top border-5 border-warning position-relative" style="transition: 0.3s ease;">
+                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5 border-warning position-relative" style="transition: 0.3s ease;">
                         <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-3">7 Hari</span>
                         <div class="d-flex align-items-center mb-3">
                             <div class="bg-warning bg-opacity-25 rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px;">
@@ -273,7 +273,7 @@
 
                 <!-- Feature Usage -->
                 <div class="col-md-4 mb-4">
-                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-top border-5 border-warning position-relative" style="transition: 0.3s ease;">
+                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5 border-warning position-relative" style="transition: 0.3s ease;">
                         <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-3">Top 3</span>
                         <div class="d-flex align-items-center mb-3">
                             <div class="bg-warning bg-opacity-25 rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px;">
@@ -289,6 +289,7 @@
                     </div>
                 </div>
             </div>
+
 
 
             <!-- Testimonials -->
