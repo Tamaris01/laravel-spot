@@ -234,6 +234,13 @@
                     </div>
                 </div>
             </div>
+            <!-- Session Duration -->
+            <div class="bg-warning bg-opacity-10 border-start border-warning border-4 rounded p-4 mb-5 shadow-sm">
+                <h5 class="mb-2">⏱️ Durasi & Frekuensi Sesi</h5>
+                <p class="mb-0 text-muted">
+                    Rata-rata sesi: <strong>4 menit 20 detik</strong>, kunjungan: <strong>2–3 kali per hari</strong>
+                </p>
+            </div>
 
 
             <!-- Retention + Feature Usage -->
@@ -257,13 +264,6 @@
                 </div>
             </div>
 
-            <!-- Session Duration -->
-            <div class="bg-warning bg-opacity-10 border-start border-warning border-4 rounded p-4 mb-5 shadow-sm">
-                <h5 class="mb-2">⏱️ Durasi & Frekuensi Sesi</h5>
-                <p class="mb-0 text-muted">
-                    Rata-rata sesi: <strong>4 menit 20 detik</strong>, kunjungan: <strong>2–3 kali per hari</strong>
-                </p>
-            </div>
 
             <!-- Testimonials -->
             <div class="mb-5">
