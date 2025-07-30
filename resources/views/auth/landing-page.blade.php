@@ -213,27 +213,37 @@
             <!-- Active Users -->
             <div class="row text-center mb-5">
                 <div class="col-md-4 mb-4">
-                    <div class="bg-white shadow-sm rounded p-4">
-                        <h5 class="text-black">MAU</h5>
-                        <h3 class="fw-bold" style="color: #FFDC40;">100+</h3>
-                        <p class="text-muted">Pengguna aktif bulanan</p>
+                    <div class="bg-white shadow rounded-4 p-4 h-100 border-start border-5 border-warning">
+                        <div class="mb-2">
+                            <i class="bi bi-calendar3 text-warning fs-2"></i>
+                        </div>
+                        <h5 class="text-dark fw-semibold">MAU</h5>
+                        <h2 class="fw-bold text-warning">100+</h2>
+                        <p class="text-muted mb-0">Pengguna Aktif Bulanan</p>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="bg-white shadow-sm rounded p-4">
-                        <h5 class="text-black">WAU</h5>
-                        <h3 class="fw-bold" style="color: #FFDC40;">80</h3>
-                        <p class="text-muted">Pengguna aktif mingguan</p>
+                    <div class="bg-white shadow rounded-4 p-4 h-100 border-start border-5 border-warning">
+                        <div class="mb-2">
+                            <i class="bi bi-calendar-week text-warning fs-2"></i>
+                        </div>
+                        <h5 class="text-dark fw-semibold">WAU</h5>
+                        <h2 class="fw-bold text-warning">80</h2>
+                        <p class="text-muted mb-0">Pengguna Aktif Mingguan</p>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="bg-white shadow-sm rounded p-4">
-                        <h5 class="text-black">DAU</h5>
-                        <h3 class="fw-bold" style="color: #FFDC40;">50</h3>
-                        <p class="text-muted">Pengguna aktif harian</p>
+                    <div class="bg-white shadow rounded-4 p-4 h-100 border-start border-5 border-warning">
+                        <div class="mb-2">
+                            <i class="bi bi-calendar-day text-warning fs-2"></i>
+                        </div>
+                        <h5 class="text-dark fw-semibold">DAU</h5>
+                        <h2 class="fw-bold text-warning">50</h2>
+                        <p class="text-muted mb-0">Pengguna Aktif Harian</p>
                     </div>
                 </div>
             </div>
+
             <!-- Session Duration -->
             <div class="bg-warning bg-opacity-10 border-start border-warning border-4 rounded p-4 mb-5 shadow-sm">
                 <h5 class="mb-2">⏱️ Durasi & Frekuensi Sesi</h5>
