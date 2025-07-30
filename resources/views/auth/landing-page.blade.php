@@ -208,7 +208,7 @@
     <section class="py-5 bg-light">
         <div class="container">
             <div class="col text-center">
-                <h2 class="text-center mb-5 section-title" data-aos="zoom-in">Pengguna <span class="yellow">SPOT</span></h2>
+                <h2 class="text-center mb-5" data-aos="zoom-in">Pengguna <span class="yellow">SPOT</span></h2>
             </div>
             <!-- Active Users -->
             <div class="row text-center mb-5">
