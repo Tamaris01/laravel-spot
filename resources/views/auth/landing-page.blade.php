@@ -232,77 +232,111 @@
             </div>
         </div>
     </section>
-    <section class="bg-white py-16 px-6 md:px-20">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold text-gray-800 mb-8">📊 Pengguna Kami dalam Angka</h2>
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="mb-4 fw-bold text-center">📊 Pengguna Kami dalam Angka</h2>
 
             <!-- Active Users -->
-            <div class="grid md:grid-cols-3 gap-6 mb-12">
-                <div class="bg-gray-100 p-6 rounded-2xl shadow">
-                    <h3 class="text-xl font-semibold text-gray-700 mb-2">MAU</h3>
-                    <p class="text-2xl font-bold text-indigo-600">12.500+</p>
-                    <p class="text-sm text-gray-500">Pengguna aktif bulanan</p>
+            <div class="row text-center mb-5">
+                <div class="col-md-4 mb-4">
+                    <div class="bg-white shadow-sm rounded p-4">
+                        <h5 class="text-secondary">MAU</h5>
+                        <h3 class="fw-bold text-primary">12.500+</h3>
+                        <p class="text-muted">Pengguna aktif bulanan</p>
+                    </div>
                 </div>
-                <div class="bg-gray-100 p-6 rounded-2xl shadow">
-                    <h3 class="text-xl font-semibold text-gray-700 mb-2">WAU</h3>
-                    <p class="text-2xl font-bold text-indigo-600">5.300</p>
-                    <p class="text-sm text-gray-500">Pengguna aktif mingguan</p>
+                <div class="col-md-4 mb-4">
+                    <div class="bg-white shadow-sm rounded p-4">
+                        <h5 class="text-secondary">WAU</h5>
+                        <h3 class="fw-bold text-primary">5.300</h3>
+                        <p class="text-muted">Pengguna aktif mingguan</p>
+                    </div>
                 </div>
-                <div class="bg-gray-100 p-6 rounded-2xl shadow">
-                    <h3 class="text-xl font-semibold text-gray-700 mb-2">DAU</h3>
-                    <p class="text-2xl font-bold text-indigo-600">1.700</p>
-                    <p class="text-sm text-gray-500">Pengguna aktif harian</p>
+                <div class="col-md-4 mb-4">
+                    <div class="bg-white shadow-sm rounded p-4">
+                        <h5 class="text-secondary">DAU</h5>
+                        <h3 class="fw-bold text-primary">1.700</h3>
+                        <p class="text-muted">Pengguna aktif harian</p>
+                    </div>
                 </div>
             </div>
 
             <!-- Retention + Feature Usage -->
-            <div class="grid md:grid-cols-2 gap-8 mb-12">
-                <div class="bg-white border-l-4 border-green-500 p-6 shadow rounded-xl">
-                    <h4 class="text-lg font-semibold text-gray-700 mb-2">🔄 Retensi 7 Hari</h4>
-                    <p class="text-3xl font-bold text-green-600">72%</p>
-                    <p class="text-sm text-gray-500">pengguna kembali dalam 7 hari</p>
+            <div class="row mb-5">
+                <div class="col-md-6 mb-4">
+                    <div class="border-start border-success border-4 bg-white shadow-sm rounded p-4">
+                        <h5 class="mb-2">🔄 Retensi 7 Hari</h5>
+                        <h3 class="text-success fw-bold">72%</h3>
+                        <p class="text-muted">pengguna kembali dalam 7 hari</p>
+                    </div>
                 </div>
-                <div class="bg-white border-l-4 border-blue-500 p-6 shadow rounded-xl">
-                    <h4 class="text-lg font-semibold text-gray-700 mb-2">⭐ Fitur Populer</h4>
-                    <ul class="list-disc pl-5 text-gray-600 text-sm space-y-1">
-                        <li>70% gunakan fitur "Reminder" setiap hari</li>
-                        <li>40% gunakan "Agenda Cerdas" 3x seminggu</li>
-                        <li>25% pakai QR Code untuk akses cepat</li>
-                    </ul>
+                <div class="col-md-6 mb-4">
+                    <div class="border-start border-primary border-4 bg-white shadow-sm rounded p-4">
+                        <h5 class="mb-2">⭐ Fitur Populer</h5>
+                        <ul class="list-unstyled text-muted mb-0">
+                            <li>✔️ 70% gunakan fitur "Reminder" setiap hari</li>
+                            <li>✔️ 40% pakai "Agenda Cerdas" 3x seminggu</li>
+                            <li>✔️ 25% akses cepat via QR Code</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
             <!-- Session Duration -->
-            <div class="bg-yellow-50 p-6 rounded-xl shadow mb-12">
-                <h4 class="text-lg font-semibold text-gray-700 mb-2">⏱️ Durasi & Frekuensi Sesi</h4>
-                <p class="text-gray-600 text-sm">Rata-rata sesi: <strong>4 menit 20 detik</strong>, rata-rata kunjungan: <strong>2–3 kali per hari</strong>.</p>
+            <div class="bg-warning bg-opacity-10 border-start border-warning border-4 rounded p-4 mb-5 shadow-sm">
+                <h5 class="mb-2">⏱️ Durasi & Frekuensi Sesi</h5>
+                <p class="mb-0 text-muted">
+                    Rata-rata sesi: <strong>4 menit 20 detik</strong>, kunjungan: <strong>2–3 kali per hari</strong>
+                </p>
             </div>
 
             <!-- Testimonials -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-gray-800 mb-4">💬 Apa Kata Pengguna Kami?</h3>
-                <div class="space-y-4">
-                    <blockquote class="bg-gray-50 p-4 rounded-lg border-l-4 border-indigo-400 text-sm text-gray-700">
-                        “Aplikasi ini bener-bener bantu saya atur jadwal harian tanpa stres!” – <strong>Andi, mahasiswa</strong>
-                    </blockquote>
-                    <blockquote class="bg-gray-50 p-4 rounded-lg border-l-4 border-indigo-400 text-sm text-gray-700">
-                        “Fitur pengingatnya simple tapi sangat efektif. Sekarang saya nggak pernah telat lagi.” – <strong>Rina, karyawan swasta</strong>
-                    </blockquote>
-                    <blockquote class="bg-gray-50 p-4 rounded-lg border-l-4 border-indigo-400 text-sm text-gray-700">
-                        “QR code-nya mempermudah akses tanpa harus buka aplikasi secara manual. Keren banget!” – <strong>Bagus, pengusaha</strong>
-                    </blockquote>
+            <div class="mb-5">
+                <h3 class="fw-bold mb-4">💬 Apa Kata Pengguna Kami?</h3>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <blockquote class="blockquote bg-white p-3 rounded shadow-sm border-start border-info border-4">
+                            <p class="mb-2">“Aplikasi ini bener-bener bantu saya atur jadwal harian tanpa stres!”</p>
+                            <footer class="blockquote-footer">Andi, <cite title="Source Title">mahasiswa</cite></footer>
+                        </blockquote>
+                    </div>
+                    <div class="col-md-4">
+                        <blockquote class="blockquote bg-white p-3 rounded shadow-sm border-start border-info border-4">
+                            <p class="mb-2">“Fitur pengingatnya simple tapi sangat efektif. Sekarang saya nggak pernah telat lagi.”</p>
+                            <footer class="blockquote-footer">Rina, <cite title="Source Title">karyawan swasta</cite></footer>
+                        </blockquote>
+                    </div>
+                    <div class="col-md-4">
+                        <blockquote class="blockquote bg-white p-3 rounded shadow-sm border-start border-info border-4">
+                            <p class="mb-2">“QR code-nya mempermudah akses tanpa harus buka aplikasi manual. Keren banget!”</p>
+                            <footer class="blockquote-footer">Bagus, <cite title="Source Title">pengusaha</cite></footer>
+                        </blockquote>
+                    </div>
                 </div>
             </div>
 
-            <!-- Charts Placeholder -->
+            <!-- Chart placeholders -->
             <div>
-                <h3 class="text-2xl font-bold text-gray-800 mb-4">📈 Visualisasi Data</h3>
-                <div class="grid md:grid-cols-3 gap-4">
-                    <div class="bg-white p-4 rounded-xl shadow h-48 flex items-center justify-center text-gray-400 text-sm">[Bar Chart – MAU/WAU/DAU]</div>
-                    <div class="bg-white p-4 rounded-xl shadow h-48 flex items-center justify-center text-gray-400 text-sm">[Pie Chart – Fitur Populer]</div>
-                    <div class="bg-white p-4 rounded-xl shadow h-48 flex items-center justify-center text-gray-400 text-sm">[Line Chart – Retensi]</div>
+                <h3 class="fw-bold mb-3">📈 Visualisasi Data</h3>
+                <div class="row text-center">
+                    <div class="col-md-4 mb-4">
+                        <div class="bg-white rounded shadow-sm p-4 h-100">
+                            <div class="text-muted">[Bar Chart – MAU/WAU/DAU]</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="bg-white rounded shadow-sm p-4 h-100">
+                            <div class="text-muted">[Pie Chart – Fitur Populer]</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="bg-white rounded shadow-sm p-4 h-100">
+                            <div class="text-muted">[Line Chart – Retensi 30 Hari]</div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
     </section>
 
