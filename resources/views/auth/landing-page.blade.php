@@ -205,33 +205,6 @@
             </div>
         </div>
     </section>
-    <section id="analytics" style="background-color: #f7f7f7; padding: 60px 0;">
-        <div class="container text-center">
-            <h2 class="fw-bold mb-5">Data Analitik SPOT</h2>
-            <div class="row justify-content-center">
-                <!-- Statistik 1 -->
-                <div class="col-md-3 mb-4" data-aos="zoom-in" style="background-color: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                    <img src="{{ asset('images/icon-parking.png') }}" alt="Area Parkir" style="width: 50px; margin-bottom: 10px;">
-                    <h3 style="color: #333;">120+</h3>
-                    <p class="text-muted">Area Parkir Terdaftar</p>
-                </div>
-
-                <!-- Statistik 2 -->
-                <div class="col-md-3 mb-4" data-aos="zoom-in" data-aos-delay="100" style="background-color: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                    <img src="{{ asset('images/icon-user.png') }}" alt="Pengguna" style="width: 50px; margin-bottom: 10px;">
-                    <h3 style="color: #333;">5.000+</h3>
-                    <p class="text-muted">Pengguna Aktif</p>
-                </div>
-
-                <!-- Statistik 3 -->
-                <div class="col-md-3 mb-4" data-aos="zoom-in" data-aos-delay="200" style="background-color: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                    <img src="{{ asset('images/icon-checklist.png') }}" alt="Transaksi" style="width: 50px; margin-bottom: 10px;">
-                    <h3 style="color: #333;">15.000+</h3>
-                    <p class="text-muted">Transaksi Parkir</p>
-                </div>
-            </div>
-        </div>
-    </section>
     <section class="py-5 bg-light">
         <div class="container">
             <h2 class="mb-4 fw-bold text-center">📊 Pengguna Kami dalam Angka</h2>
