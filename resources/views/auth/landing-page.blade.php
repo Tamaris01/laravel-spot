@@ -211,9 +211,9 @@
                 <h2 class="text-center fw-bold mb-5" data-aos="zoom-in">Pengguna <span class="yellow">SPOT</span></h2>
             </div>
             <!-- Active Users -->
-            <div class="row text-center mb-5">
+            <div class="row text-center mb-4">
                 <div class="col-md-4 mb-4">
-                    <div class="bg-white bg-opacity-10 border-start border-warning border-4 rounded p-4 mb-5 shadow-sm">
+                    <div class="bg-white bg-opacity-10 border-start border-warning border-4 rounded p-4 shadow-sm h-100">
                         <div class="mb-2">
                             <i class="bi bi-calendar3 text-warning fs-2"></i>
                         </div>
@@ -223,7 +223,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="bg-white bg-opacity-10 border-start border-warning border-4 rounded p-4 mb-5 shadow-sm">
+                    <div class="bg-white bg-opacity-10 border-start border-warning border-4 rounded p-4 shadow-sm h-100">
                         <div class="mb-2">
                             <i class="bi bi-calendar-week text-warning fs-2"></i>
                         </div>
@@ -233,7 +233,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="bg-white bg-opacity-10 border-start border-warning border-4 rounded p-4 mb-5 shadow-sm">
+                    <div class="bg-white bg-opacity-10 border-start border-warning border-4 rounded p-4 shadow-sm h-100">
                         <div class="mb-2">
                             <i class="bi bi-calendar-day text-warning fs-2"></i>
                         </div>
@@ -245,12 +245,13 @@
             </div>
 
             <!-- Session Duration -->
-            <div class="bg-warning bg-opacity-10 border-start border-warning border-4 rounded p-4 mb-5 shadow-sm">
+            <div class="bg-warning bg-opacity-10 border-start border-warning border-4 rounded p-4 mb-4 shadow-sm">
                 <h5 class="mb-2">⏱️ Durasi & Frekuensi Sesi</h5>
                 <p class="mb-0 text-muted">
                     Rata-rata sesi: <strong>4 menit 20 detik</strong>, kunjungan: <strong>2–3 kali per hari</strong>
                 </p>
             </div>
+
 
 
             <!-- Retention + Feature Usage -->
