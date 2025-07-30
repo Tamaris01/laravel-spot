@@ -301,7 +301,7 @@
                 <h3 class="fw-bold mb-4 text-center" data-aos="zoom-in-up">Apa Kata Pengguna Kami?</h3>
                 <div class="row g-4">
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                        <div class="card h-100 border-0 shadow-lg rounded-4 p-3 bg-gradient" style="background: linear-gradient(135deg, #fff8e1, #ffffff); transition: transform 0.3s;">
+                        <div class="card h-100 border-0 shadow-lg rounded-4 p-4" style="background: linear-gradient(135deg, #fff8e1, #ffffff); transition: transform 0.3s;">
                             <div class="card-body">
                                 <div class="d-flex align-items-start mb-3">
                                     <div class="me-3">
@@ -316,7 +316,7 @@
                         </div>
                     </div>
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                        <div class="card h-100 border-0 shadow-lg rounded-4 p-3 bg-gradient" style="background: linear-gradient(135deg, #e3f2fd, #ffffff); transition: transform 0.3s;">
+                        <div class="card h-100 border-0 shadow-lg rounded-4 p-4" style="background: linear-gradient(135deg, #e3f2fd, #ffffff); transition: transform 0.3s;">
                             <div class="card-body">
                                 <div class="d-flex align-items-start mb-3">
                                     <div class="me-3">
@@ -331,7 +331,7 @@
                         </div>
                     </div>
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                        <div class="card h-100 border-0 shadow-lg rounded-4 p-3 bg-gradient" style="background: linear-gradient(135deg, #f3e5f5, #ffffff); transition: transform 0.3s;">
+                        <div class="card h-100 border-0 shadow-lg rounded-4 p-4" style="background: linear-gradient(135deg, #f3e5f5, #ffffff); transition: transform 0.3s;">
                             <div class="card-body">
                                 <div class="d-flex align-items-start mb-3">
                                     <div class="me-3">
@@ -347,6 +347,7 @@
                     </div>
                 </div>
             </div>
+
 
         </div>
     </section>
