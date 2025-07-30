@@ -327,7 +327,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-start mb-3">
                                     <div class="me-3">
-                                        <i class="bi bi-qr-code-scan fs-2 text-primary"></i>
+                                        <i class="bi bi-qr-code-scan fs-2 text-warning"></i>
                                     </div>
                                     <div>
                                         <p class="mb-2 fs-5">“QR code cepat dan mudah dipindai.”</p>
@@ -342,7 +342,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-start mb-3">
                                     <div class="me-3">
-                                        <i class="bi bi-camera-video fs-2 text-purple"></i>
+                                        <i class="bi bi-camera-video fs-2 text-warning"></i>
                                     </div>
                                     <div>
                                         <p class="mb-2 fs-5">“Monitoring bantu cek kendaraan masuk.”</p>
