@@ -90,7 +90,7 @@
     </section>
     <!-- About Section-->
     <section id="about" class="about-section">
-        <div class="about-container">
+        <div class="container">
             <!-- Judul -->
             <div class="text-center mb-5" data-aos="fade-down">
                 <h2 class="fw-bold">Anda Masih Mengelola Parkir Secara Manual?</h2>
