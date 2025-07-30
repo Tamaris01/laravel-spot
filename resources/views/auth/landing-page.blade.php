@@ -249,9 +249,10 @@
                     <div class="border-start border-primary border-4 bg-white shadow-sm rounded p-4">
                         <h5 class="mb-2">⭐ Fitur Populer</h5>
                         <ul class="list-unstyled text-muted mb-0">
-                            <li>✔️ 70% gunakan fitur "Reminder" setiap hari</li>
-                            <li>✔️ 40% pakai "Agenda Cerdas" 3x seminggu</li>
-                            <li>✔️ 25% akses cepat via QR Code</li>
+                            <li>📷 <span style="color: #ffdb4d;">QR Scan</span> – <strong style="color: #ffdb4d;">50%</strong></li>
+                            <li>🔍 <span style="color: #ffdb4d;">Deteksi Plat</span> – <strong style="color: #ffdb4d;">35%</strong></li>
+                            <li>🕘 <span style="color: #ffdb4d;">Riwayat Parkir</span> – <strong style="color: #ffdb4d;">15%</strong></li>
+
                         </ul>
                     </div>
                 </div>
