@@ -389,7 +389,7 @@
                             <div class="mb-3">
                                 <i class="bi bi-tools fs-1 text-warning"></i>
                             </div>
-                            <h4 class="card-title fw-semibold text-warning">Paket Profesional</h4>
+                            <h4 class="card-title fw-semibold">Paket Profesional</h4>
                             <h3 style="color: #ffdb4d;">Rp 6.500.000</h3>
                             <p class="text-muted">+ Rp 300.000/bulan untuk maintenance & support</p>
                             <ul class="list-unstyled text-start">
