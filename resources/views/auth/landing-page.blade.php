@@ -525,8 +525,8 @@
 
             <!-- Contact Form -->
             <form id="contact-form" class="contact-form d-flex flex-column" style="flex: 1; max-width: 400px;" data-aos="fade-right">
-                <input type="text" name="user_name" class="form-control mb-2" placeholder="Nama Lengkap Anda" required>
-                <input type="email" name="user_email" class="form-control mb-2" placeholder="Alamat Email Anda" required>
+                <input type="text" name="from_name" class="form-control mb-2" placeholder="Nama Lengkap Anda" required>
+                <input type="email" name="from_email" class="form-control mb-2" placeholder="Alamat Email Anda" required>
                 <textarea name="message" class="form-control mb-2" rows="3" placeholder="Isi Pesan Anda" required></textarea>
                 <button type="submit" class="btn btn-dark">
                     <i class="fa fa-paper-plane"></i> Kirim
@@ -583,7 +583,7 @@
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
         (function() {
-            emailjs.init("layanan_u054rsm"); // Ganti dengan user ID EmailJS kamu (bisa kosongkan jika pakai SDK v3)
+            emailjs.init("Ok1z5E09gzxP4fbib"); // Ganti dengan user ID EmailJS kamu (bisa kosongkan jika pakai SDK v3)
         })();
     </script>
 
