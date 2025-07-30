@@ -213,93 +213,79 @@
                 <h2 class="text-center fw-bold mb-5" data-aos="zoom-in">Pengguna <span class="yellow">SPOT</span></h2>
             </div>
             <!-- Active Users -->
-            <div class="row text-center mb-4">
+            <div class="row text-center mb-5">
                 <div class="col-md-4 mb-4">
-                    <div class="bg-white border-start border-warning border-4 rounded p-4 shadow-sm h-100">
-                        <div class="mb-2">
-                            <i class="bi bi-calendar3 text-warning fs-2"></i>
-                        </div>
-                        <h5 class="text-dark fw-semibold">MAU</h5>
+                    <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #FFC107;">
+                        <i class="bi bi-calendar3 fs-1 text-warning mb-3"></i>
+                        <h5 class="fw-semibold text-dark">MAU</h5>
                         <h2 class="fw-bold text-warning">100+</h2>
-                        <p class="text-muted mb-0">Pengguna Aktif Bulanan</p>
+                        <p class="text-muted">Pengguna Aktif Bulanan</p>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="bg-white border-start border-warning border-4 rounded p-4 shadow-sm h-100">
-                        <div class="mb-2">
-                            <i class="bi bi-calendar-week text-warning fs-2"></i>
-                        </div>
-                        <h5 class="text-dark fw-semibold">WAU</h5>
+                    <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #FFA000;">
+                        <i class="bi bi-calendar-week fs-1 text-warning mb-3"></i>
+                        <h5 class="fw-semibold text-dark">WAU</h5>
                         <h2 class="fw-bold text-warning">80</h2>
-                        <p class="text-muted mb-0">Pengguna Aktif Mingguan</p>
+                        <p class="text-muted">Pengguna Aktif Mingguan</p>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="bg-white border-start border-warning border-4 rounded p-4 shadow-sm h-100">
-                        <div class="mb-2">
-                            <i class="bi bi-calendar-day text-warning fs-2"></i>
-                        </div>
-                        <h5 class="text-dark fw-semibold">DAU</h5>
+                    <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #FF8F00;">
+                        <i class="bi bi-calendar-day fs-1 text-warning mb-3"></i>
+                        <h5 class="fw-semibold text-dark">DAU</h5>
                         <h2 class="fw-bold text-warning">50</h2>
-                        <p class="text-muted mb-0">Pengguna Aktif Harian</p>
+                        <p class="text-muted">Pengguna Aktif Harian</p>
                     </div>
                 </div>
             </div>
-
-
             <div class="row mb-5">
-                <!-- Session Duration Card -->
+                <!-- Session Duration -->
                 <div class="col-md-4 mb-4">
-                    <div class="d-flex flex-column justify-content-between h-100 bg-white border-start border-warning border-4 rounded-4 shadow-sm p-4 transition">
+                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-top border-5 border-warning" style="transition: 0.3s ease;">
                         <div class="d-flex align-items-center mb-3">
-                            <div class="bg-warning bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                                <i class="bi bi-clock-history fs-4 text-warning"></i>
+                            <div class="bg-warning bg-opacity-25 rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-clock-history text-warning fs-4"></i>
                             </div>
-                            <h5 class="mb-0 fw-semibold text-dark ms-3">Durasi & Frekuensi</h5>
+                            <h5 class="ms-3 mb-0 fw-semibold text-dark">Durasi & Frekuensi</h5>
                         </div>
-                        <div>
-                            <p class="text-muted mb-1">Rata-rata sesi:</p>
-                            <h6 class="fw-bold text-dark">4 menit 20 detik</h6>
-                            <p class="text-muted mb-1">Kunjungan harian:</p>
-                            <h6 class="fw-bold text-dark">2–3 kali</h6>
-                        </div>
+                        <p class="text-muted mb-1">Rata-rata sesi:</p>
+                        <h6 class="fw-bold text-dark">4 menit 20 detik</h6>
+                        <p class="text-muted mb-1">Kunjungan harian:</p>
+                        <h6 class="fw-bold text-dark">2–3 kali</h6>
                     </div>
                 </div>
 
-                <!-- Retention Card -->
+                <!-- Retention Rate -->
                 <div class="col-md-4 mb-4">
-                    <div class="d-flex flex-column justify-content-between h-100 bg-white border-start border-warning border-4 rounded-4 shadow-sm p-4 transition position-relative">
-                        <span class="badge bg-warning position-absolute top-0 end-0 m-3">%</span>
-                        <div>
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="bg-warning bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                                    <i class="bi bi-arrow-repeat fs-4 text-warning"></i>
-                                </div>
-                                <h5 class="mb-0 fw-semibold text-dark ms-3">Retensi 7 Hari</h5>
+                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-top border-5 border-warning position-relative" style="transition: 0.3s ease;">
+                        <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-3">7 Hari</span>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-warning bg-opacity-25 rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-arrow-repeat text-warning fs-4"></i>
                             </div>
-                            <h2 class="fw-bold text-warning">72%</h2>
-                            <p class="text-muted mb-0">Pengguna kembali dalam 7 hari terakhir</p>
+                            <h5 class="ms-3 mb-0 fw-semibold text-dark">Retensi Pengguna</h5>
                         </div>
+                        <h2 class="fw-bold text-warning">72%</h2>
+                        <p class="text-muted">Kembali dalam 7 hari terakhir</p>
                     </div>
                 </div>
 
-                <!-- Feature Usage Card -->
+                <!-- Feature Usage -->
                 <div class="col-md-4 mb-4">
-                    <div class="d-flex flex-column justify-content-between h-100 bg-white border-start border-warning border-4 rounded-4 shadow-sm p-4 transition position-relative">
-                        <span class="badge bg-warning position-absolute top-0 end-0 m-3">Top 3</span>
-                        <div>
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="bg-warning bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                                    <i class="bi bi-stars fs-4 text-warning"></i>
-                                </div>
-                                <h5 class="mb-0 fw-semibold text-dark ms-3">Fitur Populer</h5>
+                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-top border-5 border-warning position-relative" style="transition: 0.3s ease;">
+                        <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-3">Top 3</span>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-warning bg-opacity-25 rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-stars text-warning fs-4"></i>
                             </div>
-                            <ul class="list-unstyled text-muted mb-0">
-                                <li class="mb-1"><i class="bi bi-check-circle-fill text-success me-2"></i> 70% QR Scan</li>
-                                <li class="mb-1"><i class="bi bi-check-circle-fill text-success me-2"></i> 35% Deteksi Plat</li>
-                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> 15% Laporan Parkir</li>
-                            </ul>
+                            <h5 class="ms-3 mb-0 fw-semibold text-dark">Fitur Populer</h5>
                         </div>
+                        <ul class="list-unstyled text-muted mb-0">
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>70% QR Scan</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>35% Deteksi Plat</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>15% Laporan Parkir</li>
+                        </ul>
                     </div>
                 </div>
             </div>
