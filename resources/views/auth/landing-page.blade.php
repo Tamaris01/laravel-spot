@@ -246,14 +246,19 @@
 
 
             <!-- Session Duration -->
-            <div class="bg-warning bg-opacity-10 border-start border-warning border-4 rounded p-4 mb-4 shadow-sm">
-                <div class="bg-warning bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
-                    <i class="bi bi-stopwatch-fill text-warning fs-4"></i>
+            <div class="d-flex align-items-center bg-white border-start border-4 border-warning rounded-4 shadow-sm p-4 mb-4">
+                <div class="d-flex align-items-center justify-content-center rounded-4 bg-warning bg-opacity-25 me-4" style="width: 60px; height: 60px;">
+                    <i class="bi bi-clock-history text-warning fs-3"></i>
                 </div>
-                <p class="mb-0 text-muted">
-                    Rata-rata sesi: <strong>4 menit 20 detik</strong>, kunjungan: <strong>2–3 kali per hari</strong>
-                </p>
+                <div>
+                    <h5 class="fw-bold text-dark mb-1">Durasi & Frekuensi Sesi</h5>
+                    <p class="text-muted mb-0">
+                        Rata-rata sesi: <span class="fw-semibold text-dark">4 menit 20 detik</span><br>
+                        Kunjungan: <span class="fw-semibold text-dark">2–3 kali per hari</span>
+                    </p>
+                </div>
             </div>
+
 
 
 
