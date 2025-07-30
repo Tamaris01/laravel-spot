@@ -133,7 +133,8 @@ html {
     font-weight: bold;
     color: #000;
     max-width: 90%;
-    white-space: nowrap; /* Cegah tulisan turun ke bawah */
+  white-space: normal;
+
 }
 
 /* Subjudul */
@@ -142,8 +143,9 @@ html {
     font-weight: bold;
     color: #000;
     max-width: 90%;
-    white-space: nowrap; /* Pastikan tetap dalam satu baris */
-}
+   white-space: normal;
+   }
+
 
 /* Paragraf dalam hero */
 .hero p {
