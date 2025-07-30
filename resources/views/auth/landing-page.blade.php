@@ -249,10 +249,9 @@
                     <div class="border-start border-primary border-4 bg-white shadow-sm rounded p-4">
                         <h5 class="mb-2">⭐ Fitur Populer</h5>
                         <ul class="list-unstyled text-muted mb-0">
-                            <li>📷 <span style="color: #ffdb4d;">QR Scan</span> – <strong style="color: #ffdb4d;">50%</strong></li>
-                            <li>🔍 <span style="color: #ffdb4d;">Deteksi Plat</span> – <strong style="color: #ffdb4d;">35%</strong></li>
-                            <li>🕘 <span style="color: #ffdb4d;">Riwayat Parkir</span> – <strong style="color: #ffdb4d;">15%</strong></li>
-
+                            <li>✔️ 70% QR Scan</li>
+                            <li>✔️ 35% Deteksi Plat</li>
+                            <li>✔️ 15% Laporan Parkir</li>
                         </ul>
                     </div>
                 </div>
