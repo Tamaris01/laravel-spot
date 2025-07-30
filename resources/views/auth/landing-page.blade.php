@@ -426,10 +426,10 @@
             <div class="mt-5" data-aos="fade-up" data-aos-delay="300">
                 <p class="text-muted"><i class="bi bi-arrow-repeat me-2"></i><strong>Perpanjangan Maintenance Bulanan</strong>: Mulai dari <strong>Rp 300.000/bulan</strong></p>
                 <p class="text-muted">
-                    <i class="bi bi-info-circle me-2"></i>
                     <em>
                         Hubungi kami untuk pilihan penawaran yang Anda inginkan sekarang!
                         <a href="#contact" style="color: #ffdb4d; font-weight: bold; text-decoration: underline;">Hubungi kami</a>
+
                     </em>
                 </p>
             </div>
