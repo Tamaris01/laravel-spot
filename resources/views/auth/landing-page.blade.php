@@ -215,7 +215,7 @@
             <!-- Active Users -->
             <div class="row text-center mb-5">
                 <div class="col-md-4 mb-4">
-                    <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #FFC107;">
+                    <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #ffdb4d;">
                         <i class="bi bi-calendar3 fs-1 text-warning mb-3"></i>
                         <h5 class="fw-semibold text-dark">MAU</h5>
                         <h2 class="fw-bold text-warning">100+</h2>
@@ -223,7 +223,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #FFA000;">
+                    <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #ffdb4d;">
                         <i class="bi bi-calendar-week fs-1 text-warning mb-3"></i>
                         <h5 class="fw-semibold text-dark">WAU</h5>
                         <h2 class="fw-bold text-warning">80</h2>
@@ -231,7 +231,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #FF8F00;">
+                    <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #ffdb4d;">
                         <i class="bi bi-calendar-day fs-1 text-warning mb-3"></i>
                         <h5 class="fw-semibold text-dark">DAU</h5>
                         <h2 class="fw-bold text-warning">50</h2>
