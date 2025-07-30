@@ -258,14 +258,14 @@
             <!-- Retention + Feature Usage -->
             <div class="row mb-5">
                 <div class="col-md-6 mb-4">
-                    <div class="border-start border-warning border-4 bg-white shadow-sm rounded p-4">
+                    <div class="border-start border-warning border-4 bg-white shadow-sm rounded p-4 h-100">
                         <h5 class="mb-2">🔄 Retensi 7 Hari</h5>
                         <h3 class="text-black fw-bold">72%</h3>
                         <p class="text-muted">pengguna kembali dalam 7 hari</p>
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
-                    <div class="border-start border-warning border-4 bg-white shadow-sm rounded p-4">
+                    <div class="border-start border-warning border-4 bg-white shadow-sm rounded p-4 h-100">
                         <h5 class="mb-2">⭐ Fitur Populer</h5>
                         <ul class="list-unstyled text-muted mb-0">
                             <li>✔️ 70% QR Scan</li>
@@ -275,6 +275,7 @@
                     </div>
                 </div>
             </div>
+
 
 
             <!-- Testimonials -->
