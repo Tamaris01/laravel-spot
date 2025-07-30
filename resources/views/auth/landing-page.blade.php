@@ -264,24 +264,24 @@
                 </p>
             </div>
 
-            <!-- User Feedback -->
+            <!-- Testimonials -->
             <div class="mb-5">
-                <h3 class="fw-bold mb-4" data-aos="zoom-in" style="color: #ffdb4d;">💬 Pendapat Pengguna</h3>
-                <div class="row g-4">
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                        <blockquote class="blockquote bg-white p-4 rounded shadow-sm border-start border-4" style="border-color: #ffdb4d;">
+                <h3 class="fw-bold mb-4">💬 Apa Kata Pengguna Kami?</h3>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <blockquote class="blockquote bg-white p-3 rounded shadow-sm border-start border-info border-4">
                             <p class="mb-2">“Saya merasa lebih aman parkir di kampus sekarang.”</p>
                             <footer class="blockquote-footer">Penguji Mahasiswa</footer>
                         </blockquote>
                     </div>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                        <blockquote class="blockquote bg-white p-4 rounded shadow-sm border-start border-4" style="border-color: #ffdb4d;">
+                    <div class="col-md-4">
+                        <blockquote class="blockquote bg-white p-3 rounded shadow-sm border-start border-info border-4">
                             <p class="mb-2">“Pemindaian QR cepat dan praktis.”</p>
                             <footer class="blockquote-footer">Pengguna Beta</footer>
                         </blockquote>
                     </div>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                        <blockquote class="blockquote bg-white p-4 rounded shadow-sm border-start border-4" style="border-color: #ffdb4d;">
+                    <div class="col-md-4">
+                        <blockquote class="blockquote bg-white p-3 rounded shadow-sm border-start border-info border-4">
                             <p class="mb-2">“Monitoring membantu saya memeriksa kendaraan masuk dengan mudah.”</p>
                             <footer class="blockquote-footer">Penguji Admin</footer>
                         </blockquote>
