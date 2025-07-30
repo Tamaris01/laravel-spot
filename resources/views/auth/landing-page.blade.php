@@ -584,8 +584,28 @@
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
         (function() {
-            emailjs.init("Ok1z5E09gzxP4fbib"); // Ganti dengan USER ID kamu
+            emailjs.init("Ok1z5E09gzxP4fbib"); // Ganti dengan USER ID EmailJS kamu
         })();
+
+        document.getElementById("contact-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const nama = this.querySelector('[name="nama"]').value;
+            const email = this.querySelector('[name="e-mail"]').value;
+            const pesan = this.querySelector('[name="pesan"]').value;
+
+            emailjs.send("layanan_u054rsm", "template_z8nc5hl", {
+                nama: nama,
+                email: email,
+                pesan: pesan
+            }).then(function(response) {
+                alert("✅ Pesan berhasil dikirim!");
+                document.getElementById("contact-form").reset();
+            }, function(error) {
+                alert("❌ Gagal mengirim pesan. Coba lagi.");
+                console.error("EmailJS Error:", error);
+            });
+        });
     </script>
     <script>
         document.getElementById("contact-form").addEventListener("submit", function(e) {
