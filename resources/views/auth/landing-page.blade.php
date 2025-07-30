@@ -260,7 +260,7 @@
                 <!-- Retention Card -->
                 <div class="col-md-6 mb-4">
                     <div class="d-flex flex-column justify-content-between h-100 bg-white border-start border-warning border-4 rounded-4 shadow-sm p-4 transition position-relative">
-                        <span class="badge bg-success position-absolute top-0 end-0 m-3">+12%</span>
+                        <span class="badge bg-black position-absolute top-0 end-0 m-3">%</span>
                         <div>
                             <div class="d-flex align-items-center mb-3">
                                 <div class="bg-warning bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
@@ -277,7 +277,7 @@
                 <!-- Feature Usage Card -->
                 <div class="col-md-6 mb-4">
                     <div class="d-flex flex-column justify-content-between h-100 bg-white border-start border-warning border-4 rounded-4 shadow-sm p-4 transition position-relative">
-                        <span class="badge bg-primary position-absolute top-0 end-0 m-3">Top 3</span>
+                        <span class="badge bg-black position-absolute top-0 end-0 m-3">Top 3</span>
                         <div>
                             <div class="d-flex align-items-center mb-3">
                                 <div class="bg-warning bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
