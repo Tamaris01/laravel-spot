@@ -215,25 +215,26 @@
                 <div class="col-md-4 mb-4">
                     <div class="bg-white shadow-sm rounded p-4">
                         <h5 class="text-secondary">MAU</h5>
-                        <h3 class="fw-bold text-primary">12.500+</h3>
+                        <h3 class="fw-bold" style="color: #FFDC40;">100+</h3>
                         <p class="text-muted">Pengguna aktif bulanan</p>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="bg-white shadow-sm rounded p-4">
                         <h5 class="text-secondary">WAU</h5>
-                        <h3 class="fw-bold text-primary">5.300</h3>
+                        <h3 class="fw-bold" style="color: #FFDC40;">80</h3>
                         <p class="text-muted">Pengguna aktif mingguan</p>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="bg-white shadow-sm rounded p-4">
                         <h5 class="text-secondary">DAU</h5>
-                        <h3 class="fw-bold text-primary">1.700</h3>
+                        <h3 class="fw-bold" style="color: #FFDC40;">50</h3>
                         <p class="text-muted">Pengguna aktif harian</p>
                     </div>
                 </div>
             </div>
+
 
             <!-- Retention + Feature Usage -->
             <div class="row mb-5">
