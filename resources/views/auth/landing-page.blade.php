@@ -524,14 +524,15 @@
         <div class="container d-flex justify-content-center flex-wrap gap-3">
 
             <!-- Contact Form -->
-            <form id="emailForm" class="contact-form d-flex flex-column" style="flex: 1; max-width: 400px;" data-aos="fade-right">
-                <input type="text" name="nama" id="nama" class="form-control mb-2" placeholder="Nama Lengkap Anda" required>
-                <input type="email" name="email" id="email" class="form-control mb-2" placeholder="Alamat Email Anda" required>
-                <textarea name="pesan" id="pesan" class="form-control mb-2" rows="3" placeholder="Isi Pesan Anda" required></textarea>
+            <form id="contact-form" class="contact-form d-flex flex-column" style="flex: 1; max-width: 400px;" data-aos="fade-right">
+                <input type="text" name="user_name" class="form-control mb-2" placeholder="Nama Lengkap Anda" required>
+                <input type="email" name="user_email" class="form-control mb-2" placeholder="Alamat Email Anda" required>
+                <textarea name="message" class="form-control mb-2" rows="3" placeholder="Isi Pesan Anda" required></textarea>
                 <button type="submit" class="btn btn-dark">
                     <i class="fa fa-paper-plane"></i> Kirim
                 </button>
             </form>
+
 
             <!-- Contact Info -->
             <div class="contact-info d-flex flex-column" style="flex: 1; max-width: 400px;" data-aos="fade-left">
@@ -578,33 +579,28 @@
     <button id="scrollTopBtn" onclick="scrollToTop()"><i class="fas fa-chevron-up"></i></button>
 
 
-    <!-- EmailJS Script -->
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
         (function() {
-            emailjs.init("YOUR_PUBLIC_KEY"); // Ganti dengan public key kamu
+            emailjs.init("layanan_u054rsm"); // Ganti dengan user ID EmailJS kamu (bisa kosongkan jika pakai SDK v3)
         })();
+    </script>
 
-        document.getElementById("emailForm").addEventListener("submit", function(e) {
-            e.preventDefault();
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Mencegah reload halaman
 
-            const templateParams = {
-                nama: document.getElementById("nama").value,
-                email: document.getElementById("email").value,
-                pesan: document.getElementById("pesan").value,
-                waktu: new Date().toLocaleString()
-            };
-
-            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+            emailjs.sendForm('layanan_u054rsm', 'template_9u6boc4', this)
                 .then(function(response) {
-                    alert("Pesan berhasil dikirim! Terima kasih 😊");
-                    document.getElementById("emailForm").reset();
+                    alert('Pesan berhasil dikirim!');
                 }, function(error) {
-                    alert("Terjadi kesalahan. Silakan coba lagi.");
-                    console.error(error);
+                    alert('Gagal mengirim pesan. Coba lagi.');
+                    console.log('FAILED...', error);
                 });
         });
     </script>
+
 
 
 
