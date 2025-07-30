@@ -442,11 +442,12 @@
     <section id="team" class="section bg-team py-5">
         <div class="container">
             <h2 class="text-center mb-5 section-title" data-aos="fade-right">Tim Kami</h2>
-            <p class="text-center mb-5 section-subtitle" data-aos="fade-up" data-aos-delay="100">
+            <p class="mb-5 section-subtitle" style="text-align: justify;" data-aos="fade-up" data-aos-delay="100">
                 Bersama, kami membangun solusi inovatif yang mendorong masa depan teknologi.
                 Dengan semangat kolaborasi, kreativitas, dan keahlian, kami menghadirkan inovasi yang berarti
                 untuk menjawab tantangan dunia digital yang terus berkembang.
             </p>
+
             <div class="row">
                 <div class="col-12 col-sm-6 col-lg-3 mb-4">
                     <div class="team-card text-center" data-aos="zoom-in" data-aos-delay="100">
