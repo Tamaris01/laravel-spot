@@ -17,9 +17,6 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/landingpage.css') }}">
-
-    <!-- FontAwesome Icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <!-- FontAwesome & Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <!--  AOS CSS -->
