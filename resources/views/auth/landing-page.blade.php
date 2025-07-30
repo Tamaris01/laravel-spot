@@ -65,7 +65,8 @@
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">Tentang</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#features">Fitur Utama</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Fitur</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pengguna">Pengguna</a></li>
                     <li class="nav-item"><a class="nav-link" href="#penawaran">Penawaran</a></li>
                     <li class="nav-item"><a class="nav-link" href="#team">Tim</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Hubungi Kami</a></li>
@@ -207,7 +208,7 @@
             </div>
         </div>
     </section>
-    <section class="py-5 bg-light">
+    <section id="pengguna" class="py-5 bg-light">
         <div class="container">
             <div class="col text-center">
                 <h2 class="text-center fw-bold mb-5" data-aos="zoom-in">Pengguna <span class="yellow">SPOT</span></h2>
