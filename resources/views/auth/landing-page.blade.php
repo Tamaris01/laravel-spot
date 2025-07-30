@@ -142,15 +142,16 @@
                 </div>
                 <div class="col-md-6 order-md-1" data-aos="fade-right">
                     <h3 class="fw-bold mb-3">Sistem Parkir Otomatis Terjamin</h3>
-                    <p class="lead text-muted">
+                    <p class="lead text-muted" style="text-align: justify;">
                         SPOT adalah sistem parkir modern yang dirancang untuk meningkatkan keamanan dan efisiensi pengelolaan parkir.
                         Menggunakan teknologi canggih seperti Internet of Things (IoT), QR code, dan deteksi plat nomor, SPOT memudahkan
                         proses masuk dan keluar kendaraan secara otomatis. Sistem ini memastikan kendaraan yang masuk terverifikasi dengan akurat
                         dan membantu pengelola menganalisis pola parkir agar kapasitas lebih optimal.
                     </p>
-                    <p class="lead text-muted">
+                    <p class="lead text-muted" style="text-align: justify;">
                         Dengan SPOT, parkir jadi lebih cepat, aman, dan nyaman — tanpa ribet! 🚗✨
                     </p>
+
                     <div class="mt-4">
                         <a href="{{ route('register') }}" class="btn btn-outline-black me-2">Daftar</a>
                         <a href="{{ route('login') }}" class="btn btn-black">Masuk</a>
@@ -442,12 +443,11 @@
     <section id="team" class="section bg-team py-5">
         <div class="container">
             <h2 class="text-center mb-5 section-title" data-aos="fade-right">Tim Kami</h2>
-            <p class="mb-5 section-subtitle" style="text-align: justify;" data-aos="fade-up" data-aos-delay="100">
+            <p class="text-center mb-5 section-subtitle" data-aos="fade-up" data-aos-delay="100">
                 Bersama, kami membangun solusi inovatif yang mendorong masa depan teknologi.
                 Dengan semangat kolaborasi, kreativitas, dan keahlian, kami menghadirkan inovasi yang berarti
                 untuk menjawab tantangan dunia digital yang terus berkembang.
             </p>
-
             <div class="row">
                 <div class="col-12 col-sm-6 col-lg-3 mb-4">
                     <div class="team-card text-center" data-aos="zoom-in" data-aos-delay="100">
