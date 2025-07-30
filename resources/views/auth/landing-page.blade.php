@@ -455,9 +455,9 @@
                         <h4>Tamaris Roulina</h4>
                         <p>Lead Developer</p>
                         <div class="social-icons">
-                            <a href="mailto:#" class="social-icon"><i class="ri-mail-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-instagram-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-whatsapp-fill"></i></a>
+                            <a href="mailto:tamarissilitonga@gmail.com" class="social-icon"><i class="ri-mail-fill"></i></a>
+                            <a href="https://instagram.com/username" class="social-icon"><i class="ri-instagram-fill"></i></a>
+                            <a href="https://wa.me/6282171475991" class="social-icon"><i class="ri-whatsapp-fill"></i></a>
                             <a href="#" class="social-icon"><i class="ri-linkedin-box-fill"></i></a>
                             <a href="#" class="social-icon"><i class="ri-youtube-fill"></i></a>
                         </div>
@@ -469,9 +469,9 @@
                         <h4>Alifzidan Rizky</h4>
                         <p>UI/UX Designer</p>
                         <div class="social-icons">
-                            <a href="mailto:#" class="social-icon"><i class="ri-mail-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-instagram-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-whatsapp-fill"></i></a>
+                            <a href="mailto:alifzidan041@gmail.com" class="social-icon"><i class="ri-mail-fill"></i></a>
+                            <a href="https://instagram.com/username" class="social-icon"><i class="ri-instagram-fill"></i></a>
+                            <a href="https://wa.me/6289508780943" class="social-icon"><i class="ri-whatsapp-fill"></i></a>
                             <a href="#" class="social-icon"><i class="ri-linkedin-box-fill"></i></a>
                             <a href="#" class="social-icon"><i class="ri-youtube-fill"></i></a>
                         </div>
@@ -484,9 +484,9 @@
                         <h4>Elicia Sandova</h4>
                         <p>Testing</p>
                         <div class="social-icons">
-                            <a href="mailto:#" class="social-icon"><i class="ri-mail-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-instagram-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-whatsapp-fill"></i></a>
+                            <a href="mailto:eliciasandova@gmail.com" class="social-icon"><i class="ri-mail-fill"></i></a>
+                            <a href="https://instagram.com/username" class="social-icon"><i class="ri-instagram-fill"></i></a>
+                            <a href="https://wa.me/6289623059420" class="social-icon"><i class="ri-whatsapp-fill"></i></a>
                             <a href="#" class="social-icon"><i class="ri-linkedin-box-fill"></i></a>
                             <a href="#" class="social-icon"><i class="ri-youtube-fill"></i></a>
                         </div>
@@ -499,9 +499,9 @@
                         <h4>Maulana Arianto</h4>
                         <p>Backend Developer</p>
                         <div class="social-icons">
-                            <a href="mailto:#" class="social-icon"><i class="ri-mail-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-instagram-fill"></i></a>
-                            <a href="#" class="social-icon"><i class="ri-whatsapp-fill"></i></a>
+                            <a href="mailto:maulanaarianto592@gmail.com" class="social-icon"><i class="ri-mail-fill"></i></a>
+                            <a href="https://instagram.com/username" class="social-icon"><i class="ri-instagram-fill"></i></a>
+                            <a href="https://wa.me/62895385178108" class="social-icon"><i class="ri-whatsapp-fill"></i></a>
                             <a href="#" class="social-icon"><i class="ri-linkedin-box-fill"></i></a>
                             <a href="#" class="social-icon"><i class="ri-youtube-fill"></i></a>
                         </div>
