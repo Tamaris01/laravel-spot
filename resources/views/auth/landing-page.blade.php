@@ -207,7 +207,13 @@
     </section>
     <section class="py-5 bg-light">
         <div class="container">
-            <h2 class="text-center mb-5 section-title" data-aos="zoom-in">Pengguna <span class="yellow">SPOT</span></h2>
+            <div class="col text-center">
+                <h2 class="fw-bold mb-5" data-aos="zoom-in" style="font-size: 2.2rem;">
+                    <span style="border-bottom: 3px solid #000; padding-bottom: 5px;">
+                        Pengguna <span class="text-warning">SPOT</span>
+                    </span>
+                </h2>
+            </div>
             <!-- Active Users -->
             <div class="row text-center mb-5">
                 <div class="col-md-4 mb-4">
