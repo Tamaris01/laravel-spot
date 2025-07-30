@@ -205,10 +205,18 @@
             </div>
         </div>
     </section>
+    <!-- Section Judul Tengah Fullscreen -->
+    <section class="d-flex align-items-center justify-content-center" style="height: 100vh; background-color: #f8f9fa;">
+        <div class="text-center" data-aos="zoom-in">
+            <h2 class="display-4 fw-bold">Pengguna <span class="text-warning">SPOT</span></h2>
+            <p class="lead text-muted mt-3">Statistik, Retensi, dan Pengalaman Pengguna Kami</p>
+        </div>
+    </section>
+
+    <!-- Section Statistik dan Testimoni -->
     <section class="py-5 bg-light">
         <div class="container">
-            <h2 class="text-center mb-5 section-title" data-aos="zoom-in">Pengguna <span class="yellow">SPOT</span></h2>
-            <!-- Active Users -->
+            <!-- Statistik MAU/WAU/DAU -->
             <div class="row text-center mb-5">
                 <div class="col-md-4 mb-4">
                     <div class="bg-white shadow-sm rounded p-4">
@@ -233,7 +241,7 @@
                 </div>
             </div>
 
-            <!-- Retention + Feature Usage -->
+            <!-- Retensi dan Fitur -->
             <div class="row mb-5">
                 <div class="col-md-6 mb-4">
                     <div class="border-start border-success border-4 bg-white shadow-sm rounded p-4">
@@ -254,7 +262,7 @@
                 </div>
             </div>
 
-            <!-- Session Duration -->
+            <!-- Durasi Sesi -->
             <div class="bg-warning bg-opacity-10 border-start border-warning border-4 rounded p-4 mb-5 shadow-sm">
                 <h5 class="mb-2">⏱️ Durasi & Frekuensi Sesi</h5>
                 <p class="mb-0 text-muted">
@@ -262,7 +270,7 @@
                 </p>
             </div>
 
-            <!-- Testimonials -->
+            <!-- Testimoni -->
             <div class="mb-5">
                 <h3 class="fw-bold mb-4">💬 Apa Kata Pengguna Kami?</h3>
                 <div class="row g-3">
@@ -287,7 +295,7 @@
                 </div>
             </div>
 
-            <!-- Chart placeholders -->
+            <!-- Visualisasi Data -->
             <div>
                 <h3 class="fw-bold mb-3">📈 Visualisasi Data</h3>
                 <div class="row text-center">
@@ -311,6 +319,7 @@
 
         </div>
     </section>
+
 
     <!-- Section Harga Layanan SPOT -->
     <section class="py-5 bg-light" id="penawaran">
