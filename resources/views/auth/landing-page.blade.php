@@ -580,6 +580,7 @@
     <button id="scrollTopBtn" onclick="scrollToTop()"><i class="fas fa-chevron-up"></i></button>
 
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- EmailJS SDK -->
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
@@ -607,25 +608,7 @@
             });
         });
     </script>
-    <script>
-        document.getElementById("contact-form").addEventListener("submit", function(e) {
-            e.preventDefault();
 
-            emailjs.sendForm("layanan_u054rsm", "template_z8nc5hl", this)
-                .then(function(response) {
-                    alert("Pesan berhasil dikirim!");
-                    document.getElementById("contact-form").reset();
-                }, function(error) {
-                    alert("Gagal mengirim pesan. Silakan coba lagi.");
-                    console.error("EmailJS Error:", error);
-                });
-        });
-    </script>
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Tampilkan tombol scroll jika user menggulir ke bawah 100px
         window.onscroll = function() {
