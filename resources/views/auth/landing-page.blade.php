@@ -215,7 +215,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="bg-white border-start border-warning border-4 rounded p-4 shadow-sm h-100">
                         <div class="mb-2">
-                            <i class="bi bi-calendar3 text-black fs-2"></i>
+                            <i class="bi bi-calendar3 text-warning fs-2"></i>
                         </div>
                         <h5 class="text-dark fw-semibold">MAU</h5>
                         <h2 class="fw-bold text-warning">100+</h2>
@@ -225,7 +225,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="bg-white border-start border-warning border-4 rounded p-4 shadow-sm h-100">
                         <div class="mb-2">
-                            <i class="bi bi-calendar-week text-black fs-2"></i>
+                            <i class="bi bi-calendar-week text-warning fs-2"></i>
                         </div>
                         <h5 class="text-dark fw-semibold">WAU</h5>
                         <h2 class="fw-bold text-warning">80</h2>
@@ -235,7 +235,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="bg-white border-start border-warning border-4 rounded p-4 shadow-sm h-100">
                         <div class="mb-2">
-                            <i class="bi bi-calendar-day text-black fs-2"></i>
+                            <i class="bi bi-calendar-day text-warning fs-2"></i>
                         </div>
                         <h5 class="text-dark fw-semibold">DAU</h5>
                         <h2 class="fw-bold text-warning">50</h2>
@@ -260,7 +260,7 @@
                 <!-- Retention Card -->
                 <div class="col-md-6 mb-4">
                     <div class="d-flex flex-column justify-content-between h-100 bg-white border-start border-warning border-4 rounded-4 shadow-sm p-4 transition position-relative">
-                        <span class="badge bg-black position-absolute top-0 end-0 m-3">%</span>
+                        <span class="badge bg-warning position-absolute top-0 end-0 m-3">%</span>
                         <div>
                             <div class="d-flex align-items-center mb-3">
                                 <div class="bg-warning bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
@@ -277,7 +277,7 @@
                 <!-- Feature Usage Card -->
                 <div class="col-md-6 mb-4">
                     <div class="d-flex flex-column justify-content-between h-100 bg-white border-start border-warning border-4 rounded-4 shadow-sm p-4 transition position-relative">
-                        <span class="badge bg-black position-absolute top-0 end-0 m-3">Top 3</span>
+                        <span class="badge bg-warning position-absolute top-0 end-0 m-3">Top 3</span>
                         <div>
                             <div class="d-flex align-items-center mb-3">
                                 <div class="bg-warning bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
