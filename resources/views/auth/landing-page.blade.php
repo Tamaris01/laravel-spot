@@ -103,8 +103,8 @@
             Selengkapnya <i class="fas fa-arrow-down"></i>
         </a>
     </section>
-    <!-- About Section (Gabungan Problem & Tentang) -->
-    <section id="about" class="about-section py-5">
+    <!-- About Section-->
+    <section id="about" class="about-section py-5" style="background-color: #ffdb4d;">
         <div class="container">
             <!-- Judul -->
             <div class="text-center mb-5" data-aos="fade-down">
@@ -131,25 +131,35 @@
                 </div>
             </div>
 
-            <!-- Bagian Tentang SPOT -->
+            <!-- Transisi ke Solusi -->
+            <div class="text-center my-5" data-aos="zoom-in">
+                <i class="bi bi-arrow-down-circle-fill fs-1 text-dark mb-3"></i>
+                <h3 class="fw-bold text-dark">Inilah Solusinya!</h3>
+            </div>
+
+            <!-- Bagian Tentang SPOT (Card Putih) -->
             <div class="row align-items-center">
                 <div class="col-md-6 order-md-2 mb-4 mb-md-0" data-aos="fade-left">
-                    <img src="{{ asset('images/Tentang.png') }}" alt="SPOT Illustration" class="img-fluid rounded">
+                    <div class="bg-white p-3 rounded shadow-sm">
+                        <img src="{{ asset('images/Tentang.png') }}" alt="SPOT Illustration" class="img-fluid rounded">
+                    </div>
                 </div>
                 <div class="col-md-6 order-md-1" data-aos="fade-right">
-                    <h3 class="fw-bold mb-3">Sistem Parkir Otomatis Terjamin</h3>
-                    <p class="lead text-muted">
-                        SPOT adalah sistem parkir modern yang dirancang untuk meningkatkan keamanan dan efisiensi pengelolaan parkir.
-                        Menggunakan teknologi canggih seperti Internet of Things (IoT), QR code, dan deteksi plat nomor, SPOT memudahkan
-                        proses masuk dan keluar kendaraan secara otomatis. Sistem ini memastikan kendaraan yang masuk terverifikasi dengan akurat
-                        dan membantu pengelola menganalisis pola parkir agar kapasitas lebih optimal.
-                    </p>
-                    <p class="lead text-muted">
-                        Dengan SPOT, parkir jadi lebih cepat, aman, dan nyaman — tanpa ribet! 🚗✨
-                    </p>
-                    <div class="mt-4">
-                        <a href="{{ route('register') }}" class="btn btn-outline-black me-2">Daftar</a>
-                        <a href="{{ route('login') }}" class="btn btn-black">Masuk</a>
+                    <div class="bg-white p-4 rounded shadow-sm">
+                        <h3 class="fw-bold mb-3">Sistem Parkir Otomatis Terjamin</h3>
+                        <p class="lead text-muted">
+                            SPOT adalah sistem parkir modern yang dirancang untuk meningkatkan keamanan dan efisiensi pengelolaan parkir.
+                            Menggunakan teknologi canggih seperti Internet of Things (IoT), QR code, dan deteksi plat nomor, SPOT memudahkan
+                            proses masuk dan keluar kendaraan secara otomatis. Sistem ini memastikan kendaraan yang masuk terverifikasi dengan akurat
+                            dan membantu pengelola menganalisis pola parkir agar kapasitas lebih optimal.
+                        </p>
+                        <p class="lead text-muted">
+                            Dengan SPOT, parkir jadi lebih cepat, aman, dan nyaman — tanpa ribet! 🚗✨
+                        </p>
+                        <div class="mt-4">
+                            <a href="{{ route('register') }}" class="btn btn-outline-dark me-2">Daftar</a>
+                            <a href="{{ route('login') }}" class="btn btn-dark">Masuk</a>
+                        </div>
                     </div>
                 </div>
             </div>
