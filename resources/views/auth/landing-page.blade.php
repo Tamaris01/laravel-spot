@@ -208,7 +208,7 @@
             </div>
         </div>
     </section>
-    <section id="pengguna" class="py-5 bg-light">
+    <section id="pengguna" class="py-5 bg-light" data-aos="fade-up">
         <div class="container">
             <div class="col text-center">
                 <h2 class="text-center fw-bold mb-5" data-aos="zoom-in">Pengguna <span class="yellow">SPOT</span></h2>
@@ -216,7 +216,7 @@
 
             <!-- Active Users -->
             <div class="row text-center mb-5">
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-4" data-aos="fade-right">
                     <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #ffdb4d;">
                         <i class="bi bi-calendar3 fs-1 mb-3" style="color:#ffdb4d;"></i>
                         <h5 class="fw-semibold text-dark">MAU</h5>
@@ -224,7 +224,7 @@
                         <p class="text-muted">Pengguna Aktif Bulanan</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-4" data-aos="fade-up">
                     <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #ffdb4d;">
                         <i class="bi bi-calendar-week fs-1 mb-3" style="color:#ffdb4d;"></i>
                         <h5 class="fw-semibold text-dark">WAU</h5>
@@ -232,7 +232,7 @@
                         <p class="text-muted">Pengguna Aktif Mingguan</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-4" data-aos="fade-left">
                     <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #ffdb4d;">
                         <i class="bi bi-calendar-day fs-1 mb-3" style="color:#ffdb4d;"></i>
                         <h5 class="fw-semibold text-dark">DAU</h5>
@@ -244,14 +244,10 @@
 
             <!-- Additional Metrics -->
             <div class="row mb-5">
-
-                <!-- Session Duration -->
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-4" data-aos="flip-left">
+                    <!-- Session Duration -->
                     <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5 position-relative" style="transition: 0.3s ease; border-color: #ffdb4d;">
-                        <!-- Badge pojok kanan atas -->
                         <span class="badge text-dark position-absolute top-0 end-0 m-3" style="background-color: #ffdb4d;">Harian</span>
-
-                        <!-- Konten utama -->
                         <div class="d-flex align-items-center mb-3">
                             <div class="rounded-circle d-flex justify-content-center align-items-center"
                                 style="width: 50px; height: 50px; background-color: rgba(255,219,77,0.25);">
@@ -266,8 +262,8 @@
                     </div>
                 </div>
 
-                <!-- Retention Rate -->
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-4" data-aos="flip-up">
+                    <!-- Retention Rate -->
                     <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5 position-relative" style="transition: 0.3s ease; border-color: #ffdb4d;">
                         <span class="badge text-dark position-absolute top-0 end-0 m-3" style="background-color: #ffdb4d;">7 Hari</span>
                         <div class="d-flex align-items-center mb-3">
@@ -281,8 +277,8 @@
                     </div>
                 </div>
 
-                <!-- Feature Usage -->
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-4" data-aos="flip-right">
+                    <!-- Feature Usage -->
                     <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5 position-relative" style="transition: 0.3s ease; border-color: #ffdb4d;">
                         <span class="badge text-dark position-absolute top-0 end-0 m-3" style="background-color: #ffdb4d;">Top 3</span>
                         <div class="d-flex align-items-center mb-3">
@@ -302,9 +298,9 @@
 
             <!-- Testimonials -->
             <div class="mb-5">
-                <h3 class="fw-bold mb-4 text-center">Apa Kata Pengguna Kami?</h3>
+                <h3 class="fw-bold mb-4 text-center" data-aos="zoom-in-up">Apa Kata Pengguna Kami?</h3>
                 <div class="row g-4">
-                    <div class="col-md-4">
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
                         <div class="card h-100 border-0 shadow-lg rounded-4 p-3 bg-gradient" style="background: linear-gradient(135deg, #fff8e1, #ffffff); transition: transform 0.3s;">
                             <div class="card-body">
                                 <div class="d-flex align-items-start mb-3">
@@ -319,7 +315,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
                         <div class="card h-100 border-0 shadow-lg rounded-4 p-3 bg-gradient" style="background: linear-gradient(135deg, #e3f2fd, #ffffff); transition: transform 0.3s;">
                             <div class="card-body">
                                 <div class="d-flex align-items-start mb-3">
@@ -334,7 +330,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
                         <div class="card h-100 border-0 shadow-lg rounded-4 p-3 bg-gradient" style="background: linear-gradient(135deg, #f3e5f5, #ffffff); transition: transform 0.3s;">
                             <div class="card-body">
                                 <div class="d-flex align-items-start mb-3">
