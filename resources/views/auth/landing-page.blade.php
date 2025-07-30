@@ -212,40 +212,43 @@
             <div class="col text-center">
                 <h2 class="text-center fw-bold mb-5" data-aos="zoom-in">Pengguna <span class="yellow">SPOT</span></h2>
             </div>
+
             <!-- Active Users -->
             <div class="row text-center mb-5">
                 <div class="col-md-4 mb-4">
                     <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #ffdb4d;">
-                        <i class="bi bi-calendar3 fs-1 text-warning mb-3"></i>
+                        <i class="bi bi-calendar3 fs-1 mb-3" style="color:#ffdb4d;"></i>
                         <h5 class="fw-semibold text-dark">MAU</h5>
-                        <h2 class="fw-bold text-warning">100+</h2>
+                        <h2 class="fw-bold" style="color:#ffdb4d;">100+</h2>
                         <p class="text-muted">Pengguna Aktif Bulanan</p>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #ffdb4d;">
-                        <i class="bi bi-calendar-week fs-1 text-warning mb-3"></i>
+                        <i class="bi bi-calendar-week fs-1 mb-3" style="color:#ffdb4d;"></i>
                         <h5 class="fw-semibold text-dark">WAU</h5>
-                        <h2 class="fw-bold text-warning">80</h2>
+                        <h2 class="fw-bold" style="color:#ffdb4d;">80</h2>
                         <p class="text-muted">Pengguna Aktif Mingguan</p>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="p-4 rounded-4 h-100 shadow-lg bg-light bg-gradient hover-zoom" style="transition: 0.3s ease; border-top: 5px solid #ffdb4d;">
-                        <i class="bi bi-calendar-day fs-1 text-warning mb-3"></i>
+                        <i class="bi bi-calendar-day fs-1 mb-3" style="color:#ffdb4d;"></i>
                         <h5 class="fw-semibold text-dark">DAU</h5>
-                        <h2 class="fw-bold text-warning">50</h2>
+                        <h2 class="fw-bold" style="color:#ffdb4d;">50</h2>
                         <p class="text-muted">Pengguna Aktif Harian</p>
                     </div>
                 </div>
             </div>
+
+            <!-- Additional Metrics -->
             <div class="row mb-5">
                 <!-- Session Duration -->
                 <div class="col-md-4 mb-4">
-                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5 border-warning" style="transition: 0.3s ease;">
+                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5" style="transition: 0.3s ease; border-color: #ffdb4d;">
                         <div class="d-flex align-items-center mb-3">
-                            <div class="bg-warning bg-opacity-25 rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px;">
-                                <i class="bi bi-clock-history text-warning fs-4"></i>
+                            <div class="rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px; background-color: rgba(255,219,77,0.25);">
+                                <i class="bi bi-clock-history fs-4" style="color:#ffdb4d;"></i>
                             </div>
                             <h5 class="ms-3 mb-0 fw-semibold text-dark">Durasi & Frekuensi</h5>
                         </div>
@@ -258,26 +261,26 @@
 
                 <!-- Retention Rate -->
                 <div class="col-md-4 mb-4">
-                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5 border-warning position-relative" style="transition: 0.3s ease;">
-                        <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-3">7 Hari</span>
+                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5 position-relative" style="transition: 0.3s ease; border-color: #ffdb4d;">
+                        <span class="badge text-dark position-absolute top-0 end-0 m-3" style="background-color: #ffdb4d;">7 Hari</span>
                         <div class="d-flex align-items-center mb-3">
-                            <div class="bg-warning bg-opacity-25 rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px;">
-                                <i class="bi bi-arrow-repeat text-warning fs-4"></i>
+                            <div class="rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px; background-color: rgba(255,219,77,0.25);">
+                                <i class="bi bi-arrow-repeat fs-4" style="color:#ffdb4d;"></i>
                             </div>
                             <h5 class="ms-3 mb-0 fw-semibold text-dark">Retensi Pengguna</h5>
                         </div>
-                        <h2 class="fw-bold text-warning">72%</h2>
+                        <h2 class="fw-bold" style="color:#ffdb4d;">72%</h2>
                         <p class="text-muted">Kembali dalam 7 hari terakhir</p>
                     </div>
                 </div>
 
                 <!-- Feature Usage -->
                 <div class="col-md-4 mb-4">
-                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5 border-warning position-relative" style="transition: 0.3s ease;">
-                        <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-3">Top 3</span>
+                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5 position-relative" style="transition: 0.3s ease; border-color: #ffdb4d;">
+                        <span class="badge text-dark position-absolute top-0 end-0 m-3" style="background-color: #ffdb4d;">Top 3</span>
                         <div class="d-flex align-items-center mb-3">
-                            <div class="bg-warning bg-opacity-25 rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px;">
-                                <i class="bi bi-stars text-warning fs-4"></i>
+                            <div class="rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px; background-color: rgba(255,219,77,0.25);">
+                                <i class="bi bi-stars fs-4" style="color:#ffdb4d;"></i>
                             </div>
                             <h5 class="ms-3 mb-0 fw-semibold text-dark">Fitur Populer</h5>
                         </div>
@@ -290,8 +293,6 @@
                 </div>
             </div>
 
-
-
             <!-- Testimonials -->
             <div class="mb-5">
                 <h3 class="fw-bold mb-4 text-center">Apa Kata Pengguna Kami?</h3>
@@ -301,7 +302,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-start mb-3">
                                     <div class="me-3">
-                                        <i class="bi bi-shield-check fs-2 text-warning"></i>
+                                        <i class="bi bi-shield-check fs-2" style="color:#ffdb4d;"></i>
                                     </div>
                                     <div>
                                         <p class="mb-2 fs-5">“Parkir jadi lebih aman dan nyaman di kampus.”</p>
@@ -316,7 +317,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-start mb-3">
                                     <div class="me-3">
-                                        <i class="bi bi-qr-code-scan fs-2 text-warning"></i>
+                                        <i class="bi bi-qr-code-scan fs-2" style="color:#ffdb4d;"></i>
                                     </div>
                                     <div>
                                         <p class="mb-2 fs-5">“QR code cepat dan mudah dipindai.”</p>
@@ -331,7 +332,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-start mb-3">
                                     <div class="me-3">
-                                        <i class="bi bi-camera-video fs-2 text-warning"></i>
+                                        <i class="bi bi-camera-video fs-2" style="color:#ffdb4d;"></i>
                                     </div>
                                     <div>
                                         <p class="mb-2 fs-5">“Monitoring bantu cek kendaraan masuk.”</p>
@@ -343,7 +344,6 @@
                     </div>
                 </div>
             </div>
-
 
         </div>
     </section>
