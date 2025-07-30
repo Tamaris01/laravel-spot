@@ -207,100 +207,110 @@
     </section>
     <section class="py-5 bg-light">
         <div class="container">
-            <h2 class="text-center mb-5 fw-bold" data-aos="zoom-in">
-                Bukti Dampak Pengguna <span style="color: #ffdb4d;">SPOT</span>
-            </h2>
-
-            <!-- Stat Boxes -->
+            <h2 class="text-center mb-5 section-title" data-aos="zoom-in">Pengguna <span class="yellow">SPOT</span></h2>
+            <!-- Active Users -->
             <div class="row text-center mb-5">
-                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="bg-white shadow rounded p-4">
-                        <h5 style="color: #ffdb4d;" class="mb-1">Total Pengguna</h5>
-                        <h3 class="fw-bold" style="color: #ffdb4d;">50</h3>
-                        <p class="mb-0 text-muted">35 pengguna aktif</p>
+                <div class="col-md-4 mb-4">
+                    <div class="bg-white shadow-sm rounded p-4">
+                        <h5 class="text-secondary">MAU</h5>
+                        <h3 class="fw-bold text-primary">12.500+</h3>
+                        <p class="text-muted">Pengguna aktif bulanan</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="bg-white shadow rounded p-4">
-                        <h5 style="color: #ffdb4d;" class="mb-1">WAU (7 Hari)</h5>
-                        <h3 class="fw-bold" style="color: #ffdb4d;">5 → 50</h3>
-                        <p class="mb-0 text-muted">Peningkatan signifikan</p>
+                <div class="col-md-4 mb-4">
+                    <div class="bg-white shadow-sm rounded p-4">
+                        <h5 class="text-secondary">WAU</h5>
+                        <h3 class="fw-bold text-primary">5.300</h3>
+                        <p class="text-muted">Pengguna aktif mingguan</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="bg-white shadow rounded p-4">
-                        <h5 style="color: #ffdb4d;" class="mb-1">Durasi Sesi</h5>
-                        <h3 class="fw-bold" style="color: #ffdb4d;">1–3 Menit</h3>
-                        <p class="mb-0 text-muted">3–5 sesi per minggu</p>
+                <div class="col-md-4 mb-4">
+                    <div class="bg-white shadow-sm rounded p-4">
+                        <h5 class="text-secondary">DAU</h5>
+                        <h3 class="fw-bold text-primary">1.700</h3>
+                        <p class="text-muted">Pengguna aktif harian</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Retention & Feature Usage -->
+            <!-- Retention + Feature Usage -->
             <div class="row mb-5">
-                <div class="col-md-6 mb-4" data-aos="fade-right">
-                    <div class="border-start border-4 bg-white shadow-sm rounded p-4" style="border-color: #ffdb4d;">
-                        <h5 class="mb-2" style="color: #ffdb4d;">🔁 Tingkat Retensi</h5>
-                        <p class="mb-1 text-muted">
-                            Tingkat retensi tetap tinggi di kisaran <strong style="color: #ffdb4d;">80–87%</strong> sepanjang minggu penggunaan.
-                        </p>
+                <div class="col-md-6 mb-4">
+                    <div class="border-start border-success border-4 bg-white shadow-sm rounded p-4">
+                        <h5 class="mb-2">🔄 Retensi 7 Hari</h5>
+                        <h3 class="text-success fw-bold">72%</h3>
+                        <p class="text-muted">pengguna kembali dalam 7 hari</p>
                     </div>
                 </div>
-                <div class="col-md-6 mb-4" data-aos="fade-left">
-                    <div class="border-start border-4 bg-white shadow-sm rounded p-4" style="border-color: #ffdb4d;">
-                        <h5 class="mb-2" style="color: #ffdb4d;">⭐ Fitur Paling Sering Digunakan</h5>
-                        <ul class="list-unstyled mb-0 text-muted">
-                            <li>📷 <span style="color: #ffdb4d;">QR Scan</span> – <strong style="color: #ffdb4d;">50%</strong></li>
-                            <li>🔍 <span style="color: #ffdb4d;">Deteksi Plat</span> – <strong style="color: #ffdb4d;">35%</strong></li>
-                            <li>🕘 <span style="color: #ffdb4d;">Riwayat Parkir</span> – <strong style="color: #ffdb4d;">15%</strong></li>
+                <div class="col-md-6 mb-4">
+                    <div class="border-start border-primary border-4 bg-white shadow-sm rounded p-4">
+                        <h5 class="mb-2">⭐ Fitur Populer</h5>
+                        <ul class="list-unstyled text-muted mb-0">
+                            <li>✔️ 70% gunakan fitur "Reminder" setiap hari</li>
+                            <li>✔️ 40% pakai "Agenda Cerdas" 3x seminggu</li>
+                            <li>✔️ 25% akses cepat via QR Code</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <!-- User Feedback -->
+            <!-- Session Duration -->
+            <div class="bg-warning bg-opacity-10 border-start border-warning border-4 rounded p-4 mb-5 shadow-sm">
+                <h5 class="mb-2">⏱️ Durasi & Frekuensi Sesi</h5>
+                <p class="mb-0 text-muted">
+                    Rata-rata sesi: <strong>4 menit 20 detik</strong>, kunjungan: <strong>2–3 kali per hari</strong>
+                </p>
+            </div>
+
+            <!-- Testimonials -->
             <div class="mb-5">
-                <h3 class="fw-bold mb-4" data-aos="zoom-in" style="color: #ffdb4d;">💬 Pendapat Pengguna</h3>
-                <div class="row g-4">
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                        <blockquote class="blockquote bg-white p-4 rounded shadow-sm border-start border-4" style="border-color: #ffdb4d;">
-                            <p class="mb-2">“Saya merasa lebih aman parkir di kampus sekarang.”</p>
-                            <footer class="blockquote-footer">Penguji Mahasiswa</footer>
+                <h3 class="fw-bold mb-4">💬 Apa Kata Pengguna Kami?</h3>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <blockquote class="blockquote bg-white p-3 rounded shadow-sm border-start border-info border-4">
+                            <p class="mb-2">“Aplikasi ini bener-bener bantu saya atur jadwal harian tanpa stres!”</p>
+                            <footer class="blockquote-footer">Andi, <cite title="Source Title">mahasiswa</cite></footer>
                         </blockquote>
                     </div>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                        <blockquote class="blockquote bg-white p-4 rounded shadow-sm border-start border-4" style="border-color: #ffdb4d;">
-                            <p class="mb-2">“Pemindaian QR cepat dan praktis.”</p>
-                            <footer class="blockquote-footer">Pengguna Beta</footer>
+                    <div class="col-md-4">
+                        <blockquote class="blockquote bg-white p-3 rounded shadow-sm border-start border-info border-4">
+                            <p class="mb-2">“Fitur pengingatnya simple tapi sangat efektif. Sekarang saya nggak pernah telat lagi.”</p>
+                            <footer class="blockquote-footer">Rina, <cite title="Source Title">karyawan swasta</cite></footer>
                         </blockquote>
                     </div>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                        <blockquote class="blockquote bg-white p-4 rounded shadow-sm border-start border-4" style="border-color: #ffdb4d;">
-                            <p class="mb-2">“Monitoring membantu saya memeriksa kendaraan masuk dengan mudah.”</p>
-                            <footer class="blockquote-footer">Penguji Admin</footer>
+                    <div class="col-md-4">
+                        <blockquote class="blockquote bg-white p-3 rounded shadow-sm border-start border-info border-4">
+                            <p class="mb-2">“QR code-nya mempermudah akses tanpa harus buka aplikasi manual. Keren banget!”</p>
+                            <footer class="blockquote-footer">Bagus, <cite title="Source Title">pengusaha</cite></footer>
                         </blockquote>
                     </div>
                 </div>
             </div>
 
-            <!-- Chart Placeholders -->
+            <!-- Chart placeholders -->
             <div>
-                <h3 class="fw-bold mb-3" data-aos="zoom-in" style="color: #ffdb4d;">📈 Visualisasi Data</h3>
+                <h3 class="fw-bold mb-3">📈 Visualisasi Data</h3>
                 <div class="row text-center">
-                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-                        <div class="bg-white rounded shadow-sm p-4 h-100 text-muted">[Bar Chart – WAU per Hari]</div>
+                    <div class="col-md-4 mb-4">
+                        <div class="bg-white rounded shadow-sm p-4 h-100">
+                            <div class="text-muted">[Bar Chart – MAU/WAU/DAU]</div>
+                        </div>
                     </div>
-                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-                        <div class="bg-white rounded shadow-sm p-4 h-100 text-muted">[Pie Chart – Penggunaan Fitur]</div>
+                    <div class="col-md-4 mb-4">
+                        <div class="bg-white rounded shadow-sm p-4 h-100">
+                            <div class="text-muted">[Pie Chart – Fitur Populer]</div>
+                        </div>
                     </div>
-                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-                        <div class="bg-white rounded shadow-sm p-4 h-100 text-muted">[Line Chart – Retensi 7 Hari]</div>
+                    <div class="col-md-4 mb-4">
+                        <div class="bg-white rounded shadow-sm p-4 h-100">
+                            <div class="text-muted">[Line Chart – Retensi 30 Hari]</div>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
-
 
     <!-- Section Harga Layanan SPOT -->
     <section class="py-5 bg-light" id="penawaran">
