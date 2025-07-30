@@ -523,45 +523,38 @@
         <h2 class="text-center mb-5 section-title" data-aos="zoom-in">Hubungi Kami</h2>
         <div class="container d-flex justify-content-center flex-wrap gap-3">
 
-            <form class="contact-form d-flex flex-column" style="flex: 1; max-width: 400px;" data-aos="fade-right">
-                <input type="text" class="form-control mb-2" placeholder="Nama Lengkap Anda">
-                <input type="email" class="form-control mb-2" placeholder="Alamat Email Anda">
-                <textarea class="form-control mb-2" rows="3" placeholder="Isi Pesan Anda"></textarea>
+            <!-- Contact Form -->
+            <form id="emailForm" class="contact-form d-flex flex-column" style="flex: 1; max-width: 400px;" data-aos="fade-right">
+                <input type="text" name="nama" id="nama" class="form-control mb-2" placeholder="Nama Lengkap Anda" required>
+                <input type="email" name="email" id="email" class="form-control mb-2" placeholder="Alamat Email Anda" required>
+                <textarea name="pesan" id="pesan" class="form-control mb-2" rows="3" placeholder="Isi Pesan Anda" required></textarea>
                 <button type="submit" class="btn btn-dark">
                     <i class="fa fa-paper-plane"></i> Kirim
                 </button>
             </form>
 
             <!-- Contact Info -->
-            <div class="contact-info d-flex flex-column" style="flex: 1; max-width: 400px;" data-aos="fade-right">
-                <div class="contact-item d-flex" data-aos="zoom-in">
-                    <div class="contact-icon-box">
-                        <i class="fa fa-phone contact-icon"></i>
-                    </div>
+            <div class="contact-info d-flex flex-column" style="flex: 1; max-width: 400px;" data-aos="fade-left">
+                <div class="contact-item d-flex mb-2" data-aos="zoom-in">
+                    <div class="contact-icon-box"><i class="fa fa-phone contact-icon"></i></div>
                     <div class="contact-text-box">
                         <p>+62 821 7147 5991</p>
                     </div>
                 </div>
-                <div class="contact-item d-flex" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="contact-icon-box">
-                        <i class="fa fa-envelope contact-icon"></i>
-                    </div>
+                <div class="contact-item d-flex mb-2" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="contact-icon-box"><i class="fa fa-envelope contact-icon"></i></div>
                     <div class="contact-text-box">
                         <p>spotid618@gmail.com</p>
                     </div>
                 </div>
-                <div class="contact-item d-flex" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="contact-icon-box">
-                        <i class="fab fa-instagram contact-icon"></i>
-                    </div>
+                <div class="contact-item d-flex mb-2" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="contact-icon-box"><i class="fab fa-instagram contact-icon"></i></div>
                     <div class="contact-text-box">
                         <p>@spotid618</p>
                     </div>
                 </div>
-                <div class="contact-item d-flex" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="contact-icon-box">
-                        <i class="fas fa-map-marker-alt contact-icon"></i>
-                    </div>
+                <div class="contact-item d-flex mb-2" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="contact-icon-box"><i class="fas fa-map-marker-alt contact-icon"></i></div>
                     <div class="contact-text-box">
                         <p>Politeknik Negeri Batam</p>
                     </div>
@@ -575,12 +568,44 @@
 
 
 
+
+
     <!-- Footer -->
     <footer>
         <p>&copy; 2025 - Sistem Parkir Otomatis Terjamin</p>
     </footer>
     <!-- Scroll to Top Button -->
     <button id="scrollTopBtn" onclick="scrollToTop()"><i class="fas fa-chevron-up"></i></button>
+
+
+    <!-- EmailJS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY"); // Ganti dengan public key kamu
+        })();
+
+        document.getElementById("emailForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const templateParams = {
+                nama: document.getElementById("nama").value,
+                email: document.getElementById("email").value,
+                pesan: document.getElementById("pesan").value,
+                waktu: new Date().toLocaleString()
+            };
+
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+                .then(function(response) {
+                    alert("Pesan berhasil dikirim! Terima kasih 😊");
+                    document.getElementById("emailForm").reset();
+                }, function(error) {
+                    alert("Terjadi kesalahan. Silakan coba lagi.");
+                    console.error(error);
+                });
+        });
+    </script>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
