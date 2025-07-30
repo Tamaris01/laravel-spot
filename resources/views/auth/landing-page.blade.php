@@ -305,50 +305,56 @@
 
             <!-- Testimonials -->
             <div class="mb-5">
-                <h3 class="fw-bold mb-4">Apa Kata Pengguna Kami?</h3>
-                <div class="row g-3">
+                <h3 class="fw-bold mb-4 text-center">Apa Kata Pengguna Kami?</h3>
+                <div class="row g-4">
                     <div class="col-md-4">
-                        <blockquote class="blockquote bg-white p-4 rounded shadow-sm border-start border-warning border-4 h-100">
-                            <p class="mb-3" style="min-height: 60px;">“Parkir jadi lebih aman dan nyaman di kampus.”</p>
-                            <footer class="blockquote-footer">Penguji Mahasiswa</footer>
-                        </blockquote>
+                        <div class="card h-100 border-0 shadow-lg rounded-4 p-3 bg-gradient" style="background: linear-gradient(135deg, #fff8e1, #ffffff); transition: transform 0.3s;">
+                            <div class="card-body">
+                                <div class="d-flex align-items-start mb-3">
+                                    <div class="me-3">
+                                        <i class="bi bi-shield-check fs-2 text-warning"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-2 fs-5">“Parkir jadi lebih aman dan nyaman di kampus.”</p>
+                                        <small class="text-muted">— Penguji Mahasiswa</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-4">
-                        <blockquote class="blockquote bg-white p-4 rounded shadow-sm border-start border-warning border-4 h-100">
-                            <p class="mb-3" style="min-height: 60px;">“QR code cepat dan mudah dipindai.”</p>
-                            <footer class="blockquote-footer">Pengguna Beta</footer>
-                        </blockquote>
+                        <div class="card h-100 border-0 shadow-lg rounded-4 p-3 bg-gradient" style="background: linear-gradient(135deg, #e3f2fd, #ffffff); transition: transform 0.3s;">
+                            <div class="card-body">
+                                <div class="d-flex align-items-start mb-3">
+                                    <div class="me-3">
+                                        <i class="bi bi-qr-code-scan fs-2 text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-2 fs-5">“QR code cepat dan mudah dipindai.”</p>
+                                        <small class="text-muted">— Pengguna Beta</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-4">
-                        <blockquote class="blockquote bg-white p-4 rounded shadow-sm border-start border-warning border-4 h-100">
-                            <p class="mb-3" style="min-height: 60px;">“Monitoring bantu cek kendaraan masuk.”</p>
-                            <footer class="blockquote-footer">Penguji Admin</footer>
-                        </blockquote>
+                        <div class="card h-100 border-0 shadow-lg rounded-4 p-3 bg-gradient" style="background: linear-gradient(135deg, #f3e5f5, #ffffff); transition: transform 0.3s;">
+                            <div class="card-body">
+                                <div class="d-flex align-items-start mb-3">
+                                    <div class="me-3">
+                                        <i class="bi bi-camera-video fs-2 text-purple"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-2 fs-5">“Monitoring bantu cek kendaraan masuk.”</p>
+                                        <small class="text-muted">— Penguji Admin</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Chart placeholders -->
-            <div>
-                <h3 class="fw-bold mb-3">Visualisasi Data</h3>
-                <div class="row text-center">
-                    <div class="col-md-4 mb-4">
-                        <div class="bg-white rounded shadow-sm p-4 h-100">
-                            <div class="text-muted">[Bar Chart – MAU/WAU/DAU]</div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="bg-white rounded shadow-sm p-4 h-100">
-                            <div class="text-muted">[Pie Chart – Fitur Populer]</div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="bg-white rounded shadow-sm p-4 h-100">
-                            <div class="text-muted">[Line Chart – Retensi 30 Hari]</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div>
     </section>
