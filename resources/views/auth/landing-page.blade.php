@@ -259,36 +259,41 @@
             <div class="row mb-5">
                 <!-- Retention Card -->
                 <div class="col-md-6 mb-4">
-                    <div class="d-flex flex-column justify-content-between h-100 border-start border-warning border-4 bg-white shadow-sm rounded-4 p-4 transition">
+                    <div class="d-flex flex-column justify-content-between h-100 bg-white border-start border-warning border-4 rounded-4 shadow-sm p-4 transition position-relative">
+                        <span class="badge bg-success position-absolute top-0 end-0 m-3">+12%</span>
                         <div>
                             <div class="d-flex align-items-center mb-3">
-                                <i class="bi bi-arrow-repeat fs-3 text-warning me-2"></i>
-                                <h5 class="mb-0 fw-semibold text-dark">Retensi 7 Hari</h5>
+                                <div class="bg-warning bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <i class="bi bi-arrow-repeat fs-4 text-warning"></i>
+                                </div>
+                                <h5 class="mb-0 fw-semibold text-dark ms-3">Retensi 7 Hari</h5>
                             </div>
                             <h2 class="fw-bold text-warning">72%</h2>
-                            <p class="text-muted mb-0">Pengguna kembali dalam 7 hari</p>
+                            <p class="text-muted mb-0">Pengguna kembali dalam 7 hari terakhir</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Feature Usage Card -->
                 <div class="col-md-6 mb-4">
-                    <div class="d-flex flex-column justify-content-between h-100 border-start border-warning border-4 bg-white shadow-sm rounded-4 p-4 transition">
+                    <div class="d-flex flex-column justify-content-between h-100 bg-white border-start border-warning border-4 rounded-4 shadow-sm p-4 transition position-relative">
+                        <span class="badge bg-primary position-absolute top-0 end-0 m-3">Top 3</span>
                         <div>
                             <div class="d-flex align-items-center mb-3">
-                                <i class="bi bi-stars fs-3 text-warning me-2"></i>
-                                <h5 class="mb-0 fw-semibold text-dark">Fitur Populer</h5>
+                                <div class="bg-warning bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <i class="bi bi-stars fs-4 text-warning"></i>
+                                </div>
+                                <h5 class="mb-0 fw-semibold text-dark ms-3">Fitur Populer</h5>
                             </div>
-                            <ul class="list-unstyled text-muted">
-                                <li><i class="bi bi-check-circle-fill text-success me-1"></i> 70% QR Scan</li>
-                                <li><i class="bi bi-check-circle-fill text-success me-1"></i> 35% Deteksi Plat</li>
-                                <li><i class="bi bi-check-circle-fill text-success me-1"></i> 15% Laporan Parkir</li>
+                            <ul class="list-unstyled text-muted mb-0">
+                                <li class="mb-1"><i class="bi bi-check-circle-fill text-success me-2"></i> 70% QR Scan</li>
+                                <li class="mb-1"><i class="bi bi-check-circle-fill text-success me-2"></i> 35% Deteksi Plat</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> 15% Laporan Parkir</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-
 
 
             <!-- Testimonials -->
