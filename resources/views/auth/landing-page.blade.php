@@ -360,10 +360,10 @@
                             <h3 style="color: #ffdb4d;">Rp 4.500.000</h3>
                             <p class="text-muted">Pembayaran sekali, tanpa biaya bulanan</p>
                             <ul class="list-unstyled text-start">
-                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Perangkat IoT</li>
-                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Sistem scan QR</li>
-                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Dashboard Admin</li>
-                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Riwayat Transaksi</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> 1 set perangkat IoT SPOT</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Panduan instalasi & dokumentasi</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Gratis maintenance 1 bulan</li>
+
                             </ul>
                         </div>
                     </div>
@@ -380,9 +380,11 @@
                             <h3 style="color: #ffdb4d;">Rp 6.500.000</h3>
                             <p class="text-muted">+ Rp 300.000/bulan untuk maintenance & support</p>
                             <ul class="list-unstyled text-start">
-                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Fitur Dasar + Kamera Deteksi</li>
-                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Statistik & Laporan Otomatis</li>
-                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Fitur Komplain Pengguna</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> 1 set perangkat IoT SPOT</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Semua fitur Paket Dasar</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Instalasi langsung oleh tim SPOT</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Update sistem & fitur berkala</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Maintenance perangkat rutin</li>
                             </ul>
                         </div>
                     </div>
@@ -399,9 +401,13 @@
                             <h3 style="color: #ffdb4d;">Custom</h3>
                             <p class="text-muted">Solusi fleksibel untuk skala besar</p>
                             <ul class="list-unstyled text-start">
-                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Seluruh fitur Profesional</li>
-                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Integrasi Sistem Pihak Ketiga</li>
-                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Dukungan SLA Khusus</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> 1 set perangkat IoT SPOT</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Semua fitur Paket Dasar</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Instalasi langsung oleh tim SPOT</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Update sistem & fitur berkala</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Maintenance perangkat rutin</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Integrasi Sistem Pihak Ketiga & penyesuaian fitur</li>
+
                             </ul>
                         </div>
                     </div>
