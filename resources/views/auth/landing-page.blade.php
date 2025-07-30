@@ -211,7 +211,7 @@
     <section id="pengguna" class="py-5" style="background-color: #ffdb4d;" data-aos="fade-up">
         <div class="container">
             <div class="col text-center">
-                <h2 class="text-center fw-bold mb-5" data-aos="zoom-in">Pengguna <span class="yellow">SPOT</span></h2>
+                <h2 class="text-center fw-bold mb-5" data-aos="zoom-in">Pengguna SPOT</h2>
             </div>
 
             <!-- Active Users -->
