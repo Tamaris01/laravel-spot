@@ -92,7 +92,7 @@
         </a>
     </section>
     <!-- About Section-->
-    <section id="about" class="about-section py-5">
+    <section id="about" class="about-section">
         <div class="container">
             <!-- Judul -->
             <div class="text-center mb-5" data-aos="fade-down">
