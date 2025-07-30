@@ -213,7 +213,7 @@
             <!-- Active Users -->
             <div class="row text-center mb-5">
                 <div class="col-md-4 mb-4">
-                    <div class="bg-white shadow rounded-4 p-4 h-100 border-start border-5 border-warning">
+                    <div class="bg-warning bg-opacity-10 border-start border-warning border-4 rounded p-4 mb-5 shadow-sm">
                         <div class="mb-2">
                             <i class="bi bi-calendar3 text-warning fs-2"></i>
                         </div>
@@ -223,7 +223,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="bg-white shadow rounded-4 p-4 h-100 border-start border-5 border-warning">
+                    <div class="bg-warning bg-opacity-10 border-start border-warning border-4 rounded p-4 mb-5 shadow-sm">
                         <div class="mb-2">
                             <i class="bi bi-calendar-week text-warning fs-2"></i>
                         </div>
@@ -233,7 +233,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="bg-white shadow rounded-4 p-4 h-100 border-start border-5 border-warning">
+                    <div class="bg-warning bg-opacity-10 border-start border-warning border-4 rounded p-4 mb-5 shadow-sm">
                         <div class="mb-2">
                             <i class="bi bi-calendar-day text-warning fs-2"></i>
                         </div>
