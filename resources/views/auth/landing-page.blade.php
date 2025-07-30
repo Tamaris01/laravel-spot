@@ -207,7 +207,7 @@
     </section>
     <section class="py-5 bg-light">
         <div class="container">
-            <h2 class="mb-4 fw-bold text-center">📊 Pengguna Kami dalam Angka</h2>
+            <h2 class="text-center mb-5 section-title" data-aos="zoom-in">Pengguna Kami dalam Angka</h2>
 
             <!-- Active Users -->
             <div class="row text-center mb-5">
