@@ -243,11 +243,17 @@
 
             <!-- Additional Metrics -->
             <div class="row mb-5">
+
                 <!-- Session Duration -->
                 <div class="col-md-4 mb-4">
-                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5" style="transition: 0.3s ease; border-color: #ffdb4d;">
+                    <div class="bg-white rounded-4 shadow-lg p-4 h-100 hover-zoom border-start border-5 position-relative" style="transition: 0.3s ease; border-color: #ffdb4d;">
+                        <!-- Badge pojok kanan atas -->
+                        <span class="badge text-dark position-absolute top-0 end-0 m-3" style="background-color: #ffdb4d;">Harian</span>
+
+                        <!-- Konten utama -->
                         <div class="d-flex align-items-center mb-3">
-                            <div class="rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px; background-color: rgba(255,219,77,0.25);">
+                            <div class="rounded-circle d-flex justify-content-center align-items-center"
+                                style="width: 50px; height: 50px; background-color: rgba(255,219,77,0.25);">
                                 <i class="bi bi-clock-history fs-4" style="color:#ffdb4d;"></i>
                             </div>
                             <h5 class="ms-3 mb-0 fw-semibold text-dark">Durasi & Frekuensi</h5>
