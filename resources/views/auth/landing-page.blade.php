@@ -166,53 +166,36 @@
     <!-- Features Section -->
     <section id="features" class="py-5 bg-light">
         <div class="container text-center">
-            <h2 class="text-center mb-5 section-title" data-aos="zoom-in">Fitur <span class="yellow">SPOT</span></h2>
+            <h2 class="text-center mb-5 section-title" data-aos="zoom-in">
+                Fitur <span class="yellow">SPOT</span>
+            </h2>
             <div class="row g-4">
+                <!-- Feature Item -->
+                @foreach([
+                ['img' => 'pendaftaran.png', 'title' => 'Pendaftaran Akun', 'desc' => 'Daftar akun dengan mudah untuk mengakses layanan kami.'],
+                ['img' => 'kelola pengguna.png', 'title' => 'Kelola Pengguna', 'desc' => 'Kelola data pengguna dengan aman dan efisien.'],
+                ['img' => 'kelola kendaraan.png', 'title' => 'Kelola Kendaraan', 'desc' => 'Kelola data kendaraan secara praktis dan terorganisir.'],
+                ['img' => 'AksesQR.png', 'title' => 'Akses QR & Deteksi Plat', 'desc' => 'Pindai QR & deteksi plat otomatis untuk akses cepat dan aman.'],
+                ['img' => 'Monitor.png', 'title' => 'Monitoring Parkir', 'desc' => 'Pantau aktivitas dan status parkir secara real-time.'],
+                ['img' => 'laporan.png', 'title' => 'Laporan Parkir', 'desc' => 'Buat laporan otomatis untuk analisis dan optimasi.']
+                ] as $index => $feature)
                 <div class="col-md-4 col-sm-6">
-                    <div class="card shadow-box p-4 hidden-card" data-aos="fade-up">
-                        <img src="{{ asset('images/pendaftaran.png') }}" class="img-fluid mb-3" alt="Pendaftaran Akun">
-                        <h5>Pendaftaran Akun</h5>
-                        <p>Daftar akun dengan mudah untuk mengakses layanan kami.</p>
+                    <div class="card h-100 border-0 shadow-lg p-4 rounded-4 hover-effect bg-white"
+                        data-aos="fade-up"
+                        data-aos-delay="{{ $index * 200 }}">
+                        <img src="{{ asset('images/' . $feature['img']) }}"
+                            class="img-fluid mb-3 mx-auto"
+                            style="max-width: 80px;"
+                            alt="{{ $feature['title'] }}">
+                        <h5 class="fw-bold text-dark">{{ $feature['title'] }}</h5>
+                        <p class="text-muted small">{{ $feature['desc'] }}</p>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="card shadow-box p-4 hidden-card" data-aos="fade-up" data-aos-delay="200">
-                        <img src="{{ asset('images/kelola pengguna.png') }}" class="img-fluid mb-3" alt="Kelola Pengguna">
-                        <h5>Kelola Pengguna</h5>
-                        <p>Kelola data pengguna dengan <br> aman dan efisien.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="card shadow-box p-4 hidden-card" data-aos="fade-up" data-aos-delay="400">
-                        <img src="{{ asset('images/kelola kendaraan.png') }}" class="img-fluid mb-3" alt="Kelola Kendaraan">
-                        <h5>Kelola Kendaraan</h5>
-                        <p>Kelola data kendaraan secara <br> praktis dan terorganisir.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="card shadow-box p-4 hidden-card" data-aos="fade-up" data-aos-delay="600">
-                        <img src="{{ asset('images/AksesQR.png') }}" class="img-fluid mb-3" alt="Akses QR Code & Deteksi Plat">
-                        <h5>Akses QR Code & Deteksi Plat</h5>
-                        <p>Pindai QR Code dan deteksi otomatis nomor plat untuk akses parkir yang aman.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="card shadow-box p-4 hidden-card" data-aos="fade-up" data-aos-delay="800">
-                        <img src="{{ asset('images/Monitor.png') }}" class="img-fluid mb-3" alt="Monitoring Parkir">
-                        <h5>Monitoring Parkir</h5>
-                        <p>Pantau aktivitas keluar masuk kendaraan dan status parkir secara real-time.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="card shadow-box p-4 hidden-card" data-aos="fade-up" data-aos-delay="1000">
-                        <img src="{{ asset('images/laporan.png') }}" class="img-fluid mb-3" alt="Laporan Parkir">
-                        <h5>Laporan Parkir</h5>
-                        <p>Generate laporan parkir otomatis untuk analisis yang lebih akurat dan optimal.</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
+
     <section id="pengguna" class="py-5" style="background-color: #ffdb4d;" data-aos="fade-up">
         <div class="container">
             <div class="col text-center">
