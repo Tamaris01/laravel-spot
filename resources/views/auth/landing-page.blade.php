@@ -428,7 +428,7 @@
                 <p class="text-muted"><i class="bi bi-arrow-repeat me-2"></i><strong>Perpanjangan Maintenance Bulanan</strong>: Mulai dari <strong>Rp 300.000/bulan</strong></p>
                 <p class="text-muted">
                     <em>
-                        <a href="#contact" style="color: #ffdb4d; font-weight: bold; text-decoration: underline;">Hubungi kami</a>untuk pilihan penawaran yang Anda inginkan sekarang!
+                        <a href="#contact" style="color: #ffdb4d; font-weight: bold; text-decoration: underline;">Hubungi kami </a>untuk pilihan penawaran yang Anda inginkan sekarang!
 
                     </em>
                 </p>
