@@ -267,7 +267,7 @@
 
             <!-- Testimonials -->
             <div class="mb-5">
-                <h3 class="fw-bold mb-4">💬 Apa Kata Pengguna Kami?</h3>
+                <h3 class="fw-bold mb-4">Apa Kata Pengguna Kami?</h3>
                 <div class="row g-3">
                     <div class="col-md-4">
                         <blockquote class="blockquote bg-white p-4 rounded shadow-sm border-start border-warning border-4 h-100">
@@ -292,7 +292,7 @@
 
             <!-- Chart placeholders -->
             <div>
-                <h3 class="fw-bold mb-3">📈 Visualisasi Data</h3>
+                <h3 class="fw-bold mb-3">Visualisasi Data</h3>
                 <div class="row text-center">
                     <div class="col-md-4 mb-4">
                         <div class="bg-white rounded shadow-sm p-4 h-100">
