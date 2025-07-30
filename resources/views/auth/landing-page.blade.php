@@ -101,7 +101,7 @@
         </a>
     </section>
     <!-- Problem Statement Section -->
-    <section class="about-section" style="background-color: #ffdb4d">
+    <section id="about" class="about-section">
         <div class="container">
             <div class="row align-items-center">
                 <!-- Text Content -->
