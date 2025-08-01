@@ -360,7 +360,7 @@
     // =============== CEK STATUS PLAT DB ===============
     async function checkPlatNomor(platNomor) {
         try {
-            const response = await fetch(`https://alpu.web.id/api/check_plate/${platNomor}`);
+            const response = await fetch(`https://spot618.web.id/api/check_plate/${platNomor}`);
             if (!response.ok) throw new Error("Gagal fetch validasi plat");
             const data = await response.json();
             return data.exists;
@@ -375,7 +375,7 @@
     async function fetchPlatNomor() {
         if (isChecking) return;
         try {
-            const response = await fetch("https://alpu.web.id/server/result");
+            const response = await fetch("https://spot618.web.id/server/result");
             if (!response.ok) throw new Error("Gagal fetch plat nomor");
             const data = await response.json();
             const platNomor = data.plat_nomor?.trim() || '-';
@@ -465,7 +465,7 @@
 
             const base64Image = tempCanvas.toDataURL("image/jpeg"); // dengan prefix data:image/jpeg;base64
 
-            await fetch("https://alpu.web.id/server/upload_frame", {
+            await fetch("https://spot618.web.id/server/upload_frame", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -482,7 +482,7 @@
     // ✅ Ambil frame hasil deteksi YOLO
     async function fetchProcessedFrame() {
         try {
-            const response = await fetch("https://alpu.web.id/server/get_processed_frame");
+            const response = await fetch("https://spot618.web.id/server/get_processed_frame");
             if (!response.ok) {
                 console.warn("Gagal fetch processed frame:", await response.text());
                 return;
